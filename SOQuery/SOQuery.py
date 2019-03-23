@@ -1,21 +1,19 @@
 from bs4 import BeautifulSoup
 import requests
+from termcolor import colored
 #from stackapi import StackAPI
 
 
 class WebScraper:
-
-
     # Returns the parsed html of a page.
     def scrape_so(searchStrings):
-        
+        # Url string to get html from.
         url = "https://stackoverflow.com/search?q="
 
         # Build url to search.
         url = url + searchStrings[0]
         for i in searchStrings[1:]:
             url = url + "+" + i
-        #print(url)
 
         # Request page.
         r = requests.get(url)
@@ -23,13 +21,15 @@ class WebScraper:
         # Get html from page.
         html_doc = r.text
 
-        # Convert html to BeautfulSoup lxml.
+        # Convert html to BeautfulSoup object.
         soup = BeautifulSoup(html_doc, 'lxml')
 
-        # Returns lxml.
+        # Returns soup object.
         return soup
 
+    # Scrapes html from question.
     def scrape_question(url):
+        # Builds url to question.
         url = "https://stackoverflow.com/" + url
 
         r = requests.get(url)
@@ -39,7 +39,6 @@ class WebScraper:
         soup = BeautifulSoup(html_doc, 'lxml')
 
         return soup
-
 
     def get_post_url(soup):
         #postUrl = soup("div")
@@ -54,13 +53,35 @@ class WebScraper:
 
     def get_answer(soup):
         theDiv = soup.find("div", {"itemprop": "acceptedAnswer"})
-        theTextDiv = theDiv.get("div", {"class": "post-text"})
+
+        # if theDiv is None:
+        #     print("Error: no answer")
+        #     return
+
+        theText = theDiv.find("div", {"class": "post-text"})
+
+        #print(theText)
+
+        return theText
+
+    def loop_and_print(soup):
+        print(colored("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~", 'yellow'))
+        for i in soup:
+            #print(i.name)
+            if i.name == "p":
+                print(colored(i.text, 'red'))
+            elif i.name == "blockquote":
+                print(colored("    " + i.text, 'green'))
+            elif i.name == "pre":
+                print("\n")
+                code = i.find("code")
+                #print(code)
+                for j in code:
+                    span = j.find("span")
+                    print(colored(j, "blue"))
         
-
-        print(theDiv.find_all("p"))
-        print(theDiv.find_all("blockquote"))
-
-
+        print(colored("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~", 'yellow'))
+        return
 
 if __name__ == "__main__":
     stringToSearch = ["bad", "request", "error", "flask"]
@@ -68,5 +89,6 @@ if __name__ == "__main__":
     postUrl = WebScraper.get_post_url(searchSoup)
 
     answerSoup = WebScraper.scrape_question(postUrl)
-    WebScraper.get_answer(answerSoup)
+    answer_text_soup = WebScraper.get_answer(answerSoup)
+    WebScraper.loop_and_print(answer_text_soup)
     #print(returnThing)
