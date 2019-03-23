@@ -1,4 +1,4 @@
-![Logo](logo.png)
+![Logo](/Logo.png)
 
 # Authors
 * [Elijah Sawyers](https://github.com/elijahsawyers)
