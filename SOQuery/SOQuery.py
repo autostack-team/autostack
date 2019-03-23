@@ -2,6 +2,9 @@ from bs4 import BeautifulSoup
 import requests
 from termcolor import colored
 #from stackapi import StackAPI
+from pygments import highlight
+from pygments.lexers import PythonLexer
+from pygments.formatters import HtmlFormatter
 
 
 class WebScraper:
@@ -77,14 +80,16 @@ class WebScraper:
                 code = i.find("code")
                 #print(code)
                 for j in code:
-                    span = j.find("span")
+                    #span = j.find("span")
                     print(colored(j, "blue"))
+                    #print(highlight(str(j), PythonLexer(), HtmlFormatter()))
         
         print(colored("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~", 'yellow'))
         return
 
 if __name__ == "__main__":
-    stringToSearch = ["bad", "request", "error", "flask"]
+    #stringToSearch = ["bad", "request", "error", "flask"]
+    stringToSearch = ["how", "to", "get", "text", "from", "span", "tag", "in", "beautifulsoup"]
     searchSoup = WebScraper.scrape_so(stringToSearch)
     postUrl = WebScraper.get_post_url(searchSoup)
 
