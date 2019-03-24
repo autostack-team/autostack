@@ -6,7 +6,7 @@ from pygments.lexers import PythonLexer
 
 # Functions to take an error message, search StackOverflow for an answer, and print the answer to the terminal.
 class WebScraper:
-    # Returns the parsed html of a page.
+    # Returns the parsed html of a search page.
     def scrape_so(self, searchStrings):
         # Url string to get html from.
         url = "https://stackoverflow.com/search?q="
@@ -46,6 +46,7 @@ class WebScraper:
         # Return soup object.
         return soup
 
+    # Gets the url of a post to scrape.
     def get_post_url(self, soup, data_position = "1"):
         # Find first question.
         theDiv = soup.find("div", {"data-position": data_position})
@@ -63,6 +64,7 @@ class WebScraper:
         # Return link to post.
         return theRef
 
+    # Finds accepted answer, if it exists, and returns a BeautifulSoup object of the html.
     def get_answer(self, soup):
         # Get accepted answer.
         theDiv = soup.find("div", {"itemprop": "acceptedAnswer"})
@@ -77,6 +79,7 @@ class WebScraper:
         # Return post text.
         return theText
 
+    # Traverses through a BeautifulSoup object of the answer's text and prints the text.
     def loop_and_print(self, soup):
         # Formatting in terminal.
         print(colored("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~", 'red'))
