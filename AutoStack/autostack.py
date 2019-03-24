@@ -1,3 +1,4 @@
+#!/usr/bin/python
 import subprocess
 from SOQuery import WebScraper
 
@@ -38,23 +39,30 @@ if __name__ == '__main__':
     # Listen for stdout.
     stdout_listener = subprocess.Popen(cmd, stdout=subprocess.PIPE)
 
+    # Inform the user that the script is listening for errors.
+    print("Listening for Python errors...")
+
     # Listen for new stdout.
     while True:
         try:
+            # Grab the output from the .d script.
             output = stdout_listener.stdout.readline().decode("utf-8")
-            print(output.split()[0][:-1])
+
+            # If it's a python error, scrape SO.
             if output.split()[0][:-1] in exceptions:
-                searchSoup = WebScraper.scrape_so(output.split())
-                postUrl = WebScraper.get_post_url(searchSoup)
+                # Find a SO post.
+                webscraper = WebScraper()
+                searchSoup = webscraper.scrape_so(output.split())
+                postUrl = webscraper.get_post_url(searchSoup)
                 
                 if postUrl is None:
                     print("No questions found.")
                 else:
-                    answerSoup = WebScraper.scrape_question(postUrl)
-                    answer_text_soup = WebScraper.get_answer(answerSoup)
+                    answerSoup = webscraper.scrape_question(postUrl)
+                    answer_text_soup = webscraper.get_answer(answerSoup)
                     if answer_text_soup is None:
                         print("No answers found.")
                     else:
-                        WebScraper.loop_and_print(answer_text_soup)
+                        webscraper.loop_and_print(answer_text_soup)
         except UnicodeDecodeError:
             pass

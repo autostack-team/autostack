@@ -1,16 +1,14 @@
 from bs4 import BeautifulSoup
 import requests
 from termcolor import colored
-#from stackapi import StackAPI
 from pygments import highlight
 from pygments.lexers import PythonLexer
 from pygments.formatters import NullFormatter
-from Error_Parser import parser
 
 # Functions to take an error message, search StackOverflow for an answer, and print the answer to the terminal.
 class WebScraper:
     # Returns the parsed html of a page.
-    def scrape_so(searchStrings):
+    def scrape_so(self, searchStrings):
         # Url string to get html from.
         url = "https://stackoverflow.com/search?q="
 
@@ -32,7 +30,7 @@ class WebScraper:
         return soup
 
     # Scrapes html from question.
-    def scrape_question(url):
+    def scrape_question(self, url):
         # Builds url to question.
         url = "https://stackoverflow.com/" + url
         print("Getting post from: " + url)
@@ -49,7 +47,7 @@ class WebScraper:
         # Return soup object.
         return soup
 
-    def get_post_url(soup):
+    def get_post_url(self, soup):
         # Find first question.
         theDiv = soup.find("div", {"data-position": "1"})
 
@@ -63,36 +61,24 @@ class WebScraper:
         # Get link from a tag.
         theRef = theLink.get("href")
         
-        # Get .
+        # Return link to post.
         return theRef
 
-    def get_answer(soup):
-        # TODO: No accepted Answer exception OR no answers.
-
+    def get_answer(self, soup):
         # Get accepted answer.
         theDiv = soup.find("div", {"itemprop": "acceptedAnswer"})
 
         # If no accepted answer is found.
         if theDiv is None:
-            print("looking for another answers")
-            # No accepted answers found. Go to top, suggested answer.
-            theDiv = soup.find("div", {"itemprop": "suggestedAnswer"})
-            # If no answers are present.
-            if theDiv is None:
-                return None
+            return None
 
-        # TODO: No results exception.
-        # if theDiv is None:
-        #     print("Error: no answer")
-        #     return
-
+        # Get text of post.
         theText = theDiv.find("div", {"class": "post-text"})
 
-        #print(theText)
-
+        # Return post text.
         return theText
 
-    def loop_and_print(soup):
+    def loop_and_print(self, soup):
         # Formatting in terminal.
         print(colored("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~", 'yellow'))
         print(colored("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~", 'yellow'))
@@ -115,8 +101,6 @@ class WebScraper:
                 # Find the code block.
                 code = i.find("code")
 
-                #print("")
-
                 # Loop through the elements in the code block.
                 # for j in code:
                 #     # Print the highlited code.
@@ -128,36 +112,19 @@ class WebScraper:
                 #     except NavigableString:
                 #         pass
 
+                # Loop through code spans.
                 for j in code:
                     print(j)
+            # If the object is an unordered list.
             elif i.name == "ul":
+                # Loop through list items.
                 for li in i.find_all("li"):
                     print("    - " + li.text)
+                    # If a link is present.
                     if li.find("a") is not None:
+                        # Get link text.
                         link = li.find("a").get("href")
                         print("        link to: " + link)
         print(colored("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~", 'yellow'))
         print(colored("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~", 'yellow'))
         return
-
-if __name__ == "__main__":
-    #stringToSearch = ["bad", "request", "error", "flask"]
-    
-    #stringToSearch = ["how", "to", "get", "text", "from", "span", "tag", "in", "beautifulsoup"]
-    with open('/Users/bensanders/repos/AutoStack/error.txt', 'r') as myfile:
-        stuff=myfile.read()
-    stringToSearch = parser.get_last_line_as_array(stuff)
-    searchSoup = WebScraper.scrape_so(stringToSearch)
-    postUrl = WebScraper.get_post_url(searchSoup)
-    postUrl = "https://stackoverflow.com/questions/55178365/split-text-into-multiple-lines-based-on-pipe-and-cap-delimiter-oracle-pl-sql-p"
-    
-    if postUrl is None:
-        print("No questions found.")
-    else:
-        answerSoup = WebScraper.scrape_question(postUrl)
-        answer_text_soup = WebScraper.get_answer(answerSoup)
-        if answer_text_soup is None:
-            print("No answers found.")
-        else:
-            WebScraper.loop_and_print(answer_text_soup)
-    #print(returnThing)
