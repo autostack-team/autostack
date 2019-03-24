@@ -50,19 +50,32 @@ if __name__ == '__main__':
 
             # If it's a python error, scrape SO.
             if output.split()[0][:-1] in exceptions:
+                # Store user input.
+                satisfied = 'no'
+                i = 1
+
                 # Find a SO post.
                 webscraper = WebScraper()
                 searchSoup = webscraper.scrape_so(output.split())
-                postUrl = webscraper.get_post_url(searchSoup)
-                
-                if postUrl is None:
-                    print("No questions found.")
-                else:
-                    answerSoup = webscraper.scrape_question(postUrl)
-                    answer_text_soup = webscraper.get_answer(answerSoup)
-                    if answer_text_soup is None:
-                        print("No answers found.")
+
+                # Loop over SO post.
+                while (satisfied == 'no'):
+                    postUrl = webscraper.get_post_url(searchSoup, str(i))
+                    
+                    if postUrl is None:
+                        print("No questions found.")
                     else:
-                        webscraper.loop_and_print(answer_text_soup)
+                        answerSoup = webscraper.scrape_question(postUrl)
+                        answer_text_soup = webscraper.get_answer(answerSoup)
+                        if answer_text_soup is None:
+                            print("No answers found.")
+                            break
+                        else:
+                            webscraper.loop_and_print(answer_text_soup)
+                    
+                    print("Happy with this answer? (yes, no): ")
+                    satisfied = input()
+                    i += 1
+
         except UnicodeDecodeError:
             pass
