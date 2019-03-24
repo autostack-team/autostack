@@ -46,9 +46,9 @@ class WebScraper:
         # Return soup object.
         return soup
 
-    def get_post_url(self, soup):
+    def get_post_url(self, soup, data_position = "1"):
         # Find first question.
-        theDiv = soup.find("div", {"data-position": "1"})
+        theDiv = soup.find("div", {"data-position": data_position})
 
         # If no questions are found.
         if theDiv == None:
