@@ -1,9 +1,8 @@
 from bs4 import BeautifulSoup
 import requests
 from termcolor import colored
-from pygments import highlight
+import pygments
 from pygments.lexers import PythonLexer
-from pygments.formatters import NullFormatter
 
 # Functions to take an error message, search StackOverflow for an answer, and print the answer to the terminal.
 class WebScraper:
@@ -33,7 +32,7 @@ class WebScraper:
     def scrape_question(self, url):
         # Builds url to question.
         url = "https://stackoverflow.com/" + url
-        print("Getting post from: " + url)
+        print(colored("Getting post from: " + url, 'yellow'))
 
         # Request page.
         r = requests.get(url)
@@ -80,14 +79,14 @@ class WebScraper:
 
     def loop_and_print(self, soup):
         # Formatting in terminal.
-        print(colored("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~", 'yellow'))
-        print(colored("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~", 'yellow'))
+        print(colored("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~", 'red'))
+        print(colored("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~", 'red'))
         
         # Loop through soup objects.
         for i in soup:
             # If the object is a paragraph.
             if i.name == "p":
-                print(colored(i.text, 'red'))
+                print(colored(i.text, 'white'))
 
             # If the object is a quote.
             elif i.name == "blockquote":
@@ -101,30 +100,47 @@ class WebScraper:
                 # Find the code block.
                 code = i.find("code")
 
-                # Loop through the elements in the code block.
-                # for j in code:
-                #     # Print the highlited code.
-                #     # if j.get("class") == None:
-                #     #     print("IT FINALLY WORKS")
-                #     try:
-                #         print(j.get("class"))
-                #         print(highlight(str(j), PythonLexer(), NullFormatter()))
-                #     except NavigableString:
-                #         pass
+                # Store the code.
+                code_to_be_colored = ''
 
                 # Loop through code spans.
                 for j in code:
-                    print(j)
+                    code_to_be_colored += j
+
+                # Loop over code, and highlight.
+                for token, content in pygments.lex(code_to_be_colored, PythonLexer()):
+                    if str(token) == "Token.Keyword":
+                        print(colored(content, 'blue'), end='')
+                    elif str(token) == "Token.Name.Builtin.Pseudo":
+                        print(colored(content, 'blue'), end='')
+                    elif str(token) == "Token.Literal.Number.Integer":
+                        print(colored(content, 'green'), end='')
+                    elif str(token) == "Token.Literal.Number.Float":
+                        print(colored(content, 'green'), end='')
+                    elif str(token) == "Token.Literal.String.Single":
+                        print(colored(content, 'yellow'), end='')
+                    elif str(token) == "Token.Literal.String.Double":
+                        print(colored(content, 'yellow'), end='')
+                    elif str(token) == "Token.Literal.String.Doc":
+                        print(colored(content, 'yellow'), end='')
+                    elif str(token) == "Token.Comment.Single":
+                        print(colored(content, 'green'), end='')
+                    elif str(token) == "Token.Comment.Hashbang":
+                        print(colored(content, 'green'), end='')
+                    else:
+                        print(content, end='')
+                print('')
+
             # If the object is an unordered list.
             elif i.name == "ul":
                 # Loop through list items.
                 for li in i.find_all("li"):
-                    print("    - " + li.text)
+                    print(colored("    - " + li.text, 'yellow', attrs=['bold']))
                     # If a link is present.
                     if li.find("a") is not None:
                         # Get link text.
                         link = li.find("a").get("href")
-                        print("        link to: " + link)
-        print(colored("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~", 'yellow'))
-        print(colored("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~", 'yellow'))
+                        print(colored("        link to: " + link, 'yellow', attrs=['bold']))
+        print(colored("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~", 'red'))
+        print(colored("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~", 'red'))
         return
