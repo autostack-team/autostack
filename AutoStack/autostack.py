@@ -1,5 +1,35 @@
 import subprocess
-from threading import Thread
+from SOQuery import WebScraper
+
+exceptions = ['Exception',
+'StopIteration',
+'SystemExit',
+'StandardError',
+'ArithmeticError',
+'OverflowError',
+'FloatingPointError',
+'ZeroDivisionError',
+'AssertionError',
+'AttributeError',
+'EOFError',
+'ImportError',
+'KeyboardInterrupt',
+'LookupError',
+'IndexError',
+'KeyError',
+'NameError',
+'UnboundLocalError',
+'EnvironmentError',
+'IOError',
+'OSError',
+'SyntaxError',
+'IndentationError',
+'SystemError',
+'SystemExit',
+'TypeError',
+'ValueError',
+'RuntimeError',
+'NotImplementedError']
    
 if __name__ == '__main__':
     # Command to run the .d stdout script.
@@ -11,7 +41,20 @@ if __name__ == '__main__':
     # Listen for new stdout.
     while True:
         try:
-            line = stdout_listener.stdout.readline().decode("utf-8")
-            print(line)
+            output = stdout_listener.stdout.readline().decode("utf-8")
+            print(output.split()[0][:-1])
+            if output.split()[0][:-1] in exceptions:
+                searchSoup = WebScraper.scrape_so(output.split())
+                postUrl = WebScraper.get_post_url(searchSoup)
+                
+                if postUrl is None:
+                    print("No questions found.")
+                else:
+                    answerSoup = WebScraper.scrape_question(postUrl)
+                    answer_text_soup = WebScraper.get_answer(answerSoup)
+                    if answer_text_soup is None:
+                        print("No answers found.")
+                    else:
+                        WebScraper.loop_and_print(answer_text_soup)
         except UnicodeDecodeError:
             pass
