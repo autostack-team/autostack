@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/usr/bin/env python3
 import subprocess
 from SOQuery import WebScraper
 
@@ -34,7 +34,7 @@ exceptions = ['Exception',
    
 if __name__ == '__main__':
     # Command to run the .d stdout script.
-    cmd = ["sudo", "dtrace", "-q", "-s", "stdout.d"]
+    cmd = ["sudo", "dtrace", "-q", "-s", "/usr/bin/AutoStack/stdout.d"]
 
     # Listen for stdout.
     stdout_listener = subprocess.Popen(cmd, stdout=subprocess.PIPE)
