@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
-import subprocess
-from SOQuery import WebScraper
+import os
+from .SOQuery import WebScraper
 
 exceptions = ['Exception',
 'StopIteration',
@@ -33,11 +33,12 @@ exceptions = ['Exception',
 'NotImplementedError']
    
 if __name__ == '__main__':
-    # Command to run the .d stdout script.
-    cmd = ["sudo", "dtrace", "-q", "-s", "/usr/bin/AutoStack/stdout.d"]
+    # Ensure that the pipe exists; if not, create it.
+    if not os.path.exists('./monitorPipe'):
+        os.mkfifo('monitorPipe')
 
-    # Listen for stdout.
-    stdout_listener = subprocess.Popen(cmd, stdout=subprocess.PIPE)
+    # Open the pipe.
+    f = open('monitorPipe', 'r')
 
     # Inform the user that the script is listening for errors.
     print("Listening for Python errors...")
@@ -45,8 +46,12 @@ if __name__ == '__main__':
     # Listen for new stdout.
     while True:
         try:
-            # Grab the output from the .d script.
-            output = stdout_listener.stdout.readline().decode("utf-8")
+            # Read a line from the pipe.
+            output = f.readline()
+
+            # Pipe closed.
+            if output == '':
+                break
 
             # If it's a python error, scrape SO.
             if output.split()[0][:-1] in exceptions:
