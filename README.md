@@ -1,4 +1,4 @@
-![Logo](/Logo.png)
+![Logo](https://raw.githubusercontent.com/elijahsawyers/autostack/master/Logo.png)
 
 # License
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)  
@@ -10,7 +10,7 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 Clone the repo.
 ```
-git clone https://github.com/elijahsawyers/AutoStack.git
+git clone https://github.com/elijahsawyers/autostack.git
 ```
 
 Navigate to the project directory, and run the install bash script.
