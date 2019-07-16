@@ -6,6 +6,8 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 # Setup
 
+1. Clone the repo and use the install script.
+
 Clone the repo.
 ```
 git clone https://github.com/elijahsawyers/AutoStack.git
@@ -17,6 +19,14 @@ cd /path/to/project/
 chmod +x install.sh
 ./install.sh 
 ```
+
+2. OR, just use pip to install.
+
+```
+pip3 install autostack
+```
+
+# Usage 
 
 In one terminal window, execute the autostack command to listen for errors.
 ```
