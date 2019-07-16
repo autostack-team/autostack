@@ -36,6 +36,6 @@ setuptools.setup(
         'Topic :: Software Development :: Debuggers',
         'Programming Language :: Python :: 3',
         'License :: OSI Approved :: MIT License',
-        'Operating System :: *nix',
+        'Operating System :: Unix',
     ],
 )
