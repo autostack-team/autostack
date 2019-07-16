@@ -1,1 +1,1 @@
-name='AutoStack'
+name = "autostack"
