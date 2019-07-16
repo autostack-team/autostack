@@ -1,9 +1,15 @@
 import setuptools
+from os import path
 
+# Long Description.
+this_directory = path.abspath(path.dirname(__file__))
+with open(path.join(this_directory, 'LONGDESCRIPTION.md'), encoding='utf-8') as f:
+    long_description = f.read()
+    
 setuptools.setup(
     # General setup information.
     name='autostack',
-    version='0.0.1',
+    version='0.0.4',
     packages=setuptools.find_packages(exclude=['tests']),
     scripts=[
         'autostack/autostack-terminal'
@@ -25,8 +31,8 @@ setuptools.setup(
     author='Elijah Sawyers, Benjamin Sanders, Caleb Werth',
     author_email='elijahsawyers@gmail.com, ben.sanders97@gmail.com, cwerth@crimson.ua.edu',
     description='Automatically detect python errors and search Stack Overflow.',
-    # TODO: Long Description.
-    # TODO: Long Description Content Type.
+    long_description=long_description,
+    long_description_content_type='text/markdown',
     # TODO: URL.
     # TODO: Keywords.
     url='https://github.com/elijahsawyers/AutoStack',
