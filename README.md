@@ -20,7 +20,7 @@ chmod +x install.sh
 ./install.sh 
 ```
 
-2. OR, just use pip to install.
+2. Or just use pip to install.
 
 ```
 pip3 install autostack
