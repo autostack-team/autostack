@@ -5,7 +5,14 @@ setuptools.setup(
     name='autostack',
     version='0.0.1',
     packages=setuptools.find_packages(exclude=['tests']),
-    scripts=['autostack/autostack.py'],
+    scripts=[
+        'autostack/autostack-terminal'
+    ],
+    entry_points={
+        'console_scripts': [
+            'autostack=autostack.__main__:main'
+        ]
+    },
     install_requires=[
         'Pygments>=2.3.1',
         'requests>=2.21.0',

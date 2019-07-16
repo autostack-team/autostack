@@ -11,20 +11,22 @@ Clone the repo.
 git clone https://github.com/elijahsawyers/AutoStack.git
 ```
 
-Navigate to the project directory, and install the requirements.
+Navigate to the project directory, and run the install bash script.
 ```
-pip install -r requirements.txt
-```
-
-Run the install bash script.
-```
+cd /path/to/project/
+chmod +x install.sh
 ./install.sh 
 ```
 
-Start listening for errors!
+In one terminal window, execute the autostack command to listen for errors.
 ```
 autostack
 ```
+
+In another terminal window, execute autostack-termal which will inform the autostack listener to listen for errors in the terminal.
+```
+autostack-terminal
+``` 
 
 # Authors
 * [Elijah Sawyers](https://github.com/elijahsawyers)

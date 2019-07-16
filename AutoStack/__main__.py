@@ -2,46 +2,48 @@
 import os
 from .SOQuery import WebScraper
 
-exceptions = ['Exception',
-'StopIteration',
-'SystemExit',
-'StandardError',
-'ArithmeticError',
-'OverflowError',
-'FloatingPointError',
-'ZeroDivisionError',
-'AssertionError',
-'AttributeError',
-'EOFError',
-'ImportError',
-'KeyboardInterrupt',
-'LookupError',
-'IndexError',
-'KeyError',
-'NameError',
-'UnboundLocalError',
-'EnvironmentError',
-'IOError',
-'OSError',
-'SyntaxError',
-'IndentationError',
-'SystemError',
-'SystemExit',
-'TypeError',
-'ValueError',
-'RuntimeError',
-'NotImplementedError']
+EXCEPTIONS = [
+    'Exception',
+    'StopIteration',
+    'SystemExit',
+    'StandardError',
+    'ArithmeticError',
+    'OverflowError',
+    'FloatingPointError',
+    'ZeroDivisionError',
+    'AssertionError',
+    'AttributeError',
+    'EOFError',
+    'ImportError',
+    'KeyboardInterrupt',
+    'LookupError',
+    'IndexError',
+    'KeyError',
+    'NameError',
+    'UnboundLocalError',
+    'EnvironmentError',
+    'IOError',
+    'OSError',
+    'SyntaxError',
+    'IndentationError',
+    'SystemError',
+    'SystemExit',
+    'TypeError',
+    'ValueError',
+    'RuntimeError',
+    'NotImplementedError'
+]
    
-if __name__ == '__main__':
+def main():
     # Ensure that the pipe exists; if not, create it.
-    if not os.path.exists('./monitorPipe'):
-        os.mkfifo('monitorPipe')
+    if not os.path.exists(os.environ['HOME'] + '/Desktop/autostack/monitorPipe'):
+        os.mkfifo(os.environ['HOME'] + '/Desktop/autostack/monitorPipe')
 
     # Open the pipe.
-    f = open('monitorPipe', 'r')
+    f = open(os.environ['HOME'] + '/Desktop/autostack/monitorPipe', 'r')
 
     # Inform the user that the script is listening for errors.
-    print("Listening for Python errors...")
+    print("Development terminal opened - listening for Python errors...")
 
     # Listen for new stdout.
     while True:
@@ -54,7 +56,7 @@ if __name__ == '__main__':
                 break
 
             # If it's a python error, scrape SO.
-            if output.split()[0][:-1] in exceptions:
+            if output.split()[0][:-1] in EXCEPTIONS:
                 # Store user input.
                 satisfied = 'no'
                 i = 1
@@ -84,3 +86,6 @@ if __name__ == '__main__':
 
         except UnicodeDecodeError:
             pass
+
+if __name__ == '__main__':
+    main()
