@@ -1,4 +1,4 @@
-![Logo](/Logo.png)
+![Logo](https://raw.githubusercontent.com/elijahsawyers/autostack/master/Logo.png)
 
 # License
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)  

@@ -3,6 +3,7 @@ import requests
 from termcolor import colored
 import pygments
 from pygments.lexers import PythonLexer
+from __future__ import print_function # Allows use of the python 3 print function.
 
 # Functions to take an error message, search StackOverflow for an answer, and print the answer to the terminal.
 class WebScraper:

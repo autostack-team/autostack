@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 import os
 from .SOQuery import WebScraper
+from __future__ import print_function # Allows use of the python 3 print function.
 
 EXCEPTIONS = [
     'Exception',
@@ -36,11 +37,14 @@ EXCEPTIONS = [
    
 def main():
     # Ensure that the pipe exists; if not, create it.
-    if not os.path.exists(os.environ['HOME'] + '/Desktop/autostack/monitorPipe'):
-        os.mkfifo(os.environ['HOME'] + '/Desktop/autostack/monitorPipe')
-
+    if not os.path.exists('/tmp'):
+        os.mkdir('/tmp')
+        os.mkfifo('/tmp/monitorPipe')
+    elif not os.path.exists('/tmp/monitorPipe')
+        os.mkfifo('/tmp/monitorPipe')
+        
     # Open the pipe.
-    f = open(os.environ['HOME'] + '/Desktop/autostack/monitorPipe', 'r')
+    f = open('/tmp/monitorPipe', 'r')
 
     # Inform the user that the script is listening for errors.
     print("Development terminal opened - listening for Python errors...")
