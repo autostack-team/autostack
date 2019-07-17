@@ -1,2 +1,2 @@
 #!/usr/bin/env bash
-script -q -F ~/Desktop/autostack/monitorPipe
+script -q -F /tmp/monitorPipe

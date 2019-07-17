@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 from __future__ import print_function # Allows use of the python 3 print function.
 import os
-from .SOQuery import WebScraper
+from WebScraper.StackOverflowScraper import StackOverflowScraper
 
 EXCEPTIONS = [
     'Exception',
@@ -36,6 +36,10 @@ EXCEPTIONS = [
 ]
    
 def main():
+    '''
+    Listens for python errors outputed in autostack-terminals.
+    '''
+
     # Ensure that the pipe exists; if not, create it.
     if not os.path.exists('/tmp'):
         os.mkdir('/tmp')
@@ -45,8 +49,6 @@ def main():
         
     # Open the pipe.
     f = open('/tmp/monitorPipe', 'r')
-
-    # Inform the user that the script is listening for errors.
     print("Development terminal opened - listening for Python errors...")
 
     # Listen for new stdout.
@@ -59,35 +61,44 @@ def main():
             if output == '':
                 break
 
-            # If it's a python error, scrape SO.
+            # If the current line of output is a python error, query Stack Overflow.
             if output.split()[0][:-1] in EXCEPTIONS:
                 # Store user input.
-                satisfied = 'no'
+                satisfied = 'n'
                 i = 1
 
-                # Find a SO post.
-                webscraper = WebScraper()
-                searchSoup = webscraper.scrape_so(output.split())
+                # Query Stack Overflow for the error.
+                so_scraper = StackOverflowScraper()
+                query_soup = so_scraper.query(output.split())
 
-                # Loop over SO post.
-                while (satisfied == 'no'):
-                    postUrl = webscraper.get_post_url(searchSoup, str(i))
+                # Loop over the Stack Overflow posts from the query.
+                while (True):
+                    if satisfied == 'n':
+                        pass
+                    elif satisfied == 'Y':
+                        break
+                    else:
+                        print("Invalid input! (Y/n): ")
+                        satisfied = input()
+                        continue
+
+                    post_url = so_scraper.get_post_url(searchSoup, str(i))
                     
-                    if postUrl is None:
+                    if post_url is None:
                         print("No questions found.")
                     else:
-                        answerSoup = webscraper.scrape_question(postUrl)
-                        answer_text_soup = webscraper.get_answer(answerSoup)
-                        if answer_text_soup is None:
+                        post_soup = so_scraper.scrape_question(post_url)
+                        answer_soup = so_scraper.get_answer(post_soup)
+                        
+                        if answer_soup is None:
                             print("No answers found.")
                             break
                         else:
-                            webscraper.loop_and_print(answer_text_soup)
+                            so_scraper.loop_and_print(answer_soup)
                     
-                    print("Happy with this answer? (yes, no): ")
+                    print("Happy with this answer? (Y/n): ")
                     satisfied = input()
                     i += 1
-
         except UnicodeDecodeError:
             pass
 
