@@ -9,7 +9,7 @@ with open(path.join(this_directory, 'README.md')) as f:
 setuptools.setup(
     # General setup information.
     name='autostack',
-    version='0.0.6',
+    version='0.0.7',
     packages=setuptools.find_packages(exclude=['tests']),
     scripts=[
         'autostack/autostack-terminal'

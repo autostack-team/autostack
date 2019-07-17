@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
-import os
-from .SOQuery import WebScraper
 from __future__ import print_function # Allows use of the python 3 print function.
+import os
+from SOQuery import WebScraper
 
 EXCEPTIONS = [
     'Exception',
@@ -40,7 +40,7 @@ def main():
     if not os.path.exists('/tmp'):
         os.mkdir('/tmp')
         os.mkfifo('/tmp/monitorPipe')
-    elif not os.path.exists('/tmp/monitorPipe')
+    elif not os.path.exists('/tmp/monitorPipe'):
         os.mkfifo('/tmp/monitorPipe')
         
     # Open the pipe.
