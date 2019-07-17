@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 from __future__ import print_function # Allows use of the python 3 print function.
 import os
-from SOQuery import WebScraper
+from .SOQuery import WebScraper
 
 EXCEPTIONS = [
     'Exception',
