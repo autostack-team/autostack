@@ -1,7 +1,16 @@
 #!/usr/bin/env python3
-from __future__ import print_function # Allows use of the python 3 print function.
+'''
+Authors: Elijah Sawyers, Benjamin Sanders
+Emails: elijahsawyers@gmail.com, ben.sanders97@gmail.com
+Date: 03/17/2019
+Overview: This opens the named pipe '/tmp/monitorPipe' and listens for data
+passed to the pipe. If the data is detected to be a python error, it queries
+Stack Overflow for the error and displays posts with accepted answers.
+'''
+
+from __future__ import print_function
 import os
-from WebScraper.StackOverflowScraper import StackOverflowScraper
+from .web_scraper.stack_overflow_scraper import StackOverflowScraper
 
 EXCEPTIONS = [
     'Exception',
@@ -34,10 +43,16 @@ EXCEPTIONS = [
     'RuntimeError',
     'NotImplementedError'
 ]
-   
+
 def main():
     '''
-    Listens for python errors outputed in autostack-terminals.
+    Listens for python errors outputed on the '/tmp/monitorPipe'
+    named pipe.
+
+    This opens the named pipe '/tmp/monitorPipe' and listens for data
+    passed to the pipe. If the data is detected to be a python error,
+    it queries Stack Overflow for the error and displays posts with
+    accepted answers.
     '''
 
     # Ensure that the pipe exists; if not, create it.
@@ -46,61 +61,42 @@ def main():
         os.mkfifo('/tmp/monitorPipe')
     elif not os.path.exists('/tmp/monitorPipe'):
         os.mkfifo('/tmp/monitorPipe')
-        
+
     # Open the pipe.
-    f = open('/tmp/monitorPipe', 'r')
-    print("Development terminal opened - listening for Python errors...")
+    pipe = open('/tmp/monitorPipe', 'r')
+    print("Development terminal[s] open - ")
+    print("Listening for Python errors...")
 
     # Listen for new stdout.
     while True:
-        try:
-            # Read a line from the pipe.
-            output = f.readline()
+        # Read a line from the pipe.
+        output = pipe.readline()
 
-            # Pipe closed.
-            if output == '':
-                break
+        # Pipe closed.
+        if output == '':
+            break
 
-            # If the current line of output is a python error, query Stack Overflow.
-            if output.split()[0][:-1] in EXCEPTIONS:
-                # Store user input.
-                satisfied = 'n'
-                i = 1
+        # If the current line of output is a python error, query Stack Overflow.
+        if output.split()[0][:-1] in EXCEPTIONS:
 
-                # Query Stack Overflow for the error.
-                so_scraper = StackOverflowScraper()
-                query_soup = so_scraper.query(output.split())
+            so_scraper = StackOverflowScraper()
 
-                # Loop over the Stack Overflow posts from the query.
-                while (True):
-                    if satisfied == 'n':
-                        pass
-                    elif satisfied == 'Y':
+            for post in so_scraper.accepted_posts(output):
+
+                # Display Stack Overflow posts for the error.
+                so_scraper.print_accepted_post(post)
+
+                # If the user's question has been answered, don't keep looping over posts.
+                while True:
+                    print('Did this answer your question? (Y/n): ', end='')
+                    question_answered = raw_input()
+                    if str(question_answered) == 'Y' or str(question_answered) == 'n':
                         break
-                    else:
-                        print("Invalid input! (Y/n): ")
-                        satisfied = input()
-                        continue
-
-                    post_url = so_scraper.get_post_url(searchSoup, str(i))
-                    
-                    if post_url is None:
-                        print("No questions found.")
-                    else:
-                        post_soup = so_scraper.scrape_question(post_url)
-                        answer_soup = so_scraper.get_answer(post_soup)
-                        
-                        if answer_soup is None:
-                            print("No answers found.")
-                            break
-                        else:
-                            so_scraper.loop_and_print(answer_soup)
-                    
-                    print("Happy with this answer? (Y/n): ")
-                    satisfied = input()
-                    i += 1
-        except UnicodeDecodeError:
-            pass
+                if str(question_answered) == 'Y':
+                    print("Listening for Python errors...")
+                    break
+                elif str(question_answered) == 'n':
+                    continue
 
 if __name__ == '__main__':
     main()
