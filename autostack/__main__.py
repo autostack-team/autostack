@@ -1,7 +1,16 @@
 #!/usr/bin/env python3
-from __future__ import print_function # Allows use of the python 3 print function.
+'''
+Authors: Elijah Sawyers, Benjamin Sanders
+Emails: elijahsawyers@gmail.com, ben.sanders97@gmail.com
+Date: 03/17/2019
+Overview: This opens the named pipe '/tmp/monitorPipe' and listens for data
+passed to the pipe. If the data is detected to be a python error, it queries
+Stack Overflow for the error and displays posts with accepted answers.
+'''
+
+from __future__ import print_function
 import os
-from .SOQuery import WebScraper
+from .web_scraper.stack_overflow_scraper import StackOverflowScraper
 
 EXCEPTIONS = [
     'Exception',
@@ -34,62 +43,60 @@ EXCEPTIONS = [
     'RuntimeError',
     'NotImplementedError'
 ]
-   
+
 def main():
+    '''
+    Listens for python errors outputed on the '/tmp/monitorPipe'
+    named pipe.
+
+    This opens the named pipe '/tmp/monitorPipe' and listens for data
+    passed to the pipe. If the data is detected to be a python error,
+    it queries Stack Overflow for the error and displays posts with
+    accepted answers.
+    '''
+
     # Ensure that the pipe exists; if not, create it.
     if not os.path.exists('/tmp'):
         os.mkdir('/tmp')
         os.mkfifo('/tmp/monitorPipe')
     elif not os.path.exists('/tmp/monitorPipe'):
         os.mkfifo('/tmp/monitorPipe')
-        
-    # Open the pipe.
-    f = open('/tmp/monitorPipe', 'r')
 
-    # Inform the user that the script is listening for errors.
-    print("Development terminal opened - listening for Python errors...")
+    # Open the pipe.
+    pipe = open('/tmp/monitorPipe', 'r')
+    print("Development terminal[s] open - ")
+    print("Listening for Python errors...")
 
     # Listen for new stdout.
     while True:
-        try:
-            # Read a line from the pipe.
-            output = f.readline()
+        # Read a line from the pipe.
+        output = pipe.readline()
 
-            # Pipe closed.
-            if output == '':
-                break
+        # Pipe closed.
+        if output == '':
+            break
 
-            # If it's a python error, scrape SO.
-            if output.split()[0][:-1] in EXCEPTIONS:
-                # Store user input.
-                satisfied = 'no'
-                i = 1
+        # If the current line of output is a python error, query Stack Overflow.
+        if output.split()[0][:-1] in EXCEPTIONS:
 
-                # Find a SO post.
-                webscraper = WebScraper()
-                searchSoup = webscraper.scrape_so(output.split())
+            so_scraper = StackOverflowScraper()
 
-                # Loop over SO post.
-                while (satisfied == 'no'):
-                    postUrl = webscraper.get_post_url(searchSoup, str(i))
-                    
-                    if postUrl is None:
-                        print("No questions found.")
-                    else:
-                        answerSoup = webscraper.scrape_question(postUrl)
-                        answer_text_soup = webscraper.get_answer(answerSoup)
-                        if answer_text_soup is None:
-                            print("No answers found.")
-                            break
-                        else:
-                            webscraper.loop_and_print(answer_text_soup)
-                    
-                    print("Happy with this answer? (yes, no): ")
-                    satisfied = input()
-                    i += 1
+            for post in so_scraper.accepted_posts(output):
 
-        except UnicodeDecodeError:
-            pass
+                # Display Stack Overflow posts for the error.
+                so_scraper.print_accepted_post(post)
+
+                # If the user's question has been answered, don't keep looping over posts.
+                while True:
+                    print('Did this answer your question? (Y/n): ', end='')
+                    question_answered = raw_input()
+                    if str(question_answered) == 'Y' or str(question_answered) == 'n':
+                        break
+                if str(question_answered) == 'Y':
+                    print("Listening for Python errors...")
+                    break
+                elif str(question_answered) == 'n':
+                    continue
 
 if __name__ == '__main__':
     main()
