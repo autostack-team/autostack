@@ -10,7 +10,10 @@ Stack Overflow for the error and displays posts with accepted answers.
 from __future__ import print_function
 from builtins import input
 import os
-from .web_scraper.stack_overflow_scraper import StackOverflowScraper
+from .web_scraper.stack_overflow_scraper import (
+    accepted_posts,
+    print_accepted_post
+)
 
 EXCEPTIONS = [
     'Exception',
@@ -78,13 +81,9 @@ def main():
 
         # If the current line of output is a python error, query Stack Overflow.
         if output.split()[0][:-1] in EXCEPTIONS:
-
-            so_scraper = StackOverflowScraper()
-
-            for post in so_scraper.accepted_posts(output):
-
+            for post in accepted_posts(output):
                 # Display Stack Overflow posts for the error.
-                so_scraper.print_accepted_post(post)
+                print_accepted_post(post)
 
                 # If the user's question has been answered, don't keep looping over posts.
                 while True:
