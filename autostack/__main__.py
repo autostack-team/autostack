@@ -1,4 +1,3 @@
-#!/usr/bin/env python3
 '''
 Authors: Elijah Sawyers, Benjamin Sanders
 Emails: elijahsawyers@gmail.com, ben.sanders97@gmail.com
@@ -9,6 +8,7 @@ Stack Overflow for the error and displays posts with accepted answers.
 '''
 
 from __future__ import print_function
+from builtins import input
 import os
 from .web_scraper.stack_overflow_scraper import StackOverflowScraper
 
@@ -89,7 +89,7 @@ def main():
                 # If the user's question has been answered, don't keep looping over posts.
                 while True:
                     print('Did this answer your question? (Y/n): ', end='')
-                    question_answered = raw_input()
+                    question_answered = input()
                     if str(question_answered) == 'Y' or str(question_answered) == 'n':
                         break
                 if str(question_answered) == 'Y':

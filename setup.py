@@ -9,7 +9,7 @@ with open(path.join(this_directory, 'README.md')) as f:
 setuptools.setup(
     # General setup information.
     name='autostack',
-    version='0.0.9',
+    version='0.0.10',
     packages=setuptools.find_packages(exclude=['tests']),
     scripts=[
         'autostack/autostack-terminal'
@@ -25,6 +25,7 @@ setuptools.setup(
         'termcolor>=1.1.0',
         'lxml>=4.3.2',
         'beautifulsoup4>=4.7.1',
+        'future>=0.17.1',
     ],
 
     # Meta data.
