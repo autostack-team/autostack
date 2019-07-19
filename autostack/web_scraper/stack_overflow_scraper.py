@@ -108,7 +108,7 @@ def print_accepted_post(post):
     if not question:
         return
 
-    self.print_post_text(question)
+    print_post_text(question)
 
     print(colored('~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~', 'red'))
     print(colored('Answer:', 'red'))
@@ -129,7 +129,7 @@ def print_accepted_post(post):
     if not accepted_answer:
         return
 
-    self.print_post_text(accepted_answer)
+    print_post_text(accepted_answer)
 
     print(colored('~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~', 'red'))
     return
@@ -148,7 +148,7 @@ def print_post_text(post_text):
     Text: White.
     Quotes: Yellow.
     Lists: Green.
-    Code: Syntax Highlighted in self.print_code_block().
+    Code: Syntax Highlighted in print_code_block().
 
     Parameter {BeautifulSoup} post_text: 'soup' of a HTML
     'div' element from a Stack Overflow post with class of
@@ -166,7 +166,7 @@ def print_post_text(post_text):
             for li_element in element.find_all('li'):
                 print(colored('    - ' + li_element.text, 'green', attrs=['bold']))
         elif element.name == 'pre': # Code.
-            self.print_code_block(element.find('code'))
+            print_code_block(element.find('code'))
 
 def print_code_block(code_block):
     '''
