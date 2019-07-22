@@ -96,6 +96,3 @@ def main():
                     break
                 elif str(question_answered) == 'n':
                     continue
-
-if __name__ == '__main__':
-    main()
