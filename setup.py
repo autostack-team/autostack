@@ -20,13 +20,22 @@ setuptools.setup(
         ]
     },
     install_requires=[
-        'Pygments>=2.3.1',
-        'requests>=2.21.0',
-        'termcolor>=1.1.0',
-        'lxml>=4.3.2',
-        'beautifulsoup4>=4.7.1',
-        'future>=0.17.1',
+        'Pygments',
+        'requests',
+        'termcolor',
+        'lxml',
+        'beautifulsoup4',
+        'future',
+        'pytest',
+        'pytest-cov',
     ],
+    extras_require={ 
+        'development': [
+            'pytest',
+            'pytest-pep8',
+            'pytest-cov'
+        ]
+    },
 
     # Meta data.
     author='Elijah Sawyers, Benjamin Sanders, Caleb Werth',
