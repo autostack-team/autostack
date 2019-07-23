@@ -9,14 +9,14 @@ with open(path.join(this_directory, 'README.md')) as f:
 setuptools.setup(
     # General setup information.
     name='autostack',
-    version='0.0.10',
+    version='0.0.11',
     packages=setuptools.find_packages(exclude=['tests']),
     scripts=[
         'autostack/autostack-terminal'
     ],
     entry_points={
         'console_scripts': [
-            'autostack=autostack.__main__:main'
+            'autostack=autostack.main:main'
         ]
     },
     install_requires=[
