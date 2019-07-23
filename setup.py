@@ -5,7 +5,7 @@ from os import path
 this_directory = path.abspath(path.dirname(__file__))
 with open(path.join(this_directory, 'README.md')) as f:
     long_description = f.read()
-    
+
 setuptools.setup(
     # General setup information.
     name='autostack',
@@ -33,19 +33,17 @@ setuptools.setup(
         'development': [
             'pytest',
             'pytest-pep8',
-            'pytest-cov'
+            'pytest-cov',
         ]
     },
 
     # Meta data.
+    url='https://github.com/elijahsawyers/autostack',
     author='Elijah Sawyers, Benjamin Sanders, Caleb Werth',
     author_email='elijahsawyers@gmail.com, ben.sanders97@gmail.com, cwerth@crimson.ua.edu',
     description='Automatically detect python errors and search Stack Overflow.',
     long_description=long_description,
     long_description_content_type='text/markdown',
-    # TODO: URL.
-    # TODO: Keywords.
-    url='https://github.com/elijahsawyers/AutoStack',
     classifiers=[
         'Development Status :: 3 - Alpha',
         'Intended Audience :: Developers',
@@ -54,4 +52,5 @@ setuptools.setup(
         'License :: OSI Approved :: MIT License',
         'Operating System :: Unix',
     ],
+    keywords='command-line debug development tool'
 )

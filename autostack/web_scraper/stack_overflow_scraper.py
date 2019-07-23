@@ -63,6 +63,7 @@ def accepted_posts(query):
 
             # Only view posts with accepted answers.
             if not accepted_answer:
+                print('here')
                 continue
 
             post_href = post_summary.find(
