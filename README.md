@@ -1,7 +1,12 @@
 ![Logo](https://raw.githubusercontent.com/elijahsawyers/autostack/master/Logo.png)
 
+<p align="center">
+    <a href="https://join.slack.com/t/autostack/shared_invite/enQtNzAzOTcyODkxNDU2LTkyODhmOTJmY2I5OWZiNmIwOWVkZDZmZjdhOTA3ODcwZGYzZjU0ODdiYjMzMzA1ZGIzZTBhMzNiNzBmYjM0ZGY" alt="Contributors">
+        <img src="https://img.shields.io/badge/Chat-on_slack-purple.svg?logo=slack" /></a>
+</p>
+
 # License
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)  
+[![License: MIT](https://img.shields.io/badge/License-MIT-blueviolet.svg)](https://opensource.org/licenses/MIT)  
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details
 
 # Setup
