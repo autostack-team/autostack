@@ -1,8 +1,8 @@
 ![Logo](https://raw.githubusercontent.com/elijahsawyers/autostack/master/Logo.png)
-[![Chat](https://img.sheilds.io/badge/Chat-Slack-purple.svg)](https://join.slack.com/t/autostack/shared_invite/enQtNzAzOTcyODkxNDU2LTkyODhmOTJmY2I5OWZiNmIwOWVkZDZmZjdhOTA3ODcwZGYzZjU0ODdiYjMzMzA1ZGIzZTBhMzNiNzBmYjM0ZGY)
+[![Chat: Slack](https://img.shields.io/badge/Chat-on_slack-purple.svg?logo=slack)](https://join.slack.com/t/autostack/shared_invite/enQtNzAzOTcyODkxNDU2LTkyODhmOTJmY2I5OWZiNmIwOWVkZDZmZjdhOTA3ODcwZGYzZjU0ODdiYjMzMzA1ZGIzZTBhMzNiNzBmYjM0ZGY)
 
 # License
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)  
+[![License: MIT](https://img.shields.io/badge/License-MIT-blueviolet.svg)](https://opensource.org/licenses/MIT)  
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details
 
 # Setup
