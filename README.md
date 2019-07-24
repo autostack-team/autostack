@@ -1,4 +1,5 @@
 ![Logo](https://raw.githubusercontent.com/elijahsawyers/autostack/master/Logo.png)
+[![Chat](https://img.sheilds.io/badge/Chat-Slack-purple.svg)](https://join.slack.com/t/autostack/shared_invite/enQtNzAzOTcyODkxNDU2LTkyODhmOTJmY2I5OWZiNmIwOWVkZDZmZjdhOTA3ODcwZGYzZjU0ODdiYjMzMzA1ZGIzZTBhMzNiNzBmYjM0ZGY)
 
 # License
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)  
