@@ -1,5 +1,9 @@
 ![Logo](https://raw.githubusercontent.com/elijahsawyers/autostack/master/Logo.png)
-[![Chat: Slack](https://img.shields.io/badge/Chat-on_slack-purple.svg?logo=slack)](https://join.slack.com/t/autostack/shared_invite/enQtNzAzOTcyODkxNDU2LTkyODhmOTJmY2I5OWZiNmIwOWVkZDZmZjdhOTA3ODcwZGYzZjU0ODdiYjMzMzA1ZGIzZTBhMzNiNzBmYjM0ZGY)
+
+<p align="center">
+    <a href="https://join.slack.com/t/autostack/shared_invite/enQtNzAzOTcyODkxNDU2LTkyODhmOTJmY2I5OWZiNmIwOWVkZDZmZjdhOTA3ODcwZGYzZjU0ODdiYjMzMzA1ZGIzZTBhMzNiNzBmYjM0ZGY" alt="Contributors">
+        <img src="https://img.shields.io/badge/Chat-on_slack-purple.svg?logo=slack" /></a>
+</p>
 
 # License
 [![License: MIT](https://img.shields.io/badge/License-MIT-blueviolet.svg)](https://opensource.org/licenses/MIT)  
