@@ -1,8 +1,8 @@
 ![Logo](https://raw.githubusercontent.com/elijahsawyers/autostack/master/Logo.png)
 
 <p align="center">
-    <a href="https://join.slack.com/t/autostack/shared_invite/enQtNzAzOTcyODkxNDU2LTkyODhmOTJmY2I5OWZiNmIwOWVkZDZmZjdhOTA3ODcwZGYzZjU0ODdiYjMzMzA1ZGIzZTBhMzNiNzBmYjM0ZGY" alt="Contributors">
-        <img src="https://img.shields.io/badge/Chat-on_slack-purple.svg?logo=slack" /></a>
+    <a href="https://teams.microsoft.com/join/1oa3o6vva07n" alt="Chat">
+        <img src="https://img.shields.io/badge/Chat-on_MSTeams-purple.svg" /></a>
 </p>
 
 # License
