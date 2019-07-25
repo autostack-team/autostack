@@ -3,6 +3,9 @@
 <p align="center">
     <a href="https://teams.microsoft.com/join/1oa3o6vva07n" alt="Chat">
         <img src="https://img.shields.io/badge/Chat-on_MSTeams-purple.svg" /></a>
+    <a href="https://twitter.com/intent/follow?screen_name=autostackteam">
+        <img src="https://img.shields.io/twitter/follow/autostackteam.svg?style=social&logo=twitter"
+            alt="follow on Twitter"></a>
 </p>
 
 # License
