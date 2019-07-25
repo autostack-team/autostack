@@ -6,7 +6,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 ### Added
-- Created CHANGELOG.md
+- Created CHANGELOG.md.
+- Created shield for MSTeams chat.
+### Changed
+- Updated CODE_OF_CONDUCT.md email to new team email.
+- Updated and cleaned PULL_REQUEST_TEMPLATE.
 
 ## [0.0.11] - 2019-07-22
 ### Added
