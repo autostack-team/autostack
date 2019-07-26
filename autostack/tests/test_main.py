@@ -8,5 +8,6 @@ Overview: Tests for the main functionality.
 from unittest import mock
 import pytest
 
-def test_placeholder():
+
+def test_main_placeholder():
     assert True

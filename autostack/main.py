@@ -47,6 +47,7 @@ EXCEPTIONS = [
     'NotImplementedError'
 ]
 
+
 def main():
     '''
     Listens for python errors outputed on the '/tmp/monitorPipe'
@@ -67,8 +68,8 @@ def main():
 
     # Open the pipe.
     pipe = open('/tmp/monitorPipe', 'r')
-    print("Development terminal[s] open - ")
-    print("\U0001F95E Listening for Python errors...")
+    print('Development terminal[s] open - ')
+    print(u'\U0001F95E Listening for Python errors...')
 
     # Listen for new stdout.
     while True:
@@ -79,20 +80,22 @@ def main():
         if output == '':
             break
 
-        # If the current line of output is a python error, query Stack Overflow.
+        # If the current line of output is a python error,
+        # query Stack Overflow.
         if output.split()[0][:-1] in EXCEPTIONS:
             for post in accepted_posts(output):
                 # Display Stack Overflow posts for the error.
                 print_accepted_post(post)
 
-                # If the user's question has been answered, don't keep looping over posts.
+                # If the user's question has been answered,
+                # don't keep looping over posts.
                 while True:
                     print('Did this answer your question? (Y/n): ', end='')
                     question_answered = input()
-                    if str(question_answered) == 'Y' or str(question_answered) == 'n':
+                    if question_answered == 'Y' or question_answered == 'n':
                         break
-                if str(question_answered) == 'Y':
-                    print("\U0001F95E Listening for Python errors...")
+                if question_answered == 'Y':
+                    print(u'\U0001F95E Listening for Python errors...')
                     break
-                elif str(question_answered) == 'n':
+                elif question_answered == 'n':
                     continue

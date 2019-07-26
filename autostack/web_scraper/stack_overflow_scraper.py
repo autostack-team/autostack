@@ -9,11 +9,12 @@ scrape Stack Overflow for posts with accepted answers for a given query.
 from __future__ import print_function
 from bs4 import BeautifulSoup
 import pygments
-from pygments.lexers import PythonLexer
+from pygments.lexers import PythonLexer  # pylint: disable=no-name-in-module
 import requests
 from termcolor import colored
 
 URL = 'https://stackoverflow.com'
+
 
 def accepted_posts(query):
     '''
@@ -45,7 +46,7 @@ def accepted_posts(query):
         # Grab all post summaries from the current page.
         post_summaries = query_soup.find_all(
             attrs={
-                "class": "question-summary"
+                'class': 'question-summary'
             }
         )
 
@@ -63,7 +64,6 @@ def accepted_posts(query):
 
             # Only view posts with accepted answers.
             if not accepted_answer:
-                print('here')
                 continue
 
             post_href = post_summary.find(
@@ -82,6 +82,7 @@ def accepted_posts(query):
 
         # Go to the next page
         page += 1
+
 
 def print_accepted_post(post):
     '''
@@ -135,6 +136,7 @@ def print_accepted_post(post):
     print(colored('~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~', 'red'))
     return
 
+
 def print_post_text(post_text):
     '''
     Prints post-text from Stack Overflow.
@@ -157,17 +159,30 @@ def print_post_text(post_text):
     '''
 
     for element in post_text:
-        if element.name == 'h1' or element.name == 'h2' or element.name == 'h3': # Header.
-            print(colored(element.text, 'white', attrs=['bold']))
-        elif element.name == 'p': # Text.
-            print(colored(element.text, 'white'))
-        elif element.name == 'blockquote': # Quotes.
-            print(colored('    ' + element.text, 'yellow'))
-        elif element.name == 'ul': # Lists.
-            for li_element in element.find_all('li'):
-                print(colored('    - ' + li_element.text, 'green', attrs=['bold']))
-        elif element.name == 'pre': # Code.
+        if (
+            element.name == 'h1' or
+            element.name == 'h2' or
+            element.name == 'h3'
+        ):  # Headers.
+            print(
+                colored(element.text, 'white', attrs=['bold'])
+            )
+        elif element.name == 'p':  # Text.
+            print(
+                colored(element.text, 'white')
+            )
+        elif element.name == 'blockquote':  # Quotes.
+            print(
+                colored('    ' + element.text, 'yellow')
+            )
+        elif element.name == 'ul':  # Lists.
+            for item in element.find_all('li'):
+                print(
+                    colored('    - ' + item.text, 'green', attrs=['bold'])
+                )
+        elif element.name == 'pre':  # Code.
             print_code_block(element.find('code'))
+
 
 def print_code_block(code_block):
     '''
@@ -197,24 +212,54 @@ def print_code_block(code_block):
     # Loop over code, and highlight.
     for token, content in pygments.lex(code, PythonLexer()):
         if str(token) == 'Token.Keyword':
-            print(colored(content, 'blue'), end='')
+            print(
+                colored(content, 'blue'),
+                end=''
+            )
         elif str(token) == 'Token.Name.Builtin.Pseudo':
-            print(colored(content, 'blue'), end='')
+            print(
+                colored(content, 'blue'),
+                end=''
+            )
         elif str(token) == 'Token.Literal.Number.Integer':
-            print(colored(content, 'green'), end='')
+            print(
+                colored(content, 'green'),
+                end=''
+            )
         elif str(token) == 'Token.Literal.Number.Float':
-            print(colored(content, 'green'), end='')
+            print(
+                colored(content, 'green'),
+                end=''
+            )
         elif str(token) == 'Token.Literal.String.Single':
-            print(colored(content, 'yellow'), end='')
+            print(
+                colored(content, 'yellow'),
+                end=''
+            )
         elif str(token) == 'Token.Literal.String.Double':
-            print(colored(content, 'yellow'), end='')
+            print(
+                colored(content, 'yellow'),
+                end=''
+            )
         elif str(token) == 'Token.Literal.String.Doc':
-            print(colored(content, 'yellow'), end='')
+            print(
+                colored(content, 'yellow'),
+                end=''
+            )
         elif str(token) == 'Token.Comment.Single':
-            print(colored(content, 'green'), end='')
+            print(
+                colored(content, 'green'),
+                end=''
+            )
         elif str(token) == 'Token.Comment.Hashbang':
-            print(colored(content, 'green'), end='')
+            print(
+                colored(content, 'green'),
+                end=''
+            )
         else:
-            print(content, end='')
+            print(
+                content,
+                end=''
+            )
 
     print('')

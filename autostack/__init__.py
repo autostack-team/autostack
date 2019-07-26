@@ -6,4 +6,4 @@ Overview: The autostack module contains the code necessary to
 listen for python errors outputed in a terminal.
 '''
 
-name = "autostack" # pylint: disable=invalid-name
+name = "autostack"  # pylint: disable=invalid-name
