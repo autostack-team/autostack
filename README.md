@@ -1,6 +1,14 @@
 ![Logo](https://raw.githubusercontent.com/elijahsawyers/autostack/master/Logo.png)
 
 <p align="center">
+    <a href="https://travis-ci.com/elijahsawyers/autostack/">
+        <img src="https://travis-ci.com/elijahsawyers/autostack.svg?branch=master"
+            alt="Build status"/>
+    </a>
+    <a href="https://codecov.io/gh/elijahsawyers/autostack">
+        <img src="https://codecov.io/gh/elijahsawyers/autostack/branch/master/graph/badge.svg" 
+            alt="Code coverage"/>
+    </a>
     <a href="https://github.com/elijahsawyers/autostack">
         <img src="https://img.shields.io/github/commit-activity/m/elijahsawyers/autostack"
             alt="GitHub commit activity"/>
