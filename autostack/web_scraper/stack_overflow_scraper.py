@@ -37,9 +37,29 @@ def accepted_posts(query):
         for query_string in query.split(' '):
             query_url = query_url + '+' + query_string
 
-        # The 'soup' of the query page.
-        request = requests.get(query_url)
+        try:
+            # The 'soup' of the query page.
+            request = requests.get(query_url)
+            # Raise exception or error if it exists.
+            request.raise_for_status()
+        except requests.exceptions.Timeout:
+            # Maybe set up for a retry, or continue in a retry loop
+            print e
+            return None
+        except requests.exceptions.TooManyRedirects:
+            # Tell the user their URL was bad and try a different one
+            return None
+        except requests.exceptions.RequestException as e:
+            # catastrophic error. bail.
+            print e
+            return None
+        except requests.exceptions.HTTPError as err:
+            print err
+            return None
+        
+        # Get text from request.
         query_html = request.text
+        # Turn text into soup object.
         query_soup = BeautifulSoup(query_html, 'lxml')
 
         # Grab all post summaries from the current page.
