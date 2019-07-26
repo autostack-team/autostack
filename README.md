@@ -27,6 +27,10 @@
     </a>
 </p>
 
+autostack is a command-line debugging tool for Python projects that automatically displays Stack Overflow answers for thrown errors.
+
+What is the first thing you do when a confusing error message is displayed in your terminal window? You search for an answer on Stack Overflow, of course! With autostack, you no longer have to search for answers on Stack Overflow, they are found for you. Gone are the days of scowering the internet for hours to find an answer to your development questions! autostack is here to automate the debugging process and in turn, expedite Python project development.
+
 ## Installation
 
 **1. Clone the repo and use the install script.**
@@ -66,7 +70,12 @@ To stop running autostack,use the exit command in the autostack-terminal windows
 $ exit
 ```
 
+## Contributing
+
+For information on how to get started contributing to autostack, see the [contributing guidlines](https://github.com/elijahsawyers/autostack/blob/master/CONTRIBUTING.md).
+
 ## License
+
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
 ## Authors
