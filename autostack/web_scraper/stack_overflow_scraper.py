@@ -13,6 +13,7 @@ from pygments.lexers import PythonLexer  # pylint: disable=no-name-in-module
 import requests
 from termcolor import colored
 
+
 URL = 'https://stackoverflow.com'
 
 
@@ -91,46 +92,55 @@ def print_accepted_post(post):
     Parameter {BeautifulSoup} post: The 'soup' of the post
     to print.
     '''
+
+    question = None
+    try:
+        question = post.find(
+            attrs={
+                'class',
+                'question'
+            }
+        ).find(
+            attrs={
+                'class',
+                'post-text'
+            }
+        )
+    except AttributeError:
+        return
+    finally:
+        if not question:
+            return
+
+    accepted_answer = None
+    try:
+        accepted_answer = post.find(
+            attrs={
+                'class',
+                'accepted-answer'
+            }
+        ).find(
+            attrs={
+                'class',
+                'post-text'
+            }
+        )
+    except AttributeError:
+        return
+    finally:
+        if not accepted_answer:
+            return
+
     print(colored('~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~', 'red'))
     print(colored('Question:', 'red'))
 
     # Print the question.
-    question = post.find(
-        attrs={
-            'class',
-            'question'
-        }
-    ).find(
-        attrs={
-            'class',
-            'post-text'
-        }
-    )
-
-    if not question:
-        return
-
     print_post_text(question)
 
     print(colored('~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~', 'red'))
     print(colored('Answer:', 'red'))
 
     # Print the answer.
-    accepted_answer = post.find(
-        attrs={
-            'class',
-            'accepted-answer'
-        }
-    ).find(
-        attrs={
-            'class',
-            'post-text'
-        }
-    )
-
-    if not accepted_answer:
-        return
-
     print_post_text(accepted_answer)
 
     print(colored('~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~', 'red'))

@@ -1,11 +1,12 @@
 <!DOCTYPE html>
 
 
-<html itemscope itemtype="http://schema.org/QAPage" class="html__responsive">
+<html class="html__responsive">
 
 <head>
 
-    <title>python - IndentationError: unexpected indent after comment - Stack Overflow</title>
+    <title>python - ImportError: The _plotly_future_ module must be imported before the plotly module - Stack Overflow
+    </title>
     <link rel="shortcut icon" href="https://cdn.sstatic.net/Sites/stackoverflow/img/favicon.ico?v=4f32ecc8f43d">
     <link rel="apple-touch-icon image_src"
         href="https://cdn.sstatic.net/Sites/stackoverflow/img/apple-touch-icon.png?v=c78bd457575a">
@@ -15,40 +16,39 @@
 
     <meta property="og:type" content="website" />
     <meta property="og:url"
-        content="https://stackoverflow.com/questions/50722329/indentationerror-unexpected-indent-after-comment" />
+        content="https://stackoverflow.com/questions/57240949/importerror-the-plotly-future-module-must-be-imported-before-the-plotly-modul" />
     <meta property="og:site_name" content="Stack Overflow" />
     <meta property="og:image" itemprop="image primaryImageOfPage"
         content="https://cdn.sstatic.net/Sites/stackoverflow/img/apple-touch-icon@2.png?v=73d79a89bded" />
     <meta name="twitter:card" content="summary" />
     <meta name="twitter:domain" content="stackoverflow.com" />
     <meta name="twitter:title" property="og:title" itemprop="name"
-        content="IndentationError: unexpected indent after comment" />
-    <meta name="twitter:description" property="og:description" itemprop="description" content="I am trying to write some Python example code with a line commented out:
-
-user_by_email = session.query(User)\
-.filter(Address.email==&#39;one&#39;)\
-#.options(joinedload(User.addresses))\
-.fir..." />
+        content="ImportError: The _plotly_future_ module must be imported before the plotly module" />
+    <meta name="twitter:description" property="og:description" itemprop="description"
+        content="I try to reproduce example of making plotly plot with multiple subplots in Python which is posted as 1st example here: &quot;Subplots in Python&quot;. I work in Jupyter notebook, plotly version: 3.10.0, Python " />
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
     <script src="https://cdn.sstatic.net/Js/stub.en.js?v=9ed18f493345"></script>
 
-    <link rel="stylesheet" type="text/css" href="https://cdn.sstatic.net/Shared/stacks.css?v=e7e1f4e05af5">
+    <link rel="stylesheet" type="text/css" href="https://cdn.sstatic.net/Shared/stacks.css?v=d0626e33feab">
     <link rel="stylesheet" type="text/css"
-        href="https://cdn.sstatic.net/Sites/stackoverflow/primary.css?v=134b0e0ef3d1">
+        href="https://cdn.sstatic.net/Sites/stackoverflow/primary.css?v=3121fd52eed8">
 
 
+    <link rel="alternate" type="application/atom+xml"
+        title="Feed for question &#39;ImportError: The _plotly_future_ module must be imported before the plotly module&#39;"
+        href="/feeds/question/57240949">
     <meta name="twitter:app:country" content="US" />
     <meta name="twitter:app:name:iphone" content="Stack Exchange iOS" />
     <meta name="twitter:app:id:iphone" content="871299723" />
     <meta name="twitter:app:url:iphone"
-        content="se-zaphod://stackoverflow.com/questions/50722329/indentationerror-unexpected-indent-after-comment" />
+        content="se-zaphod://stackoverflow.com/questions/57240949/importerror-the-plotly-future-module-must-be-imported-before-the-plotly-modul" />
     <meta name="twitter:app:name:ipad" content="Stack Exchange iOS" />
     <meta name="twitter:app:id:ipad" content="871299723" />
     <meta name="twitter:app:url:ipad"
-        content="se-zaphod://stackoverflow.com/questions/50722329/indentationerror-unexpected-indent-after-comment" />
+        content="se-zaphod://stackoverflow.com/questions/57240949/importerror-the-plotly-future-module-must-be-imported-before-the-plotly-modul" />
     <meta name="twitter:app:name:googleplay" content="Stack Exchange Android">
     <meta name="twitter:app:url:googleplay"
-        content="http://stackoverflow.com/questions/50722329/indentationerror-unexpected-indent-after-comment">
+        content="http://stackoverflow.com/questions/57240949/importerror-the-plotly-future-module-must-be-imported-before-the-plotly-modul">
     <meta name="twitter:app:id:googleplay" content="com.stackexchange.marvin">
     <script>
 
@@ -64,11 +64,11 @@ user_by_email = session.query(User)\
             });
 
 
-            StackExchange.question.init({ votesCast: [], autoShowCommentHelp: true, showAnswerHelp: true, totalCommentCount: 0, shownCommentCount: 0, highlightColor: '#F4A83D', backgroundColor: '#FFF', questionId: 50722329 });
+            StackExchange.question.init({ votesCast: [], autoShowCommentHelp: true, showAnswerHelp: true, totalCommentCount: 0, shownCommentCount: 0, highlightColor: '#F4A83D', backgroundColor: '#FFF', questionId: 57240949 });
 
             styleCode();
 
-            StackExchange.realtime.subscribeToQuestion('1', '50722329');
+            StackExchange.realtime.subscribeToQuestion('1', '57240949');
             StackExchange.using("gps", function () { StackExchange.gps.trackOutboundClicks('#content', '.post-text'); });
 
         });
@@ -91,8 +91,8 @@ user_by_email = session.query(User)\
         });
     </script>
     <script>
-        StackExchange.init({ "locale": "en", "serverTime": 1563884426, "routeName": "Questions/Show", "stackAuthUrl": "https://stackauth.com", "networkMetaHostname": "meta.stackexchange.com", "site": { "name": "Stack Overflow", "description": "Q&A for professional and enthusiast programmers", "isNoticesTabEnabled": true, "enableNewTagCreationWarning": true, "insertSpaceAfterNameTabCompletion": false, "id": 1, "childUrl": "https://meta.stackoverflow.com", "enableSocialMediaInSharePopup": true, "protocol": "https" }, "timingsGuid": "fdebab7a-7f1a-4a22-a62d-6e9256ca952c", "timingsInfo": "jOvRsPgDcjPCRCo/WpBaTN3lvpv/qXXVY8/L05M1jt4hNntPAvfTAN5B332zyN2SaMYYBLu+ZsI+sFi8FDWw9ZeORBIxBL0rwauavf9k69jCxlXXOMfszasXvl+1ek0sYDpbtGXxlvuAOatOSL3XuUTzB9M6btT9sreY12l4HT+aOLd1w66baaAL3PiFLrV9fR4jNWKpLGxPhsnuW+FjMKK+QwemkIQUFabQbO2Uxc0DsXoUa78nqC6qv7S5jnJHYmecvHlUsDjMlCzI1jFWJ47o4ts7JGSZWrnqmZP7yNA=", "user": { "fkey": "9100124dc85774c8604d66e7de10e9eb754256cb66dac568b2fd356111675afa", "tid": "b5964a4d-fbe2-0dc9-47d9-f4a36d347a97", "rep": 30, "isRegistered": true, "userType": 3, "userId": 5732400, "accountId": 7550950, "gravatar": "<div class=\"gravatar-wrapper-32\"><img src=\"https://i.stack.imgur.com/7Dnar.jpg?s=32&amp;g=1\" alt=\"\" width=\"32\" height=\"32\"></div>", "profileUrl": "https://stackoverflow.com/users/5732400/e-sawyers", "canSeeDeletedPosts": false, "ab": { "hero_signup_button": { "v": "team_tofu_create_cta_b", "g": 1 }, "satisfaction_survey_anon": { "v": "anon", "g": 1 }, "anonymoushero": { "v": "product_pages_teams_create_cta_a", "g": 1 }, "similar_questions_breakout": { "v": "filtered_results", "g": 1 } } }, "realtime": { "newest": false, "active": false, "tagged": true, "staleDisconnectIntervalInHours": 0 }, "events": { "postType": { "question": 1 }, "postEditionSection": { "title": 1, "body": 2, "tags": 3 } }, "story": { "minCompleteBodyLength": 75, "likedTagsMaxLength": 300, "dislikedTagsMaxLength": 300 }, "jobPreferences": { "maxNumDeveloperRoles": 2, "maxNumIndustries": 4 }, "svgIconPath": "https://cdn.sstatic.net/Img/svg-icons", "svgIconHash": "c0fe2eea72c0" }, { "userProfile": { "openGraphAPIKey": "4a307e43-b625-49bb-af15-ffadf2bda017" }, "userMessaging": {}, "tags": {}, "snippets": { "snippetsEnabled": true, "renderDomain": "stacksnippets.net" }, "slack": { "sidebarAdDismissCookie": "slack-sidebar-ad" }, "site": { "allowImageUploads": true, "enableUserHovercards": true, "styleCode": true, "enableImgurHttps": true, "forceHttpsImages": true }, "paths": {}, "monitoring": { "clientTimingsAbsoluteTimeout": 30000, "clientTimingsDebounceTimeout": 1000 }, "mentions": { "maxNumUsersInDropdown": 50 }, "markdown": { "asteriskIntraWordEmphasis": true }, "flags": { "allowRetractingFlags": true }, "comments": {}, "accounts": { "currentPasswordRequiredForChangingStackIdPassword": true } });
-        StackExchange.using.setCacheBreakers({ "js/prettify-full.en.js": "da4cad2c35f2", "js/moderator.en.js": "994195f3a101", "js/pseudomoderator.en.js": "b5e58525eb0e", "js/full-anon.en.js": "d46819768021", "js/full.en.js": "7270fbfdf9ff", "js/wmd.en.js": "9af1b2630e10", "js/mobile.en.js": "ad1e4d00b12f", "js/help.en.js": "6cb52a7b4ed0", "js/tageditor.en.js": "0fab02893f16", "js/tageditornew.en.js": "3a0b10487381", "js/inline-tag-editing.en.js": "6c0fb727df2d", "js/revisions.en.js": "055fbe1202e9", "js/review.en.js": "dd5f64dfff0e", "js/tagsuggestions.en.js": "b278f9a0b23b", "js/post-validation.en.js": "078fbb81a82d", "js/explore-qlist.en.js": "222b04ca33bc", "js/events.en.js": "36d54b888b56", "js/keyboard-shortcuts.en.js": "0045059e8a87", "js/adops.en.js": "22a9bd59b1e9", "js/begin-edit-event.en.js": "3238dd301e69", "js/stacks-polyfills.en.js": "3c98d1d858d7", "js/snippet-javascript-codemirror.en.js": "53f79b24730f" });
+        StackExchange.init({ "locale": "en", "serverTime": 1564317384, "routeName": "Questions/Show", "stackAuthUrl": "https://stackauth.com", "networkMetaHostname": "meta.stackexchange.com", "site": { "name": "Stack Overflow", "description": "Q&A for professional and enthusiast programmers", "isNoticesTabEnabled": true, "enableNewTagCreationWarning": true, "insertSpaceAfterNameTabCompletion": false, "id": 1, "childUrl": "https://meta.stackoverflow.com", "enableSocialMediaInSharePopup": true, "protocol": "https" }, "user": { "fkey": "6d363285b86ebae53298bf95e31c5a397d0606a9bc73c3fd0730a56366c3a4ed", "tid": "07179634-43ae-caaa-3ea3-f3118730505a", "rep": 30, "isRegistered": true, "userType": 3, "userId": 5732400, "accountId": 7550950, "gravatar": "<div class=\"gravatar-wrapper-32\"><img src=\"https://i.stack.imgur.com/7Dnar.jpg?s=32&amp;g=1\" alt=\"\" width=\"32\" height=\"32\"></div>", "profileUrl": "https://stackoverflow.com/users/5732400/e-sawyers", "canSeeDeletedPosts": false, "ab": { "hero_signup_button": { "v": "team_tofu_create_cta_b", "g": 2 }, "anonymoushero": { "v": "product_pages_teams_create_cta_a", "g": 2 }, "similar_questions_breakout": { "v": "filtered_results", "g": 2 } } }, "realtime": { "newest": false, "active": false, "tagged": true, "staleDisconnectIntervalInHours": 0 }, "events": { "postType": { "question": 1 }, "postEditionSection": { "title": 1, "body": 2, "tags": 3 } }, "story": { "minCompleteBodyLength": 75, "likedTagsMaxLength": 300, "dislikedTagsMaxLength": 300 }, "jobPreferences": { "maxNumDeveloperRoles": 2, "maxNumIndustries": 4 }, "svgIconPath": "https://cdn.sstatic.net/Img/svg-icons", "svgIconHash": "c0fe2eea72c0" }, { "userProfile": { "openGraphAPIKey": "4a307e43-b625-49bb-af15-ffadf2bda017" }, "userMessaging": {}, "tags": {}, "snippets": { "snippetsEnabled": true, "renderDomain": "stacksnippets.net" }, "slack": { "sidebarAdDismissCookie": "slack-sidebar-ad" }, "site": { "allowImageUploads": true, "enableUserHovercards": true, "styleCode": true, "enableImgurHttps": true, "forceHttpsImages": true }, "paths": {}, "monitoring": { "clientTimingsAbsoluteTimeout": 30000, "clientTimingsDebounceTimeout": 1000 }, "mentions": { "maxNumUsersInDropdown": 50 }, "markdown": { "asteriskIntraWordEmphasis": true }, "flags": { "allowRetractingFlags": true }, "comments": {}, "accounts": { "currentPasswordRequiredForChangingStackIdPassword": true } });
+        StackExchange.using.setCacheBreakers({ "js/prettify-full.en.js": "4802c3e3435e", "js/moderator.en.js": "5ad6dede4af3", "js/pseudomoderator.en.js": "23d2ff294372", "js/full-anon.en.js": "c90d48ffd6e6", "js/full.en.js": "1af563105956", "js/wmd.en.js": "a70f637122c1", "js/mobile.en.js": "32a7cb3d19b9", "js/help.en.js": "6cb52a7b4ed0", "js/tageditor.en.js": "8fa88c98de3f", "js/tageditornew.en.js": "908e94a5e72b", "js/inline-tag-editing.en.js": "09084a455513", "js/revisions.en.js": "055fbe1202e9", "js/review.en.js": "8c70db4e3f5f", "js/tagsuggestions.en.js": "b278f9a0b23b", "js/post-validation.en.js": "93be57037b56", "js/explore-qlist.en.js": "d046fe5d0680", "js/events.en.js": "00d7ad73ec2b", "js/keyboard-shortcuts.en.js": "1cd4c489b7c4", "js/adops.en.js": "6b9883f0531e", "js/begin-edit-event.en.js": "3238dd301e69", "js/stacks-polyfills.en.js": "38e1117a6bfc", "js/snippet-javascript-codemirror.en.js": "ce57753b0e95" });
         StackExchange.using("gps", function () {
             StackExchange.gps.init(true);
         });
@@ -466,7 +466,7 @@ user_by_email = session.query(User)\
                             </ul>
                             <div class="pinned-site-editor-container" style="display: none;">
                                 <input type="hidden" name="fkey"
-                                    value="9100124dc85774c8604d66e7de10e9eb754256cb66dac568b2fd356111675afa">
+                                    value="6d363285b86ebae53298bf95e31c5a397d0606a9bc73c3fd0730a56366c3a4ed">
                                 <input id="js-site-search-txt" type="text" class="site-filter-input" value=""
                                     placeholder="Add a Stack Exchange community" />
                                 <input type="submit" id="pin-site-btn" value="Add" disabled="disabled" />
@@ -595,7 +595,7 @@ user_by_email = session.query(User)\
 
                                             <div class="ps-relative overflow-hidden">
                                                 <p class="mb2"><strong>Teams</strong></p>
-                                                <p class="mb16 fs-caption fc-medium">Q&amp;A for Work</p>
+                                                <p class="mb16 fs-caption fc-medium">Join Private Q&amp;A</p>
                                                 <p class="mb8 fs-caption fc-medium">
                                                     Setup a private space for you and your coworkers to ask questions
                                                     and share information.
@@ -654,7 +654,7 @@ user_by_email = session.query(User)\
                                                         fill="#6A7E7C" /></svg>
                                             </div>
                                             <div class="grid--cell pl6 js-create-team-btn-with-tooltip">
-                                                Q&amp;A for Work
+                                                Join Private Q&amp;A
                                             </div>
                                         </div>
                                     </a>
@@ -674,7 +674,7 @@ user_by_email = session.query(User)\
 
 
 
-            <div itemprop="mainEntity" itemscope itemtype="http://schema.org/Question">
+            <div itemscope>
                 <link itemprop="image"
                     href="https://cdn.sstatic.net/Sites/stackoverflow/img/apple-touch-icon.png?v=c78bd457575a">
 
@@ -682,11 +682,11 @@ user_by_email = session.query(User)\
 
 
 
-                    <div id="question-header" class="grid">
-                        <h1 itemprop="name" class="grid--cell fs-headline1 fl1 ow-break-word"><a
-                                href="/questions/50722329/indentationerror-unexpected-indent-after-comment"
-                                class="question-hyperlink">IndentationError: unexpected indent after comment
-                                [duplicate]</a></h1>
+                    <div id="question-header" class="grid sm:fd-column">
+                        <h1 itemprop="name" class="grid--cell fs-headline1 fl1 ow-break-word mb8"><a
+                                href="/questions/57240949/importerror-the-plotly-future-module-must-be-imported-before-the-plotly-modul"
+                                class="question-hyperlink">ImportError: The _plotly_future_ module must be imported
+                                before the plotly module</a></h1>
 
 
                         <div class="pl8 aside-cta grid--cell print:d-none">
@@ -696,11 +696,21 @@ user_by_email = session.query(User)\
                         </div>
 
                     </div>
+                    <div class="grid fw-wrap pb8 mb16 bb bc-black-2">
+                        <div class="grid--cell ws-nowrap mr16 mb8" title="2019-07-28 12:34:10Z">
+                            <span class="fc-light mr2">Asked</span>
+                            <time itemprop="dateCreated" datetime="2019-07-28T12:34:10">today</time>
+                        </div>
+                        <div class="grid--cell ws-nowrap mb8" title="Viewed 6 times">
+                            <span class="fc-light mr2">Viewed</span>
+                            6 times
+                        </div>
+                    </div>
                     <div id="mainbar" role="main" aria-label="question and answers">
 
 
 
-                        <div class="question" data-questionid="50722329" id="question">
+                        <div class="question" data-questionid="57240949" id="question">
 
                             <style>
                                 .everyoneloves__top-leaderboard:empty,
@@ -715,7 +725,7 @@ user_by_email = session.query(User)\
 
 
                                     <div class="js-voting-container grid fd-column ai-stretch gs4 fc-black-200"
-                                        data-post-id="50722329">
+                                        data-post-id="57240949">
                                         <button class="js-vote-up-btn grid--cell s-btn s-btn__unset c-pointer"
                                             title="This question shows research effort; it is useful and clear (click again to undo)"
                                             aria-pressed="false" aria-label="up vote"
@@ -724,7 +734,7 @@ user_by_email = session.query(User)\
                                                 viewBox="0 0 36 36">
                                                 <path d="M2 26h32L18 10 2 26z" /></svg></button>
                                         <div class="js-vote-count grid--cell fc-black-500 fs-title grid fd-column ai-center"
-                                            itemprop="upvoteCount" data-value="7">7</div>
+                                            itemprop="upvoteCount" data-value="0">0</div>
                                         <button class="js-vote-down-btn grid--cell s-btn s-btn__unset c-pointer"
                                             title="This question does not show any research effort; it is unclear or not useful (click again to undo)"
                                             aria-pressed="false" aria-label="down vote"
@@ -754,136 +764,138 @@ user_by_email = session.query(User)\
 
                                     <div class="post-text" itemprop="text">
 
-                                        <div class="question-status question-originals-of-duplicate">
-                                            <p>This question already has an answer here:</p>
-                                            <ul>
-                                                <li>
-                                                    <a href="/questions/17630835/python-comments-after-backslash"
-                                                        dir="ltr">Python: &#39;#&#39; Comments after backslash</a>
-                                                    <span class="question-originals-answer-count">
-                                                        2 answers
-                                                    </span>
-                                                </li>
-                                            </ul>
-                                        </div>
-                                        <p>I am trying to write some Python example code with a line commented out:</p>
+                                        <p>I try to reproduce example of making <code>plotly</code> plot with multiple
+                                            subplots in Python which is posted as 1st example <a
+                                                href="https://plot.ly/python/subplots/" rel="nofollow noreferrer">here:
+                                                "Subplots in Python"</a>. I work in Jupyter notebook,
+                                            <code>plotly</code> version: 3.10.0, <code>Python</code> version: 3.6.3.</p>
 
-                                        <pre><code>user_by_email = session.query(User)\
-.filter(Address.email=='one')\
-#.options(joinedload(User.addresses))\
-.first()
+                                        <p>After running that example:</p>
+
+                                        <pre><code>from plotly.subplots import make_subplots
+import plotly.graph_objs as go
+from plotly.offline import download_plotlyjs, init_notebook_mode, plot, iplot
+
+## Allow to generate plotly plots inline in notebook
+init_notebook_mode(connected=True)
+
+fig = make_subplots(rows=1, cols=2)
+fig.add_trace(go.Scatter(x=[1, 2, 3], y=[4, 5, 6]), row=1, col=1)
+fig.add_trace(go.Scatter(x=[20, 30, 40], y=[50, 60, 70]), row=1, col=2)
+fig.update_layout(height=600, width=800, title_text="Subplots")
+iplot(fig)
 </code></pre>
 
-                                        <p>I also tried:</p>
+                                        <p>I got <strong>ValueError</strong>:</p>
 
-                                        <pre><code>user_by_email = session.query(User)\
-.filter(Address.email=='one')\
-#    .options(joinedload(User.addresses))\
-.first()
+                                        <pre><code>ValueError: 
+plotly.subplots.make_subplots may only be used in the
+v4_subplots _plotly_future_ mode.  To try it out, run
+&gt;&gt;&gt; from _plotly_future_ import v4_subplots
+before importing plotly.
 </code></pre>
 
-                                        <p>But I get IndentationError: unexpected indent.
-                                            If I remove the commented out line, the code works.
-                                            I am decently sure that I use only spaces (Notepad++ screenshot):</p>
+                                        <p>I then added <code>from _plotly_future_ import v4_subplots</code> at the very
+                                            top of the imports. I cleaned output, used <code>%restet</code> to clean all
+                                            variables and even refreshed the notebook, but the code with the headlines:
+                                        </p>
 
-                                        <p><a href="https://i.stack.imgur.com/Zw4Gb.png" rel="noreferrer"><img
-                                                    src="https://i.stack.imgur.com/Zw4Gb.png"
-                                                    alt="enter image description here"></a></p>
+                                        <pre><code>from _plotly_future_ import v4_subplots 
+from plotly.subplots import make_subplots 
+import plotly.graph_objs as go from plotly.offline import download_plotlyjs, 
+init_notebook_mode, plot, iplot
+# (...)
+</code></pre>
+
+                                        <p>results now in <strong>ImportError</strong>:</p>
+
+                                        <pre><code>---------------------------------------------------------------------------
+ImportError                               Traceback (most recent call last)
+&lt;ipython-input-14-d2ad52c99588&gt; in &lt;module&gt;
+----&gt; 1 from _plotly_future_ import v4_subplots
+  2 from plotly.subplots import make_subplots
+  3 import plotly.graph_objs as go
+  4 from plotly.offline import download_plotlyjs, init_notebook_mode, plot, iplot
+  5 
+
+c:\users\karasma6\appdata\local\continuum\anaconda3\envs\actigrapy\lib\site-packages\_plotly_future_\v4_subplots.py in &lt;module&gt;
+  2 from _plotly_future_ import _future_flags, _assert_plotly_not_imported
+  3 
+----&gt; 4 _assert_plotly_not_imported()
+  5 _future_flags.add('v4_subplots')
+
+c:\users\karasma6\appdata\local\continuum\anaconda3\envs\actigrapy\lib\site-packages\_plotly_future_\__init__.py in _assert_plotly_not_imported()
+  9     if 'plotly' in sys.modules:
+ 10         raise ImportError("""\
+---&gt; 11 The _plotly_future_ module must be imported before the plotly module""")
+ 12 
+ 13 
+
+ImportError: The _plotly_future_ module must be imported before the plotly module
+</code></pre>
+
+                                        <p>How to fix it? </p>
                                     </div>
 
                                     <div class="post-taglist grid gs4 gsy fd-column">
                                         <div class="grid ps-relative d-block">
                                             <a href="/questions/tagged/python" class="post-tag"
                                                 title="show questions tagged &#39;python&#39;" rel="tag">python</a> <a
-                                                href="/questions/tagged/python-2.7" class="post-tag"
-                                                title="show questions tagged &#39;python-2.7&#39;"
-                                                rel="tag">python-2.7</a> <a href="/questions/tagged/indentation"
-                                                class="post-tag" title="show questions tagged &#39;indentation&#39;"
-                                                rel="tag">indentation</a>
+                                                href="/questions/tagged/plotly" class="post-tag"
+                                                title="show questions tagged &#39;plotly&#39;" rel="tag">plotly</a> <a
+                                                href="/questions/tagged/importerror" class="post-tag"
+                                                title="show questions tagged &#39;importerror&#39;"
+                                                rel="tag">importerror</a> <a href="/questions/tagged/plotly-python"
+                                                class="post-tag" title="show questions tagged &#39;plotly-python&#39;"
+                                                rel="tag">plotly-python</a>
                                         </div>
                                     </div>
 
                                     <div class="mb0 ">
                                         <div class="mt16 pt4 grid gs8 gsy fw-wrap jc-end ai-start">
                                             <div class="grid--cell mr16" style="flex: 1 1 100px;">
-                                                <div class="post-menu"><a href="/q/50722329/5732400"
+                                                <div class="post-menu"><a href="/q/57240949/5732400"
                                                         title="short permalink to this question" class="short-link"
-                                                        itemprop="url" id="link-post-50722329">share</a><span
-                                                        class="lsep">|</span><a href="/posts/50722329/edit"
+                                                        itemprop="url" id="link-post-57240949">share</a><span
+                                                        class="lsep">|</span><a href="/posts/57240949/edit"
                                                         class="suggest-edit-post"
                                                         title="revise and improve this post">edit</a><span
                                                         class="lsep">|</span><a href="#" class="flag-post-link"
                                                         title="flag this post for serious problems or moderator attention"
-                                                        data-postid="50722329">flag</a></div>
+                                                        data-postid="57240949">flag</a></div>
                                             </div>
 
-                                            <div class="post-signature grid--cell">
-                                                <div class="user-info user-hover">
-                                                    <div class="user-action-time">
-                                                        <a href="/posts/50722329/revisions"
-                                                            title="show all edits to this post">edited <span
-                                                                title="2018-06-06 14:01:00Z" class="relativetime">Jun 6
-                                                                '18 at 14:01</span></a>
-                                                    </div>
-                                                    <div class="user-gravatar32">
-                                                        <a href="/users/6260170/chris-rands">
-                                                            <div class="gravatar-wrapper-32"><img
-                                                                    src="https://www.gravatar.com/avatar/0caf9a0d28be362618ffc0223b301d6e?s=32&amp;d=identicon&amp;r=PG&amp;f=1"
-                                                                    alt="" width="32" height="32"></div>
-                                                        </a>
-                                                    </div>
-                                                    <div class="user-details">
-                                                        <a href="/users/6260170/chris-rands">Chris_Rands</a>
-                                                        <div class="-flair">
-                                                            <span class="reputation-score"
-                                                                title="reputation score 18,532"
-                                                                dir="ltr">18.5k</span><span title="6 gold badges"
-                                                                aria-hidden="true"><span class="badge1"></span><span
-                                                                    class="badgecount">6</span></span><span
-                                                                class="v-visible-sr">6 gold badges</span><span
-                                                                title="46 silver badges" aria-hidden="true"><span
-                                                                    class="badge2"></span><span
-                                                                    class="badgecount">46</span></span><span
-                                                                class="v-visible-sr">46 silver badges</span><span
-                                                                title="83 bronze badges" aria-hidden="true"><span
-                                                                    class="badge3"></span><span
-                                                                    class="badgecount">83</span></span><span
-                                                                class="v-visible-sr">83 bronze badges</span>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
                                             <div class="post-signature owner grid--cell">
                                                 <div class="user-info user-hover">
                                                     <div class="user-action-time">
-                                                        asked <span title="2018-06-06 13:58:55Z"
-                                                            class="relativetime">Jun 6 '18 at 13:58</span>
+                                                        asked <span title="2019-07-28 12:34:10Z" class="relativetime">2
+                                                            mins ago</span>
                                                     </div>
                                                     <div class="user-gravatar32">
-                                                        <a href="/users/756233/ray-hulha">
+                                                        <a href="/users/1818420/marta-karas">
                                                             <div class="gravatar-wrapper-32"><img
-                                                                    src="https://i.stack.imgur.com/ySRUp.jpg?s=32&amp;g=1"
+                                                                    src="https://www.gravatar.com/avatar/6f3c198f7194f27b3bf72f6f57255f51?s=32&amp;d=identicon&amp;r=PG"
                                                                     alt="" width="32" height="32"></div>
                                                         </a>
                                                     </div>
                                                     <div class="user-details" itemprop="author" itemscope
                                                         itemtype="http://schema.org/Person">
-                                                        <a href="/users/756233/ray-hulha">Ray Hulha</a><span
-                                                            class="d-none" itemprop="name">Ray Hulha</span>
+                                                        <a href="/users/1818420/marta-karas">Marta Karas</a><span
+                                                            class="d-none" itemprop="name">Marta Karas</span>
                                                         <div class="-flair">
                                                             <span class="reputation-score" title="reputation score "
-                                                                dir="ltr">7,422</span><span title="4 gold badges"
+                                                                dir="ltr">1,828</span><span title="8 gold badges"
                                                                 aria-hidden="true"><span class="badge1"></span><span
-                                                                    class="badgecount">4</span></span><span
-                                                                class="v-visible-sr">4 gold badges</span><span
-                                                                title="34 silver badges" aria-hidden="true"><span
+                                                                    class="badgecount">8</span></span><span
+                                                                class="v-visible-sr">8 gold badges</span><span
+                                                                title="32 silver badges" aria-hidden="true"><span
                                                                     class="badge2"></span><span
-                                                                    class="badgecount">34</span></span><span
-                                                                class="v-visible-sr">34 silver badges</span><span
-                                                                title="40 bronze badges" aria-hidden="true"><span
+                                                                    class="badgecount">32</span></span><span
+                                                                class="v-visible-sr">32 silver badges</span><span
+                                                                title="64 bronze badges" aria-hidden="true"><span
                                                                     class="badge3"></span><span
-                                                                    class="badgecount">40</span></span><span
-                                                                class="v-visible-sr">40 bronze badges</span>
+                                                                    class="badgecount">64</span></span><span
+                                                                class="v-visible-sr">64 bronze badges</span>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -893,28 +905,10 @@ user_by_email = session.query(User)\
                                     </div>
 
                                 </div>
-                                <div class="special-status post-layout--full">
-                                    <div class="question-status">
-                                        <h2> <b>marked</b> as duplicate by <a href="/users/789671/glibdud">glibdud</a>,
-                                            <span class="voter-history"
-                                                title="This question&#39;s author approved a pending duplicate vote."><a
-                                                    href="/users/-1/community">Community</a><span class="mod-flair"
-                                                    title="moderator">&#9830;</span></span> <span dir="ltr"><span
-                                                    title="2018-06-06 14:20:03Z" class="relativetime">Jun 6 '18 at
-                                                    14:20</span></span>
-                                        </h2>
-                                        <p>This question has been asked before and already has an answer. If those
-                                            answers do not fully address your question, please <a
-                                                href="/questions/ask">ask a new question</a>.</p>
-                                    </div>
-
-
-
-                                </div>
 
                                 <div class="post-layout--right">
-                                    <div id="comments-50722329" class="comments js-comments-container  dno"
-                                        data-post-id="50722329" data-min-length="15">
+                                    <div id="comments-57240949" class="comments js-comments-container  dno"
+                                        data-post-id="57240949" data-min-length="15">
                                         <ul class="comments-list js-comments-list" data-remaining-comments-count="0"
                                             data-canpost="false" data-cansee="true" data-comments-unavailable="false"
                                             data-addlink-disabled="true">
@@ -922,7 +916,7 @@ user_by_email = session.query(User)\
                                         </ul>
                                     </div>
 
-                                    <div id="comments-link-50722329" data-rep=50 data-reg=true>
+                                    <div id="comments-link-57240949" data-rep=50 data-reg=true>
 
                                         <a class="js-add-link comments-link disabled-link "
                                             title="Use comments to ask for more information or suggest improvements. Avoid answering questions in comments.">add
@@ -936,28 +930,27 @@ user_by_email = session.query(User)\
 
 
                         <div id="dfp-isb" class="everyonelovesstackoverflow everyoneloves__inline-sidebar"></div>
-                        <div id="answers">
+                        <div id="answers" class="no-answers">
 
                             <a name="tab-top"></a>
                             <div id="answers-header">
                                 <div class="subheader answers-subheader">
-                                    <h2 data-answercount="3">
-                                        3 Answers
-                                        <span style="display:none;" itemprop="answerCount">3</span>
+                                    <h2 data-answercount="0">
+                                        <span style="display:none;" itemprop="answerCount">0</span>
                                     </h2>
-                                    <div>
+                                    <div style="display:none;">
 
                                         <div id="tabs">
-                                            <a href="/questions/50722329/indentationerror-unexpected-indent-after-comment?answertab=active#tab-top"
+                                            <a href="/questions/57240949/importerror-the-plotly-future-module-must-be-imported-before-the-plotly-modul?answertab=active#tab-top"
                                                 data-nav-xhref="" title="Answers with the latest activity first"
                                                 data-value="active" data-shortcut="A">
                                                 active</a>
-                                            <a href="/questions/50722329/indentationerror-unexpected-indent-after-comment?answertab=oldest#tab-top"
+                                            <a href="/questions/57240949/importerror-the-plotly-future-module-must-be-imported-before-the-plotly-modul?answertab=oldest#tab-top"
                                                 data-nav-xhref="" title="Answers in the order they were provided"
                                                 data-value="oldest" data-shortcut="O">
                                                 oldest</a>
                                             <a class="youarehere is-selected "
-                                                href="/questions/50722329/indentationerror-unexpected-indent-after-comment?answertab=votes#tab-top"
+                                                href="/questions/57240949/importerror-the-plotly-future-module-must-be-imported-before-the-plotly-modul?answertab=votes#tab-top"
                                                 data-nav-xhref="" title="Answers with the highest score first"
                                                 data-value="votes" data-shortcut="V">
                                                 votes</a>
@@ -970,672 +963,215 @@ user_by_email = session.query(User)\
 
 
 
-
-                            <a name="50722701"></a>
-                            <div id="answer-50722701" class="answer accepted-answer" data-answerid="50722701"
-                                itemprop="acceptedAnswer" itemscope itemtype="http://schema.org/Answer">
-                                <div class="post-layout">
-                                    <div class="votecell post-layout--left">
-
-
-                                        <div class="js-voting-container grid fd-column ai-stretch gs4 fc-black-200"
-                                            data-post-id="50722701">
-                                            <button class="js-vote-up-btn grid--cell s-btn s-btn__unset c-pointer"
-                                                title="This answer is useful (click again to undo)" aria-pressed="false"
-                                                aria-label="up vote" data-selected-classes="fc-theme-primary"><svg
-                                                    aria-hidden="true" class="svg-icon m0 iconArrowUpLg" width="36"
-                                                    height="36" viewBox="0 0 36 36">
-                                                    <path d="M2 26h32L18 10 2 26z" /></svg></button>
-                                            <div class="js-vote-count grid--cell fc-black-500 fs-title grid fd-column ai-center"
-                                                itemprop="upvoteCount" data-value="4">4</div>
-                                            <button class="js-vote-down-btn grid--cell s-btn s-btn__unset c-pointer"
-                                                title="This answer is not useful (click again to undo)"
-                                                aria-pressed="false" aria-label="down vote"
-                                                data-selected-classes="fc-theme-primary"><svg aria-hidden="true"
-                                                    class="svg-icon m0 iconArrowDownLg" width="36" height="36"
-                                                    viewBox="0 0 36 36">
-                                                    <path d="M2 10h32L18 26 2 10z" /></svg></button>
-
-
-                                            <div class="js-accepted-answer-indicator grid--item fc-green-500 ta-center p4"
-                                                title="loading when this answer was accepted..." tabindex="0"
-                                                role="note" aria-label="accepted"><svg aria-hidden="true"
-                                                    class="svg-icon iconCheckmarkLg" width="36" height="36"
-                                                    viewBox="0 0 36 36">
-                                                    <path d="M6 14l8 8L30 6v8L14 30l-8-8v-8z" /></svg></div>
-
-                                        </div>
-
-                                    </div>
-
-
-                                    <div class="answercell post-layout--right">
-
-                                        <div class="post-text" itemprop="text">
-                                            <p>Enclose the statement in paranthesis</p>
-
-                                            <pre><code>user_by_email = (session.query(User)
- .filter(Address.email=='one')
- #.options(joinedload(User.addresses))
- .first())
-</code></pre>
-                                        </div>
-                                        <div class="grid mb0 fw-wrap ai-start jc-end gs8 gsy">
-                                            <time itemprop="dateCreated" datetime="2018-06-06T14:16:42"></time>
-                                            <div class="grid--cell mr16" style="flex: 1 1 100px;">
-                                                <div class="post-menu"><a href="/a/50722701/5732400"
-                                                        title="short permalink to this answer" class="short-link"
-                                                        itemprop="url" id="link-post-50722701">share</a><span
-                                                        class="lsep">|</span><a href="/posts/50722701/edit"
-                                                        class="suggest-edit-post"
-                                                        title="revise and improve this post">edit</a><span
-                                                        class="lsep">|</span><a href="#" class="flag-post-link"
-                                                        title="flag this post for serious problems or moderator attention"
-                                                        data-postid="50722701">flag</a></div>
-                                            </div>
-                                            <div class="post-signature grid--cell fl0">
-                                                <div class="user-info user-hover">
-                                                    <div class="user-action-time">
-                                                        <a href="/posts/50722701/revisions"
-                                                            title="show all edits to this post">edited <span
-                                                                title="2018-06-06 14:18:48Z" class="relativetime">Jun 6
-                                                                '18 at 14:18</span></a>
-                                                    </div>
-                                                    <div class="user-gravatar32">
-                                                        <a href="/users/756233/ray-hulha">
-                                                            <div class="gravatar-wrapper-32"><img
-                                                                    src="https://i.stack.imgur.com/ySRUp.jpg?s=32&amp;g=1"
-                                                                    alt="" width="32" height="32"></div>
-                                                        </a>
-                                                    </div>
-                                                    <div class="user-details">
-                                                        <a href="/users/756233/ray-hulha">Ray Hulha</a>
-                                                        <div class="-flair">
-                                                            <span class="reputation-score" title="reputation score "
-                                                                dir="ltr">7,422</span><span title="4 gold badges"
-                                                                aria-hidden="true"><span class="badge1"></span><span
-                                                                    class="badgecount">4</span></span><span
-                                                                class="v-visible-sr">4 gold badges</span><span
-                                                                title="34 silver badges" aria-hidden="true"><span
-                                                                    class="badge2"></span><span
-                                                                    class="badgecount">34</span></span><span
-                                                                class="v-visible-sr">34 silver badges</span><span
-                                                                title="40 bronze badges" aria-hidden="true"><span
-                                                                    class="badge3"></span><span
-                                                                    class="badgecount">40</span></span><span
-                                                                class="v-visible-sr">40 bronze badges</span>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-
-
-
-                                            <div class="post-signature grid--cell fl0">
-                                                <div class="user-info ">
-                                                    <div class="user-action-time">
-                                                        answered <span title="2018-06-06 14:16:42Z"
-                                                            class="relativetime">Jun 6 '18 at 14:16</span>
-                                                    </div>
-                                                    <div class="user-gravatar32">
-                                                        <a href="/users/6571554/sreyas">
-                                                            <div class="gravatar-wrapper-32"><img
-                                                                    src="https://i.stack.imgur.com/Y7lTr.jpg?s=32&amp;g=1"
-                                                                    alt="" width="32" height="32"></div>
-                                                        </a>
-                                                    </div>
-                                                    <div class="user-details" itemprop="author" itemscope
-                                                        itemtype="http://schema.org/Person">
-                                                        <a href="/users/6571554/sreyas">Sreyas</a><span class="d-none"
-                                                            itemprop="name">Sreyas</span>
-                                                        <div class="-flair">
-                                                            <span class="reputation-score" title="reputation score "
-                                                                dir="ltr">113</span><span title="10 bronze badges"
-                                                                aria-hidden="true"><span class="badge3"></span><span
-                                                                    class="badgecount">10</span></span><span
-                                                                class="v-visible-sr">10 bronze badges</span>
-                                                        </div>
-                                                    </div>
-                                                </div>
-
-                                            </div>
-                                        </div>
-
-                                    </div>
-
-
-                                    <div class="post-layout--right">
-                                        <div id="comments-50722701" class="comments js-comments-container  dno"
-                                            data-post-id="50722701" data-min-length="15">
-                                            <ul class="comments-list js-comments-list" data-remaining-comments-count="0"
-                                                data-canpost="false" data-cansee="true"
-                                                data-comments-unavailable="false" data-addlink-disabled="true">
-
-                                            </ul>
-                                        </div>
-
-                                        <div id="comments-link-50722701" data-rep=50 data-reg=true>
-
-                                            <a class="js-add-link comments-link disabled-link "
-                                                title="Use comments to ask for more information or suggest improvements. Avoid comments like “+1” or “thanks”.">add
-                                                a comment</a><span class="js-link-separator dno">&nbsp;|&nbsp;</span>
-                                            <a class="js-show-link comments-link dno"
-                                                title="expand to show all comments on this post" href=# onclick=""></a>
-                                        </div>
+                            <aside class="s-notice s-notice__info py8 js-product-notice" role="status"
+                                aria-hidden="false">
+                                <div class="grid gs16 gsx ai-center jc-space-between">
+                                    <div class="grid--cell">
+                                        Is this question similar to what you get asked at work? <a href="/teams"
+                                            data-ga="[&quot;teams suggestion bar&quot;,&quot;learn more click&quot;,&quot;unanswered&quot;,null,null]"
+                                            class="js-gps-track" data-gps-track="teams.question_banner.click">Learn
+                                            more</a> about asking and sharing private information with your coworkers
+                                        using Stack Overflow for Teams. </div>
+                                    <div class="grid--cell mr0" aria-label="dismiss">
+                                        <button class="p8 s-btn grid grid__center fc-dark js-product-notice-close"
+                                            data-dismiss-entity="1"
+                                            data-ga="[&quot;teams suggestion bar&quot;,&quot;dismiss click&quot;,&quot;unanswered&quot;,null,null]">
+                                            <svg aria-hidden="true" class="svg-icon m0 iconClearSm" width="14"
+                                                height="14" viewBox="0 0 14 14">
+                                                <path
+                                                    d="M12 3.41L10.59 2 7 5.59 3.41 2 2 3.41 5.59 7 2 10.59 3.41 12 7 8.41 10.59 12 12 10.59 8.41 7 12 3.41z" />
+                                                </svg>
+                                        </button>
                                     </div>
                                 </div>
-                            </div>
-                            <div id="dfp-mlb" class="everyonelovesstackoverflow everyoneloves__mid-leaderboard"></div>
+                            </aside>
 
-                            <a name="50722532"></a>
-                            <div id="answer-50722532" class="answer" data-answerid="50722532" itemprop="suggestedAnswer"
-                                itemscope itemtype="http://schema.org/Answer">
-                                <div class="post-layout">
-                                    <div class="votecell post-layout--left">
-
-
-                                        <div class="js-voting-container grid fd-column ai-stretch gs4 fc-black-200"
-                                            data-post-id="50722532">
-                                            <button class="js-vote-up-btn grid--cell s-btn s-btn__unset c-pointer"
-                                                title="This answer is useful (click again to undo)" aria-pressed="false"
-                                                aria-label="up vote" data-selected-classes="fc-theme-primary"><svg
-                                                    aria-hidden="true" class="svg-icon m0 iconArrowUpLg" width="36"
-                                                    height="36" viewBox="0 0 36 36">
-                                                    <path d="M2 26h32L18 10 2 26z" /></svg></button>
-                                            <div class="js-vote-count grid--cell fc-black-500 fs-title grid fd-column ai-center"
-                                                itemprop="upvoteCount" data-value="1">1</div>
-                                            <button class="js-vote-down-btn grid--cell s-btn s-btn__unset c-pointer"
-                                                title="This answer is not useful (click again to undo)"
-                                                aria-pressed="false" aria-label="down vote"
-                                                data-selected-classes="fc-theme-primary"><svg aria-hidden="true"
-                                                    class="svg-icon m0 iconArrowDownLg" width="36" height="36"
-                                                    viewBox="0 0 36 36">
-                                                    <path d="M2 10h32L18 26 2 10z" /></svg></button>
+                            <h2 class="bottom-notice bottom-share-links" style="padding-top: 8px; margin-bottom: -8px;">
+                                Know someone who can answer? Share a link to this <a
+                                    href="/q/57240949/5732400">question</a> via <a
+                                    href="mailto:?subject=Stack%20Overflow%20Question&amp;body=ImportError%3a%20The%20_plotly_future_%20module%20must%20be%20imported%20before%20the%20plotly%20module%0Ahttps%3a%2f%2fstackoverflow.com%2fq%2f57240949%2f5732400%3fsem%3d2">email</a>,
+                                <a
+                                    href="https://twitter.com/share?url=https%3a%2f%2fstackoverflow.com%2fq%2f57240949%2f5732400%3fstw%3d2">Twitter</a>,
+                                or <a
+                                    href="https://www.facebook.com/sharer.php?u=https%3a%2f%2fstackoverflow.com%2fq%2f57240949%2f5732400%3fsfb%3d2">Facebook</a>.
+                            </h2>
+                            <a name='new-answer'></a>
+                            <form id="post-form" action="/questions/57240949/answer/submit" method="post"
+                                class="post-form">
+                                <input type="hidden" id="post-id" value="57240949" />
+                                <input type="hidden" id="qualityBanWarningShown" name="qualityBanWarningShown"
+                                    value="false" />
+                                <input type="hidden" name="referrer"
+                                    value="https://stackoverflow.com/questions/tagged/python" />
+                                <h2 class="space">
+                                    Your Answer
+                                </h2>
 
 
-                                            <div class="js-accepted-answer-indicator grid--item fc-green-500 ta-center p4 d-none"
-                                                title="loading when this answer was accepted..." tabindex="0"
-                                                role="note" aria-label="accepted"><svg aria-hidden="true"
-                                                    class="svg-icon iconCheckmarkLg" width="36" height="36"
-                                                    viewBox="0 0 36 36">
-                                                    <path d="M6 14l8 8L30 6v8L14 30l-8-8v-8z" /></svg></div>
 
-                                        </div>
+                                <script>
+                                    StackExchange.ifUsing("editor", function () {
+                                        StackExchange.using("externalEditor", function () {
+                                            StackExchange.using("snippets", function () {
+                                                StackExchange.snippets.init();
+                                            });
+                                        });
+                                    }, "code-snippets");
+                                </script>
 
-                                    </div>
+
+                                <script>
+                                    StackExchange.ready(function () {
+                                        var channelOptions = {
+                                            tags: "".split(" "),
+                                            id: "1"
+                                        };
+                                        initTagRenderer("".split(" "), "".split(" "), channelOptions);
+
+                                        StackExchange.using("externalEditor", function () {
+                                            // Have to fire editor after snippets, if snippets enabled
+                                            if (StackExchange.settings.snippets.snippetsEnabled) {
+                                                StackExchange.using("snippets", function () {
+                                                    createEditor();
+                                                });
+                                            }
+                                            else {
+                                                createEditor();
+                                            }
+                                        });
+
+                                        function createEditor() {
+                                            StackExchange.prepareEditor({
+                                                heartbeatType: 'answer',
+                                                autoActivateHeartbeat: false,
+                                                convertImagesToLinks: false,
+                                                noModals: true,
+                                                showLowRepImageUploadWarning: false,
+                                                reputationToPostImages: null,
+                                                bindNavPrevention: true,
+                                                postfix: "",
+                                                imageUploader: {
+                                                    brandingHtml: "Powered by \u003ca class=\"icon-imgur-white\" href=\"https://imgur.com/\"\u003e\u003c/a\u003e",
+                                                    contentPolicyHtml: "User contributions licensed under \u003ca href=\"https://creativecommons.org/licenses/by-sa/3.0/\"\u003ecc by-sa 3.0 with attribution required\u003c/a\u003e \u003ca href=\"https://stackoverflow.com/legal/content-policy\"\u003e(content policy)\u003c/a\u003e",
+                                                    allowUrls: true
+                                                },
+                                                onDemand: false,
+                                                discardSelector: ".discard-answer"
+                                                , immediatelyShowMarkdownHelp: true, userId: 5732400
+                                            });
 
 
-                                    <div class="answercell post-layout--right">
+                                        }
+                                    });
+                                </script>
 
-                                        <div class="post-text" itemprop="text">
-                                            <p>Essentially its the same line , thats how Python interpreter reads it.
-                                            </p>
 
-                                            <p>Just like you can not comment just a word in line of code. (Below)</p>
+                                <div id="post-editor" class="post-editor js-post-editor js-wz-element"
+                                    data-wz-state="8,16,32,64,128,256">
 
-                                            <blockquote>
-                                                <p>Not allowed</p>
-                                            </blockquote>
-
-                                            <pre><code>user_by_email = session.query(User).filter(Address.email=='one')#comment#.first()
-</code></pre>
-
-                                            <p>You need to move the comment to the end of the line.</p>
-
-                                            <pre><code>user_by_email = session.query(User)\
-.filter(Address.email=='one')\
-.first()
-#.options(joinedload(User.addresses))\
-</code></pre>
-                                        </div>
-                                        <div class="grid mb0 fw-wrap ai-start jc-end gs8 gsy">
-                                            <time itemprop="dateCreated" datetime="2018-06-06T14:09:18"></time>
-                                            <div class="grid--cell mr16" style="flex: 1 1 100px;">
-                                                <div class="post-menu"><a href="/a/50722532/5732400"
-                                                        title="short permalink to this answer" class="short-link"
-                                                        itemprop="url" id="link-post-50722532">share</a><span
-                                                        class="lsep">|</span><a href="/posts/50722532/edit"
-                                                        class="suggest-edit-post"
-                                                        title="revise and improve this post">edit</a><span
-                                                        class="lsep">|</span><a href="#" class="flag-post-link"
-                                                        title="flag this post for serious problems or moderator attention"
-                                                        data-postid="50722532">flag</a></div>
-                                            </div>
-                                            <div class="post-signature grid--cell fl0">
-                                                <div class="user-info ">
-                                                    <div class="user-action-time">
-                                                        <a href="/posts/50722532/revisions"
-                                                            title="show all edits to this post">edited <span
-                                                                title="2018-06-06 14:24:54Z" class="relativetime">Jun 6
-                                                                '18 at 14:24</span></a>
-                                                    </div>
-                                                    <div class="user-gravatar32">
-
-                                                    </div>
-                                                    <div class="user-details">
-
-                                                        <div class="-flair">
-
-                                                        </div>
-                                                    </div>
+                                    <div class="ps-relative">
+                                        <div class="wmd-container mb8">
+                                            <div id="wmd-button-bar" class="wmd-button-bar btr-sm"></div>
+                                            <div class="js-stacks-validation">
+                                                <div class="ps-relative">
+                                                    <textarea id="wmd-input"
+                                                        class="wmd-input js-wz-element s-input bar0" name="post-text"
+                                                        cols="92" rows="15" tabindex="101" data-wz-state="256"
+                                                        data-min-length=""></textarea>
+                                                </div>
+                                                <div class="s-input-message mt4 d-none js-stacks-validation-message">
                                                 </div>
                                             </div>
-
-
-
-                                            <div class="post-signature grid--cell fl0">
-                                                <div class="user-info user-hover">
-                                                    <div class="user-action-time">
-                                                        answered <span title="2018-06-06 14:09:18Z"
-                                                            class="relativetime">Jun 6 '18 at 14:09</span>
-                                                    </div>
-                                                    <div class="user-gravatar32">
-                                                        <a href="/users/7907591/prateek">
-                                                            <div class="gravatar-wrapper-32"><img
-                                                                    src="https://i.stack.imgur.com/sO22q.png?s=32&amp;g=1"
-                                                                    alt="" width="32" height="32"></div>
-                                                        </a>
-                                                    </div>
-                                                    <div class="user-details" itemprop="author" itemscope
-                                                        itemtype="http://schema.org/Person">
-                                                        <a href="/users/7907591/prateek">Prateek</a><span class="d-none"
-                                                            itemprop="name">Prateek</span>
-                                                        <div class="-flair">
-                                                            <span class="reputation-score" title="reputation score "
-                                                                dir="ltr">3,064</span><span title="4 gold badges"
-                                                                aria-hidden="true"><span class="badge1"></span><span
-                                                                    class="badgecount">4</span></span><span
-                                                                class="v-visible-sr">4 gold badges</span><span
-                                                                title="19 silver badges" aria-hidden="true"><span
-                                                                    class="badge2"></span><span
-                                                                    class="badgecount">19</span></span><span
-                                                                class="v-visible-sr">19 silver badges</span><span
-                                                                title="42 bronze badges" aria-hidden="true"><span
-                                                                    class="badge3"></span><span
-                                                                    class="badgecount">42</span></span><span
-                                                                class="v-visible-sr">42 bronze badges</span>
-                                                        </div>
-                                                    </div>
-                                                </div>
-
-                                            </div>
                                         </div>
-
                                     </div>
 
-
-                                    <div class="post-layout--right">
-                                        <div id="comments-50722532" class="comments js-comments-container "
-                                            data-post-id="50722532" data-min-length="15">
-                                            <ul class="comments-list js-comments-list" data-remaining-comments-count="0"
-                                                data-canpost="false" data-cansee="true"
-                                                data-comments-unavailable="false" data-addlink-disabled="true">
-
-
-                                                <li id="comment-88453666" class="comment js-comment "
-                                                    data-comment-id="88453666">
-                                                    <div class="js-comment-actions comment-actions">
-                                                        <div class="comment-score js-comment-edit-hide">
-                                                        </div>
-                                                        <div class="comment-voting mtn2 js-comment-edit-hide">
-                                                            <a tabindex="0" role="button" href="#"
-                                                                class="comment-up comment-up-off"
-                                                                aria-label="Upvote Comment"
-                                                                title="This comment adds something useful to the post">
-                                                                <svg aria-hidden="true" class="svg-icon iconArrowUp"
-                                                                    width="18" height="18" viewBox="0 0 18 18">
-                                                                    <path d="M1 13h16L9 5l-8 8z" /></svg>
-                                                            </a>
-                                                        </div>
-                                                        <div class="comment-flagging js-comment-edit-hide">
-                                                            <a tabindex="0" role="button" href="#" class="comment-flag"
-                                                                aria-label="Flag Comment"
-                                                                title="Flag this comment for serious problems or moderator attention">
-                                                                <svg aria-hidden="true" class="svg-icon iconFlag"
-                                                                    width="18" height="18" viewBox="0 0 18 18">
-                                                                    <path d="M3 2v14h2v-6h3.6l.4 1h6V3H9.5L9 2H3z" />
-                                                                    </svg>
-                                                            </a>
-                                                        </div>
-                                                    </div>
-                                                    <div class="comment-text js-comment-text-and-form">
-                                                        <div class="comment-body js-comment-edit-hide">
-
-                                                            <span class="comment-copy">removing the slash didn&#39;t
-                                                                work but adding braces did.</span>
-
-                                                            &ndash;&nbsp;<a href="/users/756233/ray-hulha"
-                                                                title="7,422 reputation" class="comment-user owner">Ray
-                                                                Hulha</a>
-                                                            <span class="comment-date" dir="ltr"><span
-                                                                    title="2018-06-06 14:16:12Z"
-                                                                    class="relativetime-clean">Jun 6 '18 at
-                                                                    14:16</span></span>
-                                                        </div>
-                                                    </div>
-                                                </li>
-                                                <li id="comment-88453862" class="comment js-comment "
-                                                    data-comment-id="88453862">
-                                                    <div class="js-comment-actions comment-actions">
-                                                        <div class="comment-score js-comment-edit-hide">
-                                                        </div>
-                                                        <div class="comment-voting mtn2 js-comment-edit-hide">
-                                                            <a tabindex="0" role="button" href="#"
-                                                                class="comment-up comment-up-off"
-                                                                aria-label="Upvote Comment"
-                                                                title="This comment adds something useful to the post">
-                                                                <svg aria-hidden="true" class="svg-icon iconArrowUp"
-                                                                    width="18" height="18" viewBox="0 0 18 18">
-                                                                    <path d="M1 13h16L9 5l-8 8z" /></svg>
-                                                            </a>
-                                                        </div>
-                                                        <div class="comment-flagging js-comment-edit-hide">
-                                                            <a tabindex="0" role="button" href="#" class="comment-flag"
-                                                                aria-label="Flag Comment"
-                                                                title="Flag this comment for serious problems or moderator attention">
-                                                                <svg aria-hidden="true" class="svg-icon iconFlag"
-                                                                    width="18" height="18" viewBox="0 0 18 18">
-                                                                    <path d="M3 2v14h2v-6h3.6l.4 1h6V3H9.5L9 2H3z" />
-                                                                    </svg>
-                                                            </a>
-                                                        </div>
-                                                    </div>
-                                                    <div class="comment-text js-comment-text-and-form">
-                                                        <div class="comment-body js-comment-edit-hide">
-
-                                                            <span class="comment-copy">@Prateek I removed my comment as
-                                                                I could not edit it to correct that the simple removal
-                                                                of the backslash does not work in that case.</span>
-
-                                                            &ndash;&nbsp;<a href="/users/9802392/d-parolin"
-                                                                title="186 reputation" class="comment-user">d
-                                                                parolin</a>
-                                                            <span class="comment-date" dir="ltr"><span
-                                                                    title="2018-06-06 14:20:41Z"
-                                                                    class="relativetime-clean">Jun 6 '18 at
-                                                                    14:20</span></span>
-                                                        </div>
-                                                    </div>
-                                                </li>
-                                                <li id="comment-88454069" class="comment js-comment "
-                                                    data-comment-id="88454069">
-                                                    <div class="js-comment-actions comment-actions">
-                                                        <div class="comment-score js-comment-edit-hide">
-                                                        </div>
-                                                        <div class="comment-voting mtn2 js-comment-edit-hide">
-                                                            <a tabindex="0" role="button" href="#"
-                                                                class="comment-up comment-up-off"
-                                                                aria-label="Upvote Comment"
-                                                                title="This comment adds something useful to the post">
-                                                                <svg aria-hidden="true" class="svg-icon iconArrowUp"
-                                                                    width="18" height="18" viewBox="0 0 18 18">
-                                                                    <path d="M1 13h16L9 5l-8 8z" /></svg>
-                                                            </a>
-                                                        </div>
-                                                        <div class="comment-flagging js-comment-edit-hide">
-                                                            <a tabindex="0" role="button" href="#" class="comment-flag"
-                                                                aria-label="Flag Comment"
-                                                                title="Flag this comment for serious problems or moderator attention">
-                                                                <svg aria-hidden="true" class="svg-icon iconFlag"
-                                                                    width="18" height="18" viewBox="0 0 18 18">
-                                                                    <path d="M3 2v14h2v-6h3.6l.4 1h6V3H9.5L9 2H3z" />
-                                                                    </svg>
-                                                            </a>
-                                                        </div>
-                                                    </div>
-                                                    <div class="comment-text js-comment-text-and-form">
-                                                        <div class="comment-body js-comment-edit-hide">
-
-                                                            <span class="comment-copy">sorry , i thought that worked
-                                                                .updated answer.</span>
-
-                                                            &ndash;&nbsp;<a href="/users/7907591/prateek"
-                                                                title="3,064 reputation"
-                                                                class="comment-user">Prateek</a>
-                                                            <span class="comment-date" dir="ltr"><span
-                                                                    title="2018-06-06 14:26:00Z"
-                                                                    class="relativetime-clean">Jun 6 '18 at
-                                                                    14:26</span></span>
-                                                        </div>
-                                                    </div>
-                                                </li>
+                                    <aside
+                                        class="grid ai-start jc-space-between js-answer-help s-notice s-notice__warning pb0 pr4 pt4 mb8 d-none"
+                                        role="status" aria-hidden="true">
+                                        <div class="grid--cell pt8">
+                                            <p>Thanks for contributing an answer to Stack Overflow!</p>
+                                            <ul>
+                                                <li>Please be sure to <em>answer the question</em>. Provide details and
+                                                    share your research!</li>
                                             </ul>
-                                        </div>
-
-                                        <div id="comments-link-50722532" data-rep=50 data-reg=true>
-
-                                            <a class="js-add-link comments-link disabled-link "
-                                                title="Use comments to ask for more information or suggest improvements. Avoid comments like “+1” or “thanks”.">add
-                                                a comment</a><span class="js-link-separator dno">&nbsp;|&nbsp;</span>
-                                            <a class="js-show-link comments-link dno"
-                                                title="expand to show all comments on this post" href=# onclick=""></a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-
-                            <a name="50722474"></a>
-                            <div id="answer-50722474" class="answer" data-answerid="50722474" itemprop="suggestedAnswer"
-                                itemscope itemtype="http://schema.org/Answer">
-                                <div class="post-layout">
-                                    <div class="votecell post-layout--left">
-
-
-                                        <div class="js-voting-container grid fd-column ai-stretch gs4 fc-black-200"
-                                            data-post-id="50722474">
-                                            <button class="js-vote-up-btn grid--cell s-btn s-btn__unset c-pointer"
-                                                title="This answer is useful (click again to undo)" aria-pressed="false"
-                                                aria-label="up vote" data-selected-classes="fc-theme-primary"><svg
-                                                    aria-hidden="true" class="svg-icon m0 iconArrowUpLg" width="36"
-                                                    height="36" viewBox="0 0 36 36">
-                                                    <path d="M2 26h32L18 10 2 26z" /></svg></button>
-                                            <div class="js-vote-count grid--cell fc-black-500 fs-title grid fd-column ai-center"
-                                                itemprop="upvoteCount" data-value="0">0</div>
-                                            <button class="js-vote-down-btn grid--cell s-btn s-btn__unset c-pointer"
-                                                title="This answer is not useful (click again to undo)"
-                                                aria-pressed="false" aria-label="down vote"
-                                                data-selected-classes="fc-theme-primary"><svg aria-hidden="true"
-                                                    class="svg-icon m0 iconArrowDownLg" width="36" height="36"
-                                                    viewBox="0 0 36 36">
-                                                    <path d="M2 10h32L18 26 2 10z" /></svg></button>
-
-
-                                            <div class="js-accepted-answer-indicator grid--item fc-green-500 ta-center p4 d-none"
-                                                title="loading when this answer was accepted..." tabindex="0"
-                                                role="note" aria-label="accepted"><svg aria-hidden="true"
-                                                    class="svg-icon iconCheckmarkLg" width="36" height="36"
-                                                    viewBox="0 0 36 36">
-                                                    <path d="M6 14l8 8L30 6v8L14 30l-8-8v-8z" /></svg></div>
-
-                                        </div>
-
-                                    </div>
-
-
-                                    <div class="answercell post-layout--right">
-
-                                        <div class="post-text" itemprop="text">
-                                            <p>Did you try this?</p>
-
-                                            <pre><code>user_by_email = session.query(User).\
-filter(Address.email=='one').\
-#options(joinedload(User.addresses)).\
-first()
-</code></pre>
-                                        </div>
-                                        <div class="grid mb0 fw-wrap ai-start jc-end gs8 gsy">
-                                            <time itemprop="dateCreated" datetime="2018-06-06T14:06:17"></time>
-                                            <div class="grid--cell mr16" style="flex: 1 1 100px;">
-                                                <div class="post-menu"><a href="/a/50722474/5732400"
-                                                        title="short permalink to this answer" class="short-link"
-                                                        itemprop="url" id="link-post-50722474">share</a><span
-                                                        class="lsep">|</span><a href="/posts/50722474/edit"
-                                                        class="suggest-edit-post"
-                                                        title="revise and improve this post">edit</a><span
-                                                        class="lsep">|</span><a href="#" class="flag-post-link"
-                                                        title="flag this post for serious problems or moderator attention"
-                                                        data-postid="50722474">flag</a></div>
-                                            </div>
-
-
-
-                                            <div class="post-signature grid--cell fl0">
-                                                <div class="user-info ">
-                                                    <div class="user-action-time">
-                                                        answered <span title="2018-06-06 14:06:17Z"
-                                                            class="relativetime">Jun 6 '18 at 14:06</span>
-                                                    </div>
-                                                    <div class="user-gravatar32">
-                                                        <a href="/users/8542090/vasily-bronsky">
-                                                            <div class="gravatar-wrapper-32"><img
-                                                                    src="https://lh6.googleusercontent.com/-nrkYxM9yTVg/AAAAAAAAAAI/AAAAAAAAAAA/14ZRSi7vLXo/photo.jpg?sz=32"
-                                                                    alt="" width="32" height="32"></div>
-                                                        </a>
-                                                    </div>
-                                                    <div class="user-details" itemprop="author" itemscope
-                                                        itemtype="http://schema.org/Person">
-                                                        <a href="/users/8542090/vasily-bronsky">Vasily Bronsky</a><span
-                                                            class="d-none" itemprop="name">Vasily Bronsky</span>
-                                                        <div class="-flair">
-                                                            <span class="reputation-score" title="reputation score "
-                                                                dir="ltr">338</span><span title="1 silver badge"
-                                                                aria-hidden="true"><span class="badge2"></span><span
-                                                                    class="badgecount">1</span></span><span
-                                                                class="v-visible-sr">1 silver badge</span><span
-                                                                title="12 bronze badges" aria-hidden="true"><span
-                                                                    class="badge3"></span><span
-                                                                    class="badgecount">12</span></span><span
-                                                                class="v-visible-sr">12 bronze badges</span>
-                                                        </div>
-                                                    </div>
-                                                </div>
-
-                                            </div>
-                                        </div>
-
-                                    </div>
-
-
-                                    <div class="post-layout--right">
-                                        <div id="comments-50722474" class="comments js-comments-container "
-                                            data-post-id="50722474" data-min-length="15">
-                                            <ul class="comments-list js-comments-list" data-remaining-comments-count="0"
-                                                data-canpost="false" data-cansee="true"
-                                                data-comments-unavailable="false" data-addlink-disabled="true">
-
-
-                                                <li id="comment-88453492" class="comment js-comment "
-                                                    data-comment-id="88453492">
-                                                    <div class="js-comment-actions comment-actions">
-                                                        <div class="comment-score js-comment-edit-hide">
-                                                        </div>
-                                                        <div class="comment-voting mtn2 js-comment-edit-hide">
-                                                            <a tabindex="0" role="button" href="#"
-                                                                class="comment-up comment-up-off"
-                                                                aria-label="Upvote Comment"
-                                                                title="This comment adds something useful to the post">
-                                                                <svg aria-hidden="true" class="svg-icon iconArrowUp"
-                                                                    width="18" height="18" viewBox="0 0 18 18">
-                                                                    <path d="M1 13h16L9 5l-8 8z" /></svg>
-                                                            </a>
-                                                        </div>
-                                                        <div class="comment-flagging js-comment-edit-hide">
-                                                            <a tabindex="0" role="button" href="#" class="comment-flag"
-                                                                aria-label="Flag Comment"
-                                                                title="Flag this comment for serious problems or moderator attention">
-                                                                <svg aria-hidden="true" class="svg-icon iconFlag"
-                                                                    width="18" height="18" viewBox="0 0 18 18">
-                                                                    <path d="M3 2v14h2v-6h3.6l.4 1h6V3H9.5L9 2H3z" />
-                                                                    </svg>
-                                                            </a>
-                                                        </div>
-                                                    </div>
-                                                    <div class="comment-text js-comment-text-and-form">
-                                                        <div class="comment-body js-comment-edit-hide">
-
-                                                            <span class="comment-copy">Then I get: SyntaxError:
-                                                                unexpected character after line continuation
-                                                                character</span>
-
-                                                            &ndash;&nbsp;<a href="/users/756233/ray-hulha"
-                                                                title="7,422 reputation" class="comment-user owner">Ray
-                                                                Hulha</a>
-                                                            <span class="comment-date" dir="ltr"><span
-                                                                    title="2018-06-06 14:12:03Z"
-                                                                    class="relativetime-clean">Jun 6 '18 at
-                                                                    14:12</span></span>
-                                                        </div>
-                                                    </div>
-                                                </li>
+                                            <p>But <em>avoid</em> …</p>
+                                            <ul>
+                                                <li>Asking for help, clarification, or responding to other answers.</li>
+                                                <li>Making statements based on opinion; back them up with references or
+                                                    personal experience.</li>
                                             </ul>
+                                            <p>To learn more, see our <a href="/help/how-to-answer">tips on writing
+                                                    great answers</a>.</p>
                                         </div>
+                                        <button class="grid--cell js-answer-help-close-btn s-btn s-btn__muted fc-dark">
+                                            <svg aria-hidden="true" class="svg-icon iconClear" width="18" height="18"
+                                                viewBox="0 0 18 18">
+                                                <path
+                                                    d="M15 4.41L13.59 3 9 7.59 4.41 3 3 4.41 7.59 9 3 13.59 4.41 15 9 10.41 13.59 15 15 13.59 10.41 9 15 4.41z" />
+                                                </svg>
+                                        </button>
+                                    </aside>
 
-                                        <div id="comments-link-50722474" data-rep=50 data-reg=true>
 
-                                            <a class="js-add-link comments-link disabled-link "
-                                                title="Use comments to ask for more information or suggest improvements. Avoid comments like “+1” or “thanks”.">add
-                                                a comment</a><span class="js-link-separator dno">&nbsp;|&nbsp;</span>
-                                            <a class="js-show-link comments-link dno"
-                                                title="expand to show all comments on this post" href=# onclick=""></a>
+                                    <div id="draft-saved" class="draft-saved community-option fl"
+                                        style="height:24px; display:none;">draft saved</div>
+                                    <div id="draft-discarded" class="draft-discarded community-option fl"
+                                        style="height:24px; display:none;">draft discarded</div>
+
+                                    <div class="community-option g-row ai-center f-checkbox">
+                                        <div class="g-col -input">
+                                            <input id="communitymode" name="communitymode" type="checkbox">
+                                        </div>
+                                        <div class="g-col">
+                                            <label for="communitymode" class="f-label _small"
+                                                title="Marking an answer community wiki encourages others to edit it by lowering the reputation barrier required to edit. However, you will not gain any upvote reputation from it. This cannot be undone.">community
+                                                wiki</label>
                                         </div>
                                     </div>
+
+
+                                    <div id="wmd-preview" class="wmd-preview"></div>
+                                    <div></div>
+                                    <div class="edit-block">
+                                        <input id="fkey" name="fkey" type="hidden"
+                                            value="6d363285b86ebae53298bf95e31c5a397d0606a9bc73c3fd0730a56366c3a4ed">
+                                        <input id="author" name="author" type="text">
+                                    </div>
+
+
+
                                 </div>
-                            </div>
+
+                                <div class="ps-relative">
 
 
+                                </div>
+
+                                <div class="form-submit cbt grid gsx gs4">
+                                    <button id="submit-button" class="grid--cell s-btn s-btn__primary s-btn__icon"
+                                        type="submit" tabindex="120" autocomplete="off">
+                                        Post Your Answer </button>
+                                    <button class="grid--cell s-btn s-btn__danger discard-answer dno">
+                                        Discard
+                                    </button>
+                                </div>
+                            </form>
 
 
 
                             <h2 class="bottom-notice" data-loc="1">
-                                Not the answer you&#39;re looking for? Browse other questions tagged <a
-                                    href="/questions/tagged/python" class="post-tag"
+                                Browse other questions tagged <a href="/questions/tagged/python" class="post-tag"
                                     title="show questions tagged &#39;python&#39;" rel="tag">python</a> <a
-                                    href="/questions/tagged/python-2.7" class="post-tag"
-                                    title="show questions tagged &#39;python-2.7&#39;" rel="tag">python-2.7</a> <a
-                                    href="/questions/tagged/indentation" class="post-tag"
-                                    title="show questions tagged &#39;indentation&#39;" rel="tag">indentation</a> or <a
-                                    href="/questions/ask">ask your own question</a>. </h2>
+                                    href="/questions/tagged/plotly" class="post-tag"
+                                    title="show questions tagged &#39;plotly&#39;" rel="tag">plotly</a> <a
+                                    href="/questions/tagged/importerror" class="post-tag"
+                                    title="show questions tagged &#39;importerror&#39;" rel="tag">importerror</a> <a
+                                    href="/questions/tagged/plotly-python" class="post-tag"
+                                    title="show questions tagged &#39;plotly-python&#39;" rel="tag">plotly-python</a> or
+                                <a href="/questions/ask">ask your own question</a>. </h2>
                         </div>
                     </div>
                     <div id="sidebar" class="show-votes" role="complementary" aria-label="sidebar">
-                        <div class="module question-stats">
-                            <table id="qinfo">
-                                <tr>
-                                    <td>
-                                        <p class="label-key">asked</p>
-                                    </td>
-                                    <td style="padding-left: 10px">
-                                        <p class="label-key" title="2018-06-06 13:58:55Z">
-                                            <b>
-                                                <time itemprop="dateCreated" datetime="2018-06-06T13:58:55">1 year, 1
-                                                    month ago</time>
-                                            </b>
-                                        </p>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <p class="label-key">viewed</p>
-                                    </td>
-
-                                    <td style="padding-left: 10px">
-                                        <p class="label-key">
-                                            <b>832 times</b>
-                                        </p>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <p class="label-key">active</p>
-                                    </td>
-                                    <td style="padding-left: 10px">
-                                        <p class="label-key"><b><a href="?lastactivity" class="lastactivity-link"
-                                                    title="2018-06-06 14:24:54Z">1 year, 1 month ago</a></b></p>
-                                    </td>
-                                </tr>
-                            </table>
-                        </div>
                         <div class="s-sidebarwidget s-sidebarwidget__yellow s-anchors s-anchors__default mb16"
                             data-tracker="cb=1">
                             <div class="s-sidebarwidget--header s-sidebarwidget__small-bold-text">
@@ -1644,33 +1180,33 @@ first()
                             <ul class="s-sidebarwidget--content s-sidebarwidget__items pt0 pr16 pb0 pl16">
                                 <li class="s-sidebarwidget--item grid">
                                     <div class="grid--cell1 fl-shrink0">
-                                        <a href="https://stackoverflow.blog/2019/07/18/building-community-inclusivity-stack-overflow/"
-                                            data-ga="[&quot;community bulletin board&quot;,&quot;Blog&quot;,&quot;https://stackoverflow.blog/2019/07/18/building-community-inclusivity-stack-overflow/&quot;,null,null]">
+                                        <a href="https://stackoverflow.blog/2019/07/24/making-sense-of-the-metadata-clustering-4000-stack-overflow-tags-with-bigquery-k-means/"
+                                            data-ga="[&quot;community bulletin board&quot;,&quot;Blog&quot;,&quot;https://stackoverflow.blog/2019/07/24/making-sense-of-the-metadata-clustering-4000-stack-overflow-tags-with-bigquery-k-means/&quot;,null,null]">
                                             <div class="favicon favicon-stackexchangemeta" title="Meta Stack Exchange">
                                             </div>
                                         </a>
                                     </div>
                                     <div class="grid--cell">
-                                        <a href="https://stackoverflow.blog/2019/07/18/building-community-inclusivity-stack-overflow/"
-                                            data-ga="[&quot;community bulletin board&quot;,&quot;Blog&quot;,&quot;https://stackoverflow.blog/2019/07/18/building-community-inclusivity-stack-overflow/&quot;,null,null]">What
-                                            a very bad day at work taught me about building Stack Overflow’s
-                                            community</a>
+                                        <a href="https://stackoverflow.blog/2019/07/24/making-sense-of-the-metadata-clustering-4000-stack-overflow-tags-with-bigquery-k-means/"
+                                            title="Making Sense of the Metadata: Clustering 4,000 Stack Overflow tags with BigQuery k-means"
+                                            data-ga="[&quot;community bulletin board&quot;,&quot;Blog&quot;,&quot;https://stackoverflow.blog/2019/07/24/making-sense-of-the-metadata-clustering-4000-stack-overflow-tags-with-bigquery-k-means/&quot;,null,null]">Making
+                                            Sense of the Metadata: Clustering 4,000 Stack Overflow tags with&hellip;</a>
                                     </div>
                                 </li>
                             </ul>
                             <ul class="s-sidebarwidget--content s-sidebarwidget__items pt0 pr16 pb0 pl16">
                                 <li class="s-sidebarwidget--item grid">
                                     <div class="grid--cell1 fl-shrink0">
-                                        <a href="https://stackoverflow.blog/2019/07/22/how-stack-overflow-upgraded-from-windows-server-2012/"
-                                            data-ga="[&quot;community bulletin board&quot;,&quot;Blog&quot;,&quot;https://stackoverflow.blog/2019/07/22/how-stack-overflow-upgraded-from-windows-server-2012/&quot;,null,null]">
+                                        <a href="https://stackoverflow.blog/2019/07/25/introducing-custom-filters/"
+                                            data-ga="[&quot;community bulletin board&quot;,&quot;Blog&quot;,&quot;https://stackoverflow.blog/2019/07/25/introducing-custom-filters/&quot;,null,null]">
                                             <div class="favicon favicon-stackexchangemeta" title="Meta Stack Exchange">
                                             </div>
                                         </a>
                                     </div>
                                     <div class="grid--cell">
-                                        <a href="https://stackoverflow.blog/2019/07/22/how-stack-overflow-upgraded-from-windows-server-2012/"
-                                            data-ga="[&quot;community bulletin board&quot;,&quot;Blog&quot;,&quot;https://stackoverflow.blog/2019/07/22/how-stack-overflow-upgraded-from-windows-server-2012/&quot;,null,null]">How
-                                            Stack Overflow upgraded from Windows Server 2012</a>
+                                        <a href="https://stackoverflow.blog/2019/07/25/introducing-custom-filters/"
+                                            data-ga="[&quot;community bulletin board&quot;,&quot;Blog&quot;,&quot;https://stackoverflow.blog/2019/07/25/introducing-custom-filters/&quot;,null,null]">Introducing
+                                            Custom Filters</a>
                                     </div>
                                 </li>
                             </ul>
@@ -1693,32 +1229,53 @@ first()
                                     </div>
                                 </li>
                             </ul>
-                            <div class="s-sidebarwidget--header s-sidebarwidget__small-bold-text">
-                                Hot Meta Posts
-                            </div>
                             <ul class="s-sidebarwidget--content s-sidebarwidget__items pt0 pr16 pb0 pl16">
                                 <li class="s-sidebarwidget--item grid">
                                     <div class="grid--cell1 fl-shrink0">
-                                        <span class="fc-black-500" title="Vote score (upvotes - downvotes)">7</span>
+                                        <a href="https://meta.stackexchange.com/questions/331248/unicorn-meta-zoo-6-interview-with-catija"
+                                            data-ga="[&quot;community bulletin board&quot;,&quot;Featured on Meta&quot;,&quot;https://meta.stackexchange.com/questions/331248/unicorn-meta-zoo-6-interview-with-catija&quot;,null,null]">
+                                            <div class="favicon favicon-stackexchangemeta" title="Meta Stack Exchange">
+                                            </div>
+                                        </a>
                                     </div>
                                     <div class="grid--cell">
-                                        <a href="https://meta.stackoverflow.com/questions/387522/neterr-cert-common-name-invalid-when-visiting-https-stackoverflowbusiness-co"
-                                            title="NET::ERR_CERT_COMMON_NAME_INVALID when visiting https://stackoverflowbusiness.com/"
-                                            data-ga="[&quot;community bulletin board&quot;,&quot;Hot Meta Posts&quot;,&quot;https://meta.stackoverflow.com/questions/387522/neterr-cert-common-name-invalid-when-visiting-https-stackoverflowbusiness-co&quot;,null,null]">NET::ERR_CERT_COMMON_NAME_INVALID
-                                            when visiting&hellip;</a>
+                                        <a href="https://meta.stackexchange.com/questions/331248/unicorn-meta-zoo-6-interview-with-catija"
+                                            data-ga="[&quot;community bulletin board&quot;,&quot;Featured on Meta&quot;,&quot;https://meta.stackexchange.com/questions/331248/unicorn-meta-zoo-6-interview-with-catija&quot;,null,null]">Unicorn
+                                            Meta Zoo #6: Interview with Catija</a>
                                     </div>
                                 </li>
                             </ul>
                             <ul class="s-sidebarwidget--content s-sidebarwidget__items pt0 pr16 pb0 pl16">
                                 <li class="s-sidebarwidget--item grid">
                                     <div class="grid--cell1 fl-shrink0">
-                                        <span class="fc-black-500" title="Vote score (upvotes - downvotes)">20</span>
+                                        <a href="https://meta.stackoverflow.com/questions/387651/the-world-is-big-and-i-am-so-small-what-are-the-implications-for-our-meta-commu"
+                                            data-ga="[&quot;community bulletin board&quot;,&quot;Featured on Meta&quot;,&quot;https://meta.stackoverflow.com/questions/387651/the-world-is-big-and-i-am-so-small-what-are-the-implications-for-our-meta-commu&quot;,null,null]">
+                                            <div class="favicon favicon-stackoverflowmeta" title="Meta Stack Overflow">
+                                            </div>
+                                        </a>
                                     </div>
                                     <div class="grid--cell">
-                                        <a href="https://meta.stackoverflow.com/questions/387496/create-new-url-for-new-stack-overflow-company-business-products-and-services-h"
-                                            title="Create new URL for new Stack Overflow company / business products and services homepage"
-                                            data-ga="[&quot;community bulletin board&quot;,&quot;Hot Meta Posts&quot;,&quot;https://meta.stackoverflow.com/questions/387496/create-new-url-for-new-stack-overflow-company-business-products-and-services-h&quot;,null,null]">Create
-                                            new URL for new Stack Overflow company / business products and&hellip;</a>
+                                        <a href="https://meta.stackoverflow.com/questions/387651/the-world-is-big-and-i-am-so-small-what-are-the-implications-for-our-meta-commu"
+                                            title="The world is big and I am SO small. What are the implications for our meta community with the changes in Stack Overflow?"
+                                            data-ga="[&quot;community bulletin board&quot;,&quot;Featured on Meta&quot;,&quot;https://meta.stackoverflow.com/questions/387651/the-world-is-big-and-i-am-so-small-what-are-the-implications-for-our-meta-commu&quot;,null,null]">The
+                                            world is big and I am SO small. What are the implications for our
+                                            meta&hellip;</a>
+                                    </div>
+                                </li>
+                            </ul>
+                            <ul class="s-sidebarwidget--content s-sidebarwidget__items pt0 pr16 pb0 pl16">
+                                <li class="s-sidebarwidget--item grid">
+                                    <div class="grid--cell1 fl-shrink0">
+                                        <a href="https://meta.stackoverflow.com/questions/387602/creating-a-system-for-featuring-posts-tell-the-mods-what-you-want"
+                                            data-ga="[&quot;community bulletin board&quot;,&quot;Featured on Meta&quot;,&quot;https://meta.stackoverflow.com/questions/387602/creating-a-system-for-featuring-posts-tell-the-mods-what-you-want&quot;,null,null]">
+                                            <div class="favicon favicon-stackoverflowmeta" title="Meta Stack Overflow">
+                                            </div>
+                                        </a>
+                                    </div>
+                                    <div class="grid--cell">
+                                        <a href="https://meta.stackoverflow.com/questions/387602/creating-a-system-for-featuring-posts-tell-the-mods-what-you-want"
+                                            data-ga="[&quot;community bulletin board&quot;,&quot;Featured on Meta&quot;,&quot;https://meta.stackoverflow.com/questions/387602/creating-a-system-for-featuring-posts-tell-the-mods-what-you-want&quot;,null,null]">Creating
+                                            a system for featuring posts. Tell the mods what you want</a>
                                     </div>
                                 </li>
                             </ul>
@@ -1732,114 +1289,66 @@ first()
                             clc.options = clc.options || {};
                             clc.options.sf = !0;
                             clc.cmd = clc.cmd || [];
-                            clc.cmd.push(function () { window.clc_request = 'AiltBiVoD9cI5jdzABn2BQMCAAAAAgAAAAMfAAAAfHB5dGhvbnxweXRob24tMi43fGluZGVudGF0aW9ufAAF8CRTcyUO0cLf'; clc.load(); });
+                            clc.cmd.push(function () { window.clc_request = 'AhBiDTRYE9cI5jdzAHVtaQMCAAAAAgAAAAMpAAAAfHB5dGhvbnxwbG90bHl8aW1wb3J0ZXJyb3J8cGxvdGx5LXB5dGhvbnwAcJjIKP5iTmExJg'; clc.load(); });
                             clc.dfp = clc.dfp || {};
-                            clc.dfp.targeting = { Registered: ['true'], 'so-tag': ['python', 'python-2.7', 'indentation'] };
+                            clc.dfp.targeting = { Registered: ['true'], 'so-tag': ['python', 'plotly', 'importerror', 'plotly-python'] };
 
                             var googletag = googletag || {};
                             googletag.cmd = googletag.cmd || [];
                             googletag.cmd.push(function () { clc.dfp.load(); });
                         </script>
-                        <script>
-                            StackExchange.ready(function () {
-                                StackExchange.newsletterAd.init({
-                                    subscribeUrl: "/users/email/newsletters/-1/subscribe"
-                                });
-                            });
-                        </script>
 
-                        <div id="newsletter-ad" class="s-sidebarwidget mb16">
-                            <div class="s-sidebarwidget--header">
-                                <svg aria-hidden="true" class="svg-icon iconMail" width="18" height="18"
-                                    viewBox="0 0 18 18">
-                                    <path
-                                        d="M1 6l8 5 8-5V4L9 9 1 4c0-1.1.9-2 2-2h12a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V6z" />
-                                    </svg> Love this site?
-                            </div>
-                            <div class="s-sidebarwidget--content d-block">
-
-                                <p id="newsletter-ad-header">Get the <b>weekly newsletter!</b> In it, you&#39;ll get:
-                                </p>
-                                <ul>
-                                    <li>The week&#39;s top questions and answers</li>
-                                    <li>Important community announcements</li>
-                                    <li>Questions that need answers</li>
-                                </ul>
-                                <div id="newsletter-signup-container" class="ta-center">
-                                    <button id="newsletter-signup" class="s-btn s-btn__filled">Sign up for the
-                                        newsletter</button>
-                                </div>
-                                <p id="newsletter-preview-container" class="mt8 mb0 ta-center">see an <a
-                                        href="/newsletter/preview" id="newsletter-preview">example newsletter</a></p>
-
-                            </div>
-                        </div>
-                        <div class="module sidebar-linked">
-                            <h4 id="h-linked">Linked</h4>
-                            <div class="linked" data-tracker="lq=1">
-
-                                <div class="spacer">
-                                    <a href="/q/17630835" title="Vote score (upvotes - downvotes)">
-                                        <div class="answer-votes answered-accepted default">41</div>
-                                    </a>
-                                    <a href="/questions/17630835/python-comments-after-backslash?noredirect=1"
-                                        class="question-hyperlink">Python: &#39;#&#39; Comments after backslash</a>
-                                </div>
-                            </div>
-                        </div>
 
                         <div class="module sidebar-related">
                             <h4 id="h-related">Related</h4>
                             <div class="related js-gps-related-questions" data-tracker="rq=1">
-                                <div class="spacer"><a href="/q/354883" title="Vote score (upvotes - downvotes)">
-                                        <div class="answer-votes large">956</div>
-                                    </a><a href="/questions/354883/how-do-i-return-multiple-values-from-a-function"
-                                        class="question-hyperlink">How do I return multiple values from a function?</a>
-                                </div>
-                                <div class="spacer"><a href="/q/2514445" title="Vote score (upvotes - downvotes)">
-                                        <div class="answer-votes answered-accepted extra-large">1079</div>
-                                    </a><a href="/questions/2514445/turning-off-auto-indent-when-pasting-text-into-vim"
-                                        class="question-hyperlink">Turning off auto indent when pasting text into
-                                        vim</a></div>
-                                <div class="spacer"><a href="/q/2573135" title="Vote score (upvotes - downvotes)">
-                                        <div class="answer-votes answered-accepted large">659</div>
-                                    </a><a href="/questions/2573135/python-progression-path-from-apprentice-to-guru"
-                                        class="question-hyperlink">Python progression path - From apprentice to guru</a>
-                                </div>
-                                <div class="spacer"><a href="/q/5685406" title="Vote score (upvotes - downvotes)">
-                                        <div class="answer-votes large">153</div>
-                                    </a><a href="/questions/5685406/inconsistent-use-of-tabs-and-spaces-in-indentation"
-                                        class="question-hyperlink">&ldquo;inconsistent use of tabs and spaces in
-                                        indentation&rdquo;</a></div>
-                                <div class="spacer"><a href="/q/10660435" title="Vote score (upvotes - downvotes)">
-                                        <div class="answer-votes answered-accepted extra-large">1058</div>
-                                    </a><a href="/questions/10660435/pythonic-way-to-create-a-long-multi-line-string"
-                                        class="question-hyperlink">Pythonic way to create a long multi-line string</a>
-                                </div>
-                                <div class="spacer"><a href="/q/25947947" title="Vote score (upvotes - downvotes)">
-                                        <div class="answer-votes default">1</div>
-                                    </a><a href="/questions/25947947/sshclient-indentationerror-unexpected-indent"
-                                        class="question-hyperlink">SSHClient() IndentationError: unexpected indent</a>
-                                </div>
-                                <div class="spacer"><a href="/q/31890191" title="Vote score (upvotes - downvotes)">
+                                <div class="spacer"><a href="/q/3061" title="Vote score (upvotes - downvotes)">
+                                        <div class="answer-votes answered-accepted extra-large">1468</div>
+                                    </a><a
+                                        href="/questions/3061/calling-a-function-of-a-module-by-using-its-name-a-string"
+                                        class="question-hyperlink">Calling a function of a module by using its name (a
+                                        string)</a></div>
+                                <div class="spacer"><a href="/q/67631" title="Vote score (upvotes - downvotes)">
+                                        <div class="answer-votes answered-accepted large">956</div>
+                                    </a><a href="/questions/67631/how-to-import-a-module-given-the-full-path"
+                                        class="question-hyperlink">How to import a module given the full path?</a></div>
+                                <div class="spacer"><a href="/q/338768" title="Vote score (upvotes - downvotes)">
+                                        <div class="answer-votes answered-accepted large">387</div>
+                                    </a><a href="/questions/338768/python-error-importerror-no-module-named"
+                                        class="question-hyperlink">Python error &ldquo;ImportError: No module
+                                        named&rdquo;</a></div>
+                                <div class="spacer"><a href="/q/4383571" title="Vote score (upvotes - downvotes)">
+                                        <div class="answer-votes extra-large">1058</div>
+                                    </a><a href="/questions/4383571/importing-files-from-different-folder"
+                                        class="question-hyperlink">Importing files from different folder</a></div>
+                                <div class="spacer"><a href="/q/9252543" title="Vote score (upvotes - downvotes)">
+                                        <div class="answer-votes large">425</div>
+                                    </a><a href="/questions/9252543/importerror-cannot-import-name-x"
+                                        class="question-hyperlink">ImportError: Cannot import name X</a></div>
+                                <div class="spacer"><a href="/q/40360372" title="Vote score (upvotes - downvotes)">
+                                        <div class="answer-votes default">4</div>
+                                    </a><a href="/questions/40360372/cant-import-numpy-from-c"
+                                        class="question-hyperlink">Can&#39;t import numpy from C</a></div>
+                                <div class="spacer"><a href="/q/43106170" title="Vote score (upvotes - downvotes)">
+                                        <div class="answer-votes answered-accepted default">14</div>
+                                    </a><a
+                                        href="/questions/43106170/remove-the-this-is-the-format-of-your-plot-grid-in-a-plotly-subplot-in-a-jupy"
+                                        class="question-hyperlink">Remove the &ldquo;This is the format of your plot
+                                        grid:&rdquo; in a plotly subplot in a Jupyter Notebook</a></div>
+                                <div class="spacer"><a href="/q/50953880" title="Vote score (upvotes - downvotes)">
                                         <div class="answer-votes answered-accepted default">1</div>
-                                    </a><a href="/questions/31890191/for-loop-indentationerror-unexpected-indent"
-                                        class="question-hyperlink">for loop IndentationError: unexpected indent</a>
-                                </div>
-                                <div class="spacer"><a href="/q/33953613" title="Vote score (upvotes - downvotes)">
-                                        <div class="answer-votes default">2</div>
-                                    </a><a href="/questions/33953613/python-indentationerror-unexpected-indent"
-                                        class="question-hyperlink">Python - IndentationError: unexpected indent</a>
-                                </div>
-                                <div class="spacer"><a href="/q/46396652" title="Vote score (upvotes - downvotes)">
-                                        <div class="answer-votes default">-1</div>
-                                    </a><a href="/questions/46396652/indentationerror-unexpected-indent-frustrating"
-                                        class="question-hyperlink">IndentationError: unexpected
-                                        indent&hellip;FRUSTRATING</a></div>
-                                <div class="spacer"><a href="/q/47752383" title="Vote score (upvotes - downvotes)">
+                                    </a><a href="/questions/50953880/importerror-no-module-named-textract"
+                                        class="question-hyperlink">ImportError: No module named textract</a></div>
+                                <div class="spacer"><a href="/q/53227954" title="Vote score (upvotes - downvotes)">
+                                        <div class="answer-votes answered-accepted default">0</div>
+                                    </a><a
+                                        href="/questions/53227954/unable-to-import-tensorflow-error-for-importing-pywrap-tensorflow"
+                                        class="question-hyperlink">Unable to import tensorflow, error for importing
+                                        pywrap_tensorflow</a></div>
+                                <div class="spacer"><a href="/q/53991810" title="Vote score (upvotes - downvotes)">
                                         <div class="answer-votes default">0</div>
-                                    </a><a href="/questions/47752383/indentationerror-unexpected-indent-python-3"
-                                        class="question-hyperlink">IndentationError: unexpected indent - Python 3</a>
+                                    </a><a href="/questions/53991810/how-to-add-subplot-title-to-3d-subplot-in-plotly"
+                                        class="question-hyperlink">How to add subplot title to 3D subplot in plotly</a>
                                 </div>
                             </div>
                         </div>
@@ -1854,238 +1363,230 @@ first()
                             </h4>
                             <ul>
                                 <li>
-                                    <div class="favicon favicon-bicycles" title="Bicycles Stack Exchange"></div><a
-                                        href="https://bicycles.stackexchange.com/questions/63272/adding-gears-to-my-grandsons-12-bike"
+                                    <div class="favicon favicon-worldbuilding" title="Worldbuilding Stack Exchange">
+                                    </div><a
+                                        href="https://worldbuilding.stackexchange.com/questions/151584/how-can-i-prevent-corporations-from-growing-their-own-workforce"
                                         class="js-gps-track question-hyperlink mb0"
-                                        data-gps-track="site.switch({ item_type:11, target_site:126 }); posts_hot_network.click({ item_type:2, location:11 })">
-                                        Adding gears to my grandson&#39;s 12&quot; bike
+                                        data-gps-track="site.switch({ item_type:11, target_site:579 }); posts_hot_network.click({ item_type:2, location:11 })">
+                                        How can I prevent corporations from growing their own workforce?
                                     </a>
 
                                 </li>
                                 <li>
-                                    <div class="favicon favicon-skeptics" title="Skeptics Stack Exchange"></div><a
-                                        href="https://skeptics.stackexchange.com/questions/44406/did-don-young-threaten-john-boehner-with-a-10-inch-blade-to-the-throat"
+                                    <div class="favicon favicon-unix" title="Unix &amp; Linux Stack Exchange"></div><a
+                                        href="https://unix.stackexchange.com/questions/532134/why-isnt-there-a-after-do-in-sh-loops"
                                         class="js-gps-track question-hyperlink mb0"
-                                        data-gps-track="site.switch({ item_type:11, target_site:212 }); posts_hot_network.click({ item_type:2, location:11 })">
-                                        Did Don Young threaten John Boehner with a 10 inch blade to the throat?
-                                    </a>
-
-                                </li>
-                                <li>
-                                    <div class="favicon favicon-codereview" title="Code Review Stack Exchange"></div><a
-                                        href="https://codereview.stackexchange.com/questions/224669/calculating-fibonacci-sequence-in-several-different-ways"
-                                        class="js-gps-track question-hyperlink mb0"
-                                        data-gps-track="site.switch({ item_type:11, target_site:196 }); posts_hot_network.click({ item_type:2, location:11 })">
-                                        Calculating Fibonacci sequence in several different ways
+                                        data-gps-track="site.switch({ item_type:11, target_site:106 }); posts_hot_network.click({ item_type:2, location:11 })">
+                                        Why isn&#39;t there a &quot;;&quot; after &quot;do&quot; in sh loops?
                                     </a>
 
                                 </li>
                                 <li>
                                     <div class="favicon favicon-electronics"
                                         title="Electrical Engineering Stack Exchange"></div><a
-                                        href="https://electronics.stackexchange.com/questions/449475/strange-led-behavior-why-is-there-a-voltage-over-the-led-with-only-one-wire-con"
+                                        href="https://electronics.stackexchange.com/questions/450383/why-when-is-ac-dc-ac-conversion-superior-to-direct-ac-ac-conversion"
                                         class="js-gps-track question-hyperlink mb0"
                                         data-gps-track="site.switch({ item_type:11, target_site:135 }); posts_hot_network.click({ item_type:2, location:11 })">
-                                        Strange LED behavior: Why is there a voltage over the LED with only one wire
-                                        connected to it?
+                                        Why/when is AC-DC-AC conversion superior to direct AC-Ac conversion?
                                     </a>
 
                                 </li>
                                 <li>
-                                    <div class="favicon favicon-mechanics"
-                                        title="Motor Vehicle Maintenance &amp; Repair Stack Exchange"></div><a
-                                        href="https://mechanics.stackexchange.com/questions/69128/tire-pressure-with-load-and-heat"
+                                    <div class="favicon favicon-puzzling" title="Puzzling Stack Exchange"></div><a
+                                        href="https://puzzling.stackexchange.com/questions/86580/3d-statue-park-u-shapes"
                                         class="js-gps-track question-hyperlink mb0"
-                                        data-gps-track="site.switch({ item_type:11, target_site:224 }); posts_hot_network.click({ item_type:2, location:11 })">
-                                        Tire pressure with load and heat
+                                        data-gps-track="site.switch({ item_type:11, target_site:559 }); posts_hot_network.click({ item_type:2, location:11 })">
+                                        3D Statue Park: U shapes
+                                    </a>
+
+                                </li>
+                                <li>
+                                    <div class="favicon favicon-physics" title="Physics Stack Exchange"></div><a
+                                        href="https://physics.stackexchange.com/questions/493884/heisenberg-uncertainty-principle-in-daily-life"
+                                        class="js-gps-track question-hyperlink mb0"
+                                        data-gps-track="site.switch({ item_type:11, target_site:151 }); posts_hot_network.click({ item_type:2, location:11 })">
+                                        Heisenberg uncertainty principle in daily life
                                     </a>
 
                                 </li>
                                 <li class="dno js-hidden">
-                                    <div class="favicon favicon-music"
-                                        title="Music: Practice &amp; Theory Stack Exchange"></div><a
-                                        href="https://music.stackexchange.com/questions/87033/acoustic-guitar-chords-positions-vs-those-of-a-bass-guitar"
+                                    <div class="favicon favicon-stackoverflow" title="Stack Overflow"></div><a
+                                        href="https://stackoverflow.com/questions/57215858/iterate-over-non-const-variables-in-c"
                                         class="js-gps-track question-hyperlink mb0"
-                                        data-gps-track="site.switch({ item_type:11, target_site:240 }); posts_hot_network.click({ item_type:2, location:11 })">
-                                        Acoustic guitar chords&#39; positions vs those of a Bass guitar
+                                        data-gps-track="site.switch({ item_type:11, target_site:1 }); posts_hot_network.click({ item_type:2, location:11 })">
+                                        Iterate over non-const variables in C++
                                     </a>
 
                                 </li>
                                 <li class="dno js-hidden">
-                                    <div class="favicon favicon-workplace" title="The Workplace Stack Exchange"></div><a
-                                        href="https://workplace.stackexchange.com/questions/140843/my-current-job-follows-worst-practices-how-can-i-talk-about-my-experience-in"
+                                    <div class="favicon favicon-writing" title="Writing Stack Exchange"></div><a
+                                        href="https://writing.stackexchange.com/questions/46913/how-do-i-stop-my-characters-falling-in-love"
                                         class="js-gps-track question-hyperlink mb0"
-                                        data-gps-track="site.switch({ item_type:11, target_site:423 }); posts_hot_network.click({ item_type:2, location:11 })">
-                                        My current job follows &quot;worst practices&quot;. How can I talk about my
-                                        experience in an interview without giving off red flags?
-                                    </a>
-
-                                </li>
-                                <li class="dno js-hidden">
-                                    <div class="favicon favicon-english"
-                                        title="English Language &amp; Usage Stack Exchange"></div><a
-                                        href="https://english.stackexchange.com/questions/505708/why-is-there-an-extra-t-in-lemmatization"
-                                        class="js-gps-track question-hyperlink mb0"
-                                        data-gps-track="site.switch({ item_type:11, target_site:97 }); posts_hot_network.click({ item_type:2, location:11 })">
-                                        Why is there an extra &quot;t&quot; in Lemmatization?
-                                    </a>
-
-                                </li>
-                                <li class="dno js-hidden">
-                                    <div class="favicon favicon-codereview" title="Code Review Stack Exchange"></div><a
-                                        href="https://codereview.stackexchange.com/questions/224691/recursive-search-on-node-tree-with-linq-and-queue"
-                                        class="js-gps-track question-hyperlink mb0"
-                                        data-gps-track="site.switch({ item_type:11, target_site:196 }); posts_hot_network.click({ item_type:2, location:11 })">
-                                        Recursive search on Node Tree with Linq and Queue
-                                    </a>
-
-                                </li>
-                                <li class="dno js-hidden">
-                                    <div class="favicon favicon-academia" title="Academia Stack Exchange"></div><a
-                                        href="https://academia.stackexchange.com/questions/133607/is-it-ethical-to-tell-my-teaching-assistant-that-i-like-him"
-                                        class="js-gps-track question-hyperlink mb0"
-                                        data-gps-track="site.switch({ item_type:11, target_site:415 }); posts_hot_network.click({ item_type:2, location:11 })">
-                                        Is it ethical to tell my teaching assistant that I like him?
-                                    </a>
-
-                                </li>
-                                <li class="dno js-hidden">
-                                    <div class="favicon favicon-english"
-                                        title="English Language &amp; Usage Stack Exchange"></div><a
-                                        href="https://english.stackexchange.com/questions/505776/what-is-the-best-word-describing-the-nature-of-expiring-in-a-short-amount-of-tim"
-                                        class="js-gps-track question-hyperlink mb0"
-                                        data-gps-track="site.switch({ item_type:11, target_site:97 }); posts_hot_network.click({ item_type:2, location:11 })">
-                                        What is the best word describing the nature of expiring in a short amount of
-                                        time, connoting &quot;losing public attention&quot;?
-                                    </a>
-
-                                </li>
-                                <li class="dno js-hidden">
-                                    <div class="favicon favicon-rpg" title="Role-playing Games Stack Exchange"></div><a
-                                        href="https://rpg.stackexchange.com/questions/152228/as-a-dm-of-a-4-player-group-would-it-be-appropriate-for-me-to-run-a-private-1-o"
-                                        class="js-gps-track question-hyperlink mb0"
-                                        data-gps-track="site.switch({ item_type:11, target_site:122 }); posts_hot_network.click({ item_type:2, location:11 })">
-                                        As a DM of a 4-player group, would it be appropriate for me to run a private
-                                        1-on-1 session so that one PC can act secretly?
-                                    </a>
-
-                                </li>
-                                <li class="dno js-hidden">
-                                    <div class="favicon favicon-mathoverflow" title="MathOverflow"></div><a
-                                        href="https://mathoverflow.net/questions/336771/bounded-torsion-without-mazur-s-theorem"
-                                        class="js-gps-track question-hyperlink mb0"
-                                        data-gps-track="site.switch({ item_type:11, target_site:504 }); posts_hot_network.click({ item_type:2, location:11 })">
-                                        Bounded Torsion, without Mazur’s Theorem
-                                    </a>
-
-                                </li>
-                                <li class="dno js-hidden">
-                                    <div class="favicon favicon-music"
-                                        title="Music: Practice &amp; Theory Stack Exchange"></div><a
-                                        href="https://music.stackexchange.com/questions/87043/should-i-practice-til-i-get-it-or-until-im-sick-of-it"
-                                        class="js-gps-track question-hyperlink mb0"
-                                        data-gps-track="site.switch({ item_type:11, target_site:240 }); posts_hot_network.click({ item_type:2, location:11 })">
-                                        Should I practice til I &quot;get it&quot; or until I&#39;m sick of it?
-                                    </a>
-
-                                </li>
-                                <li class="dno js-hidden">
-                                    <div class="favicon favicon-scifi"
-                                        title="Science Fiction &amp; Fantasy Stack Exchange"></div><a
-                                        href="https://scifi.stackexchange.com/questions/216348/book-in-which-the-mountain-in-the-distance-was-a-hole-in-the-flat-world"
-                                        class="js-gps-track question-hyperlink mb0"
-                                        data-gps-track="site.switch({ item_type:11, target_site:186 }); posts_hot_network.click({ item_type:2, location:11 })">
-                                        Book in which the &quot;mountain&quot; in the distance was a hole in the flat
-                                        world
-                                    </a>
-
-                                </li>
-                                <li class="dno js-hidden">
-                                    <div class="favicon favicon-english"
-                                        title="English Language &amp; Usage Stack Exchange"></div><a
-                                        href="https://english.stackexchange.com/questions/505788/are-there-any-english-words-pronounced-with-sounds-syllables-that-arent-part-of"
-                                        class="js-gps-track question-hyperlink mb0"
-                                        data-gps-track="site.switch({ item_type:11, target_site:97 }); posts_hot_network.click({ item_type:2, location:11 })">
-                                        Are there any English words pronounced with sounds/syllables that aren&#39;t
-                                        part of the spelling?
-                                    </a>
-
-                                </li>
-                                <li class="dno js-hidden">
-                                    <div class="favicon favicon-stats" title="Cross Validated"></div><a
-                                        href="https://stats.stackexchange.com/questions/418417/why-do-we-need-an-estimator-to-be-consistent"
-                                        class="js-gps-track question-hyperlink mb0"
-                                        data-gps-track="site.switch({ item_type:11, target_site:65 }); posts_hot_network.click({ item_type:2, location:11 })">
-                                        Why do we need an estimator to be consistent?
-                                    </a>
-
-                                </li>
-                                <li class="dno js-hidden">
-                                    <div class="favicon favicon-rpg" title="Role-playing Games Stack Exchange"></div><a
-                                        href="https://rpg.stackexchange.com/questions/152246/can-an-attack-of-opportunity-be-made-against-a-net-if-the-restrained-creature-is"
-                                        class="js-gps-track question-hyperlink mb0"
-                                        data-gps-track="site.switch({ item_type:11, target_site:122 }); posts_hot_network.click({ item_type:2, location:11 })">
-                                        Can an attack of opportunity be made against a net if the restrained creature is
-                                        being moved?
-                                    </a>
-
-                                </li>
-                                <li class="dno js-hidden">
-                                    <div class="favicon favicon-apple" title="Ask Different"></div><a
-                                        href="https://apple.stackexchange.com/questions/365119/how-can-i-make-multiple-directories-in-mac-os-terminal"
-                                        class="js-gps-track question-hyperlink mb0"
-                                        data-gps-track="site.switch({ item_type:11, target_site:118 }); posts_hot_network.click({ item_type:2, location:11 })">
-                                        How can I make multiple directories in Mac OS terminal?
-                                    </a>
-
-                                </li>
-                                <li class="dno js-hidden">
-                                    <div class="favicon favicon-politics" title="Politics Stack Exchange"></div><a
-                                        href="https://politics.stackexchange.com/questions/43160/what-does-a-black-and-white-puerto-rican-flag-signify"
-                                        class="js-gps-track question-hyperlink mb0"
-                                        data-gps-track="site.switch({ item_type:11, target_site:475 }); posts_hot_network.click({ item_type:2, location:11 })">
-                                        What does a black-and-white Puerto Rican flag signify?
-                                    </a>
-
-                                </li>
-                                <li class="dno js-hidden">
-                                    <div class="favicon favicon-retrocomputing" title="Retrocomputing Stack Exchange">
-                                    </div><a
-                                        href="https://retrocomputing.stackexchange.com/questions/11739/what-does-a-nintendo-game-boy-do-when-turned-on-without-a-game-cartridge-inserte"
-                                        class="js-gps-track question-hyperlink mb0"
-                                        data-gps-track="site.switch({ item_type:11, target_site:648 }); posts_hot_network.click({ item_type:2, location:11 })">
-                                        What does a Nintendo Game Boy do when turned on without a game cartridge
-                                        inserted?
+                                        data-gps-track="site.switch({ item_type:11, target_site:166 }); posts_hot_network.click({ item_type:2, location:11 })">
+                                        How do I stop my characters falling in love?
                                     </a>
 
                                 </li>
                                 <li class="dno js-hidden">
                                     <div class="favicon favicon-money"
                                         title="Personal Finance &amp; Money Stack Exchange"></div><a
-                                        href="https://money.stackexchange.com/questions/111596/found-more-old-paper-shares-from-broken-up-companies"
+                                        href="https://money.stackexchange.com/questions/111799/high-income-sudden-windfall"
                                         class="js-gps-track question-hyperlink mb0"
                                         data-gps-track="site.switch({ item_type:11, target_site:93 }); posts_hot_network.click({ item_type:2, location:11 })">
-                                        Found more old paper shares from broken up companies
+                                        High income, sudden windfall
                                     </a>
 
                                 </li>
                                 <li class="dno js-hidden">
-                                    <div class="favicon favicon-superuser" title="Super User"></div><a
-                                        href="https://superuser.com/questions/1462449/i-have-a-domain-static-ip-and-many-devices-id-like-to-access-outside-my-house"
+                                    <div class="favicon favicon-english"
+                                        title="English Language &amp; Usage Stack Exchange"></div><a
+                                        href="https://english.stackexchange.com/questions/506499/can-the-term-divorc%c3%a9e-apply-if-a-woman-has-not-only-divorced-but-subsequently-r"
                                         class="js-gps-track question-hyperlink mb0"
-                                        data-gps-track="site.switch({ item_type:11, target_site:3 }); posts_hot_network.click({ item_type:2, location:11 })">
-                                        I have a domain, static IP and many devices I&#39;d like to access outside my
-                                        house. How to route them?
+                                        data-gps-track="site.switch({ item_type:11, target_site:97 }); posts_hot_network.click({ item_type:2, location:11 })">
+                                        Can the term divorc&#233;e apply if a woman has not only divorced, but
+                                        subsequently remarried?
                                     </a>
 
                                 </li>
                                 <li class="dno js-hidden">
-                                    <div class="favicon favicon-earthscience" title="Earth Science Stack Exchange">
+                                    <div class="favicon favicon-retrocomputing" title="Retrocomputing Stack Exchange">
                                     </div><a
-                                        href="https://earthscience.stackexchange.com/questions/17530/why-does-the-salt-in-the-oceans-not-sink-to-the-bottom"
+                                        href="https://retrocomputing.stackexchange.com/questions/11839/does-the-intel-8086-cpu-have-user-mode-and-kernel-mode"
                                         class="js-gps-track question-hyperlink mb0"
-                                        data-gps-track="site.switch({ item_type:11, target_site:553 }); posts_hot_network.click({ item_type:2, location:11 })">
-                                        Why does the salt in the oceans not sink to the bottom?
+                                        data-gps-track="site.switch({ item_type:11, target_site:648 }); posts_hot_network.click({ item_type:2, location:11 })">
+                                        Does the Intel 8086 CPU have user mode and kernel mode?
+                                    </a>
+
+                                </li>
+                                <li class="dno js-hidden">
+                                    <div class="favicon favicon-puzzling" title="Puzzling Stack Exchange"></div><a
+                                        href="https://puzzling.stackexchange.com/questions/86616/piece-drop-mate-3"
+                                        class="js-gps-track question-hyperlink mb0"
+                                        data-gps-track="site.switch({ item_type:11, target_site:559 }); posts_hot_network.click({ item_type:2, location:11 })">
+                                        Piece-drop Mate #3
+                                    </a>
+
+                                </li>
+                                <li class="dno js-hidden">
+                                    <div class="favicon favicon-retrocomputing" title="Retrocomputing Stack Exchange">
+                                    </div><a
+                                        href="https://retrocomputing.stackexchange.com/questions/11859/will-any-serial-mouse-connect-to-classic-macs"
+                                        class="js-gps-track question-hyperlink mb0"
+                                        data-gps-track="site.switch({ item_type:11, target_site:648 }); posts_hot_network.click({ item_type:2, location:11 })">
+                                        Will any serial mouse connect to Classic Macs?
+                                    </a>
+
+                                </li>
+                                <li class="dno js-hidden">
+                                    <div class="favicon favicon-music"
+                                        title="Music: Practice &amp; Theory Stack Exchange"></div><a
+                                        href="https://music.stackexchange.com/questions/87214/what-are-the-different-qualities-of-the-intervals"
+                                        class="js-gps-track question-hyperlink mb0"
+                                        data-gps-track="site.switch({ item_type:11, target_site:240 }); posts_hot_network.click({ item_type:2, location:11 })">
+                                        What are the different qualities of the intervals?
+                                    </a>
+
+                                </li>
+                                <li class="dno js-hidden">
+                                    <div class="favicon favicon-math" title="Mathematics Stack Exchange"></div><a
+                                        href="https://math.stackexchange.com/questions/3303294/can-two-figures-have-the-same-area-perimeter-and-same-number-of-segments-have"
+                                        class="js-gps-track question-hyperlink mb0"
+                                        data-gps-track="site.switch({ item_type:11, target_site:69 }); posts_hot_network.click({ item_type:2, location:11 })">
+                                        Can two figures have the same area, perimeter, and same number of segments have
+                                        different shape?
+                                    </a>
+
+                                </li>
+                                <li class="dno js-hidden">
+                                    <div class="favicon favicon-codegolf" title="Code Golf Stack Exchange"></div><a
+                                        href="https://codegolf.stackexchange.com/questions/188809/get-delta-of-days-by-current-hour-and-added-delta-of-days"
+                                        class="js-gps-track question-hyperlink mb0"
+                                        data-gps-track="site.switch({ item_type:11, target_site:200 }); posts_hot_network.click({ item_type:2, location:11 })">
+                                        Get delta of days by current hour and added delta of days
+                                    </a>
+
+                                </li>
+                                <li class="dno js-hidden">
+                                    <div class="favicon favicon-rpg" title="Role-playing Games Stack Exchange"></div><a
+                                        href="https://rpg.stackexchange.com/questions/152549/how-to-deal-with-a-player-who-makes-bad-characters-and-kills-them"
+                                        class="js-gps-track question-hyperlink mb0"
+                                        data-gps-track="site.switch({ item_type:11, target_site:122 }); posts_hot_network.click({ item_type:2, location:11 })">
+                                        How to deal with a player who makes bad characters and kills them?
+                                    </a>
+
+                                </li>
+                                <li class="dno js-hidden">
+                                    <div class="favicon favicon-security" title="Information Security Stack Exchange">
+                                    </div><a
+                                        href="https://security.stackexchange.com/questions/214116/is-there-a-reason-why-i-should-not-use-the-haveibeenpwned-api-to-warn-users-abou"
+                                        class="js-gps-track question-hyperlink mb0"
+                                        data-gps-track="site.switch({ item_type:11, target_site:162 }); posts_hot_network.click({ item_type:2, location:11 })">
+                                        Is there a reason why I should not use the HaveIBeenPwned API to warn users
+                                        about exposed passwords?
+                                    </a>
+
+                                </li>
+                                <li class="dno js-hidden">
+                                    <div class="favicon favicon-academia" title="Academia Stack Exchange"></div><a
+                                        href="https://academia.stackexchange.com/questions/133919/how-to-avoid-patent-trolls-when-trying-to-obtain-a-ph-d"
+                                        class="js-gps-track question-hyperlink mb0"
+                                        data-gps-track="site.switch({ item_type:11, target_site:415 }); posts_hot_network.click({ item_type:2, location:11 })">
+                                        How to avoid Patent Trolls when trying to obtain a Ph.D?
+                                    </a>
+
+                                </li>
+                                <li class="dno js-hidden">
+                                    <div class="favicon favicon-puzzling" title="Puzzling Stack Exchange"></div><a
+                                        href="https://puzzling.stackexchange.com/questions/86622/twelve-past-eleven-at-the-police-station"
+                                        class="js-gps-track question-hyperlink mb0"
+                                        data-gps-track="site.switch({ item_type:11, target_site:559 }); posts_hot_network.click({ item_type:2, location:11 })">
+                                        Twelve past eleven at the police station
+                                    </a>
+
+                                </li>
+                                <li class="dno js-hidden">
+                                    <div class="favicon favicon-mathoverflow" title="MathOverflow"></div><a
+                                        href="https://mathoverflow.net/questions/337023/examples-of-simultaneous-independent-breakthroughs"
+                                        class="js-gps-track question-hyperlink mb0"
+                                        data-gps-track="site.switch({ item_type:11, target_site:504 }); posts_hot_network.click({ item_type:2, location:11 })">
+                                        Examples of simultaneous independent breakthroughs
+                                    </a>
+
+                                </li>
+                                <li class="dno js-hidden">
+                                    <div class="favicon favicon-unix" title="Unix &amp; Linux Stack Exchange"></div><a
+                                        href="https://unix.stackexchange.com/questions/532434/why-is-drive-partition-number-still-used"
+                                        class="js-gps-track question-hyperlink mb0"
+                                        data-gps-track="site.switch({ item_type:11, target_site:106 }); posts_hot_network.click({ item_type:2, location:11 })">
+                                        Why is drive/partition number still used?
+                                    </a>
+
+                                </li>
+                                <li class="dno js-hidden">
+                                    <div class="favicon favicon-blender" title="Blender Stack Exchange"></div><a
+                                        href="https://blender.stackexchange.com/questions/146565/decreasing-star-size"
+                                        class="js-gps-track question-hyperlink mb0"
+                                        data-gps-track="site.switch({ item_type:11, target_site:502 }); posts_hot_network.click({ item_type:2, location:11 })">
+                                        Decreasing star size
+                                    </a>
+
+                                </li>
+                                <li class="dno js-hidden">
+                                    <div class="favicon favicon-electronics"
+                                        title="Electrical Engineering Stack Exchange"></div><a
+                                        href="https://electronics.stackexchange.com/questions/450454/why-is-there-no-9-5-digit-multimeter-or-higher"
+                                        class="js-gps-track question-hyperlink mb0"
+                                        data-gps-track="site.switch({ item_type:11, target_site:135 }); posts_hot_network.click({ item_type:2, location:11 })">
+                                        Why is there no 9.5 digit multimeter or higher
+                                    </a>
+
+                                </li>
+                                <li class="dno js-hidden">
+                                    <div class="favicon favicon-space" title="Space Exploration Stack Exchange"></div><a
+                                        href="https://space.stackexchange.com/questions/37727/how-much-were-the-lms-maneuvered-to-their-landing-points"
+                                        class="js-gps-track question-hyperlink mb0"
+                                        data-gps-track="site.switch({ item_type:11, target_site:508 }); posts_hot_network.click({ item_type:2, location:11 })">
+                                        How much were the LMs maneuvered to their landing points?
                                     </a>
 
                                 </li>
@@ -2097,15 +1598,75 @@ first()
                             </a>
                         </div>
 
+                        <div id="feed-link" class="js-feed-link">
+                            <a href="/feeds/question/57240949" title="Feed of this question and its answers">
+                                <svg aria-hidden="true" class="svg-icon fc-orange-400 iconRss" width="18" height="18"
+                                    viewBox="0 0 18 18">
+                                    <path
+                                        d="M1 3c0-1.1.9-2 2-2h12a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V3zm14.5 12C15.5 8.1 9.9 2.5 3 2.5V5a10 10 0 0 1 10 10h2.5zm-5 0A7.5 7.5 0 0 0 3 7.5V10a5 5 0 0 1 5 5h2.5zm-5 0A2.5 2.5 0 0 0 3 12.5V15h2.5z" />
+                                    </svg>
+                                Question feed
+                            </a>
+                        </div>
+                        <aside class="s-modal js-feed-link-modal" tabindex="-1" role="dialog"
+                            aria-labelledby="feed-modal-title" aria-describedby="feed-modal-description"
+                            aria-hidden="true">
+                            <div class="s-modal--dialog js-modal-dialog wmx4" role="document"
+                                data-controller="se-draggable">
+                                <h1 class="s-modal--header fw-bold js-first-tabbable" id="feed-modal-title"
+                                    data-target="se-draggable.handle" tabindex="0">
+                                    Subscribe to RSS
+                                </h1>
+                                <div class="grid gs4 gsy fd-column">
+                                    <div class="grid--cell">
+                                        <label class="d-block s-label c-default" for="feed-url">
+                                            Question feed
+                                            <p class="s-description mt2" id="feed-modal-description">To subscribe to
+                                                this RSS feed, copy and paste this URL into your RSS reader.</p>
+                                        </label>
+                                    </div>
+                                    <div class="grid ps-relative">
+                                        <input class="s-input" type="text" name="feed-url" id="feed-url"
+                                            readonly="readonly"
+                                            value="https://stackoverflow.com/feeds/question/57240949" />
+                                        <svg aria-hidden="true" class="svg-icon s-input-icon fc-orange-400 iconRss"
+                                            width="18" height="18" viewBox="0 0 18 18">
+                                            <path
+                                                d="M1 3c0-1.1.9-2 2-2h12a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V3zm14.5 12C15.5 8.1 9.9 2.5 3 2.5V5a10 10 0 0 1 10 10h2.5zm-5 0A7.5 7.5 0 0 0 3 7.5V10a5 5 0 0 1 5 5h2.5zm-5 0A2.5 2.5 0 0 0 3 12.5V15h2.5z" />
+                                            </svg>
+                                    </div>
+                                </div>
+                                <a class="s-modal--close s-btn s-btn__muted js-modal-close js-last-tabbable" href="#"
+                                    aria-label="Close">
+                                    <svg aria-hidden="true" class="svg-icon iconClearSm" width="14" height="14"
+                                        viewBox="0 0 14 14">
+                                        <path
+                                            d="M12 3.41L10.59 2 7 5.59 3.41 2 2 3.41 5.59 7 2 10.59 3.41 12 7 8.41 10.59 12 12 10.59 8.41 7 12 3.41z" />
+                                        </svg>
+                                </a>
+                            </div>
+                        </aside>
                     </div>
                 </div>
-                <script>StackExchange.ready(function () { $.get('/posts/50722329/ivc/e1cf'); });</script>
+                <script>StackExchange.ready(function () { $.get('/posts/57240949/ivc/7198'); });</script>
                 <noscript>
-                    <div><img src="/posts/50722329/ivc/e1cf" class="dno" alt="" width="0" height="0"></div>
+                    <div><img src="/posts/57240949/ivc/7198" class="dno" alt="" width="0" height="0"></div>
                 </noscript>
                 <div style="display:none" id="prettify-lang">lang-py</div>
             </div>
 
+            <script>
+                $('#wmd-input').one("keypress", function () {
+                    $.ajax({
+                        url: '/accounts/email-settings-form',
+                        cache: false,
+                        success: function (data) {
+                            $('#submit-button').parent().prepend(data);
+                        }
+                    });
+                });
+
+            </script>
 
         </div>
     </div>
@@ -2591,7 +2152,7 @@ first()
                         href="https://creativecommons.org/licenses/by-sa/3.0/" rel="license">cc by-sa 3.0</a>
                     with <a href="https://stackoverflow.blog/2009/06/25/attribution-required/" rel="license">attribution
                         required</a>.
-                    <span id="svnrev">rev&nbsp;2019.7.22.34392</span>
+                    <span id="svnrev">rev&nbsp;2019.7.26.34458</span>
                 </p>
             </div>
         </div>
@@ -2624,7 +2185,7 @@ first()
 
             StackExchange.ga.setDimension('dimension10', 'NotLooking');
 
-            StackExchange.ga.setDimension('dimension2', '|python|python-2.7|indentation|');
+            StackExchange.ga.setDimension('dimension2', '|python|plotly|importerror|plotly-python|');
 
             StackExchange.ga.setDimension('dimension3', 'Questions/Show');
 

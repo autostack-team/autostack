@@ -10,6 +10,7 @@ Stack Overflow for the error and displays posts with accepted answers.
 from __future__ import print_function
 from builtins import input
 import os
+
 from .web_scraper.stack_overflow_scraper import (
     accepted_posts,
     print_accepted_post
