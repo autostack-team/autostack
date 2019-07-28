@@ -55,10 +55,11 @@ def accepted_posts(query):
         except requests.exceptions.SSLError as errs:
             print ('SSL Error:',errs)
             return None
-        except requests.exceptions.Timeout as errt:
-            # Maybe set up for a retry, or continue in a retry loop
-            print ('Timeout Error:',errt)
-            return None
+        # except requests.exceptions.Timeout as errt:
+        #     Catching this error catches both Connection and Read Timeout
+        #     # Maybe set up for a retry, or continue in a retry loop
+        #     print ('Timeout Error:',errt)
+        #     return None
         except requests.exceptions.ConnectTimeout as errct:
             print ('Connection Timeout:',errct)
             return None
