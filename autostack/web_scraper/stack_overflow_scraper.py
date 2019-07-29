@@ -210,6 +210,7 @@ def print_code_block(code_block):
     Parameter {BeautifulSoup} code_block: 'soup' of a HTML
     'code' element from a Stack Overflow post.
     '''
+
     print('')
 
     # Store the code's text.

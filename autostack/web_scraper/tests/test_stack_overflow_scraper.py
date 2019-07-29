@@ -7,6 +7,7 @@ Overview: Tests for the Stack Overflow web scraper.
 
 from contextlib import contextmanager
 from io import StringIO
+import re
 import sys
 from unittest import mock
 
@@ -111,6 +112,13 @@ def captured_output():
         yield sys.stdout, sys.stderr
     finally:
         sys.stdout, sys.stderr = old_out, old_err
+
+# ======================================================================
+# Remove ANSI characters in output.
+# ======================================================================
+
+
+ANSI_ESCAPE = re.compile(r'\x1B[@-_][0-?]*[ -/]*[@-~]')
 
 
 # ======================================================================
@@ -241,8 +249,8 @@ def test_print_accepted_post_no_accepted_answer():
 
 def test_print_accepted_post_accepted_answer():
     '''
-    This test ensures that the function prints the proper
-    output of an post with an accepted answer.
+    This test ensures that print_accepted_post properly prints a
+    post with an accepted answer.
     '''
 
     # 1. Given.
@@ -257,7 +265,25 @@ def test_print_accepted_post_accepted_answer():
             print_accepted_post(soup)
 
         # 3. Then.
-        assert stdout.getvalue().strip()
+        output = ANSI_ESCAPE.sub('', stdout.getvalue().strip())
+        assert 'I am trying to write some Python example code with a line commented out:' in output
+        assert 'user_by_email = session.query(User)\\' in output
+        assert '.filter(Address.email==\'one\')\\' in output
+        assert '#.options(joinedload(User.addresses))\\' in output
+        assert '.first()' in output
+        assert 'I also tried:' in output
+        assert 'user_by_email = session.query(User)\\' in output
+        assert '.filter(Address.email==\'one\')\\' in output
+        assert '#    .options(joinedload(User.addresses))\\' in output
+        assert '.first()' in output
+        assert 'But I get IndentationError: unexpected indent.' in output
+        assert 'If I remove the commented out line, the code works.' in output
+        assert 'I am decently sure that I use only spaces (Notepad++ screenshot):' in output
+        assert 'Enclose the statement in paranthesis' in output
+        assert 'user_by_email = (session.query(User)' in output
+        assert '.filter(Address.email==\'one\')' in output
+        assert '#.options(joinedload(User.addresses))' in output
+        assert '.first())' in output
 
 
 # ======================================================================
@@ -266,7 +292,66 @@ def test_print_accepted_post_accepted_answer():
 
 
 def test_print_post_text():
-    assert True
+    '''
+    This test ensures that print_post_text properly prints a
+    post's text.
+    '''
+
+    # 1. Given.
+    with open(
+        'autostack/web_scraper/tests/data/post_accepted_answer.html',
+        'r'
+    ) as html:
+        post = BeautifulSoup(html.read(), 'lxml')
+
+        question = post.find(
+            attrs={
+                'class',
+                'question'
+            }
+        ).find(
+            attrs={
+                'class',
+                'post-text'
+            }
+        )
+
+        answer = post.find(
+            attrs={
+                'class',
+                'accepted-answer'
+            }
+        ).find(
+            attrs={
+                'class',
+                'post-text'
+            }
+        )
+
+        # 2. When.
+        with captured_output() as (stdout, stderr):
+            print_post_text(question)
+            print_post_text(answer)
+
+        output = ANSI_ESCAPE.sub('', stdout.getvalue().strip())
+        assert 'I am trying to write some Python example code with a line commented out:' in output
+        assert 'user_by_email = session.query(User)\\' in output
+        assert '.filter(Address.email==\'one\')\\' in output
+        assert '#.options(joinedload(User.addresses))\\' in output
+        assert '.first()' in output
+        assert 'I also tried:' in output
+        assert 'user_by_email = session.query(User)\\' in output
+        assert '.filter(Address.email==\'one\')\\' in output
+        assert '#    .options(joinedload(User.addresses))\\' in output
+        assert '.first()' in output
+        assert 'But I get IndentationError: unexpected indent.' in output
+        assert 'If I remove the commented out line, the code works.' in output
+        assert 'I am decently sure that I use only spaces (Notepad++ screenshot):' in output
+        assert 'Enclose the statement in paranthesis' in output
+        assert 'user_by_email = (session.query(User)' in output
+        assert '.filter(Address.email==\'one\')' in output
+        assert '#.options(joinedload(User.addresses))' in output
+        assert '.first())' in output
 
 
 # ======================================================================
@@ -275,4 +360,24 @@ def test_print_post_text():
 
 
 def test_print_code_block():
-    assert True
+    '''
+    This test ensures that print_code_block properly prints a
+    code block.
+    '''
+
+    # 1. Given.
+    with open(
+        'autostack/web_scraper/tests/data/post_accepted_answer.html',
+        'r'
+    ) as html:
+        code_block = BeautifulSoup(html.read(), 'lxml').find('code')
+
+        # 2. When.
+        with captured_output() as (stdout, stderr):
+            print_code_block(code_block)
+
+        output = ANSI_ESCAPE.sub('', stdout.getvalue().strip())
+        assert 'user_by_email = session.query(User)\\' in output
+        assert '.filter(Address.email==\'one\')\\' in output
+        assert '#.options(joinedload(User.addresses))\\' in output
+        assert '.first()' in output
