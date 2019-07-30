@@ -13,7 +13,12 @@ from autostack.web_scraper.stack_overflow_scraper import (
 
 def custom_query():
     '''
-    Allows the user to submit a custom query to search on Stack Overflow.
+    Searches Stack Overflow using a custom search query from the user.
+
+    Called after three "no"s from the user. This function prompts the user
+    for a string to serach on Stack Overflow. Using the same for loop as
+    main, questions and accepted answers are printed to the terminal for the
+    user to view.
     '''
 
     print('Enter a custom query: ', end='')
