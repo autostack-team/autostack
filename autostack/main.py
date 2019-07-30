@@ -11,9 +11,13 @@ from __future__ import print_function
 from builtins import input
 import os
 
-from .web_scraper.stack_overflow_scraper import (
+from autostack.web_scraper.stack_overflow_scraper import (
     accepted_posts,
     print_accepted_post
+)
+
+from autostack.features.query_features import (
+    custom_query
 )
 
 EXCEPTIONS = [
@@ -81,6 +85,9 @@ def main():
         if output == '':
             break
 
+        # Variable to count number of "no"s.
+        no_counter = 0
+
         # If the current line of output is a python error,
         # query Stack Overflow.
         if output.split()[0][:-1] in EXCEPTIONS:
@@ -99,4 +106,11 @@ def main():
                     print(u'\U0001F95E Listening for Python errors...')
                     break
                 elif question_answered == 'n':
+                    no_counter += 1
+                    # If three "no"s occur in a row let the user enter a custom query.
+                    if(no_counter == 3):
+                        no_counter = 0
+                        custom_query()
+                        # After user finds an answer from their query, break loop to listen for more errors.
+                        break
                     continue
