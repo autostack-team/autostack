@@ -73,7 +73,7 @@ In another terminal window, execute autostack-termal which will inform the autos
 $ autostack-terminal
 ``` 
 
-To stop running autostack,use the exit command in the autostack-terminal windows. This automatically stops the terminal window listening for errors.
+To stop running autostack, use the exit command in the autostack-terminal windows. This automatically stops the terminal window listening for errors.
 ```
 $ exit
 ```
