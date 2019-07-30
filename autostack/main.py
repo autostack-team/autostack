@@ -16,6 +16,10 @@ from autostack.web_scraper.stack_overflow_scraper import (
     print_accepted_post
 )
 
+from autostack.option_features.features import (
+    custom_query
+)
+
 EXCEPTIONS = [
     'Exception',
     'StopIteration',
@@ -106,8 +110,8 @@ def main():
                     # If three "no"s occur in a row let the user enter a custom query.
                     if(no_counter == 3):
                         no_counter = 0
-                        print('Enter a custom query: ', end='')
-                        
+                        custom_query()
+                        break
                     continue
                     
 if __name__ == "__main__":
