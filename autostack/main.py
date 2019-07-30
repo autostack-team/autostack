@@ -16,7 +16,7 @@ from autostack.web_scraper.stack_overflow_scraper import (
     print_accepted_post
 )
 
-from autostack.option_features.features import (
+from autostack.features.query_features import (
     custom_query
 )
 
@@ -85,7 +85,7 @@ def main():
         if output == '':
             break
 
-        # Set variable to count number of "no"s.
+        # Variable to count number of "no"s.
         no_counter = 0
 
         # If the current line of output is a python error,
@@ -111,5 +111,6 @@ def main():
                     if(no_counter == 3):
                         no_counter = 0
                         custom_query()
+                        # After user finds an answer from their query, break loop to listen for more errors.
                         break
                     continue
