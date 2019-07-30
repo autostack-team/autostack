@@ -1,18 +1,45 @@
 ![Logo](https://raw.githubusercontent.com/elijahsawyers/autostack/master/Logo.png)
 
 <p align="center">
-    <a href="https://teams.microsoft.com/join/1oa3o6vva07n" alt="Chat">
-        <img src="https://img.shields.io/badge/Chat-on_MSTeams-purple.svg" /></a>
+    <a href="https://travis-ci.com/elijahsawyers/autostack/">
+        <img src="https://travis-ci.com/elijahsawyers/autostack.svg?branch=master"
+            alt="Build status"/>
+    </a>
+    <a href="https://codecov.io/gh/elijahsawyers/autostack">
+        <img src="https://codecov.io/gh/elijahsawyers/autostack/branch/master/graph/badge.svg" 
+            alt="Code coverage"/>
+    </a>
+    <a href="https://github.com/elijahsawyers/autostack">
+        <img src="https://img.shields.io/github/commit-activity/m/elijahsawyers/autostack"
+            alt="GitHub commit activity"/>
+    </a>
+    <a href="https://pypi.org/project/autostack/">
+        <img src="https://img.shields.io/pypi/dm/autostack"
+             alt="PyPI - Downloads"/>
+    </a>
+    <a href="https://pypi.org/project/autostack/">
+        <img src="https://img.shields.io/pypi/v/autostack"
+             alt="PyPI"/>
+    </a>
+    <a href="https://opensource.org/licenses/MIT">
+        <img src="https://img.shields.io/badge/License-MIT-orange.svg"
+             alt="License"/>
+    </a>
+    <a href="https://teams.microsoft.com/join/1oa3o6vva07n">
+        <img src="https://img.shields.io/badge/Chat-on_MSTeams-orange.svg"
+             alt="Chat"/>
+    </a>
     <a href="https://twitter.com/intent/follow?screen_name=autostackteam">
         <img src="https://img.shields.io/twitter/follow/autostackteam.svg?style=social&logo=twitter"
-            alt="follow on Twitter"></a>
+             alt="Follow on Twitter"/>
+    </a>
 </p>
 
-# License
-[![License: MIT](https://img.shields.io/badge/License-MIT-blueviolet.svg)](https://opensource.org/licenses/MIT)  
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details
+autostack is a command-line debugging tool for Python projects that automatically displays Stack Overflow answers for thrown errors.
 
-# Setup
+What is the first thing you do when a confusing error message is displayed in your terminal window? You search for an answer on Stack Overflow, of course! With autostack, you no longer have to search for answers on Stack Overflow, they are found for you. Gone are the days of scowering the internet for hours to find an answer to your development questions! autostack is here to automate the debugging process and in turn, expedite Python project development.
+
+## Installation
 
 **1. Clone the repo and use the install script.**
 
@@ -23,30 +50,43 @@ git clone https://github.com/elijahsawyers/autostack.git
 
 Navigate to the project directory, and run the install bash script.
 ```
-cd /path/to/project/
-chmod +x install.sh
-./install.sh 
+$ cd /path/to/project/
+$ chmod +x install.sh
+$ ./install.sh 
 ```
 
 **2. Or just use pip to install.**
 
 ```
-pip3 install autostack
+$ pip3 install autostack
 ```
 
-# Usage 
+## Usage 
 
 In one terminal window, execute the autostack command to listen for errors.
 ```
-autostack
+$ autostack
 ```
 
 In another terminal window, execute autostack-termal which will inform the autostack listener to listen for errors in the terminal.
 ```
-autostack-terminal
+$ autostack-terminal
 ``` 
 
-# Authors
+To stop running autostack, use the exit command in the autostack-terminal windows. This automatically stops the terminal window listening for errors.
+```
+$ exit
+```
+
+## Contributing
+
+For information on how to get started contributing to autostack, see the [contributing guidlines](https://github.com/elijahsawyers/autostack/blob/master/CONTRIBUTING.md).
+
+## License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
+## Authors
 * [Elijah Sawyers](https://github.com/elijahsawyers)
 * [Benjamin Sanders](https://github.com/BenOSanders)
 * [Caleb Werth](https://github.com/cwerth1)
