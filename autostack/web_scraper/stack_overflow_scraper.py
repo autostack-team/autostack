@@ -39,14 +39,15 @@ def accepted_posts(query):
         for query_string in query.split(' '):
             query_url = query_url + '+' + query_string
 
+        # The 'soup' of the query page.
+        request = requests.get(query_url)
+
         # Erros ordered from specific to general so the specific ones don't get masked by the general ones.
         try:
-            # The 'soup' of the query page.
-            request = requests.get(query_url)
             # Raise exception or error if it exists.
             request.raise_for_status()
         except requests.exceptions.HTTPError as err:
-            print err
+            print ('HTTP Error:',err)
             return None
         except requests.exceptions.ConnectionError as errc:
             print ('Error Connecting:',errc)
