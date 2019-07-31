@@ -1,4 +1,4 @@
-![Logo](https://raw.githubusercontent.com/elijahsawyers/autostack/master/Logo.png)
+![Logo](https://raw.githubusercontent.com/autostack-team/autostack/develop/Logo.png)
 
 <p align="center">
     <a href="https://travis-ci.com/elijahsawyers/autostack/">
@@ -45,7 +45,7 @@ What is the first thing you do when a confusing error message is displayed in yo
 
 Clone the repo.
 ```
-git clone https://github.com/elijahsawyers/autostack.git
+git clone https://github.com/autostack-team/autostack.git
 ```
 
 Navigate to the project directory, and run the install bash script.
@@ -80,7 +80,7 @@ $ exit
 
 ## Contributing
 
-For information on how to get started contributing to autostack, see the [contributing guidlines](https://github.com/elijahsawyers/autostack/blob/master/CONTRIBUTING.md).
+For information on how to get started contributing to autostack, see the [contributing guidlines](https://github.com/autostack-team/autostack/blob/master/CONTRIBUTING.md).
 
 ## License
 

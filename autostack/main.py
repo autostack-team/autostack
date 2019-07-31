@@ -111,6 +111,7 @@ def main():
                     if(no_counter == 3):
                         no_counter = 0
                         custom_query()
-                        # After user finds an answer from their query, break loop to listen for more errors.
+                        # After user finds an answer from their query, 
+                        # break loop to listen for more errors.
                         break
                     continue
