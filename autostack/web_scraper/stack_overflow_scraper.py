@@ -50,54 +50,54 @@ def accepted_posts(query):
             # Raise exception or error if it exists.
             request.raise_for_status()
         except requests.exceptions.HTTPError as err:
-            print ('HTTP Error:',err)
+            print('HTTP Error:', err)
             return None
         except requests.exceptions.ConnectionError as errc:
-            print ('Error Connecting:',errc)
+            print('Error Connecting:', errc)
             return None
         except requests.exceptions.ProxyError as errp:
-            print ('Proxy Error:',errp)
+            print('Proxy Error:', errp)
             return None
         except requests.exceptions.SSLError as errs:
-            print ('SSL Error:',errs)
+            print('SSL Error:', errs)
             return None
         except requests.exceptions.ConnectTimeout as errct:
-            print ('Connection Timeout:',errct)
+            print('Connection Timeout:', errct)
             return None
         except requests.exceptions.ReadTimeout as errrt:
-            print ('Read Timeout:',errrt)
+            print('Read Timeout:', errrt)
             return None
         except requests.exceptions.URLRequired as errur:
-            print ('URL Required:',errur)
+            print('URL Required:', errur)
             return None
         except requests.exceptions.TooManyRedirects as errtc:
             # Tell the user their URL was bad and try a different one
-            print ('Too Many Redirects Error:',errtc)
+            print('Too Many Redirects Error:', errtc)
             return None
         except requests.exceptions.MissingSchema as errms:
-            print ('Missing Schema:',errms)
+            print('Missing Schema:', errms)
             return None
         except requests.exceptions.InvalidSchema as erris:
-            print ('Invalid Schema:',erris)
+            print('Invalid Schema:', erris)
             return None
         except requests.exceptions.InvalidURL as erriu:
-            print ('Invalid URL:',erriu)
+            print('Invalid URL:', erriu)
             return None
         except requests.exceptions.InvalidHeader as errih:
-            print ('Invalid Header:',errih)
+            print('Invalid Header:', errih)
             return None
         except requests.exceptions.InvalidProxyURL as errip:
-            print ('Invalid Proxy URL:',errip)
+            print('Invalid Proxy URL:', errip)
             return None
         except requests.exceptions.ChunkedEncodingError as errcee:
-            print ('Chunked Encoding Error:',errcee)
+            print('Chunked Encoding Error:', errcee)
             return None
         except requests.exceptions.ContentDecodingError as errcde:
-            print ('Content Decoding Error:',errcde)
+            print('Content Decoding Error:', errcde)
             return None
         except requests.exceptions.RequestException as e:
             # catastrophic error. bail.
-            print ('Catastrophic Error:',e)
+            print('Catastrophic Error:', e)
             return None
         
         # Get text from request.
