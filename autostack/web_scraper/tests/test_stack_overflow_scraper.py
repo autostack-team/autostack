@@ -39,7 +39,7 @@ def mock_get_request(*args, **kwargs):
     class MockResponse:
         '''
         Mocks the response object from a request.get() method
-        call. 
+        call.
         '''
 
         def __init__(self, text, status_code):
@@ -48,7 +48,7 @@ def mock_get_request(*args, **kwargs):
             status code.
 
             Parameter {str} text: The HTML of the response.
-            Parameter {int} status_code: The HTTP response 
+            Parameter {int} status_code: The HTTP response
             status code (e.g. 200, 400).
             '''
             self.text = text
@@ -247,6 +247,7 @@ def test_print_accepted_post_no_accepted_answer():
         # 3. Then.
         assert not stdout.getvalue().strip()
 
+
 def test_print_accepted_post_accepted_answer():
     '''
     This test ensures that print_accepted_post properly prints a
@@ -266,7 +267,8 @@ def test_print_accepted_post_accepted_answer():
 
         # 3. Then.
         output = ANSI_ESCAPE.sub('', stdout.getvalue().strip())
-        assert 'I am trying to write some Python example code with a line commented out:' in output
+        assert 'I am trying to write some Python example\
+             code with a line commented out:' in output
         assert 'user_by_email = session.query(User)\\' in output
         assert '.filter(Address.email==\'one\')\\' in output
         assert '#.options(joinedload(User.addresses))\\' in output
@@ -278,7 +280,8 @@ def test_print_accepted_post_accepted_answer():
         assert '.first()' in output
         assert 'But I get IndentationError: unexpected indent.' in output
         assert 'If I remove the commented out line, the code works.' in output
-        assert 'I am decently sure that I use only spaces (Notepad++ screenshot):' in output
+        assert 'I am decently sure that I use only\
+             spaces (Notepad++ screenshot):' in output
         assert 'Enclose the statement in paranthesis' in output
         assert 'user_by_email = (session.query(User)' in output
         assert '.filter(Address.email==\'one\')' in output
@@ -334,7 +337,8 @@ def test_print_post_text():
             print_post_text(answer)
 
         output = ANSI_ESCAPE.sub('', stdout.getvalue().strip())
-        assert 'I am trying to write some Python example code with a line commented out:' in output
+        assert 'I am trying to write some Python example\
+             code with a line commented out:' in output
         assert 'user_by_email = session.query(User)\\' in output
         assert '.filter(Address.email==\'one\')\\' in output
         assert '#.options(joinedload(User.addresses))\\' in output
@@ -346,7 +350,8 @@ def test_print_post_text():
         assert '.first()' in output
         assert 'But I get IndentationError: unexpected indent.' in output
         assert 'If I remove the commented out line, the code works.' in output
-        assert 'I am decently sure that I use only spaces (Notepad++ screenshot):' in output
+        assert 'I am decently sure that I use only\
+             spaces (Notepad++ screenshot):' in output
         assert 'Enclose the statement in paranthesis' in output
         assert 'user_by_email = (session.query(User)' in output
         assert '.filter(Address.email==\'one\')' in output
