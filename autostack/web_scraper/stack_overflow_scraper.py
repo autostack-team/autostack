@@ -42,7 +42,10 @@ def accepted_posts(query):
         # The 'soup' of the query page.
         request = requests.get(query_url)
 
-        # Erros ordered from specific to general so the specific ones don't get masked by the general ones.
+        '''
+        Errors ordered from specific to general so the
+        specific ones don't get masked by the general ones.
+        '''
         try:
             # Raise exception or error if it exists.
             request.raise_for_status()
@@ -58,11 +61,6 @@ def accepted_posts(query):
         except requests.exceptions.SSLError as errs:
             print ('SSL Error:',errs)
             return None
-        # except requests.exceptions.Timeout as errt:
-        #     Catching this error catches both Connection and Read Timeout
-        #     # Maybe set up for a retry, or continue in a retry loop
-        #     print ('Timeout Error:',errt)
-        #     return None
         except requests.exceptions.ConnectTimeout as errct:
             print ('Connection Timeout:',errct)
             return None

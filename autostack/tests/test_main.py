@@ -25,14 +25,14 @@ from autostack.main import main
 
 def test_main_pipe_dir_doesnt_exist():
     '''
-    Test to ensure that the pipe is created even if the 
+    Test to ensure that the pipe is created even if the
     pipe dir doesn't exist.
     '''
 
     # 1. Given.
     try:
         os.system('rm -rf /tmp/')
-    except: 
+    except:
         assert True
 
     # 2. When.
@@ -62,7 +62,7 @@ def test_main_pipe_doesnt_exist():
 
 def test_main_input_y():
     '''
-    Test to ensure that, when an error is detected, inputting 
+    Test to ensure that, when an error is detected, inputting
     'Y' exits the post query loop.
     '''
 
@@ -77,7 +77,7 @@ def test_main_input_y():
 
 def test_main_input_n():
     '''
-    Test to ensure that, when an error is detected, inputting 
+    Test to ensure that, when an error is detected, inputting
     'n' continues the post query loop.
     '''
 

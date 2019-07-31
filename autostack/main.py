@@ -87,16 +87,19 @@ def main():
 
         # Variable to count number of "no"s.
         no_counter = 0
-
-        # If the current line of output is a python error,
-        # query Stack Overflow.
+        '''
+        If the current line of output is a python error,
+        query Stack Overflow.
+        '''
         if output.split()[0][:-1] in EXCEPTIONS:
             for post in accepted_posts(output):
                 # Display Stack Overflow posts for the error.
                 print_accepted_post(post)
 
-                # If the user's question has been answered,
-                # don't keep looping over posts.
+                '''
+                If the user's question has been answered,
+                don't keep looping over posts.
+                '''
                 while True:
                     print('Did this answer your question? (Y/n): ', end='')
                     question_answered = input()
@@ -107,10 +110,16 @@ def main():
                     break
                 elif question_answered == 'n':
                     no_counter += 1
-                    # If three "no"s occur in a row let the user enter a custom query.
+                    '''
+                    If three "no"s occur in a row
+                    let the user enter a custom query.
+                    '''
                     if(no_counter == 3):
                         no_counter = 0
                         custom_query()
-                        # After user finds an answer from their query, break loop to listen for more errors.
+                        '''
+                        After user finds an answer from their query,
+                        break loop to listen for more errors.
+                        '''
                         break
                     continue

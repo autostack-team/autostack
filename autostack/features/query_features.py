@@ -11,6 +11,7 @@ from autostack.web_scraper.stack_overflow_scraper import (
     print_accepted_post
 )
 
+
 def custom_query():
     '''
     Searches Stack Overflow using a custom search query from the user.
@@ -28,8 +29,10 @@ def custom_query():
         # Display Stack Overflow posts for the error.
         print_accepted_post(post)
 
-        # If the user's question has been answered,
-        # don't keep looping over posts.
+        '''
+        If the user's question has been answered,
+        don't keep looping over posts.
+        '''
         while True:
             print('Did this answer your question? (Y/n): ', end='')
             question_answered = input()
