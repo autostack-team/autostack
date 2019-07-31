@@ -99,7 +99,7 @@ def accepted_posts(query):
             # catastrophic error. bail.
             print('Catastrophic Error:', e)
             return None
-        
+
         # Get text from request.
         query_html = request.text
         # Turn text into soup object.
