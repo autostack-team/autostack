@@ -53,25 +53,29 @@ def accepted_posts(query):
             print('HTTP Error:', err)
             print('Looks like there might be a problem with Stack Overflow.',
                 'Here is the link we generated so you can use it when',
-                    'it\'s back online!', query_url)
+                    'it\'s back online!')
+            print(query_url)
             break
         except requests.exceptions.ConnectionError as errc:
             print('Error Connecting:', errc)
             print('Looks like there might be a problem with your internet',
                 'connection. Here is the link we generated for you so you',
-                    'can use it when you\'re back online!', query_url)
+                    'can use it when you\'re back online!')
+            print(query_url)            
             break
         except requests.exceptions.Timeout as errt:
             print('Timeout Error:', errt)
             print('Looks like we ran into a problem connecting to Stack',
                 'Overflow. Here is the link we generated for you so you can',
-                    'search for answers the primitive way, manually.', query_url)
+                    'search for answers the primitive way, manually.')
+            print(query_url)
             break
         except requests.exceptions.TooManyRedirects as errtc:
             print('Too Many Redirects Error:', errtc)
             print('Looks like there might be a problem with your internet',
                 'connection. Here is the link we generated for',
-                    'you so you can use it when you\'re back online!', query_url)
+                    'you so you can use it when you\'re back online!')
+            print(query_url)
             break
         except requests.exceptions.RequestException as e:
             # Catch all other errors.
