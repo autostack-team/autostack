@@ -23,8 +23,13 @@ def custom_query():
     user to view.
     '''
 
-    print('Enter a custom query: ', end='')
+    print('Enter a custom query (\'e\' to exit): ', end='')
     new_query = input()
+
+    # If the user enters e, exit custom_query.
+    if new_query == 'e':
+        print(u'\U0001F95E Listening for Python errors...')
+        return
 
     for post in accepted_posts(new_query):
         # Display Stack Overflow posts for the error.

@@ -53,6 +53,8 @@ def accepted_posts(query):
                   'Here is the link we generated so that you can use it when ',
                   'it\'s back online!')
             print(query_url)
+            # Break and listen for more errors.
+            print(u'\U0001F95E Listening for Python errors...')
             break
         except requests.exceptions.ConnectionError as errc:
             print('Error Connecting:', errc)
@@ -60,6 +62,8 @@ def accepted_posts(query):
                   'connection. Here is the link we generated for you so ',
                   'that you can use it when you\'re back online!')
             print(query_url)            
+            # Break and listen for more errors.
+            print(u'\U0001F95E Listening for Python errors...')
             break
         except requests.exceptions.Timeout as errt:
             print('Timeout Error:', errt)
@@ -67,6 +71,8 @@ def accepted_posts(query):
                   'Overflow. Here is the link we generated for you so that ',
                   'you can search for answers the primitive way, manually.')
             print(query_url)
+            # Break and listen for more errors.
+            print(u'\U0001F95E Listening for Python errors...')
             break
         except requests.exceptions.TooManyRedirects as errtc:
             print('Too Many Redirects Error:', errtc)
@@ -74,10 +80,14 @@ def accepted_posts(query):
                   'connection. Here is the link we generated for you so ',
                   'that you can use it when you\'re back online!')
             print(query_url)
+            # Break and listen for more errors.
+            print(u'\U0001F95E Listening for Python errors...')
             break
         except requests.exceptions.RequestException as e:
             # Catch all other errors.
             print('Error:', e)
+            # Break and listen for more errors.
+            print(u'\U0001F95E Listening for Python errors...')
             break
 
         # Get text from request.
