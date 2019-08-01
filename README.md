@@ -9,6 +9,10 @@
         <img src="https://codecov.io/gh/elijahsawyers/autostack/branch/master/graph/badge.svg" 
             alt="Code coverage"/>
     </a>
+    <a href="https://codeclimate.com/github/autostack-team/autostack/maintainability">
+        <img src="https://api.codeclimate.com/v1/badges/4dc7775be0fef62e5492/maintainability" 
+            alt="Maintainability"/>
+    </a>
     <a href="https://github.com/elijahsawyers/autostack">
         <img src="https://img.shields.io/github/commit-activity/m/elijahsawyers/autostack"
             alt="GitHub commit activity"/>

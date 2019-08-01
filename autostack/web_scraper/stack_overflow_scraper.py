@@ -39,40 +39,40 @@ def accepted_posts(query):
         for query_string in query.split(' '):
             query_url = query_url + '+' + query_string
 
-        # Errors ordered from specific to general so the
+        # Errors ordered from specific to general so that the
         # specific ones don't get masked by the general ones.
         try:
             # The 'soup' of the query page.
             request = requests.get(query_url)
 
-            # Raise exception or error if it exists.
+            # Throw an error, if it exists.
             request.raise_for_status()
         except requests.exceptions.HTTPError as err:
             print('HTTP Error:', err)
-            print('Looks like there might be a problem with Stack Overflow.',
-                'Here is the link we generated so you can use it when',
-                    'it\'s back online!')
+            print('Looks like there might be a problem with Stack Overflow. ',
+                  'Here is the link we generated so that you can use it when ',
+                  'it\'s back online!')
             print(query_url)
             break
         except requests.exceptions.ConnectionError as errc:
             print('Error Connecting:', errc)
-            print('Looks like there might be a problem with your internet',
-                'connection. Here is the link we generated for you so you',
-                    'can use it when you\'re back online!')
+            print('Looks like there might be a problem with your internet ',
+                  'connection. Here is the link we generated for you so ',
+                  'that you can use it when you\'re back online!')
             print(query_url)            
             break
         except requests.exceptions.Timeout as errt:
             print('Timeout Error:', errt)
-            print('Looks like we ran into a problem connecting to Stack',
-                'Overflow. Here is the link we generated for you so you can',
-                    'search for answers the primitive way, manually.')
+            print('Looks like we ran into a problem connecting to Stack ',
+                  'Overflow. Here is the link we generated for you so that ',
+                  'you can search for answers the primitive way, manually.')
             print(query_url)
             break
         except requests.exceptions.TooManyRedirects as errtc:
             print('Too Many Redirects Error:', errtc)
-            print('Looks like there might be a problem with your internet',
-                'connection. Here is the link we generated for',
-                    'you so you can use it when you\'re back online!')
+            print('Looks like there might be a problem with your internet ',
+                  'connection. Here is the link we generated for you so ',
+                  'that you can use it when you\'re back online!')
             print(query_url)
             break
         except requests.exceptions.RequestException as e:
