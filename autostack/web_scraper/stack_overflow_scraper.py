@@ -39,10 +39,8 @@ def accepted_posts(query):
         for query_string in query.split(' '):
             query_url = query_url + '+' + query_string
 
-        '''
-        Errors ordered from specific to general so the
-        specific ones don't get masked by the general ones.
-        '''
+        # Errors ordered from specific to general so the
+        # specific ones don't get masked by the general ones.
         try:
             # The 'soup' of the query page.
             request = requests.get(query_url)
