@@ -267,8 +267,8 @@ def test_print_accepted_post_accepted_answer():
 
         # 3. Then.
         output = ANSI_ESCAPE.sub('', stdout.getvalue().strip())
-        assert 'I am trying to write some Python example\
-             code with a line commented out:' in output
+        assert ('I am trying to write some Python example',
+            'code with a line commented out:') in output
         assert 'user_by_email = session.query(User)\\' in output
         assert '.filter(Address.email==\'one\')\\' in output
         assert '#.options(joinedload(User.addresses))\\' in output
@@ -280,8 +280,8 @@ def test_print_accepted_post_accepted_answer():
         assert '.first()' in output
         assert 'But I get IndentationError: unexpected indent.' in output
         assert 'If I remove the commented out line, the code works.' in output
-        assert 'I am decently sure that I use only\
-             spaces (Notepad++ screenshot):' in output
+        assert ('I am decently sure that I use only',
+            'spaces (Notepad++ screenshot):') in output
         assert 'Enclose the statement in paranthesis' in output
         assert 'user_by_email = (session.query(User)' in output
         assert '.filter(Address.email==\'one\')' in output
@@ -337,8 +337,8 @@ def test_print_post_text():
             print_post_text(answer)
 
         output = ANSI_ESCAPE.sub('', stdout.getvalue().strip())
-        assert 'I am trying to write some Python example\
-             code with a line commented out:' in output
+        assert ('I am trying to write some Python example',
+            'code with a line commented out:') in output
         assert 'user_by_email = session.query(User)\\' in output
         assert '.filter(Address.email==\'one\')\\' in output
         assert '#.options(joinedload(User.addresses))\\' in output
@@ -350,8 +350,8 @@ def test_print_post_text():
         assert '.first()' in output
         assert 'But I get IndentationError: unexpected indent.' in output
         assert 'If I remove the commented out line, the code works.' in output
-        assert 'I am decently sure that I use only\
-             spaces (Notepad++ screenshot):' in output
+        assert ('I am decently sure that I use only',
+            'spaces (Notepad++ screenshot):') in output
         assert 'Enclose the statement in paranthesis' in output
         assert 'user_by_email = (session.query(User)' in output
         assert '.filter(Address.email==\'one\')' in output
