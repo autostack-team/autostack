@@ -12,6 +12,7 @@ from autostack.web_scraper.stack_overflow_scraper import (
     print_accepted_post
 )
 
+
 def custom_query():
     '''
     Searches Stack Overflow using a custom search query from the user.

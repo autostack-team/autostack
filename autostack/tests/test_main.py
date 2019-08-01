@@ -25,7 +25,7 @@ from autostack.main import main
 
 def test_main_input_y():
     '''
-    Test to ensure that, when an error is detected, inputting 
+    Test to ensure that, when an error is detected, inputting
     'Y' exits the post query loop.
     '''
 
@@ -40,7 +40,7 @@ def test_main_input_y():
 
 def test_main_input_n():
     '''
-    Test to ensure that, when an error is detected, inputting 
+    Test to ensure that, when an error is detected, inputting
     'n' continues the post query loop.
     '''
 
