@@ -39,66 +39,44 @@ def accepted_posts(query):
         for query_string in query.split(' '):
             query_url = query_url + '+' + query_string
 
-        # The 'soup' of the query page.
-        request = requests.get(query_url)
-
         '''
         Errors ordered from specific to general so the
         specific ones don't get masked by the general ones.
         '''
         try:
+            # The 'soup' of the query page.
+            request = requests.get(query_url)
+
             # Raise exception or error if it exists.
             request.raise_for_status()
         except requests.exceptions.HTTPError as err:
             print('HTTP Error:', err)
-            return None
+            print('Looks like there might be a problem with Stack Overflow.',
+                'Here is the link we generated so you can use it when',
+                    'it\'s back online!', query_url)
+            break
         except requests.exceptions.ConnectionError as errc:
             print('Error Connecting:', errc)
-            return None
-        except requests.exceptions.ProxyError as errp:
-            print('Proxy Error:', errp)
-            return None
-        except requests.exceptions.SSLError as errs:
-            print('SSL Error:', errs)
-            return None
-        except requests.exceptions.ConnectTimeout as errct:
-            print('Connection Timeout:', errct)
-            return None
-        except requests.exceptions.ReadTimeout as errrt:
-            print('Read Timeout:', errrt)
-            return None
-        except requests.exceptions.URLRequired as errur:
-            print('URL Required:', errur)
-            return None
+            print('Looks like there might be a problem with your internet',
+                'connection. Here is the link we generated for you so you',
+                    'can use it when you\'re back online!', query_url)
+            break
+        except requests.exceptions.Timeout as errt:
+            print('Timeout Error:', errt)
+            print('Looks like we ran into a problem connecting to Stack',
+                'Overflow. Here is the link we generated for you so you can',
+                    'search for answers the primitive way, manually.', query_url)
+            break
         except requests.exceptions.TooManyRedirects as errtc:
-            # Tell the user their URL was bad and try a different one
             print('Too Many Redirects Error:', errtc)
-            return None
-        except requests.exceptions.MissingSchema as errms:
-            print('Missing Schema:', errms)
-            return None
-        except requests.exceptions.InvalidSchema as erris:
-            print('Invalid Schema:', erris)
-            return None
-        except requests.exceptions.InvalidURL as erriu:
-            print('Invalid URL:', erriu)
-            return None
-        except requests.exceptions.InvalidHeader as errih:
-            print('Invalid Header:', errih)
-            return None
-        except requests.exceptions.InvalidProxyURL as errip:
-            print('Invalid Proxy URL:', errip)
-            return None
-        except requests.exceptions.ChunkedEncodingError as errcee:
-            print('Chunked Encoding Error:', errcee)
-            return None
-        except requests.exceptions.ContentDecodingError as errcde:
-            print('Content Decoding Error:', errcde)
-            return None
+            print('Looks like there might be a problem with your internet',
+                'connection. Here is the link we generated for',
+                    'you so you can use it when you\'re back online!', query_url)
+            break
         except requests.exceptions.RequestException as e:
-            # catastrophic error. bail.
-            print('Catastrophic Error:', e)
-            return None
+            # Catch all other errors.
+            print('Error:', e)
+            break
 
         # Get text from request.
         query_html = request.text
