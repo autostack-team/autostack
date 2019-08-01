@@ -110,10 +110,10 @@ def main():
                     
                     # If three "no"s occur in a row
                     # let the user enter a custom query.
-                    if(no_counter == 3):
+                    if no_counter == 3:
                         no_counter = 0
                         custom_query()
-                        # After user finds an answer from their query,
+                        # After user finds an answer from their query or exits,
                         # break loop to listen for more errors.
                         break
                     continue

@@ -48,36 +48,46 @@ def accepted_posts(query):
             # Raise exception or error if it exists.
             request.raise_for_status()
         except requests.exceptions.HTTPError as err:
-            print('HTTP Error:', err)
+            print('HTTP Error:\n', err)
             print('Looks like there might be a problem with Stack Overflow.',
                 'Here is the link we generated so you can use it when',
                     'it\'s back online!')
             print(query_url)
+            # Break and listen for more errors.
+            print(u'\U0001F95E Listening for Python errors...')
             break
         except requests.exceptions.ConnectionError as errc:
-            print('Error Connecting:', errc)
+            print('Connection Error:\n', errc)
             print('Looks like there might be a problem with your internet',
                 'connection. Here is the link we generated for you so you',
                     'can use it when you\'re back online!')
             print(query_url)            
+            # Break and listen for more errors.
+            print(u'\U0001F95E Listening for Python errors...')
             break
         except requests.exceptions.Timeout as errt:
-            print('Timeout Error:', errt)
+            print('Timeout Error:\n', errt)
             print('Looks like we ran into a problem connecting to Stack',
                 'Overflow. Here is the link we generated for you so you can',
                     'search for answers the primitive way, manually.')
             print(query_url)
+            # Break and listen for more errors.
+            print(u'\U0001F95E Listening for Python errors...')
             break
         except requests.exceptions.TooManyRedirects as errtc:
-            print('Too Many Redirects Error:', errtc)
+            print('Too Many Redirects Error:\n', errtc)
             print('Looks like there might be a problem with your internet',
                 'connection. Here is the link we generated for',
                     'you so you can use it when you\'re back online!')
             print(query_url)
+            # Break and listen for more errors.
+            print(u'\U0001F95E Listening for Python errors...')
             break
         except requests.exceptions.RequestException as e:
             # Catch all other errors.
             print('Error:', e)
+            # Break and listen for more errors.
+            print(u'\U0001F95E Listening for Python errors...')
             break
 
         # Get text from request.
