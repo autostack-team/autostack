@@ -6,11 +6,18 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 ### Added
+- Custom query feature.
+- Unit tests for web scraping and main.
+- Exception handling for requests.
+- Created [patreon](https://www.patreon.com/autostack).
 - Created CHANGELOG.md.
-- Created shield for MSTeams chat.
+- Shields for MSTeams chat, twitter, CI, and others.
 ### Changed
-- Updated CODE_OF_CONDUCT.md email to new team email.
-- Updated and cleaned PULL_REQUEST_TEMPLATE.
+- Updated various files to new email.
+- Improved PULL_REQUEST_TEMPLATE.
+### Fixes
+- Bad grammer need good fix. Good fix done.
+- PEP8 styling across all files.
 
 ## [0.0.11] - 2019-07-22
 ### Added
