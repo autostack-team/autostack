@@ -11,10 +11,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Exception handling for requests.
 - Created [patreon](https://www.patreon.com/autostack).
 - Created CHANGELOG.md.
-- Shields for MSTeams chat, twitter, CI, and others.
+- Shields for MSTeams chat, Twitter, CI, Patreon, and others.
 ### Changed
 - Updated various files to new email.
 - Improved PULL_REQUEST_TEMPLATE.
+- Updated logo.
 ### Fixes
 - Bad grammer need good fix. Good fix done.
 - PEP8 styling across all files.
