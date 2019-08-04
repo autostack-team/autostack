@@ -37,6 +37,10 @@
         <img src="https://img.shields.io/twitter/follow/autostackteam.svg?style=social&logo=twitter"
              alt="Follow on Twitter"/>
     </a>
+    <a href="https://www.patreon.com/autostack">
+        <img src="https://img.shields.io/badge/Support-Patreon-red.svg"
+             alt="Support on Patreon"/>
+    </a>
 </p>
 
 autostack is a command-line debugging tool for Python projects that automatically displays Stack Overflow answers for thrown errors.
