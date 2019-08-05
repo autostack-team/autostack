@@ -30,7 +30,7 @@
              alt="License"/>
     </a>
     <a href="https://teams.microsoft.com/join/1oa3o6vva07n">
-        <img src="https://img.shields.io/badge/Chat-on_MSTeams-orange.svg"
+        <img src="https://img.shields.io/badge/Chat-MSTeams-orange.svg"
              alt="Chat"/>
     </a>
     <a href="https://twitter.com/intent/follow?screen_name=autostackteam">
@@ -38,8 +38,12 @@
              alt="Follow on Twitter"/>
     </a>
     <a href="https://www.patreon.com/autostack">
-        <img src="https://img.shields.io/badge/Support-Patreon-red.svg"
+        <img src="https://img.shields.io/badge/Support-Patreon-red?logo=patreon"
              alt="Support on Patreon"/>
+    </a>
+    <a href="https://instagram.com/retractablebearfist?igshid=7qlm4fol0o50">
+        <img src="https://img.shields.io/badge/logo%20by-RBF-purple?logo=instagram"
+             alt="Logo designer's instagram"/>
     </a>
 </p>
 
