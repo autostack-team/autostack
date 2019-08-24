@@ -107,7 +107,7 @@ def main():
                     break
                 elif question_answered == 'n':
                     no_counter += 1
-                    
+
                     # If three "no"s occur in a row
                     # let the user enter a custom query.
                     if no_counter == 3:

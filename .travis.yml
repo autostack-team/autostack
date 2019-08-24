@@ -4,6 +4,6 @@ python:
 install:
   - pip install -r requirements.txt
 script:
-  - python -m pytest --cov=autostack --pep8 autostack/
+  - python -m pytest --cov=autostack --pep8 --pylint autostack/
 after_success:
   - bash <(curl -s https://codecov.io/bash)

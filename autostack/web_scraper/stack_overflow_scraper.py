@@ -61,7 +61,7 @@ def accepted_posts(query):
             print('Looks like there might be a problem with your internet ',
                   'connection. Here is the link we generated for you so ',
                   'that you can use it when you\'re back online!')
-            print(query_url)            
+            print(query_url)
             # Break and listen for more errors.
             print(u'\U0001F95E Listening for Python errors...')
             break

@@ -34,6 +34,7 @@ setuptools.setup(
             'pytest',
             'pytest-pep8',
             'pytest-cov',
+            'pytest-pylint',
         ]
     },
 
