@@ -1,20 +1,20 @@
 ![Logo](https://raw.githubusercontent.com/autostack-team/autostack/develop/Logo.png)
 
 <p align="center">
-    <a href="https://travis-ci.com/elijahsawyers/autostack/">
-        <img src="https://travis-ci.com/elijahsawyers/autostack.svg?branch=master"
+    <a href="https://travis-ci.com/autostack-team/autostack/">
+        <img src="https://travis-ci.com/autostack-team/autostack.svg?branch=master"
             alt="Build status"/>
     </a>
-    <a href="https://codecov.io/gh/elijahsawyers/autostack">
-        <img src="https://codecov.io/gh/elijahsawyers/autostack/branch/master/graph/badge.svg" 
+    <a href="https://codecov.io/gh/autostack-team/autostack">
+        <img src="https://codecov.io/gh/autostack-team/autostack/branch/master/graph/badge.svg" 
             alt="Code coverage"/>
     </a>
     <a href="https://codeclimate.com/github/autostack-team/autostack/maintainability">
         <img src="https://api.codeclimate.com/v1/badges/4dc7775be0fef62e5492/maintainability" 
             alt="Maintainability"/>
     </a>
-    <a href="https://github.com/elijahsawyers/autostack">
-        <img src="https://img.shields.io/github/commit-activity/m/elijahsawyers/autostack"
+    <a href="https://github.com/autostack-team/autostack">
+        <img src="https://img.shields.io/github/commit-activity/m/autostack-team/autostack"
             alt="GitHub commit activity"/>
     </a>
     <a href="https://pypi.org/project/autostack/">
