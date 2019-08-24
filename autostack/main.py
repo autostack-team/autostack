@@ -10,42 +10,68 @@ Stack Overflow for the error and displays posts with accepted answers.
 from __future__ import print_function
 from builtins import input
 import os
-from .web_scraper.stack_overflow_scraper import (
+
+from autostack.web_scraper.stack_overflow_scraper import (
     accepted_posts,
     print_accepted_post
 )
 
-EXCEPTIONS = [
+from autostack.features.query_features import (
+    custom_query
+)
+
+BUILT_IN_EXCEPTIONS = [
     'Exception',
     'StopIteration',
-    'SystemExit',
-    'StandardError',
+    'StopAsyncIteration',
     'ArithmeticError',
-    'OverflowError',
     'FloatingPointError',
+    'OverflowError',
     'ZeroDivisionError',
     'AssertionError',
     'AttributeError',
+    'BufferError',
     'EOFError',
     'ImportError',
-    'KeyboardInterrupt',
+    'ModuleNotFoundError',
     'LookupError',
     'IndexError',
     'KeyError',
+    'MemoryError',
     'NameError',
     'UnboundLocalError',
-    'EnvironmentError',
-    'IOError',
     'OSError',
+    'BlockingIOError',
+    'ChildProcessError',
+    'ConnectionError',
+    'BrokenPipeError',
+    'ConnectionAbortedError',
+    'ConnectionRefusedError',
+    'ConnectionResetError',
+    'FileExistsError',
+    'FileNotFoundError',
+    'InterruptedError',
+    'IsADirectoryError',
+    'NotADirectoryError',
+    'PermissionError',
+    'ProcessLookupError',
+    'TimeoutError',
+    'ReferenceError',
+    'RuntimeError',
+    'NotImplementedError',
+    'RecursionError',
     'SyntaxError',
     'IndentationError',
+    'TabError',
     'SystemError',
-    'SystemExit',
     'TypeError',
     'ValueError',
-    'RuntimeError',
-    'NotImplementedError'
+    'UnicodeError',
+    'UnicodeDecodeError',
+    'UnicodeEncodeError',
+    'UnicodeTranslateError'
 ]
+
 
 def main():
     '''
@@ -67,8 +93,8 @@ def main():
 
     # Open the pipe.
     pipe = open('/tmp/monitorPipe', 'r')
-    print("Development terminal[s] open - ")
-    print("\U0001F95E Listening for Python errors...")
+    print('Development terminal[s] open - ')
+    print(u'\U0001F95E Listening for Python errors...')
 
     # Listen for new stdout.
     while True:
@@ -79,20 +105,56 @@ def main():
         if output == '':
             break
 
-        # If the current line of output is a python error, query Stack Overflow.
-        if output.split()[0][:-1] in EXCEPTIONS:
-            for post in accepted_posts(output):
-                # Display Stack Overflow posts for the error.
-                print_accepted_post(post)
+        # Variable to count number of "no"s.
+        no_counter = 0
 
-                # If the user's question has been answered, don't keep looping over posts.
-                while True:
-                    print('Did this answer your question? (Y/n): ', end='')
-                    question_answered = input()
-                    if str(question_answered) == 'Y' or str(question_answered) == 'n':
+        # If the current line of output is a built-in exception,
+        # query Stack Overflow.
+        try:
+            if output.split()[0][:-1] in BUILT_IN_EXCEPTIONS:
+                for post in accepted_posts(output.split()[0][:-1]):
+                    # Display Stack Overflow posts for the error.
+                    print_accepted_post(post)
+
+                    # If the user's question has been answered,
+                    # don't keep looping over posts.
+                    while True:
+                        print('Did this answer your question? (Y/n): ', end='')
+                        question_answered = input()
+                        if question_answered in ('Y', 'n'):
+                            break
+                    if question_answered == 'Y':
+                        print(u'\U0001F95E Listening for Python errors...')
                         break
-                if str(question_answered) == 'Y':
-                    print("\U0001F95E Listening for Python errors...")
-                    break
-                elif str(question_answered) == 'n':
-                    continue
+                    elif question_answered == 'n':
+                        continue
+
+            # If the current line of output indicates an exception,
+            # ignore the traceback and query Stack Overflow for the
+            # exception.
+            elif 'Traceback' in output.split():
+                output = pipe.readline()
+
+                while (
+                    output.split()[0][-1] != ':'
+                ):
+                    output = pipe.readline()
+                
+                for post in accepted_posts(output.split()[0][:-1]):
+                    # Display Stack Overflow posts for the error.
+                    print_accepted_post(post)
+
+                    # If the user's question has been answered,
+                    # don't keep looping over posts.
+                    while True:
+                        print('Did this answer your question? (Y/n): ', end='')
+                        question_answered = input()
+                        if question_answered in ('Y', 'n'):
+                            break
+                    if question_answered == 'Y':
+                        print(u'\U0001F95E Listening for Python errors...')
+                        break
+                    elif question_answered == 'n':
+                        continue
+        except:
+            continue

@@ -42,7 +42,7 @@ Unlike larger contributions, smaller contributions such as spelling errors or co
 
 # How to report a bug
 
-If you find a security vulnerability, do **NOT** open an issue. Email autostack@gmail.com instead.
+If you find a security vulnerability, do **NOT** open an issue. Email autostackteam@gmail.com instead.
 
 Follow the [template](.github/ISSUE_TEMPLATES/bug-report.md) provided.
 

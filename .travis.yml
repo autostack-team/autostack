@@ -1,0 +1,9 @@
+language: python
+python:
+  - "3.6"
+install:
+  - pip install -r requirements.txt
+script:
+  - python -m pytest --cov=autostack --pep8 --pylint autostack/
+after_success:
+  - bash <(curl -s https://codecov.io/bash)
