@@ -1,2 +1,1 @@
-* linguist-vendored
-*.py linguist-vendored=false
+*/tests/* linguist-vendored
