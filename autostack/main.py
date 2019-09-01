@@ -94,7 +94,7 @@ def main():
     # Open the pipe.
     pipe = open('/tmp/monitorPipe', 'r')
     print('Development terminal[s] open - ')
-    print(u'\U0001F95E Listening for Python errors...')
+    print_listening()
 
     # Listen for new stdout.
     while True:
@@ -123,8 +123,9 @@ def main():
                         question_answered = input()
                         if question_answered in ('Y', 'n'):
                             break
+
                     if question_answered == 'Y':
-                        print(u'\U0001F95E Listening for Python errors...')
+                        print_listening()
                         break
                     elif question_answered == 'n':
                         continue
@@ -151,10 +152,15 @@ def main():
                         question_answered = input()
                         if question_answered in ('Y', 'n'):
                             break
+
                     if question_answered == 'Y':
-                        print(u'\U0001F95E Listening for Python errors...')
+                        print_listening()
                         break
                     elif question_answered == 'n':
                         continue
         except:
             continue
+
+
+def print_listening():
+    print(u'\U0001F95E Listening for Python errors...')

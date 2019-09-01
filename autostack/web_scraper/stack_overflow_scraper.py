@@ -33,7 +33,7 @@ def accepted_posts(query):
     page = 1
 
     while True:
-        query_url = '{}/search?page={}&tab=Relevance&q='.format(URL, page)
+        query_url = '{}/search?page={}&tab=Relevance&q=%5Bpython%5D'.format(URL, page)
 
         # Build the query.
         for query_string in query.split(' '):
@@ -269,7 +269,12 @@ def print_code_block(code_block):
 
     # Loop through code spans.
     for token in code_block:
-        code += token
+        # Catch when spans are wrapped with other tags.
+        try:
+            code += token
+        except TypeError:
+            for nestedToken in token.contents:
+                code += nestedToken
 
     # Loop over code, and highlight.
     for token, content in pygments.lex(code, PythonLexer()):
