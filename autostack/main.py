@@ -20,56 +20,11 @@ from autostack.features.query_features import (
     custom_query
 )
 
-BUILT_IN_EXCEPTIONS = [
-    'Exception',
-    'StopIteration',
-    'StopAsyncIteration',
-    'ArithmeticError',
-    'FloatingPointError',
-    'OverflowError',
-    'ZeroDivisionError',
-    'AssertionError',
-    'AttributeError',
-    'BufferError',
-    'EOFError',
-    'ImportError',
-    'ModuleNotFoundError',
-    'LookupError',
-    'IndexError',
-    'KeyError',
-    'MemoryError',
-    'NameError',
-    'UnboundLocalError',
-    'OSError',
-    'BlockingIOError',
-    'ChildProcessError',
-    'ConnectionError',
-    'BrokenPipeError',
-    'ConnectionAbortedError',
-    'ConnectionRefusedError',
-    'ConnectionResetError',
-    'FileExistsError',
-    'FileNotFoundError',
-    'InterruptedError',
-    'IsADirectoryError',
-    'NotADirectoryError',
-    'PermissionError',
-    'ProcessLookupError',
-    'TimeoutError',
-    'ReferenceError',
-    'RuntimeError',
-    'NotImplementedError',
-    'RecursionError',
+PIPE_PATH = '/tmp/monitorPipe'
+SYNTAX_ERRORS = [
     'SyntaxError',
     'IndentationError',
     'TabError',
-    'SystemError',
-    'TypeError',
-    'ValueError',
-    'UnicodeError',
-    'UnicodeDecodeError',
-    'UnicodeEncodeError',
-    'UnicodeTranslateError'
 ]
 
 
@@ -84,16 +39,13 @@ def main():
     accepted answers.
     '''
 
-    # Ensure that the pipe exists; if not, create it.
-    if not os.path.exists('/tmp'):
-        os.mkdir('/tmp')
-        os.mkfifo('/tmp/monitorPipe')
-    elif not os.path.exists('/tmp/monitorPipe'):
-        os.mkfifo('/tmp/monitorPipe')
+    try:
+        create_pipe(PIPE_PATH)
+    except:
+        pass
 
     # Open the pipe.
-    pipe = open('/tmp/monitorPipe', 'r')
-    print('Development terminal[s] open - ')
+    pipe = open(PIPE_PATH, 'r')
     print_listening()
 
     # Listen for new stdout.
@@ -105,62 +57,69 @@ def main():
         if output == '':
             break
 
-        # Variable to count number of "no"s.
-        no_counter = 0
-
-        # If the current line of output is a built-in exception,
-        # query Stack Overflow.
         try:
-            if output.split()[0][:-1] in BUILT_IN_EXCEPTIONS:
-                for post in accepted_posts(output.split()[0][:-1]):
-                    # Display Stack Overflow posts for the error.
-                    print_accepted_post(post)
-
-                    # If the user's question has been answered,
-                    # don't keep looping over posts.
-                    while True:
-                        print('Did this answer your question? (Y/n): ', end='')
-                        question_answered = input()
-                        if question_answered in ('Y', 'n'):
-                            break
-
-                    if question_answered == 'Y':
-                        print_listening()
-                        break
-                    elif question_answered == 'n':
-                        continue
-
-            # If the current line of output indicates an exception,
-            # ignore the traceback and query Stack Overflow for the
-            # exception.
-            elif 'Traceback' in output.split():
+            if output.split()[0][:-1] in SYNTAX_ERRORS:  # Syntax errors don't have a traceback.
+                handle_exception(output)
+            elif 'Traceback' in output.split():  # Runtime error.
                 output = pipe.readline()
 
                 while (
                     output.split()[0][-1] != ':'
                 ):
                     output = pipe.readline()
-                
-                for post in accepted_posts(output.split()[0][:-1]):
-                    # Display Stack Overflow posts for the error.
-                    print_accepted_post(post)
 
-                    # If the user's question has been answered,
-                    # don't keep looping over posts.
-                    while True:
-                        print('Did this answer your question? (Y/n): ', end='')
-                        question_answered = input()
-                        if question_answered in ('Y', 'n'):
-                            break
-
-                    if question_answered == 'Y':
-                        print_listening()
-                        break
-                    elif question_answered == 'n':
-                        continue
+                handle_exception(output)
         except:
+            pass
+
+
+def handle_exception(exception):
+    '''
+    '''
+
+    for post in accepted_posts(exception.split()[0][:-1]):
+        # Display Stack Overflow posts for the error.
+        print_accepted_post(post)
+
+        handle_user_input()
+
+
+def handle_user_input():
+    '''
+    '''
+
+    while True:
+        print('Did this answer your question? (Y/n): ', end='')
+        question_answered = input()
+        if question_answered in ('Y', 'n'):
+            break
+
+        if question_answered == 'Y':
+            print_listening()
+            break
+        elif question_answered == 'n':
             continue
 
+def create_pipe(path):
+    '''
+    Creates a named pipe at the specified path. If the fifo already exists,
+    the function throws an error. This function will recursively create the
+    full file path.
+
+    Parameter {string}: the full path to the fifo.
+    '''
+
+    leaf_dir_path = path.split('/')[:-1].join('')
+
+    if (os.path.exists(path)):
+        raise Error('The fifo already exists.')
+    elif not os.path.exists(leaf_dir_path):
+        os.mkdirs(leaf_dir_path)
+    else:
+        os.mkfifo(path)
 
 def print_listening():
+    '''
+    Prints "🥞 Listening for Python errors..."
+    '''
     print(u'\U0001F95E Listening for Python errors...')
