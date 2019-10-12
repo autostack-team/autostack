@@ -36,15 +36,23 @@ def listen_for_errors(pipe):
         if output == '':
             break
 
-        try:
-            if output.split()[0][:-1] in SYNTAX_ERRORS:  # Syntax errors don't have a traceback.
-                error = output.split()[0][:-1]
-                handle_exception(error)
-            elif 'Traceback' in output.split():  # Runtime error.
-                error = get_error_from_traceback(pipe)
-                handle_exception(error_description)
-        except:
-            pass
+        parse_output_for_error(output)
+
+
+def parse_output_for_error(output):
+    '''
+    TODO: Write docstring.
+    '''
+
+    try:
+        if output.split()[0][:-1] in SYNTAX_ERRORS:  # Syntax errors - no traceback.
+            error = output.split()[0][:-1]
+            handle_exception(error)
+        elif 'Traceback' in output.split():  # Runtime error - has traceback.
+            error = get_error_from_traceback(pipe)
+            handle_exception(error_description)
+    except:
+        pass
 
 
 def get_error_from_traceback(pipe):
@@ -104,4 +112,5 @@ def print_listening_for_errors():
     '''
     Prints "🥞 Listening for Python errors..."
     '''
+
     print(u'\U0001F95E Listening for Python errors...')
