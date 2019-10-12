@@ -14,7 +14,7 @@ import pytest
 import requests
 from bs4 import BeautifulSoup
 
-from autostack.web_scraper.stack_overflow_scraper import (
+from autostack.so_web_scraper import (
     accepted_posts,
     print_accepted_post,
     print_post_text,

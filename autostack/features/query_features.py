@@ -7,7 +7,7 @@ Overview: Contains extra features for autostack.
 
 from __future__ import print_function
 from builtins import input
-from autostack.web_scraper.stack_overflow_scraper import (
+from autostack.so_web_scraper import (
     accepted_posts,
     print_accepted_post
 )
