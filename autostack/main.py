@@ -7,28 +7,20 @@ passed to the pipe. If the data is detected to be a python error, it queries
 Stack Overflow for the error and displays posts with accepted answers.
 '''
 
-from __future__ import print_function
-from builtins import input
-import os
-
+from autostack.error import (
+    listen_for_errors
+)
 from autostack.pipe import (
     create_pipe
 )
 
-PIPE_PATH = '/tmp/monitorPipe'
+PIPE_PATH = './blah/blah2/monitorPipe'
 
 
 def main():
     '''
-    Opens the fifo '/tmp/monitorPipe' and starts listening for python
-    errors inputed to the pipe.
+    Opens a fifo and starts listening for python errors inputed to the pipe.
     '''
 
-    try:
-        create_pipe(PIPE_PATH)
-    except:
-        pass
-
-    pipe = open(PIPE_PATH, 'r')
-
-    listen_for_errors(pipe)
+    with create_pipe(PIPE_PATH) as pipe:
+        listen_for_errors(pipe)
