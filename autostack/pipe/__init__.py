@@ -25,4 +25,4 @@ def create_pipe(path):
     except FileExistsError:
         pass
 
-    return open(PIPE_PATH, 'r')
+    return open(path, 'r')

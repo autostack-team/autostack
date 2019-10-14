@@ -13,127 +13,126 @@ from pygments.lexers import PythonLexer  # pylint: disable=no-name-in-module
 import requests
 from termcolor import colored
 
-
-URL = 'https://stackoverflow.com'
+BASE_URL = 'https://stackoverflow.com'
 
 
 def accepted_posts(query):
-    '''
-    Iterates over Stack Overflow posts for a given query.
-
-    The posts that are iterated are sorted by relevancy, and
-    the iterable only returns posts that have an accepted
-    answer.
-
-    Parameter {String} query: The Stack Overflow query.
-    Returns {BeautifulSoup}: An iterable that iterates
-    over Stack Overflow posts for the query.
-    '''
-
     page = 1
 
     while True:
-        query_url = '{}/search?page={}&tab=Relevance&q=%5Bpython%5D'.format(URL, page)
+        query_url = build_query_url(query, page)
+        query_soup = query_stack_overflow(query_url)
 
-        # Build the query.
-        for query_string in query.split(' '):
-            query_url = query_url + '+' + query_string
-
-        # Errors ordered from specific to general so that the
-        # specific ones don't get masked by the general ones.
-        try:
-            # The 'soup' of the query page.
-            request = requests.get(query_url)
-
-            # Throw an error, if it exists.
-            request.raise_for_status()
-        except requests.exceptions.HTTPError as err:
-            print('HTTP Error:', err)
-            print('Looks like there might be a problem with Stack Overflow. ',
-                  'Here is the link we generated so that you can use it when ',
-                  'it\'s back online!')
-            print(query_url)
-            # Break and listen for more errors.
-            print(u'\U0001F95E Listening for Python errors...')
-            break
-        except requests.exceptions.ConnectionError as errc:
-            print('Error Connecting:', errc)
-            print('Looks like there might be a problem with your internet ',
-                  'connection. Here is the link we generated for you so ',
-                  'that you can use it when you\'re back online!')
-            print(query_url)
-            # Break and listen for more errors.
-            print(u'\U0001F95E Listening for Python errors...')
-            break
-        except requests.exceptions.Timeout as errt:
-            print('Timeout Error:', errt)
-            print('Looks like we ran into a problem connecting to Stack ',
-                  'Overflow. Here is the link we generated for you so that ',
-                  'you can search for answers the primitive way, manually.')
-            print(query_url)
-            # Break and listen for more errors.
-            print(u'\U0001F95E Listening for Python errors...')
-            break
-        except requests.exceptions.TooManyRedirects as errtc:
-            print('Too Many Redirects Error:', errtc)
-            print('Looks like there might be a problem with your internet ',
-                  'connection. Here is the link we generated for you so ',
-                  'that you can use it when you\'re back online!')
-            print(query_url)
-            # Break and listen for more errors.
-            print(u'\U0001F95E Listening for Python errors...')
-            break
-        except requests.exceptions.RequestException as e:
-            # Catch all other errors.
-            print('Error:', e)
-            # Break and listen for more errors.
-            print(u'\U0001F95E Listening for Python errors...')
+        if not query_soup:
             break
 
-        # Get text from request.
-        query_html = request.text
-        # Turn text into soup object.
-        query_soup = BeautifulSoup(query_html, 'lxml')
+        post_summaries = get_post_summaries(query_soup)
 
-        # Grab all post summaries from the current page.
-        post_summaries = query_soup.find_all(
-            attrs={
-                'class': 'question-summary'
-            }
-        )
-
-        # No more posts for the given query.
         if not post_summaries:
-            page = 1
             break
 
         for post_summary in post_summaries:
-            accepted_answer = post_summary.find(
-                attrs={
-                    'class': 'answered-accepted'
-                }
-            )
+            soup = post_soup(post_summary)
 
-            # Only view posts with accepted answers.
-            if not accepted_answer:
-                continue
+            if soup:
+                yield soup
 
-            post_href = post_summary.find(
-                attrs={
-                    'class': 'question-hyperlink'
-                },
-                href=True
-            )['href']
-
-            # The 'soup' of the post.
-            request = requests.get(URL + post_href)
-            post_html = request.text
-            post_soup = BeautifulSoup(post_html, 'lxml')
-
-            yield post_soup
-
-        # Go to the next page
         page += 1
+
+
+def build_query_url(query, page):
+    '''
+    TODO: Write docstring.
+    '''
+
+    query_url = '{}/search?page={}&tab=Relevance&q=%5Bpython%5D'.format(
+        BASE_URL,
+        page
+    )
+
+    for query_string in query.split(' '):
+        query_url = '{}+{}'.format(query_url, query_string)
+
+    return query_url
+
+
+def query_stack_overflow(url):
+    '''
+    TODO: Write docstring.
+    '''
+
+    try:
+        response = requests.get(url)
+        response.raise_for_status()
+    except:
+        return None
+
+    return BeautifulSoup(response.text, 'lxml')
+
+
+def get_post_summaries(query_soup):
+    '''
+    TODO: Write docstring.
+    '''
+
+    return query_soup.find_all(
+        attrs={
+            'class': 'question-summary'
+        }
+    )
+
+
+def post_soup(post_summary):
+    '''
+    TODO: Write docstring.
+    '''
+
+    if has_accepted_answer(post_summary):
+        post_url = get_post_url(post_summary)
+
+        try:
+            response = requests.get(BASE_URL + post_href)
+        except:
+            return None
+        
+        post_soup = BeautifulSoup(response.text, 'lxml')
+
+        return post_soup
+    
+    return None
+
+
+def has_accepted_answer(post_summary):
+    '''
+    TODO: Write docstring.
+    '''
+
+    accepted_answer = post_summary.find(
+        attrs={
+            'class': 'answered-accepted'
+        }
+    )
+
+    if not accepted_answer:
+        return False
+
+    return True
+
+
+def get_post_url(post_summary):
+    '''
+    TODO: Write docstring.
+    '''
+
+    try:
+        return post_summary.find(
+            attrs={
+                'class': 'question-hyperlink'
+            },
+            href=True
+        )['href']
+    except:
+        return None
 
 
 def print_accepted_post(post):
