@@ -36,21 +36,21 @@ def listen_for_errors(pipe):
         if output == '':
             break
 
-        parse_output_for_error(output)
+        parse_output_for_error(output, pipe)
 
 
-def parse_output_for_error(output):
+def parse_output_for_error(output, pipe):
     '''
     TODO: Write docstring.
     '''
 
     try:
         if output.split()[0][:-1] in SYNTAX_ERRORS:  # Syntax errors - no traceback.
-            error = output.split()[0][:-1]
+            error = output.split()[0]
             handle_exception(error)
         elif 'Traceback' in output.split():  # Runtime error - has traceback.
             error = get_error_from_traceback(pipe)
-            handle_exception(error_description)
+            handle_exception(error)
     except:
         pass
 
@@ -67,7 +67,7 @@ def get_error_from_traceback(pipe):
     ):
         output = pipe.readline()
 
-    return output.split()[0][:-1]
+    return output.split()[0]
 
 
 def handle_exception(exception):
@@ -75,7 +75,7 @@ def handle_exception(exception):
     TODO: Write docstring.
     '''
 
-    for post in accepted_posts(exception.split()[0][:-1]):
+    for post in accepted_posts(exception[:-1]):
         # Display Stack Overflow posts for the error.
         print_accepted_post(post)
 
