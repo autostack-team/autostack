@@ -17,6 +17,10 @@ BASE_URL = 'https://stackoverflow.com'
 
 
 def accepted_posts(query):
+    '''
+    TODO: Write docstring.
+    '''
+
     page = 1
 
     while True:
@@ -194,7 +198,6 @@ def print_accepted_post(post):
     print_post_text(accepted_answer)
 
     print(colored('~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~', 'red'))
-    return
 
 
 def print_post_text(post_text):
