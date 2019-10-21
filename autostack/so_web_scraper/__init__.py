@@ -218,30 +218,35 @@ def print_post_text(post_text):
     'post-text.'
     '''
 
+    element_colors = {
+        'h1': 'white',
+        'h2': 'white',
+        'h3': 'white',
+        'p': 'white',
+        'blockquote': 'yellow',
+    }
+
     for element in post_text:
-        if (
-            element.name == 'h1' or
-            element.name == 'h2' or
-            element.name == 'h3'
-        ):  # Headers.
+        try:
             print(
-                colored(element.text, 'white', attrs=['bold'])
+                colored(element.text, element_colors[element.name], attrs=['bold'])
             )
-        elif element.name == 'p':  # Text.
-            print(
-                colored(element.text, 'white')
-            )
-        elif element.name == 'blockquote':  # Quotes.
-            print(
-                colored('    ' + element.text, 'yellow')
-            )
-        elif element.name == 'ul':  # Lists.
-            for item in element.find_all('li'):
-                print(
-                    colored('    - ' + item.text, 'green', attrs=['bold'])
-                )
-        elif element.name == 'pre':  # Code.
-            print_code_block(element.find('code'))
+        except KeyError:
+            if element.name == 'ul':  # Lists.
+                print_ul(element)
+            elif element.name == 'pre':  # Code.
+                print_code_block(element.find('code'))
+
+
+def print_ul(ul):
+    '''
+    TODO: Write docstring.
+    '''
+
+    for item in ul.find_all('li'):
+        print(
+            colored('    - ' + item.text, 'green', attrs=['bold'])
+        )
 
 
 def print_code_block(code_block):
@@ -261,7 +266,7 @@ def print_code_block(code_block):
     'code' element from a Stack Overflow post.
     '''
 
-    color_dict = {
+    token_colors = {
         'Token.Keyword': 'blue',
         'Token.Name.Builtin.Pseudo': 'blue',
         'Token.Literal.Number.Integer': 'green',
@@ -276,6 +281,28 @@ def print_code_block(code_block):
     print('')
 
     # Store the code's text.
+    code = get_code_text(code_block)
+
+    # Loop over code, and highlight.
+    for token, content in pygments.lex(code, PythonLexer()):
+        try:
+            print(
+                colored(content, token_colors[str(token)]),
+                end=''
+            )
+        except KeyError:
+            print(
+                content,
+                end=''
+            )
+
+    print('')
+
+def get_code_text(code_block):
+    '''
+    TODO: Write docstring.
+    '''
+
     code = ''
 
     # Loop through code spans.
@@ -286,18 +313,5 @@ def print_code_block(code_block):
         except TypeError:
             for nestedToken in token.contents:
                 code += nestedToken
-
-    # Loop over code, and highlight.
-    for token, content in pygments.lex(code, PythonLexer()):
-        try:
-            print(
-                colored(content, color_dict[str(token)]),
-                end=''
-            )
-        except KeyError:
-            print(
-                content,
-                end=''
-            )
-
-    print('')
+    
+    return code
