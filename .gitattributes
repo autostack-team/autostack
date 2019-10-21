@@ -1,1 +1,2 @@
-*/tests/* linguist-vendored
+*.html linguist-vendored
+*.py linguist-vendored=false
