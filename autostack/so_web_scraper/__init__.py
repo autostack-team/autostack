@@ -91,7 +91,7 @@ def post_soup(post_summary):
         post_url = get_post_url(post_summary)
 
         try:
-            response = requests.get(BASE_URL + post_href)
+            response = requests.get(BASE_URL + post_url)
         except:
             return None
         
@@ -261,6 +261,18 @@ def print_code_block(code_block):
     'code' element from a Stack Overflow post.
     '''
 
+    color_dict = {
+        'Token.Keyword': 'blue',
+        'Token.Name.Builtin.Pseudo': 'blue',
+        'Token.Literal.Number.Integer': 'green',
+        'Token.Literal.Number.Float': 'green',
+        'Token.Comment.Single': 'green',
+        'Token.Comment.Hashbang': 'green',
+        'Token.Literal.String.Single': 'yellow',
+        'Token.Literal.String.Double': 'yellow',
+        'Token.Literal.String.Doc': 'yellow'
+    }
+
     print('')
 
     # Store the code's text.
@@ -277,52 +289,12 @@ def print_code_block(code_block):
 
     # Loop over code, and highlight.
     for token, content in pygments.lex(code, PythonLexer()):
-        if str(token) == 'Token.Keyword':
+        try:
             print(
-                colored(content, 'blue'),
+                colored(content, color_dict[str(token)]),
                 end=''
             )
-        elif str(token) == 'Token.Name.Builtin.Pseudo':
-            print(
-                colored(content, 'blue'),
-                end=''
-            )
-        elif str(token) == 'Token.Literal.Number.Integer':
-            print(
-                colored(content, 'green'),
-                end=''
-            )
-        elif str(token) == 'Token.Literal.Number.Float':
-            print(
-                colored(content, 'green'),
-                end=''
-            )
-        elif str(token) == 'Token.Literal.String.Single':
-            print(
-                colored(content, 'yellow'),
-                end=''
-            )
-        elif str(token) == 'Token.Literal.String.Double':
-            print(
-                colored(content, 'yellow'),
-                end=''
-            )
-        elif str(token) == 'Token.Literal.String.Doc':
-            print(
-                colored(content, 'yellow'),
-                end=''
-            )
-        elif str(token) == 'Token.Comment.Single':
-            print(
-                colored(content, 'green'),
-                end=''
-            )
-        elif str(token) == 'Token.Comment.Hashbang':
-            print(
-                colored(content, 'green'),
-                end=''
-            )
-        else:
+        except KeyError:
             print(
                 content,
                 end=''
