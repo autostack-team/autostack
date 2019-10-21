@@ -64,38 +64,38 @@ What is the first thing you do when a confusing error message is displayed in yo
 **1. Clone the repo and use the install script.**
 
 Clone the repo.
-```
+```sh
 git clone https://github.com/autostack-team/autostack.git
 ```
 
 Navigate to the project directory, and run the install bash script.
-```
-$ cd /path/to/project/
-$ chmod +x install.sh
-$ ./install.sh 
+```sh
+cd /path/to/project/
+chmod +x install.sh
+./install.sh 
 ```
 
 **2. Or just use pip to install.**
 
-```
-$ pip3 install autostack
+```sh
+pip3 install autostack
 ```
 
 ## Usage 
 
 In one terminal window, execute the autostack command to listen for errors.
-```
-$ autostack
+```sh
+autostack
 ```
 
 In another terminal window, execute autostack-termal which will inform the autostack listener to listen for errors in the terminal.
-```
-$ autostack-terminal
+```sh
+autostack-terminal
 ``` 
 
 To stop running autostack, use the exit command in the autostack-terminal windows. This automatically stops the terminal window listening for errors.
-```
-$ exit
+```sh
+exit
 ```
 
 ## Contributing
