@@ -20,5 +20,7 @@ def main():
     Entry point of autostack.
     '''
 
-    with create_pipe(PIPE_PATH) as pipe:
+    create_pipe(PIPE_PATH)
+
+    with open(PIPE_PATH) as pipe:
         listen_for_errors(pipe)
