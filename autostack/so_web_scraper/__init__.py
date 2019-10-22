@@ -21,11 +21,12 @@ def accepted_posts(query):
     TODO: Write docstring.
     '''
 
-    for post_summary in get_post_summaries(query):
-        post = post_soup(post_summary)
-        
-        if post:
-            yield post
+    for result_set in get_post_summaries(query):
+        for post_summary in result_set:
+            post = post_soup(post_summary)
+
+            if post:
+                yield post
 
 
 def get_post_summaries(query):
@@ -51,7 +52,7 @@ def get_post_summaries(query):
         if not post_summaries:
             break
 
-        return post_summaries
+        yield post_summaries
 
         page += 1
 
@@ -80,7 +81,7 @@ def query_stack_overflow(url):
     try:
         response = requests.get(url)
         response.raise_for_status()
-    except:
+    except requests.exceptions.HTTPError:
         return None
 
     return BeautifulSoup(response.text, 'lxml')
@@ -96,13 +97,11 @@ def post_soup(post_summary):
 
         try:
             response = requests.get(BASE_URL + post_url)
-        except:
+        except requests.exceptions.HTTPError:
             return None
-        
-        post_soup = BeautifulSoup(response.text, 'lxml')
 
-        return post_soup
-    
+        return BeautifulSoup(response.text, 'lxml')
+
     return None
 
 
@@ -135,7 +134,7 @@ def get_post_url(post_summary):
             },
             href=True
         )['href']
-    except:
+    except KeyError:
         return None
 
 
@@ -229,12 +228,12 @@ def print_post_text(post_text):
             print_code_block(element.find('code'))
 
 
-def print_ul(ul):
+def print_ul(ul_element):
     '''
     TODO: Write docstring.
     '''
 
-    for item in ul.find_all('li'):
+    for item in ul_element.find_all('li'):
         print(
             colored('    - ' + item.text, 'green', attrs=['bold'])
         )
@@ -289,6 +288,7 @@ def print_code_block(code_block):
 
     print('')
 
+
 def get_src_code(code_block):
     '''
     TODO: Write docstring.
@@ -303,14 +303,13 @@ def get_src_code(code_block):
             code += token
         except TypeError:
             code += get_nested_src_code(token)
-    
+
     return code
 
 
 def get_nested_src_code(token):
-    code = ''
+    '''
+    TODO: Write docstring.
+    '''
 
-    for nestedToken in token.contents:
-        code += nestedToken
-    
-    return code
+    return ''.join(token.contents)

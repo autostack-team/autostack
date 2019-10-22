@@ -7,6 +7,7 @@ Overview:
 
 import os
 
+
 def create_pipe(path):
     '''
     TODO: Write docstring.
@@ -19,7 +20,7 @@ def create_pipe(path):
 
     if not os.path.exists(leaf_dir_path):
         os.makedirs(leaf_dir_path)
-    
+
     try:
         os.mkfifo(path)
     except FileExistsError:

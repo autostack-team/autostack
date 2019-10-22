@@ -45,13 +45,15 @@ def parse_output_for_error(output, pipe):
     '''
 
     try:
-        if output.split()[0][:-1] in SYNTAX_ERRORS:  # Syntax errors - no traceback.
+        # Syntax errors - no traceback.
+        if output.split()[0][:-1] in SYNTAX_ERRORS:
             error = output.split()[0]
             handle_exception(error)
-        elif 'Traceback' in output.split():  # Runtime error - has traceback.
+        # Runtime error - has traceback.
+        elif 'Traceback' in output.split():
             error = get_error_from_traceback(pipe)
             handle_exception(error)
-    except:
+    except IndexError:
         pass
 
 
@@ -63,7 +65,7 @@ def get_error_from_traceback(pipe):
     output = pipe.readline()
 
     while (
-        output.split()[0][-1] != ':'
+            output.split()[0][-1] != ':'
     ):
         output = pipe.readline()
 
@@ -97,14 +99,18 @@ def error_solved():
         print('Did this solve your error? (Y/n): ', end='')
         is_error_solved = input()
 
-        if not is_error_solved in ('Y', 'n'):
-            print('{} is not valid input! Please try again.'.format(is_error_solved))
+        if is_error_solved not in ('Y', 'n'):
+            print(
+                '{} is not valid input! Please try again.'.format(
+                    is_error_solved
+                )
+            )
         else:
             break
 
     if is_error_solved == 'n':
         return False
-    
+
     return True
 
 
