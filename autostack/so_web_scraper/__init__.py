@@ -147,43 +147,11 @@ def print_accepted_post(post):
     to print.
     '''
 
-    question = None
-    try:
-        question = post.find(
-            attrs={
-                'class',
-                'question'
-            }
-        ).find(
-            attrs={
-                'class',
-                'post-text'
-            }
-        )
-    except AttributeError:
-        return
-    finally:
-        if not question:
-            return
+    question = get_post_text(post, 'question')
+    accepted_answer = get_post_text(post, 'accepted-answer')
 
-    accepted_answer = None
-    try:
-        accepted_answer = post.find(
-            attrs={
-                'class',
-                'accepted-answer'
-            }
-        ).find(
-            attrs={
-                'class',
-                'post-text'
-            }
-        )
-    except AttributeError:
+    if question is None or accepted_answer is None:
         return
-    finally:
-        if not accepted_answer:
-            return
 
     print(colored('~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~', 'red'))
     print(colored('Question:', 'red'))
@@ -198,6 +166,27 @@ def print_accepted_post(post):
     print_post_text(accepted_answer)
 
     print(colored('~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~', 'red'))
+
+
+def get_post_text(post, html_class):
+    '''
+    TODO: Write docstring.
+    '''
+
+    try:
+        return post.find(
+            attrs={
+                'class',
+                html_class
+            }
+        ).find(
+            attrs={
+                'class',
+                'post-text'
+            }
+        )
+    except AttributeError:
+        return None
 
 
 def print_post_text(post_text):
