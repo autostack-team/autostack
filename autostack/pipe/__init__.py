@@ -23,7 +23,5 @@ def create_pipe(path):
 
     try:
         os.mkfifo(path)
-    except FileExistsError:
+    except (FileExistsError, OSError):
         pass
-
-    return open(path, 'r')
