@@ -21,44 +21,39 @@ def accepted_posts(query):
     TODO: Write docstring.
     '''
 
-    page = 1
-
-    while True:
-        post_summaries = get_post_summaries(query, page)
-
-        if not post_summaries:
-            break
-
-        for post_summary in post_summaries:
-            soup = post_soup(post_summary)
-
-            if soup:
-                yield soup
-
-        page += 1
+    for post_summary in get_post_summaries(query):
+        post = post_soup(post_summary)
+        
+        if post:
+            yield post
 
 
-def get_post_summaries(query, page):
+def get_post_summaries(query):
     '''
     TODO: Write docstring.
     '''
 
-    query_url = build_query_url(query, page)
-    query_soup = query_stack_overflow(query_url)
+    page = 1
 
-    if not query_soup:
-        None
+    while True:
+        query_url = build_query_url(query, page)
+        query_soup = query_stack_overflow(query_url)
 
-    post_summaries = query_soup.find_all(
-        attrs={
-            'class': 'question-summary'
-        }
-    )
+        if not query_soup:
+            break
 
-    if not post_summaries:
-        None
+        post_summaries = query_soup.find_all(
+            attrs={
+                'class': 'question-summary'
+            }
+        )
 
-    return post_summaries
+        if not post_summaries:
+            break
+
+        return post_summaries
+
+        page += 1
 
 
 def build_query_url(query, page):
