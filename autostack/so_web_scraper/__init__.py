@@ -17,6 +17,10 @@ BASE_URL = 'https://stackoverflow.com'
 
 
 def accepted_posts(query):
+    '''
+    TODO: Write docstring.
+    '''
+
     page = 1
 
     while True:
@@ -194,7 +198,6 @@ def print_accepted_post(post):
     print_post_text(accepted_answer)
 
     print(colored('~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~', 'red'))
-    return
 
 
 def print_post_text(post_text):
@@ -227,15 +230,14 @@ def print_post_text(post_text):
     }
 
     for element in post_text:
-        try:
+        if element.name in element_colors.keys():
             print(
-                colored(element.text, element_colors[element.name], attrs=['bold'])
+                colored(element.text, element_colors[element.name])
             )
-        except KeyError:
-            if element.name == 'ul':  # Lists.
-                print_ul(element)
-            elif element.name == 'pre':  # Code.
-                print_code_block(element.find('code'))
+        elif element.name == 'ul':  # Lists.
+            print_ul(element)
+        elif element.name == 'pre':  # Code.
+            print_code_block(element.find('code'))
 
 
 def print_ul(ul):
@@ -281,7 +283,7 @@ def print_code_block(code_block):
     print('')
 
     # Store the code's text.
-    code = get_code_text(code_block)
+    code = get_src_code(code_block)
 
     # Loop over code, and highlight.
     for token, content in pygments.lex(code, PythonLexer()):
@@ -298,7 +300,7 @@ def print_code_block(code_block):
 
     print('')
 
-def get_code_text(code_block):
+def get_src_code(code_block):
     '''
     TODO: Write docstring.
     '''
@@ -311,7 +313,15 @@ def get_code_text(code_block):
         try:
             code += token
         except TypeError:
-            for nestedToken in token.contents:
-                code += nestedToken
+            code += get_nested_src_code(token)
+    
+    return code
+
+
+def get_nested_src_code(token):
+    code = ''
+
+    for nestedToken in token.contents:
+        code += nestedToken
     
     return code
