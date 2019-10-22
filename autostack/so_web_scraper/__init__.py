@@ -302,14 +302,6 @@ def get_src_code(code_block):
         try:
             code += token
         except TypeError:
-            code += get_nested_src_code(token)
+            code.join(token.contents)
 
     return code
-
-
-def get_nested_src_code(token):
-    '''
-    TODO: Write docstring.
-    '''
-
-    return ''.join(token.contents)
