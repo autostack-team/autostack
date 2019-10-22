@@ -5,8 +5,8 @@
         <img src="https://travis-ci.com/autostack-team/autostack.svg?branch=master"
             alt="Build status"/>
     </a>
-    <a href="https://codecov.io/gh/autostack-team/autostack">
-        <img src="https://codecov.io/gh/autostack-team/autostack/branch/master/graph/badge.svg" 
+    <a href="https://codeclimate.com/github/autostack-team/autostack/test_coverage">
+        <img src="https://api.codeclimate.com/v1/badges/4dc7775be0fef62e5492/test_coverage" 
             alt="Code coverage"/>
     </a>
     <a href="https://codeclimate.com/github/autostack-team/autostack/maintainability">
