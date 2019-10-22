@@ -10,4 +10,7 @@ before_script:
 script:
   - python -m pytest --cov=autostack --cov-report=xml --pep8 --pylint autostack/
 after_success:
-  - ./cc-test-reporter after-build -r 187673978f9ae2b867d03bb9e0e4c972cd3b681fb96c67e1ad2590bab066f1f9
+  - ./cc-test-reporter after-build -r $COVERAGE_KEY
+branches:
+  only: 
+    - master
