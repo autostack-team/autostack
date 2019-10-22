@@ -1,3 +1,5 @@
 [run]
 omit =
     *__tests__/*
+    *main.py*
+    *autostack/__init__.py*
