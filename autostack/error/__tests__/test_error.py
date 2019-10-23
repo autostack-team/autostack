@@ -15,13 +15,14 @@ from autostack.error import (
 )
 
 
-def test_error_solved_y(capsys, monkeypatch):
+def test_error_solved_y(monkeypatch):
     '''
     Ensures that when 'Y' is inputted, error_solved returns True.
     '''
 
     # 1. Given.
-    def mock_input(prompt):
+    def mock_input(*args):
+        # pylint: disable=unused-argument
         return 'Y'
 
     monkeypatch.setattr('builtins.input', mock_input)
@@ -30,16 +31,17 @@ def test_error_solved_y(capsys, monkeypatch):
     is_error_solved = error_solved()
 
     # 3. Then.
-    assert is_error_solved == True
+    assert is_error_solved
 
 
-def test_error_solved_n(capsys, monkeypatch):
+def test_error_solved_n(monkeypatch):
     '''
     Ensures that when 'n' is inputted, error_solved returns False.
     '''
 
     # 1. Given.
-    def mock_input(prompt):
+    def mock_input(*args):
+        # pylint: disable=unused-argument
         return 'n'
 
     monkeypatch.setattr('builtins.input', mock_input)
@@ -48,7 +50,7 @@ def test_error_solved_n(capsys, monkeypatch):
     is_error_solved = error_solved()
 
     # 3. Then.
-    assert is_error_solved == False
+    assert not is_error_solved
 
 
 def test_error_solved_invalid_input(capsys, monkeypatch):
@@ -60,13 +62,14 @@ def test_error_solved_invalid_input(capsys, monkeypatch):
     # 1. Given.
     def make_mock_input():
         call_count = 0
-        def mock_input(prompt):
+
+        def mock_input(*args):
+            # pylint: disable=unused-argument
             nonlocal call_count
             if call_count == 0:
                 call_count += 1
                 return 'a'
-            else:
-                return 'Y'
+            return 'Y'
         return mock_input
 
     monkeypatch.setattr('builtins.input', make_mock_input())
@@ -75,7 +78,9 @@ def test_error_solved_invalid_input(capsys, monkeypatch):
     is_error_solved = error_solved()
 
     # 3. Then.
-    assert is_error_solved == True
+    captured = capsys.readouterr()
+    assert captured.out == 'a is not valid input! Please try again.\n'
+    assert is_error_solved
 
 
 def test_print_listening_for_errors(capsys):
