@@ -6,7 +6,7 @@ Overview: Contains the StackOverflowScraper class which is used to
 scrape Stack Overflow for posts with accepted answers for a given query.
 '''
 
-from __future__ import print_function
+from __future__ import absolute_import, division, print_function
 from bs4 import BeautifulSoup
 import pygments
 from pygments.lexers import PythonLexer  # pylint: disable=no-name-in-module

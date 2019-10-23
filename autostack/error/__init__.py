@@ -5,8 +5,7 @@ Date: 10/09/2019
 Overview: TODO: Write overview.
 '''
 
-from __future__ import print_function
-from builtins import input
+from __future__ import absolute_import, division, print_function
 
 from autostack.so_web_scraper import (
     accepted_posts,
@@ -90,14 +89,17 @@ def handle_exception(exception):
 
 def error_solved():
     '''
-    TODO: Write docstring.
+    Prompts the user to input whether or not his/her error was solved.
+    The only two valid inputs are 'Y' and 'n'. 'Y' meaning the error
+    was solved and 'f' meaning it wasn't solved.
+
+    Returns: True if 'Y' was inputed and False if 'f' was inputed.
     '''
 
     is_error_solved = False
 
     while True:
-        print('Did this solve your error? (Y/n): ', end='')
-        is_error_solved = input()
+        is_error_solved = input('Did this solve your error? (Y/n): ')
 
         if is_error_solved not in ('Y', 'n'):
             print(
