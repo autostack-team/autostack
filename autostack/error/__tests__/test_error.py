@@ -8,7 +8,7 @@ Overview: Tests for the error package.
 from autostack.error import (
     listen_for_errors,
     parse_output_for_error,
-    # get_error_from_traceback,
+    get_error_from_traceback,
     # handle_exception,
     error_solved,
     print_listening_for_errors,
@@ -122,6 +122,10 @@ def test_parse_output_for_error_traceback(monkeypatch):
 
     def mock_get_error_from_traceback(pipe):
         # pylint: disable=unused-argument
+        '''
+        Mocks the get_error_from_traceback function.
+        '''
+
         return 'NameError'
 
     monkeypatch.setattr(
@@ -142,6 +146,26 @@ def test_parse_output_for_error_traceback(monkeypatch):
     assert mock_handle_exception.was_called
 
 
+def test_get_error_from_traceback():
+    '''
+    Ensures that the error description is returned from a
+    traceback.
+    '''
+
+    # 1. Given.
+    mock_pipe = MockPipe([
+        '    File "<stdin>", line 1, in <module>',
+        'NameError: name \'xyz\' is not defined'
+    ])
+
+    # 2. When.
+    error = get_error_from_traceback(mock_pipe)
+
+    # 3. Then.
+    assert error == 'NameError'
+    assert mock_pipe.get_readline_call_count() == 2
+
+
 def test_error_solved_y(monkeypatch):
     '''
     Ensures that when 'Y' is inputted, error_solved returns True.
@@ -151,6 +175,7 @@ def test_error_solved_y(monkeypatch):
     def mock_input(*args):
         # pylint: disable=unused-argument
         '''
+        Mocks user input to be 'Y'.
         '''
 
         return 'Y'
@@ -173,6 +198,7 @@ def test_error_solved_n(monkeypatch):
     def mock_input(*args):
         # pylint: disable=unused-argument
         '''
+        Mocks user input to be 'n'.
         '''
 
         return 'n'
@@ -195,6 +221,8 @@ def test_error_solved_invalid_input(capsys, monkeypatch):
     # 1. Given.
     def make_mock_input():
         '''
+        Creates the mock function to mock user intput, and the
+        input is different based on the call count.
         '''
 
         call_count = 0
@@ -202,6 +230,7 @@ def test_error_solved_invalid_input(capsys, monkeypatch):
         def mock_input(*args):
             # pylint: disable=unused-argument
             '''
+            Mocks user input to be 'a' then 'Y'.
             '''
 
             nonlocal call_count

@@ -72,7 +72,16 @@ def parse_output_for_error(output, pipe):
 
 def get_error_from_traceback(pipe):
     '''
-    TODO: Write docstring.
+    Gets the error description from a traceback.
+
+    e.g.:
+        Traceback (most recent call last):
+            File "<stdin>", line 1, in <module>
+        NameError: name 'xyz' is not defined
+    would return 'NameError'.
+
+    Parameter {File} pipe: the pipe to read the traceback from.
+    Returns {str}: the error description.
     '''
 
     output = pipe.readline()
@@ -90,7 +99,7 @@ def handle_exception(exception):
     TODO: Write docstring.
     '''
 
-    for post in accepted_posts(exception[:-1]):
+    for post in accepted_posts(exception):
         # Display Stack Overflow posts for the error.
         print_accepted_post(post)
 
