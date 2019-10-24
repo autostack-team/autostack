@@ -8,12 +8,13 @@ Overview: Tests for the error package.
 from autostack.error import (
     listen_for_errors,
     parse_output_for_error,
-    # get_error_from_traceback,
+    get_error_from_traceback,
     # handle_exception,
     error_solved,
     print_listening_for_errors,
 )
 from autostack.error.__tests__.mock_pipe import MockPipe
+from autostack.error.__tests__.mock_handle_exception import MockHandleException
 
 
 def test_listen_for_errors(monkeypatch):
@@ -64,27 +65,21 @@ def test_parse_output_for_error_non_error(monkeypatch):
     '''
 
     # 1. Given.
-    output = 'IndentationError: unexpected indent'
-    error_called_with = None
-    was_called = False
-
-    def mock_handle_exception(error):
-        nonlocal error_called_with
-        nonlocal was_called
-        was_called = True
-        error_called_with = error
+    mock_handle_exception = MockHandleException()
 
     monkeypatch.setattr(
         'autostack.error.handle_exception',
-        mock_handle_exception
+        mock_handle_exception.handle_exception
     )
+
+    output = 'Not an error.'
 
     # 2. When.
     parse_output_for_error(output, None)
 
     # 3. Then.
-    assert error_called_with == 'IndentationError'
-    assert was_called
+    assert not mock_handle_exception.parameter
+    assert not mock_handle_exception.was_called
 
 
 def test_parse_output_for_error_with_error(monkeypatch):
@@ -94,27 +89,21 @@ def test_parse_output_for_error_with_error(monkeypatch):
     '''
 
     # 1. Given.
-    output = 'Not an error.'
-    error_called_with = None
-    was_called = False
-
-    def mock_handle_exception(error):
-        nonlocal error_called_with
-        nonlocal was_called
-        was_called = True
-        error_called_with = error
+    mock_handle_exception = MockHandleException()
 
     monkeypatch.setattr(
         'autostack.error.handle_exception',
-        mock_handle_exception
+        mock_handle_exception.handle_exception
     )
+
+    output = 'IndentationError: unexpected indent'
 
     # 2. When.
     parse_output_for_error(output, None)
 
     # 3. Then.
-    assert not error_called_with
-    assert not was_called
+    assert mock_handle_exception.parameter == 'IndentationError'
+    assert mock_handle_exception.was_called
 
 
 def test_parse_output_for_error_traceback(monkeypatch):
@@ -124,27 +113,24 @@ def test_parse_output_for_error_traceback(monkeypatch):
     '''
 
     # 1. Given.
-    pipe = MockPipe([
+    mock_pipe = MockPipe([
         '    File "<stdin>", line 1, in <module>',
         'NameError: name \'xyz\' is not defined'
     ])
+    mock_handle_exception = MockHandleException()
     output = 'Traceback (most recent call last):'
-    error_called_with = None
-    was_called = False
-
-    def mock_handle_exception(error):
-        nonlocal error_called_with
-        nonlocal was_called
-        was_called = True
-        error_called_with = error
 
     def mock_get_error_from_traceback(pipe):
         # pylint: disable=unused-argument
+        '''
+        Mocks the get_error_from_traceback function.
+        '''
+
         return 'NameError'
 
     monkeypatch.setattr(
         'autostack.error.handle_exception',
-        mock_handle_exception
+        mock_handle_exception.handle_exception
     )
 
     monkeypatch.setattr(
@@ -153,11 +139,31 @@ def test_parse_output_for_error_traceback(monkeypatch):
     )
 
     # 2. When.
-    parse_output_for_error(output, pipe)
+    parse_output_for_error(output, mock_pipe)
 
     # 3. Then.
-    assert error_called_with == 'NameError'
-    assert was_called
+    assert mock_handle_exception.parameter == 'NameError'
+    assert mock_handle_exception.was_called
+
+
+def test_get_error_from_traceback():
+    '''
+    Ensures that the error description is returned from a
+    traceback.
+    '''
+
+    # 1. Given.
+    mock_pipe = MockPipe([
+        '    File "<stdin>", line 1, in <module>',
+        'NameError: name \'xyz\' is not defined'
+    ])
+
+    # 2. When.
+    error = get_error_from_traceback(mock_pipe)
+
+    # 3. Then.
+    assert error == 'NameError'
+    assert mock_pipe.get_readline_call_count() == 2
 
 
 def test_error_solved_y(monkeypatch):
@@ -169,6 +175,7 @@ def test_error_solved_y(monkeypatch):
     def mock_input(*args):
         # pylint: disable=unused-argument
         '''
+        Mocks user input to be 'Y'.
         '''
 
         return 'Y'
@@ -191,6 +198,7 @@ def test_error_solved_n(monkeypatch):
     def mock_input(*args):
         # pylint: disable=unused-argument
         '''
+        Mocks user input to be 'n'.
         '''
 
         return 'n'
@@ -213,6 +221,8 @@ def test_error_solved_invalid_input(capsys, monkeypatch):
     # 1. Given.
     def make_mock_input():
         '''
+        Creates the mock function to mock user intput, and the
+        input is different based on the call count.
         '''
 
         call_count = 0
@@ -220,6 +230,7 @@ def test_error_solved_invalid_input(capsys, monkeypatch):
         def mock_input(*args):
             # pylint: disable=unused-argument
             '''
+            Mocks user input to be 'a' then 'Y'.
             '''
 
             nonlocal call_count
