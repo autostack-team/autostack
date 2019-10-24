@@ -21,14 +21,15 @@ SYNTAX_ERRORS = [
 
 def listen_for_errors(pipe):
     '''
-    TODO: Write docstring.
+    Reads output from a pipe until EOF, indicated by empty string. The
+    output is parsed for errors.
+
+    Parameter {File}: the pipe to read output from.
     '''
 
     print_listening_for_errors()
 
-    # Listen for new stdout.
     while True:
-        # Read a line from the pipe.
         output = pipe.readline()
 
         # Pipe closed.
@@ -40,13 +41,26 @@ def listen_for_errors(pipe):
 
 def parse_output_for_error(output, pipe):
     '''
-    TODO: Write docstring.
+    Parses a line of output, and determines whether or not it is
+    an error message. There are two types of errors, syntax errors
+    and runtime errors. Syntax errors do not have a traceback but
+    runtime errors do.
+
+    e.g. without traceback:
+        IndentationError: unexpected indent
+    e.g. with traceback:
+        Traceback (most recent call last):
+            File "<stdin>", line 1, in <module>
+        NameError: name 'xyz' is not defined
+
+    Parameter {str} output: line of output from a pipe.
+    Parameter {File} pipe: pipe to read output from, in case of traceback.
     '''
 
     try:
         # Syntax errors - no traceback.
         if output.split()[0][:-1] in SYNTAX_ERRORS:
-            error = output.split()[0]
+            error = output.split()[0][:-1]
             handle_exception(error)
         # Runtime error - has traceback.
         elif 'Traceback' in output.split():
@@ -68,7 +82,7 @@ def get_error_from_traceback(pipe):
     ):
         output = pipe.readline()
 
-    return output.split()[0]
+    return output.split()[0][:-1]
 
 
 def handle_exception(exception):
