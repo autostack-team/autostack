@@ -9,7 +9,7 @@ from autostack.error import (
     listen_for_errors,
     parse_output_for_error,
     get_error_from_traceback,
-    # handle_exception,
+    handle_exception,
     error_solved,
     print_listening_for_errors,
 )
@@ -146,6 +146,29 @@ def test_parse_output_for_error_traceback(monkeypatch):
     assert mock_handle_exception.was_called
 
 
+def test_parse_output_for_error_index_error(monkeypatch):
+    '''
+    Ensures that parse_output_for_error catches index errors.
+    '''
+
+    # 1. Given.
+    mock_handle_exception = MockHandleException()
+
+    monkeypatch.setattr(
+        'autostack.error.handle_exception',
+        mock_handle_exception.handle_exception
+    )
+
+    output = ''
+
+    # 2. When.
+    parse_output_for_error(output, None)
+
+    # 3. Then.
+    assert not mock_handle_exception.parameter
+    assert not mock_handle_exception.was_called
+
+
 def test_get_error_from_traceback():
     '''
     Ensures that the error description is returned from a
@@ -164,6 +187,83 @@ def test_get_error_from_traceback():
     # 3. Then.
     assert error == 'NameError'
     assert mock_pipe.get_readline_call_count() == 2
+
+
+def test_handle_exception(capsys, monkeypatch):
+    '''
+    Ensures that posts are printed until the user inputs 'Y'
+    to stop.
+    '''
+
+    # 1. Given.
+    def make_mock_accepted_posts():
+        '''
+        Mocks the accepted_posts function.
+        '''
+
+        iteration = 0
+
+        def mock_accepted_posts(*args):
+            # pylint: disable=unused-argument
+            '''
+            Mocks the accepted_posts function which yields
+            string digits instead of actual post bs4 soup.
+            '''
+
+            nonlocal iteration
+            yield str(iteration)
+            iteration += 1
+
+        return mock_accepted_posts
+
+    def mock_print_accepted_post(*args):
+        # pylint: disable=unused-argument
+        '''
+        Mocks the print_accepted_post function.
+        '''
+
+        return
+
+    def mock_error_solved():
+        '''
+        Mocks the error_solved function.
+        '''
+
+        return True
+
+    def mock_print_listening_for_errors():
+        '''
+        Mocks the print_listening_for_errors function.
+        '''
+
+        print(u'\U0001F95E Listening for Python errors...')
+
+    monkeypatch.setattr(
+        'autostack.error.accepted_posts',
+        make_mock_accepted_posts()
+    )
+
+    monkeypatch.setattr(
+        'autostack.error.print_accepted_post',
+        mock_print_accepted_post
+    )
+
+    monkeypatch.setattr(
+        'autostack.error.error_solved',
+        mock_error_solved
+    )
+
+    monkeypatch.setattr(
+        'autostack.error.print_listening_for_errors',
+        mock_print_listening_for_errors
+    )
+
+    # 2. When.
+    handle_exception('Error')
+
+    # 3. Then.
+    captured = capsys.readouterr()
+    assert captured.out == u'\U0001F95E Listening for Python errors...\n'
 
 
 def test_error_solved_y(monkeypatch):

@@ -94,12 +94,17 @@ def get_error_from_traceback(pipe):
     return output.split()[0][:-1]
 
 
-def handle_exception(exception):
+def handle_exception(error_description):
     '''
-    TODO: Write docstring.
+    When passed an error description, this function loops over each
+    accepted Stack Overflow post, and displays them, until the user
+    inputs 'Y'.
+
+    Parameter {str} error_description: the error description to
+    display posts for.
     '''
 
-    for post in accepted_posts(exception):
+    for post in accepted_posts(error_description):
         # Display Stack Overflow posts for the error.
         print_accepted_post(post)
 
