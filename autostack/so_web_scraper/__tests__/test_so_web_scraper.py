@@ -13,7 +13,7 @@ from autostack.so_web_scraper import (
     build_query_url,
     query_stack_overflow,
     post_soup,
-    # has_accepted_answer,
+    has_accepted_answer,
     # get_post_url,
     # print_accepted_post,
     # get_post_text,
@@ -249,7 +249,7 @@ def test_query_stack_overflow_bad_response_status(monkeypatch):
 
 def test_post_soup_no_accepted_answer(monkeypatch):
     '''
-    Ensures None is returned when there's no accepted answer.
+    Ensures that None is returned when there's no accepted answer.
     '''
 
     # 1. Given.
@@ -275,7 +275,7 @@ def test_post_soup_no_accepted_answer(monkeypatch):
 
 def test_post_soup_accepted_answer(monkeypatch):
     '''
-    Ensures BeautifulSoup is returned when there's an accepted answer.
+    Ensures that BeautifulSoup is returned when there's an accepted answer.
     '''
 
     # 1. Given.
@@ -326,7 +326,7 @@ def test_post_soup_accepted_answer(monkeypatch):
 
 def test_post_soup_bad_status(monkeypatch):
     '''
-    Ensures None is returned when the request status is bad.
+    Ensures that None is returned when the request status is bad.
     '''
 
     # 1. Given.
@@ -369,3 +369,51 @@ def test_post_soup_bad_status(monkeypatch):
 
     # 3. Then.
     assert not response
+
+
+def test_has_accepted_answer_false():
+    '''
+    Ensures that has_accepted_answer returns False when the post
+    does not have an accepted answer.
+    '''
+
+    # 1. Given.
+    html = open(
+        'autostack/so_web_scraper/__tests__/data/query_post_summaries.html'
+    ).read()
+
+    post_summary = BeautifulSoup(html, 'lxml').find_all(
+        attrs={
+            'class': 'question-summary'
+        }
+    )[0]
+
+    # 2. When.
+    accepted_answer = has_accepted_answer(post_summary)
+
+    # 3. Then.
+    assert not accepted_answer
+
+
+def test_has_accepted_answer_true():
+    '''
+    Ensures that has_accepted_answer returns True when the post
+    does in fact have an accepted answer.
+    '''
+
+    # 1. Given.
+    html = open(
+        'autostack/so_web_scraper/__tests__/data/query_post_summaries.html'
+    ).read()
+
+    post_summary = BeautifulSoup(html, 'lxml').find_all(
+        attrs={
+            'class': 'question-summary'
+        }
+    )[4]
+
+    # 2. When.
+    accepted_answer = has_accepted_answer(post_summary)
+
+    # 3. Then.
+    assert accepted_answer
