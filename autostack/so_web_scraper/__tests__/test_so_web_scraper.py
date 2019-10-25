@@ -61,6 +61,7 @@ def test_accepted_posts(monkeypatch):
         '''
         nonlocal post_soup_call_count
         post_soup_call_count += 1
+        return 'SOUP'
 
     monkeypatch.setattr(
         'autostack.so_web_scraper.get_post_summaries',
@@ -135,6 +136,50 @@ def test_get_post_summaries(monkeypatch):
 
     # 3. Then.
     assert query_stack_overflow_call_count == 3
+
+
+def test_get_post_summaries_no_query_soup(monkeypatch):
+    '''
+    Ensures that the generator yields nothing when there's
+    no BeautifulSoup returned from querying Stack Overflow.
+    '''
+
+    # 1. Given.
+    def mock_build_query_url(*args):
+        # pylint: disable=unused-argument
+        '''
+        Mocks the build_query_url function.
+        '''
+
+        return
+
+    def mock_query_stack_overflow(*args):
+        # pylint: disable=unused-argument
+        '''
+        Mocks the query_stack_overflow function.
+        '''
+
+        return None
+
+    monkeypatch.setattr(
+        'autostack.so_web_scraper.build_query_url',
+        mock_build_query_url
+    )
+
+    monkeypatch.setattr(
+        'autostack.so_web_scraper.query_stack_overflow',
+        mock_query_stack_overflow
+    )
+
+    # 2. When.
+    post_count = 0
+
+    # pylint: disable=unused-variable
+    for post_summaries in get_post_summaries(None):
+        post_count += 1
+
+    # 3. Then.
+    assert post_count == 0
 
 
 def test_build_query_url():
@@ -297,7 +342,7 @@ def test_post_soup_bad_status(monkeypatch):
         Mocks the has_accepted_answer function.
         '''
 
-        return False
+        return True
 
     def mock_get_post_url(*args):
         # pylint: disable=unused-argument
