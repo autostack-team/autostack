@@ -42,7 +42,7 @@ def test_accepted_posts(monkeypatch):
             'autostack/so_web_scraper/__tests__/data/query_post_summaries.html'
         ).read()
 
-        post_summaries = BeautifulSoup(html, features="lxml").find_all(
+        post_summaries = BeautifulSoup(html, features='lxml').find_all(
             attrs={
                 'class': 'question-summary'
             }
@@ -108,11 +108,11 @@ def test_get_post_summaries(monkeypatch):
         if query_stack_overflow_call_count == 3:
             return BeautifulSoup(open(
                 base + 'query_no_post_summaries.html'
-            ).read(), features="lxml")
+            ).read(), features='lxml')
 
         return BeautifulSoup(open(
             base + 'query_post_summaries.html'
-        ).read(), features="lxml")
+        ).read(), features='lxml')
 
     monkeypatch.setattr(
         'autostack.so_web_scraper.build_query_url',
