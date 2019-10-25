@@ -120,6 +120,7 @@ def post_soup(post_summary):
 
         try:
             response = requests.get(BASE_URL + post_url)
+            response.raise_for_status()
         except requests.exceptions.HTTPError:
             return None
 
