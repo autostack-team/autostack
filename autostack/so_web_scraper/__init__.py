@@ -18,7 +18,11 @@ BASE_URL = 'https://stackoverflow.com'
 
 def accepted_posts(query):
     '''
-    TODO: Write docstring.
+    A generator that queries Stack Overflow and yields posts with
+    accepted answers.
+
+    Parameter {str} query: the string to query Stack Overflow with.
+    Yields {bs4.BeautifulSoup}: accepted posts html documents.
     '''
 
     for result_set in get_post_summaries(query):
@@ -31,7 +35,11 @@ def accepted_posts(query):
 
 def get_post_summaries(query):
     '''
-    TODO: Write docstring.
+    A generator that queries Stack Overflow and yields a ResultSet
+    of post summaries.
+
+    Parameter {str} query: the string to query Stack Overflow with.
+    Yields {bs4.element.ResultSet}: ResultSet of post summaries.
     '''
 
     page = 1
