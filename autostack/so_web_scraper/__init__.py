@@ -67,7 +67,13 @@ def get_post_summaries(query):
 
 def build_query_url(query, page):
     '''
-    TODO: Write docstring.
+    Builds a URL to query Stack Overflow with.
+
+    e.g. query == 'Test Query' and page == 1 then the url will be:
+    https://stackoverflow.com/search?page=1&tab=Relevance&q=%5Bpython%5D+Test+Query
+
+    Parameter {str} query: the string to query Stack Overflow with.
+    Parameter {int} page: the page to select in the query.
     '''
 
     query_url = '{}/search?page={}&tab=Relevance&q=%5Bpython%5D'.format(
@@ -83,7 +89,11 @@ def build_query_url(query, page):
 
 def query_stack_overflow(url):
     '''
-    TODO: Write docstring.
+    Given a url, this function returns the BeautifulSoup of the
+    request.
+
+    Parameter {str} url: the url to request.
+    Returns {bs4.BeautifulSoup}: the BeautifulSoup of the request.
     '''
 
     try:
@@ -97,7 +107,12 @@ def query_stack_overflow(url):
 
 def post_soup(post_summary):
     '''
-    TODO: Write docstring.
+    Given a post summary, query Stack Overflow, and return the
+    BeautifulSoup of the post, if it has an accepted answer.
+
+    Parameter {bs4.Tag} post_summary: the bs4.Tag post summary.
+    Parameter {bs4.BeautifulSoup}: the BeautifulSoup of the post,
+    if it has an accepted answer; otherwise, None.
     '''
 
     if has_accepted_answer(post_summary):
