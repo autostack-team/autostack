@@ -14,7 +14,7 @@ from autostack.so_web_scraper import (
     query_stack_overflow,
     post_soup,
     has_accepted_answer,
-    # get_post_url,
+    get_post_url,
     # print_accepted_post,
     # get_post_text,
     # print_post_text,
@@ -417,3 +417,59 @@ def test_has_accepted_answer_true():
 
     # 3. Then.
     assert accepted_answer
+
+
+def test_get_post_url_where_url_exists():
+    '''
+    Ensures that a url is returned from get_post_url
+    when a url exists.
+    '''
+
+    # 1. Given.
+    html = open(
+        'autostack/so_web_scraper/__tests__/data/query_post_summaries.html'
+    ).read()
+
+    post_summary = BeautifulSoup(html, 'lxml').find(
+        attrs={
+            'class': 'question-summary'
+        }
+    )
+
+    # 2. When.
+    url = get_post_url(post_summary)
+
+    # 3. Then.
+    # pylint: disable=line-too-long
+    assert url == '/questions/930397/getting-the-last-element-of-a-list/930398?r=SearchResults#930398'  # nopep8
+
+
+def test_get_post_url_where_url_doesnt_exist():
+    '''
+    Ensures that None is returned from get_post_url
+    when a url doesn't exist.
+    '''
+
+    # 1. Given.
+    # pylint: disable=too-few-public-methods
+    class MockPostSummary:
+        '''
+        Mocks a post summary.
+        '''
+
+        def find(self, *args, **kwargs):
+            # pylint: disable=unused-argument,no-self-use
+            '''
+            Returns an empty dictionary, mocking a find call on a
+            bs4.Tag.
+            '''
+
+            return dict()
+
+    mock_post_summary = MockPostSummary()
+
+    # 2. When.
+    url = get_post_url(mock_post_summary)
+
+    # 3. Then.
+    assert not url
