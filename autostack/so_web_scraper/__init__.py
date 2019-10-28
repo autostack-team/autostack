@@ -202,7 +202,15 @@ def print_accepted_post(post):
 
 def get_post_text(post, html_class):
     '''
-    TODO: Write docstring.
+    Given a post, and a html class, this function returns a
+    bs4.Tag with the post-text.
+    Typically, you'd only pass 'question' or 'accepted-answer' as
+    the html class.
+
+    Parameter {bs4.BeautifulSoup} post: the post to get post-text from.
+    Parameter {str} html_class: the html class of the elementto get
+    post-text from.
+    Returns {bs4.Tag}: the post-text.
     '''
 
     try:
@@ -234,12 +242,11 @@ def print_post_text(post_text):
     Headers: White.
     Text: White.
     Quotes: Yellow.
-    Lists: Green.
-    Code: Syntax Highlighted in print_code_block().
+    Lists: Syntax Highlighted in print_ul.
+    Code: Syntax Highlighted in print_code_block.
 
-    Parameter {BeautifulSoup} post_text: 'soup' of a HTML
-    'div' element from a Stack Overflow post with class of
-    'post-text.'
+    Parameter {bs4.Tag} post_text: HTML 'div' element from a Stack Overflow
+    post with class of 'post-text.'
     '''
 
     element_colors = {
@@ -263,7 +270,9 @@ def print_post_text(post_text):
 
 def print_ul(ul_element):
     '''
-    TODO: Write docstring.
+    Prints an unordered list.
+
+    Parameter {bs4.Tag} ul_element: the unordered list to print.
     '''
 
     for item in ul_element.find_all('li'):
@@ -281,11 +290,7 @@ def print_code_block(code_block):
     to grab each of the 'code' element's 'span' elements' values to get
     the actual code.
 
-    To highlight the syntax, Pygments PythonLexer is used on the
-    code that was grabbed from the 'span' elements inside of the
-    'code' element.
-
-    Parameter {BeautifulSoup} code_block: 'soup' of a HTML
+    Parameter {bs4.Tag} code_block: 'soup' of a HTML
     'code' element from a Stack Overflow post.
     '''
 
@@ -324,17 +329,17 @@ def print_code_block(code_block):
 
 def get_src_code(code_block):
     '''
-    TODO: Write docstring.
+    Loops over a code block and grabs the 'source code'
+    (i.e. text).
+
+    Parameter {bs4.Tag} code_block: the source code (or text).
+    Returns {str}: the source code (or text).
     '''
 
     code = ''
 
     # Loop through code spans.
     for token in code_block:
-        # Catch when spans are wrapped with other tags.
-        try:
-            code += token
-        except TypeError:
-            code.join(token.contents)
+        code += token.text
 
     return code
