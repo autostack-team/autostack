@@ -57,7 +57,7 @@ What is the first thing you do when a confusing error message is displayed in yo
 * [Usage](#Usage)
 * [Contributing](#Contributing)
 * [License](#License)
-* [Show your support](#Show your support)
+* [Show&nbsp;your&nbsp;support](#Show&nbsp;your&nbsp;support)
 * [Authors](#Authors)
 
 ## Installation
