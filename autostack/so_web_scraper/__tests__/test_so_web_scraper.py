@@ -5,6 +5,7 @@ Date: 10/25/2019
 Overview: Tests for the so_web_scraper package.
 '''
 
+import re
 from bs4 import BeautifulSoup
 
 from autostack.so_web_scraper import (
@@ -14,8 +15,8 @@ from autostack.so_web_scraper import (
     query_stack_overflow,
     post_soup,
     has_accepted_answer,
-    # get_post_url,
-    # print_accepted_post,
+    get_post_url,
+    print_accepted_post,
     # get_post_text,
     # print_post_text,
     # print_ul,
@@ -26,6 +27,8 @@ from autostack.so_web_scraper.__tests__.mock_response import (
     MockResponse,
     build_mock_get
 )
+
+ANSI_ESCAPE = re.compile(r'\x1B[@-_][0-?]*[ -/]*[@-~]')
 
 
 def test_accepted_posts(monkeypatch):
@@ -417,3 +420,161 @@ def test_has_accepted_answer_true():
 
     # 3. Then.
     assert accepted_answer
+
+
+def test_get_post_url_where_url_exists():
+    '''
+    Ensures that a url is returned from get_post_url
+    when a url exists.
+    '''
+
+    # 1. Given.
+    html = open(
+        'autostack/so_web_scraper/__tests__/data/query_post_summaries.html'
+    ).read()
+
+    post_summary = BeautifulSoup(html, 'lxml').find(
+        attrs={
+            'class': 'question-summary'
+        }
+    )
+
+    # 2. When.
+    url = get_post_url(post_summary)
+
+    # 3. Then.
+    # pylint: disable=line-too-long
+    assert url == '/questions/930397/getting-the-last-element-of-a-list/930398?r=SearchResults#930398'  # nopep8
+
+
+def test_get_post_url_where_url_doesnt_exist():
+    '''
+    Ensures that None is returned from get_post_url
+    when a url doesn't exist.
+    '''
+
+    # 1. Given.
+    # pylint: disable=too-few-public-methods
+    class MockPostSummary:
+        '''
+        Mocks a post summary.
+        '''
+
+        def find(self, *args, **kwargs):
+            # pylint: disable=unused-argument,no-self-use
+            '''
+            Returns an empty dictionary, mocking a find call on a
+            bs4.Tag.
+            '''
+
+            return dict()
+
+    mock_post_summary = MockPostSummary()
+
+    # 2. When.
+    url = get_post_url(mock_post_summary)
+
+    # 3. Then.
+    assert not url
+
+
+def test_print_accepted_post_no_question(capsys, monkeypatch):
+    '''
+    Ensures that nothing is printed when no question is found on a post.
+    '''
+
+    # 1. Given.
+    def mock_get_post_text(*args):
+        '''
+        Mocks the get_post_text function.
+        '''
+
+        if args[1] == 'question':
+            return None
+        return True
+
+    monkeypatch.setattr(
+        'autostack.so_web_scraper.get_post_text',
+        mock_get_post_text
+    )
+
+    # 2. When.
+    print_accepted_post(None)
+
+    # 3. Then.
+    captured = capsys.readouterr()
+    assert not captured.out
+
+
+def test_print_accepted_post_no_answer(capsys, monkeypatch):
+    '''
+    Ensures that nothing is printed when no answer is found on a post.
+    '''
+
+    # 1. Given.
+    def mock_get_post_text(*args):
+        '''
+        Mocks the get_post_text function.
+        '''
+
+        if args[1] == 'accepted-answer':
+            return None
+        return True
+
+    monkeypatch.setattr(
+        'autostack.so_web_scraper.get_post_text',
+        mock_get_post_text
+    )
+
+    # 2. When.
+    print_accepted_post(None)
+
+    # 3. Then.
+    captured = capsys.readouterr()
+    assert not captured.out
+
+
+def test_print_accepted_post_found_question_and_answer(capsys, monkeypatch):
+    '''
+    Ensures proper output when both a question and answer are found.
+    '''
+
+    # 1. Given.
+    def mock_get_post_text(*args):
+        # pylint: disable=unused-argument
+        '''
+        Mocks the get_post_text function.
+        '''
+
+        return True
+
+    def mock_print_post_text(*args):
+        # pylint: disable=unused-argument
+        '''
+        Mocks the print_post_text function.
+        '''
+
+        return
+
+    monkeypatch.setattr(
+        'autostack.so_web_scraper.get_post_text',
+        mock_get_post_text
+    )
+
+    monkeypatch.setattr(
+        'autostack.so_web_scraper.print_post_text',
+        mock_print_post_text
+    )
+
+    # 2. When.
+    print_accepted_post(None)
+
+    # 3. Then.
+    captured = capsys.readouterr()
+    assert ANSI_ESCAPE.sub('', captured.out) == (
+        '~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n' +
+        'Question:\n' +
+        '~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n' +
+        'Answer:\n' +
+        '~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n'
+    )

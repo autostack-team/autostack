@@ -131,7 +131,12 @@ def post_soup(post_summary):
 
 def has_accepted_answer(post_summary):
     '''
-    TODO: Write docstring.
+    Given a post summary, this function determines whether or not
+    the post has an accepted answer.
+
+    Parameter {bs4.Tag} post_summary: the post summary.
+    Returns {Boolean}: True if the post has an accepted answer;
+    otherwise, False.
     '''
 
     accepted_answer = post_summary.find(
@@ -148,7 +153,11 @@ def has_accepted_answer(post_summary):
 
 def get_post_url(post_summary):
     '''
-    TODO: Write docstring.
+    Given a post summary, this function returns the post's url.
+
+    Parameter {bs4.Tag} post_summary: the post summary.
+    Returns {str:None}: post url, or None, if the post url couldn't
+    be found.
     '''
 
     try:
@@ -166,7 +175,7 @@ def print_accepted_post(post):
     '''
     Prints a Stack Overflow post with an accepted answer.
 
-    Parameter {BeautifulSoup} post: The 'soup' of the post
+    Parameter {bs4.BeautifulSoup} post: The 'soup' of the post
     to print.
     '''
 
