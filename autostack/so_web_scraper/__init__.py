@@ -206,6 +206,11 @@ def get_post_text(post, html_class):
     bs4.Tag with the post-text.
     Typically, you'd only pass 'question' or 'accepted-answer' as
     the html class.
+
+    Parameter {bs4.BeautifulSoup} post: the post to get post-text from.
+    Parameter {str} html_class: the html class of the elementto get
+    post-text from.
+    Returns {bs4.Tag}: the post-text.
     '''
 
     try:
@@ -237,12 +242,11 @@ def print_post_text(post_text):
     Headers: White.
     Text: White.
     Quotes: Yellow.
-    Lists: Green.
-    Code: Syntax Highlighted in print_code_block().
+    Lists: Syntax Highlighted in print_ul.
+    Code: Syntax Highlighted in print_code_block.
 
-    Parameter {BeautifulSoup} post_text: 'soup' of a HTML
-    'div' element from a Stack Overflow post with class of
-    'post-text.'
+    Parameter {bs4.Tag} post_text: HTML 'div' element from a Stack Overflow
+    post with class of 'post-text.'
     '''
 
     element_colors = {
@@ -266,7 +270,9 @@ def print_post_text(post_text):
 
 def print_ul(ul_element):
     '''
-    TODO: Write docstring.
+    Prints an unordered list.
+
+    Parameter {bs4.Tag} ul_element: the unordered list to print.
     '''
 
     for item in ul_element.find_all('li'):

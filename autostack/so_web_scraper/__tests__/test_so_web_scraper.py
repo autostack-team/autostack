@@ -18,8 +18,8 @@ from autostack.so_web_scraper import (
     get_post_url,
     print_accepted_post,
     get_post_text,
-    # print_post_text,
-    # print_ul,
+    print_post_text,
+    print_ul,
     # print_code_block,
     # get_src_code,
 )
@@ -536,7 +536,7 @@ def test_print_accepted_post_no_answer(capsys, monkeypatch):
 
 def test_print_accepted_post_found_question_and_answer(capsys, monkeypatch):
     '''
-    Ensures proper output when both a question and answer are found.
+    Ensures that proper output when both a question and answer are found.
     '''
 
     # 1. Given.
@@ -582,7 +582,7 @@ def test_print_accepted_post_found_question_and_answer(capsys, monkeypatch):
 
 def test_get_post_text_question():
     '''
-    Ensures the question post-text is returned for a post.
+    Ensures that the question post-text is returned for a post.
     '''
 
     # 1. Given.
@@ -616,7 +616,7 @@ def test_get_post_text_answer():
 
 def test_get_post_text_invalid_html_class():
     '''
-    Ensures None when an Attribute error occures.
+    Ensures that None when an Attribute error occures.
     '''
 
     # 1. Given.
@@ -641,3 +641,92 @@ def test_get_post_text_invalid_html_class():
 
     # 3. Then.
     assert not post_text
+
+
+def test_print_post_text(capsys, monkeypatch):
+    '''
+    Ensures that proper output when print_post_text is called.
+    '''
+
+    # 1. Given.
+    path = 'autostack/so_web_scraper/__tests__/data/post_text.html'
+    html = open(path).read()
+    post_text = BeautifulSoup(html, 'lxml').find(
+        attrs={
+            'class',
+            'post-text'
+        }
+    )
+
+    def mock_other_print_functions(*args):
+        # pylint: disable=unused-argument
+        '''
+        Mocks print_ul and print_code_block functions.
+        '''
+
+        return
+
+    monkeypatch.setattr(
+        'autostack.so_web_scraper.print_ul',
+        mock_other_print_functions
+    )
+
+    monkeypatch.setattr(
+        'autostack.so_web_scraper.print_code_block',
+        mock_other_print_functions
+    )
+
+    # 2. When.
+    print_post_text(post_text)
+
+    # 3. Then.
+    captured = capsys.readouterr()
+    assert ANSI_ESCAPE.sub('', captured.out) == (
+        'Test 1\n' +
+        'Test 2\n' +
+        'Test 3\n' +
+        'Test 4\n' +
+        'Test 5\n'
+    )
+
+
+def test_print_ul_populated(capsys):
+    '''
+    Ensures that all list elements are printed.
+    '''
+
+    # 1. Given.
+    path = (
+        'autostack/so_web_scraper/__tests__/data/post_text_ul_populated.html'
+    )
+    html = open(path).read()
+    unordered_list = BeautifulSoup(html, 'lxml').find('ul')
+
+    # 2. When.
+    print_ul(unordered_list)
+
+    # 3. Then.
+    captured = capsys.readouterr()
+    assert ANSI_ESCAPE.sub('', captured.out) == (
+        '    - Test 1\n' +
+        '    - Test 2\n' +
+        '    - Test 3\n'
+    )
+
+
+def test_print_ul_empty(capsys):
+    '''
+    Ensures that nothing is printed when the unordered list is empty.
+    '''
+
+    # 1. Given.
+    path = 'autostack/so_web_scraper/__tests__/data/post_text_ul_empty.html'
+    html = open(path).read()
+    unordered_list = BeautifulSoup(html, 'lxml').find('ul')
+
+    # 2. When.
+    print_ul(unordered_list)
+
+    # 3. Then.
+    captured = capsys.readouterr()
+    assert not captured.out
