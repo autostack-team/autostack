@@ -791,7 +791,7 @@ def test_get_src_code():
     line_2 = 'reduce(lambda x, y: x.extend(y), l)'
     path = 'autostack/so_web_scraper/__tests__/data/post_text_code.html'
     html = open(path).read()
-    code_block = BeautifulSoup(html, 'lxml').find('code')
+    code_block = BeautifulSoup(html, 'lxml').find('div').find('code')
 
     # 2. When.
     src_code = get_src_code(code_block)

@@ -340,6 +340,9 @@ def get_src_code(code_block):
 
     # Loop through code spans.
     for token in code_block:
-        code += token.text
+        try:  # bs4.NavigableString
+            code += token
+        except TypeError:  # bs4.Tag
+            code += get_src_code(token.contents)
 
     return code
