@@ -17,7 +17,7 @@ from autostack.so_web_scraper import (
     has_accepted_answer,
     get_post_url,
     print_accepted_post,
-    # get_post_text,
+    get_post_text,
     # print_post_text,
     # print_ul,
     # print_code_block,
@@ -578,3 +578,66 @@ def test_print_accepted_post_found_question_and_answer(capsys, monkeypatch):
         'Answer:\n' +
         '~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n'
     )
+
+
+def test_get_post_text_question():
+    '''
+    Ensures the question post-text is returned for a post.
+    '''
+
+    # 1. Given.
+    path = 'autostack/so_web_scraper/__tests__/data/post_accepted_answer.html'
+    html = open(path).read()
+    post = BeautifulSoup(html, 'lxml')
+
+    # 2. When.
+    post_text = get_post_text(post, 'question')
+
+    # 3. Then.
+    assert post_text
+
+
+def test_get_post_text_answer():
+    '''
+    Ensures the accepted answer post-text is returned for a post.
+    '''
+
+    # 1. Given.
+    path = 'autostack/so_web_scraper/__tests__/data/post_accepted_answer.html'
+    html = open(path).read()
+    post = BeautifulSoup(html, 'lxml')
+
+    # 2. When.
+    post_text = get_post_text(post, 'accepted-answer')
+
+    # 3. Then.
+    assert post_text
+
+
+def test_get_post_text_invalid_html_class():
+    '''
+    Ensures None when an Attribute error occures.
+    '''
+
+    # 1. Given.
+    # pylint: disable=too-few-public-methods
+    class MockPost:
+        '''
+        Mocks a post.
+        '''
+
+        def find(self, *args, **kwargs):
+            # pylint: disable=unused-argument,no-self-use
+            '''
+            Returns None, mocking a find call on a bs4.Tag.
+            '''
+
+            return None
+
+    mock_post = MockPost()
+
+    # 2. When.
+    post_text = get_post_text(mock_post, 'invalid-class')
+
+    # 3. Then.
+    assert not post_text

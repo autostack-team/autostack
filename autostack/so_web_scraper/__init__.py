@@ -202,7 +202,10 @@ def print_accepted_post(post):
 
 def get_post_text(post, html_class):
     '''
-    TODO: Write docstring.
+    Given a post, and a html class, this function returns a
+    bs4.Tag with the post-text.
+    Typically, you'd only pass 'question' or 'accepted-answer' as
+    the html class.
     '''
 
     try:
