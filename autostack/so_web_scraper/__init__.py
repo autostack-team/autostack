@@ -290,11 +290,7 @@ def print_code_block(code_block):
     to grab each of the 'code' element's 'span' elements' values to get
     the actual code.
 
-    To highlight the syntax, Pygments PythonLexer is used on the
-    code that was grabbed from the 'span' elements inside of the
-    'code' element.
-
-    Parameter {BeautifulSoup} code_block: 'soup' of a HTML
+    Parameter {bs4.Tag} code_block: 'soup' of a HTML
     'code' element from a Stack Overflow post.
     '''
 
@@ -333,17 +329,17 @@ def print_code_block(code_block):
 
 def get_src_code(code_block):
     '''
-    TODO: Write docstring.
+    Loops over a code block and grabs the 'source code'
+    (i.e. text).
+
+    Parameter {bs4.Tag} code_block: the source code (or text).
+    Returns {str}: the source code (or text).
     '''
 
     code = ''
 
     # Loop through code spans.
     for token in code_block:
-        # Catch when spans are wrapped with other tags.
-        try:
-            code += token
-        except TypeError:
-            code.join(token.contents)
+        code += token.text
 
     return code

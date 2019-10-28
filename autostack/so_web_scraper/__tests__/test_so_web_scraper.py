@@ -20,8 +20,8 @@ from autostack.so_web_scraper import (
     get_post_text,
     print_post_text,
     print_ul,
-    # print_code_block,
-    # get_src_code,
+    print_code_block,
+    get_src_code,
 )
 from autostack.so_web_scraper.__tests__.mock_response import (
     MockResponse,
@@ -652,10 +652,7 @@ def test_print_post_text(capsys, monkeypatch):
     path = 'autostack/so_web_scraper/__tests__/data/post_text.html'
     html = open(path).read()
     post_text = BeautifulSoup(html, 'lxml').find(
-        attrs={
-            'class',
-            'post-text'
-        }
+        attrs={'class', 'post-text'}
     )
 
     def mock_other_print_functions(*args):
@@ -730,3 +727,74 @@ def test_print_ul_empty(capsys):
     # 3. Then.
     captured = capsys.readouterr()
     assert not captured.out
+
+
+def test_print_code_block(capsys, monkeypatch):
+    '''
+    Ensures that all of the source code is printed.
+    '''
+
+    # 1. Given.
+    line_1 = 'l = [[1, 2, 3], [4, 5, 6], [7], [8, 9]]\n'
+    line_2 = 'reduce(lambda x, y: x.extend(y), l)'
+
+    def mock_get_src_code(*args):
+        # pylint: disable=unused-argument
+        '''
+        Mocks the get_src_code function.
+        '''
+
+        return
+
+    def mock_lex(*args):
+        # pylint: disable=unused-argument
+        '''
+        Mocks the pygments.lex function.
+        '''
+
+        nonlocal line_1
+        nonlocal line_2
+
+        responses = [
+            ('Token.Keyword', line_1),
+            ('Other', line_2)
+        ]
+
+        for i in range(2):
+            yield responses[i]
+
+    monkeypatch.setattr(
+        'autostack.so_web_scraper.get_src_code',
+        mock_get_src_code
+    )
+
+    monkeypatch.setattr('pygments.lex', mock_lex)
+
+    # 2. When.
+    print_code_block(None)
+
+    # 3. Then.
+    captured = capsys.readouterr()
+    assert ANSI_ESCAPE.sub('', captured.out) == (
+        '\n{}'.format(line_1) +
+        '{}\n'.format(line_2)
+    )
+
+
+def test_get_src_code():
+    '''
+    Ensures that all source code is returned.
+    '''
+
+    # 1. Given.
+    line_1 = 'l = [[1, 2, 3], [4, 5, 6], [7], [8, 9]]\n'
+    line_2 = 'reduce(lambda x, y: x.extend(y), l)'
+    path = 'autostack/so_web_scraper/__tests__/data/post_text_code.html'
+    html = open(path).read()
+    code_block = BeautifulSoup(html, 'lxml').find('code')
+
+    # 2. When.
+    src_code = get_src_code(code_block)
+
+    # 3. Then.
+    assert src_code == line_1 + line_2
