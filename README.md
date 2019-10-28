@@ -57,6 +57,7 @@ What is the first thing you do when a confusing error message is displayed in yo
 * [Usage](#Usage)
 * [Contributing](#Contributing)
 * [License](#License)
+* [Show your support](#Show your support)
 * [Authors](#Authors)
 
 ## Installation
@@ -105,6 +106,14 @@ For information on how to get started contributing to autostack, see the [contri
 ## License
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
+## Show your support
+
+Give a ⭐️ if autostack has helped you!
+
+<a href="https://www.patreon.com/autostack">
+  <img src="https://c5.patreon.com/external/logo/become_a_patron_button@2x.png" width="160">
+</a>
 
 ## Authors
 * [Elijah Sawyers](https://github.com/elijahsawyers)
