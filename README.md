@@ -90,7 +90,7 @@ In one terminal window, execute the autostack command to listen for errors.
 autostack
 ```
 
-In another terminal window, execute autostack-termal which will inform the autostack listener to listen for errors in the terminal.
+In another terminal window, execute autostack-terminal which will inform the autostack listener to listen for errors in the terminal.
 ```sh
 autostack-terminal
 ``` 
