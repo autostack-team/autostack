@@ -105,7 +105,7 @@ exit
 Checkout the demo below!
 
 <p align="center">
-    <img src="https://raw.githubusercontent.com/autostack-team/autostack/develop/Demo.png"
+    <img src="https://raw.githubusercontent.com/autostack-team/autostack/master/Demo.gif"
         alt="Demo"/>
 </p>
 
