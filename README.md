@@ -55,6 +55,7 @@ What is the first thing you do when a confusing error message is displayed in yo
 
 * [Installation](#Installation)
 * [Usage](#Usage)
+* [Demo](#Demo)
 * [Contributing](#Contributing)
 * [License](#License)
 * [Show&nbsp;your&nbsp;support](#Show-your-support)
@@ -98,6 +99,15 @@ To stop running autostack, use the exit command in the autostack-terminal window
 ```sh
 exit
 ```
+
+## Demo 
+
+Checkout the demo below!
+
+<p align="center">
+    <img src="https://raw.githubusercontent.com/autostack-team/autostack/develop/Demo.png"
+        alt="Demo"/>
+</p>
 
 ## Contributing
 
