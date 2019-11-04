@@ -49,7 +49,7 @@
 
 autostack is a command-line debugging tool for Python projects that automatically displays Stack Overflow answers for thrown errors.
 
-What is the first thing you do when a confusing error message is displayed in your terminal window? You search for an answer on Stack Overflow, of course! With autostack, you no longer have to search for answers on Stack Overflow, they are found for you. Gone are the days of scowering the internet for hours to find an answer to your development questions! autostack is here to automate the debugging process and in turn, expedite Python project development.
+What is the first thing you do when a confusing error message is displayed in your terminal window? You search for an answer on Stack Overflow, of course! With autostack, you no longer have to search for answers on Stack Overflow, they are found for you. Gone are the days of scouring the internet for hours to find an answer to your development questions! autostack is here to automate the debugging process and in turn, expedite Python project development.
 
 ## Table of Contents
 
