@@ -8,3 +8,4 @@ venv/
 *dist
 .coverage
 coverage.xml
+.DS_Store
