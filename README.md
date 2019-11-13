@@ -29,7 +29,7 @@
         <img src="https://img.shields.io/badge/License-MIT-orange.svg"
              alt="License"/>
     </a>
-    <a href="hhttps://gitter.im/autostack-team/community?utm_source=share-link&utm_medium=link&utm_campaign=share-link">
+    <a href="https://gitter.im/autostack-team/community?utm_source=share-link&utm_medium=link&utm_campaign=share-link">
         <img src="https://badges.gitter.im/autostack-team/community.svg"
              alt="Chat"/>
     </a>
