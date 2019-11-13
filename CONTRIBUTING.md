@@ -58,4 +58,4 @@ After we have given feedback, we expect responses within two weeks. After two we
 
 # Community
 
-You can chat with the core team on [Microsoft Teams](https://teams.microsoft.com/l/team/19%3ab4023a9866fa4baba3846bdf09ded1fb%40thread.skype/conversations?groupId=1f058b8c-3ee6-4995-a6fd-111b15971ee9&tenantId=d09c5b21-3604-445f-88e0-c70deda5ec92).
+You can chat with the core team on [Gitter](https://gitter.im/autostack-team/community?utm_source=share-link&utm_medium=link&utm_campaign=share-link).
