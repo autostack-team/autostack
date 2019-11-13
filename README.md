@@ -29,7 +29,7 @@
         <img src="https://img.shields.io/badge/License-MIT-orange.svg"
              alt="License"/>
     </a>
-    <a href="https://teams.microsoft.com/join/1oa3o6vva07n">
+    <a href="https://teams.microsoft.com/l/team/19%3ab4023a9866fa4baba3846bdf09ded1fb%40thread.skype/conversations?groupId=1f058b8c-3ee6-4995-a6fd-111b15971ee9&tenantId=d09c5b21-3604-445f-88e0-c70deda5ec92">
         <img src="https://img.shields.io/badge/Chat-MSTeams-orange.svg"
              alt="Chat"/>
     </a>
