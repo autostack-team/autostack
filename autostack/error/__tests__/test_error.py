@@ -10,7 +10,7 @@ from autostack.error import (
     parse_output_for_error,
     get_error_from_traceback,
     handle_exception,
-    error_solved,
+    handle_user_input,
     print_listening_for_errors,
 )
 from autostack.error.__tests__.mock_pipe import MockPipe
@@ -224,9 +224,9 @@ def test_handle_exception(capsys, monkeypatch):
 
         return
 
-    def mock_error_solved():
+    def mock_handle_user_input():
         '''
-        Mocks the error_solved function.
+        Mocks the handle_user_input function.
         '''
 
         return True
@@ -249,8 +249,8 @@ def test_handle_exception(capsys, monkeypatch):
     )
 
     monkeypatch.setattr(
-        'autostack.error.error_solved',
-        mock_error_solved
+        'autostack.error.handle_user_input',
+        mock_handle_user_input
     )
 
     monkeypatch.setattr(
@@ -266,9 +266,9 @@ def test_handle_exception(capsys, monkeypatch):
     assert captured.out == u'\U0001F95E Listening for Python errors...\n'
 
 
-def test_error_solved_y(monkeypatch):
+def test_handle_user_input_y(monkeypatch):
     '''
-    Ensures that when 'Y' is inputted, error_solved returns True.
+    Ensures that when 'Y' is inputted, handle_user_input returns True.
     '''
 
     # 1. Given.
@@ -283,15 +283,15 @@ def test_error_solved_y(monkeypatch):
     monkeypatch.setattr('builtins.input', mock_input)
 
     # 2. When.
-    is_error_solved = error_solved()
+    user_input = handle_user_input()
 
     # 3. Then.
-    assert is_error_solved
+    assert user_input is True
 
 
-def test_error_solved_n(monkeypatch):
+def test_handle_user_input_n(monkeypatch):
     '''
-    Ensures that when 'n' is inputted, error_solved returns False.
+    Ensures that when 'n' is inputted, handle_user_input returns False.
     '''
 
     # 1. Given.
@@ -306,15 +306,15 @@ def test_error_solved_n(monkeypatch):
     monkeypatch.setattr('builtins.input', mock_input)
 
     # 2. When.
-    is_error_solved = error_solved()
+    user_input = handle_user_input()
 
     # 3. Then.
-    assert not is_error_solved
+    assert not user_input
 
 
-def test_error_solved_invalid_input(capsys, monkeypatch):
+def test_handle_user_input_custom_query(monkeypatch):
     '''
-    Ensures that when input is invalid, error_solved prompts the user
+    Ensures that when input is invalid, handle_user_input prompts the user
     to try again.
     '''
 
@@ -336,19 +336,17 @@ def test_error_solved_invalid_input(capsys, monkeypatch):
             nonlocal call_count
             if call_count == 0:
                 call_count += 1
-                return 'a'
+                return 'Custom query'
             return 'Y'
         return mock_input
 
     monkeypatch.setattr('builtins.input', make_mock_input())
 
     # 2. When.
-    is_error_solved = error_solved()
+    user_input = handle_user_input()
 
     # 3. Then.
-    captured = capsys.readouterr()
-    assert captured.out == 'a is not valid input! Please try again.\n'
-    assert is_error_solved
+    assert user_input == 'Custom query'
 
 
 def test_print_listening_for_errors(capsys):

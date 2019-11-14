@@ -113,11 +113,12 @@ def handle_exception(query):
         if user_input not in (True, False):
             handle_exception(user_input)
             return
+
         # Error solved, break out of the loop.
-        elif user_input:
+        if user_input is True:
             print_listening_for_errors()
             return
-        
+
         # Otherwise, the question wasn't answered, keep looping.
 
 
@@ -136,7 +137,8 @@ def handle_user_input():
 
     if user_input not in ('Y', 'n'):
         return user_input
-    elif user_input == 'Y':
+
+    if user_input == 'Y':
         return True
 
     return False
