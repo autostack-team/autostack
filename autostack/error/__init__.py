@@ -94,54 +94,54 @@ def get_error_from_traceback(pipe):
     return output.split()[0][:-1]
 
 
-def handle_exception(error_description):
+def handle_exception(query):
     '''
-    When passed an error description, this function loops over each
-    accepted Stack Overflow post, and displays them, until the user
-    inputs 'Y'.
+    When passed a query, this function loops over each accepted
+    Stack Overflow post, and displays them, until the user inputs
+    'Y'.
 
-    Parameter {str} error_description: the error description to
-    display posts for.
+    Parameter {str} query: the query to display posts for.
     '''
 
-    for post in accepted_posts(error_description):
+    for post in accepted_posts(query):
         # Display Stack Overflow posts for the error.
         print_accepted_post(post)
 
-        error_is_solved = error_solved()
+        user_input = handle_user_input()
 
-        if error_is_solved:
+        # Custom query.
+        if user_input not in (True, False):
+            handle_exception(user_input)
+            return
+
+        # Error solved, break out of the loop.
+        if user_input is True:
             print_listening_for_errors()
-            break
+            return
+
+        # Otherwise, the question wasn't answered, keep looping.
 
 
-def error_solved():
+def handle_user_input():
     '''
     Prompts the user to input whether or not his/her error was solved.
-    The only two valid inputs are 'Y' and 'n'. 'Y' meaning the error
-    was solved and 'f' meaning it wasn't solved.
+    Valid inputs are 'Y' and 'n'. 'Y' meaning the error was solved and
+    'f' meaning it wasn't solved. Otherwise, whatever the user entered
+    is used for a custom query.
 
-    Returns: True if 'Y' was inputed and False if 'f' was inputed.
+    Returns: True if 'Y' or False if 'f' was inputed; otherwise, returns
+    the raw user input (custom query).
     '''
 
-    is_error_solved = False
+    user_input = input('Did this solve your error? (Y/n or custom query): ')
 
-    while True:
-        is_error_solved = input('Did this solve your error? (Y/n): ')
+    if user_input not in ('Y', 'n'):
+        return user_input
 
-        if is_error_solved not in ('Y', 'n'):
-            print(
-                '{} is not valid input! Please try again.'.format(
-                    is_error_solved
-                )
-            )
-        else:
-            break
+    if user_input == 'Y':
+        return True
 
-    if is_error_solved == 'n':
-        return False
-
-    return True
+    return False
 
 
 def print_listening_for_errors():
