@@ -196,25 +196,17 @@ def test_handle_exception(capsys, monkeypatch):
     '''
 
     # 1. Given.
-    def make_mock_accepted_posts():
+    def mock_accepted_posts(*args):
+        # pylint: disable=unused-argument
         '''
-        Mocks the accepted_posts function.
+        Mocks the accepted_posts function which yields
+        strings instead of actual post bs4 soup.
         '''
 
-        iteration = 0
+        i = 1
 
-        def mock_accepted_posts(*args):
-            # pylint: disable=unused-argument
-            '''
-            Mocks the accepted_posts function which yields
-            string digits instead of actual post bs4 soup.
-            '''
-
-            nonlocal iteration
-            yield str(iteration)
-            iteration += 1
-
-        return mock_accepted_posts
+        while i:
+            yield str(i)
 
     def mock_print_accepted_post(*args):
         # pylint: disable=unused-argument
@@ -224,12 +216,31 @@ def test_handle_exception(capsys, monkeypatch):
 
         return
 
-    def mock_handle_user_input():
+    def make_mock_handle_user_input():
         '''
-        Mocks the handle_user_input function.
+        Creates the mock function to mock handle_user_input, and the
+        input is different based on the call count.
         '''
 
-        return True
+        call_count = 0
+
+        def mock_handle_user_input():
+            '''
+            Mocks the handle_user_input function.
+            '''
+
+            nonlocal call_count
+            call_count += 1
+
+            if call_count == 1:
+                return False
+
+            if call_count == 2:
+                return 'Custom query'
+
+            return True
+
+        return mock_handle_user_input
 
     def mock_print_listening_for_errors():
         '''
@@ -240,7 +251,7 @@ def test_handle_exception(capsys, monkeypatch):
 
     monkeypatch.setattr(
         'autostack.error.accepted_posts',
-        make_mock_accepted_posts()
+        mock_accepted_posts
     )
 
     monkeypatch.setattr(
@@ -250,7 +261,7 @@ def test_handle_exception(capsys, monkeypatch):
 
     monkeypatch.setattr(
         'autostack.error.handle_user_input',
-        mock_handle_user_input
+        make_mock_handle_user_input()
     )
 
     monkeypatch.setattr(
@@ -314,14 +325,13 @@ def test_handle_user_input_n(monkeypatch):
 
 def test_handle_user_input_custom_query(monkeypatch):
     '''
-    Ensures that when input is invalid, handle_user_input prompts the user
-    to try again.
+    Ensures that when input isn't Y/n, handle_user_input returns the input.
     '''
 
     # 1. Given.
     def make_mock_input():
         '''
-        Creates the mock function to mock user intput, and the
+        Creates the mock function to mock user input, and the
         input is different based on the call count.
         '''
 
