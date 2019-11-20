@@ -30,5 +30,8 @@ If applicable, add screenshots to help explain your problem.
  - OS Version [e.g. 10.14.3]
  - Python Version [e.g. 2.7]
 
+**Autostack Version:**
+1.0.0
+
 **Additional Context**
 Add any other context about the problem here.
