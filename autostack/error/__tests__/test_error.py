@@ -12,6 +12,7 @@ from autostack.error import (
     handle_exception,
     handle_user_input,
     print_listening_for_errors,
+    clear_terminal,
 )
 from autostack.error.__tests__.mock_pipe import MockPipe
 from autostack.error.__tests__.mock_handle_exception import MockHandleException
@@ -242,6 +243,13 @@ def test_handle_exception(capsys, monkeypatch):
 
         return mock_handle_user_input
 
+    def mock_clear_terminal():
+        '''
+        Mocks the clear_terminal function.
+        '''
+
+        return
+
     def mock_print_listening_for_errors():
         '''
         Mocks the print_listening_for_errors function.
@@ -262,6 +270,11 @@ def test_handle_exception(capsys, monkeypatch):
     monkeypatch.setattr(
         'autostack.error.handle_user_input',
         make_mock_handle_user_input()
+    )
+
+    monkeypatch.setattr(
+        'autostack.error.clear_terminal',
+        mock_clear_terminal
     )
 
     monkeypatch.setattr(
@@ -359,7 +372,7 @@ def test_handle_user_input_custom_query(monkeypatch):
     assert user_input == 'Custom query'
 
 
-def test_print_listening_for_errors(capsys):
+def test_print_listening_for_errors(capsys, monkeypatch):
     '''
     Ensures that print_listening_for_errors prints the proper output.
 
@@ -367,6 +380,17 @@ def test_print_listening_for_errors(capsys):
     '''
 
     # 1. Given.
+    def mock_clear_terminal():
+        '''
+        Mocks the clear_terminal function.
+        '''
+
+        return
+
+    monkeypatch.setattr(
+        'autostack.error.clear_terminal',
+        mock_clear_terminal
+    )
 
     # 2. When.
     print_listening_for_errors()
@@ -374,3 +398,18 @@ def test_print_listening_for_errors(capsys):
     # 3. Then.
     captured = capsys.readouterr()
     assert captured.out == u'\U0001F95E Listening for Python errors...\n'
+
+
+def test_clear_terminal(capsys):
+    '''
+    Ensures that clear_terminal clears the terminal.
+    '''
+
+    # 1. Given.
+
+    # 2. When.
+    clear_terminal()
+
+    # 3. Then.
+    captured = capsys.readouterr()
+    assert captured.out == '\x1bc\n'  # Same as u'\033c'

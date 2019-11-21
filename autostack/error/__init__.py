@@ -105,6 +105,7 @@ def handle_exception(query):
 
     for post in accepted_posts(query):
         # Display Stack Overflow posts for the error.
+        clear_terminal()
         print_accepted_post(post)
 
         user_input = handle_user_input()
@@ -149,4 +150,13 @@ def print_listening_for_errors():
     Prints "🥞 Listening for Python errors..."
     '''
 
+    clear_terminal()
     print(u'\U0001F95E Listening for Python errors...')
+
+
+def clear_terminal():
+    '''
+    Clears the terminal window.
+    '''
+
+    print(u'\033c')
