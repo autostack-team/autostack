@@ -25,10 +25,13 @@ A clear and concise description of what actually happened.
 **Screenshots**
 If applicable, add screenshots to help explain your problem.
 
-**Device Information (please complete the following information):**
+**Device Information (please complete the following information)**
  - OS: [e.g. Mac OS]
  - OS Version [e.g. 10.14.3]
  - Python Version [e.g. 2.7]
+
+**Autostack Version**
+1.0.0
 
 **Additional Context**
 Add any other context about the problem here.
