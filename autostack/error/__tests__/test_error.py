@@ -73,6 +73,19 @@ def test_parse_output_for_error_non_error(monkeypatch):
     # 1. Given.
     mock_handle_exception = MockHandleException()
 
+    def mock_print_accepted_post(*args):
+        # pylint: disable=unused-argument
+        '''
+        Mocks the print_accepted_post function.
+        '''
+
+        return
+
+    monkeypatch.setattr(
+        'autostack.error.print_accepted_post',
+        mock_print_accepted_post
+    )
+
     monkeypatch.setattr(
         'autostack.error.handle_exception',
         mock_handle_exception.handle_exception
@@ -96,6 +109,19 @@ def test_parse_output_for_error_with_error(monkeypatch):
 
     # 1. Given.
     mock_handle_exception = MockHandleException()
+
+    def mock_print_accepted_post(*args):
+        # pylint: disable=unused-argument
+        '''
+        Mocks the print_accepted_post function.
+        '''
+
+        return
+
+    monkeypatch.setattr(
+        'autostack.error.print_accepted_post',
+        mock_print_accepted_post
+    )
 
     monkeypatch.setattr(
         'autostack.error.handle_exception',
@@ -134,6 +160,19 @@ def test_parse_output_for_error_traceback(monkeypatch):
 
         return 'NameError'
 
+    def mock_print_accepted_post(*args):
+        # pylint: disable=unused-argument
+        '''
+        Mocks the print_accepted_post function.
+        '''
+
+        return
+
+    monkeypatch.setattr(
+        'autostack.error.print_accepted_post',
+        mock_print_accepted_post
+    )
+
     monkeypatch.setattr(
         'autostack.error.handle_exception',
         mock_handle_exception.handle_exception
@@ -159,6 +198,19 @@ def test_parse_output_for_error_index_error(monkeypatch):
 
     # 1. Given.
     mock_handle_exception = MockHandleException()
+
+    def mock_print_accepted_post(*args):
+        # pylint: disable=unused-argument
+        '''
+        Mocks the print_accepted_post function.
+        '''
+
+        return
+
+    monkeypatch.setattr(
+        'autostack.error.print_accepted_post',
+        mock_print_accepted_post
+    )
 
     monkeypatch.setattr(
         'autostack.error.handle_exception',
@@ -195,7 +247,7 @@ def test_get_error_from_traceback():
     assert mock_pipe.get_readline_call_count() == 2
 
 
-def test_handle_exception(capsys, monkeypatch):
+def test_handle_exception(monkeypatch):
     '''
     Ensures that posts are printed until the user inputs 'Y'
     to stop.
@@ -209,10 +261,11 @@ def test_handle_exception(capsys, monkeypatch):
         strings instead of actual post bs4 soup.
         '''
 
-        i = 1
+        i = 0
 
-        while i:
+        while True:
             yield str(i)
+            i += 1
 
     def mock_print_accepted_post(*args):
         # pylint: disable=unused-argument
@@ -222,13 +275,15 @@ def test_handle_exception(capsys, monkeypatch):
 
         return
 
+    call_count = 0
+
     def make_mock_handle_user_input():
         '''
         Creates the mock function to mock handle_user_input, and the
         input is different based on the call count.
         '''
 
-        call_count = 0
+        nonlocal call_count
 
         def mock_handle_user_input():
             '''
@@ -255,13 +310,6 @@ def test_handle_exception(capsys, monkeypatch):
 
         return
 
-    def mock_print_listening_for_errors():
-        '''
-        Mocks the print_listening_for_errors function.
-        '''
-
-        print(u'\U0001F95E Listening for Python errors...')
-
     monkeypatch.setattr(
         'autostack.error.accepted_posts',
         mock_accepted_posts
@@ -282,17 +330,11 @@ def test_handle_exception(capsys, monkeypatch):
         mock_clear_terminal
     )
 
-    monkeypatch.setattr(
-        'autostack.error.print_listening_for_errors',
-        mock_print_listening_for_errors
-    )
-
     # 2. When.
     handle_exception('Error')
 
     # 3. Then.
-    captured = capsys.readouterr()
-    assert captured.out == u'\U0001F95E Listening for Python errors...\n'
+    assert call_count == 3
 
 
 def test_handle_user_input_y(monkeypatch):

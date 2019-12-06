@@ -7,12 +7,16 @@ Overview: TODO: Write overview.
 
 import click
 
+from autostack.error import (
+    handle_exception
+)
+
 
 @click.command()
 @click.argument('message')
-def error():
+def error(message):
     '''
     Query for a given error message, and dislay posts for that query.
     '''
 
-    return
+    handle_exception(message)

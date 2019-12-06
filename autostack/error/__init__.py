@@ -64,10 +64,12 @@ def parse_output_for_error(output, pipe):
         if output.split()[0][:-1] in SYNTAX_ERRORS:
             error = output.split()[0][:-1]
             handle_exception(error)
+            print_listening_for_errors()
         # Runtime error - has traceback.
         elif 'Traceback' in output.split():
             error = get_error_from_traceback(pipe)
             handle_exception(error)
+            print_listening_for_errors()
     except IndexError:
         pass
 
@@ -120,7 +122,6 @@ def handle_exception(query):
         # Error solved, break out of the loop.
         if user_input is True:
             clear_terminal()
-            print_listening_for_errors()
             return
 
         # Otherwise, the question wasn't answered, keep looping.
