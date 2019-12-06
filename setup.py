@@ -1,15 +1,10 @@
 import setuptools
 from os import path
 
-# Long Description.
-this_directory = path.abspath(path.dirname(__file__))
-with open(path.join(this_directory, 'README.md')) as f:
-    long_description = f.read()
-
 setuptools.setup(
     # General setup information.
     name='autostack',
-    version='1.1.1',
+    version='1.2.0',
     packages=setuptools.find_packages(exclude=['tests']),
     scripts=[
         'autostack/autostack-terminal'
@@ -45,7 +40,7 @@ setuptools.setup(
     author='Elijah Sawyers, Benjamin Sanders, Caleb Werth',
     author_email='elijahsawyers@gmail.com, ben.sanders97@gmail.com, cwerth@crimson.ua.edu',
     description='Automatically detect python errors and search Stack Overflow.',
-    long_description=long_description,
+    long_description=open('./README.md').read(),
     long_description_content_type='text/markdown',
     classifiers=[
         'Development Status :: 5 - Production/Stable',
