@@ -7,6 +7,7 @@ Overview: TODO: Write overview.
 
 from __future__ import absolute_import, division, print_function
 
+from autostack import print_logo
 from autostack.so_web_scraper import (
     accepted_posts,
     print_accepted_post
@@ -27,6 +28,7 @@ def listen_for_errors(pipe):
     Parameter {File}: the pipe to read output from.
     '''
 
+    print_logo()
     print_listening_for_errors()
 
     while True:
@@ -117,6 +119,7 @@ def handle_exception(query):
 
         # Error solved, break out of the loop.
         if user_input is True:
+            clear_terminal()
             print_listening_for_errors()
             return
 
@@ -150,7 +153,6 @@ def print_listening_for_errors():
     Prints "🥞 Listening for Python errors..."
     '''
 
-    clear_terminal()
     print(u'\U0001F95E Listening for Python errors...')
 
 

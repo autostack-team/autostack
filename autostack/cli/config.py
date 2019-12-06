@@ -9,10 +9,14 @@ import click
 
 
 @click.command()
-@click.option('--key', required=True, help='The configuration option to change.')
+@click.option(
+    '--key',
+    required=True,
+    help='The configuration option to change.'
+)
 def config():
     '''
     Set global autostack configuration options.
     '''
 
-    pass
+    return

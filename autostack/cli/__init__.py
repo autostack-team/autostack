@@ -16,6 +16,7 @@ from autostack.cli.init import init
 
 @click.group()
 def cli():
+    # pylint: disable=missing-function-docstring
     pass
 
 

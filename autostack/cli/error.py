@@ -15,4 +15,4 @@ def error():
     Query for a given error message, and dislay posts for that query.
     '''
 
-    pass
+    return
