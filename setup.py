@@ -28,6 +28,8 @@ setuptools.setup(
         'future',
         'pytest',
         'pytest-cov',
+        'click',
+        'PyInquirer',
     ],
     extras_require={ 
         'development': [

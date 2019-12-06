@@ -5,14 +5,7 @@ Date: 03/17/2019
 Overview: Entry point of autostack.
 '''
 
-from autostack.error import (
-    listen_for_errors
-)
-from autostack.pipe import (
-    create_pipe
-)
-
-PIPE_PATH = '/tmp/monitorPipe'
+from autostack.cli import cli
 
 
 def main():
@@ -20,7 +13,4 @@ def main():
     Entry point of autostack.
     '''
 
-    create_pipe(PIPE_PATH)
-
-    with open(PIPE_PATH) as pipe:
-        listen_for_errors(pipe)
+    cli()

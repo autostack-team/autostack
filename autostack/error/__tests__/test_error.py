@@ -25,9 +25,9 @@ def test_listen_for_errors(monkeypatch):
     '''
 
     # 1. Given.
-    def mock_print_listening_for_errors():
+    def mock_print():
         '''
-        Mocks the print_listening_for_errors function.
+        Mocks the print_logo and print_listening_for_errors function.
         '''
 
         return
@@ -41,8 +41,13 @@ def test_listen_for_errors(monkeypatch):
         return
 
     monkeypatch.setattr(
+        'autostack.error.print_logo',
+        mock_print
+    )
+
+    monkeypatch.setattr(
         'autostack.error.print_listening_for_errors',
-        mock_print_listening_for_errors
+        mock_print
     )
 
     monkeypatch.setattr(
@@ -372,7 +377,7 @@ def test_handle_user_input_custom_query(monkeypatch):
     assert user_input == 'Custom query'
 
 
-def test_print_listening_for_errors(capsys, monkeypatch):
+def test_print_listening_for_errors(capsys):
     '''
     Ensures that print_listening_for_errors prints the proper output.
 
@@ -380,17 +385,6 @@ def test_print_listening_for_errors(capsys, monkeypatch):
     '''
 
     # 1. Given.
-    def mock_clear_terminal():
-        '''
-        Mocks the clear_terminal function.
-        '''
-
-        return
-
-    monkeypatch.setattr(
-        'autostack.error.clear_terminal',
-        mock_clear_terminal
-    )
 
     # 2. When.
     print_listening_for_errors()

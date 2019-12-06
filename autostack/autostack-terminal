@@ -1,6 +1,0 @@
-#!/usr/bin/env bash
-if [ "$(uname)" == "Darwin" ]; then # Mac.
-    bash -c "script -q -F /tmp/monitorPipe"
-else # Linux.
-    bash -c "script -q -f /tmp/monitorPipe"
-fi
