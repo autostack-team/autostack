@@ -16,7 +16,7 @@ setuptools.setup(
     ],
     entry_points={
         'console_scripts': [
-            'autostack=autostack.main:main'
+            'autostack=autostack:cli'
         ]
     },
     install_requires=[
@@ -28,6 +28,8 @@ setuptools.setup(
         'future',
         'pytest',
         'pytest-cov',
+        'click',
+        'PyInquirer',
     ],
     extras_require={ 
         'development': [
