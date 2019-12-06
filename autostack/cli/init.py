@@ -48,8 +48,8 @@ def init():
             'type': 'checkbox',
             'name': 'languages',
             'message':
-                'What languages do you want autostack \
-                to capture errors for?',
+                'What languages do you want autostack'
+                ' to capture errors for?',
             'choices': [
                 {
                     'name': 'Python',
@@ -61,8 +61,8 @@ def init():
             'type': 'checkbox',
             'name': 'communities',
             'message':
-                'Which Stack Exchange communities do you want to \
-                query?',
+                'Which Stack Exchange communities do you want to'
+                ' query?',
             'choices': [
                 {
                     'name': 'Stack Overflow',
@@ -85,15 +85,15 @@ def init():
             'type': 'confirm',
             'name': 'verified_only',
             'message':
-                'Do you want to only display posts with verified \
-                answers?',
+                'Do you want to only display posts with verified'
+                ' answers?',
         },
         {
             'type': 'confirm',
             'name': 'display_comments',
             'message':
-                'Do you want to display comments with questions and \
-                answers?',
+                'Do you want to display comments with questions and'
+                ' answers?',
         },
     ]
 
@@ -102,8 +102,8 @@ def init():
             'type': 'input',
             'name': 'max_comments',
             'message':
-                'What\'s the max number of comments to display per \
-                question or answer?',
+                'What\'s the max number of comments to display per'
+                ' question or answer?',
             'validate': MaxCommentsValidator,
         }
     ]
