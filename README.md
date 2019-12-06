@@ -85,17 +85,17 @@ pip3 install autostack
 
 ## Usage 
 
-In one terminal window, execute the autostack command to listen for errors.
+In one terminal window, execute "autostack capture" which will capture all errors in the terminal.
 ```sh
-autostack
-```
-
-In another terminal window, execute autostack-terminal which will inform the autostack listener to listen for errors in the terminal.
-```sh
-autostack-terminal
+autostack capture
 ``` 
 
-To stop running autostack, use the exit command in the autostack-terminal windows. This automatically stops the terminal window listening for errors.
+In another terminal window, execute "autostack display" to display Stack Overflow posts for all captured errors.
+```sh
+autostack display
+```
+
+To stop running autostack, use the exit command in the terminals that executed "autostack capture". This automatically stops the terminal window displaying Stack Overflow posts for captured errors.
 ```sh
 exit
 ```
