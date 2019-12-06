@@ -16,7 +16,7 @@ setuptools.setup(
     ],
     entry_points={
         'console_scripts': [
-            'autostack=autostack:cli'
+            'autostack=autostack.main:main'
         ]
     },
     install_requires=[
