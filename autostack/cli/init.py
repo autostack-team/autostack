@@ -23,7 +23,7 @@ from autostack import (
 @click.command()
 def init():
     '''
-    Initialize a project with a .autostack.json configuration file.
+    Initialize the currect directory with a .autostack.json configuration file.
     '''
 
     class MaxCommentsValidator(Validator):
@@ -55,7 +55,7 @@ def init():
                     'name': 'Python',
                     'checked': True,
                 },
-            ]
+            ],
         },
         {
             'type': 'checkbox',
@@ -68,7 +68,7 @@ def init():
                     'name': 'Stack Overflow',
                     'checked': True,
                 },
-            ]
+            ],
         },
         {
             'type': 'list',
@@ -110,10 +110,14 @@ def init():
 
     print_logo()
     answers = prompt(questions)
-    if answers['display_comments']:
-        answers['max_comments'] = prompt(
-            max_comments_questions
-        )['max_comments']
 
-    with open('./.autostack.json', 'w') as autostack_json:
-        json.dump(answers, autostack_json, indent=4)
+    try:
+        if answers['display_comments']:
+            answers['max_comments'] = prompt(
+                max_comments_questions
+            )['max_comments']
+
+        with open('./.autostack.json', 'w') as autostack_json:
+            json.dump(answers, autostack_json, indent=4)
+    except KeyError:
+        pass

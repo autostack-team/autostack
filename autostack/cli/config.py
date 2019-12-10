@@ -7,16 +7,34 @@ Overview: TODO: Write overview.
 
 import click
 
+from autostack.config import (
+    get_all_global_configs,
+    set_global_config
+)
+
 
 @click.command()
 @click.option(
     '--key',
-    required=True,
-    help='The configuration option to change.'
+    '-k',
+    help='The configuration option to change.',
 )
-def config():
+@click.option(
+    '--list',
+    '-l',
+    'list_',
+    help='List all global configurations.',
+    flag_value=True,
+)
+@click.pass_context
+def config(ctx, key, list_):
     '''
-    Set global autostack configuration options.
+    View and set global autostack configurations.
     '''
 
-    return
+    if not key and not list_:
+        click.echo(ctx.get_help())
+    elif list_:
+        get_all_global_configs()
+    # elif key:
+    #     set_global_config(key)

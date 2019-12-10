@@ -6,9 +6,6 @@ setuptools.setup(
     name='autostack',
     version='1.2.0',
     packages=setuptools.find_packages(exclude=['tests']),
-    scripts=[
-        'autostack/autostack-terminal'
-    ],
     entry_points={
         'console_scripts': [
             'autostack=autostack.main:main'
