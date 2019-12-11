@@ -12,5 +12,5 @@ script:
 after_success:
   - ./cc-test-reporter after-build -r $COVERAGE_KEY
 branches:
-  only: 
+  only:
     - master
