@@ -2,7 +2,8 @@
 Authors: Elijah Sawyers
 Emails: elijahsawyers@gmail.com
 Date: 12/05/2019
-Overview: TODO: Write overview.
+Overview: Display posts for all error messages captured with the 'capture'
+command.
 '''
 import os
 

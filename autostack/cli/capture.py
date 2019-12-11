@@ -2,7 +2,8 @@
 Authors: Elijah Sawyers
 Emails: elijahsawyers@gmail.com
 Date: 12/05/2019
-Overview: TODO: Write overview.
+Overview: Click command to capture all error messages outputed in the terminal
+for configured languages.
 '''
 
 import subprocess
