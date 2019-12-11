@@ -3,7 +3,7 @@ Authors: Elijah Sawyers
 Emails: elijahsawyers@gmail.com
 Date: 12/10/2019
 Overview: the config package is used to interact with global and
-project-specific configuration files for autostack.
+local (project-specific) configuration files for autostack.
 '''
 
 import json
@@ -39,24 +39,26 @@ def print_file_not_found_error(path):
     print('No autostack configuration file found in {}!'.format(path))
 
 
-def print_key_error(key):
+def print_key_error(key, path):
     '''
-    Prints that the key doesn't exist in the global configuration file.
+    Prints that the key doesn't exist in the configuration file.
 
     Parameter {string} key: the key that doesn't exist.
+    Parameter {string} path: the path to the configuration file.
     '''
 
     print(
-        'The key {} doesn\'t exist in the global configuration file.'
-        .format(key)
+        'The key {} doesn\'t exist in the configuration file {}.'
+        .format(key, path)
     )
 
 
 def get_config_path(global_):
     '''
-    Returns the local or global configuration path.
+    Returns a configuration file path.
 
-    Parameter {boolean} global_: whether to grab the local or global path.
+    Parameter {boolean} global_: whether to grab the local or global
+    configuration file path.
     Returns {string}: the local or global path.
     '''
 
@@ -115,7 +117,7 @@ def print_config(global_=False):
     Prints out a configuration file.
 
     Parameter {boolean} global_: whether to print the global configuration
-    file or the configuration file in the current directory.
+    file or the location configuration file in the current working directory.
     '''
 
     path = get_config_path(global_)
@@ -124,7 +126,7 @@ def print_config(global_=False):
         with open(path, 'r') as config_file:
             config = json.loads(config_file.read())
 
-            print('\nConfigurations:')
+            print('\nCONFIGURATIONS:')
             for key, value in config.items():
                 print('  {}: {}'.format(key, value))
             print('')
@@ -145,13 +147,13 @@ def get_config(global_, key):
     path = get_config_path(global_)
 
     try:
-        with open(GLOBAL_CONFIG_PATH, 'r') as global_config_file:
-            config = json.loads(global_config_file.read())
+        with open(path, 'r') as config_file:
+            config = json.loads(config_file.read())
 
             try:
                 return config[key]
             except KeyError:
-                print_key_error(key)
+                print_key_error(key, path)
     except FileNotFoundError:
         print_file_not_found_error(path)
 
@@ -169,14 +171,14 @@ def set_config(global_, key, value):
     path = get_config_path(global_)
 
     try:
-        with open(GLOBAL_CONFIG_PATH, 'r+') as global_config_file:
-            config = json.loads(global_config_file.read())
+        with open(path, 'r+') as config_file:
+            config = json.loads(config_file.read())
 
             try:
                 config[key] = value
-                global_config_file.seek(0)
-                json.dump(config, global_config_file, indent=4)
+                config_file.seek(0)
+                json.dump(config, config_file, indent=4)
             except KeyError:
-                print_key_error(key)
+                print_key_error(key, path)
     except FileNotFoundError:
         print_file_not_found_error(path)

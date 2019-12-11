@@ -16,7 +16,7 @@ from autostack.error import (
 @click.argument('string')
 def query(string):
     '''
-    Query Stack Exchange with STRING, and dislay posts for that query.
+    Query Stack Exchange with STRING, and dislay posts for that query string.
     '''
 
     handle_exception(string)
