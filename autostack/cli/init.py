@@ -5,8 +5,6 @@ Date: 12/05/2019
 Overview: TODO: Write overview.
 '''
 
-import json
-
 import click
 import regex
 from PyInquirer import (
@@ -18,10 +16,19 @@ from PyInquirer import (
 from autostack import (
     print_logo
 )
+from autostack.config import (
+    create_config
+)
 
 
 @click.command()
-def init():
+@click.option(
+    '--default',
+    '-d',
+    is_flag=True,
+    help='Whether or not to use the default configuration.'
+)
+def init(default):
     '''
     Initialize the currect directory with a .autostack.json configuration file.
     '''
@@ -108,6 +115,10 @@ def init():
         }
     ]
 
+    if default:
+        create_config(False)
+        return
+
     print_logo()
     answers = prompt(questions)
 
@@ -117,7 +128,6 @@ def init():
                 max_comments_questions
             )['max_comments']
 
-        with open('./.autostack.json', 'w') as autostack_json:
-            json.dump(answers, autostack_json, indent=4)
+        create_config(False, answers)
     except KeyError:
         pass

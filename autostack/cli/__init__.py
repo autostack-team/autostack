@@ -10,8 +10,8 @@ import click
 from autostack.cli.capture import capture
 from autostack.cli.config import config
 from autostack.cli.display import display
-from autostack.cli.error import error
 from autostack.cli.init import init
+from autostack.cli.query import query
 
 
 @click.group()
@@ -23,5 +23,5 @@ def cli():
 cli.add_command(capture)
 cli.add_command(config)
 cli.add_command(display)
-cli.add_command(error)
 cli.add_command(init)
+cli.add_command(query)

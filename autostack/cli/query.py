@@ -13,10 +13,10 @@ from autostack.error import (
 
 
 @click.command()
-@click.argument('message')
-def error(message):
+@click.argument('string')
+def query(string):
     '''
-    Query for a given error message, and dislay posts for that query.
+    Query Stack Exchange with STRING, and dislay posts for that query.
     '''
 
-    handle_exception(message)
+    handle_exception(string)
