@@ -22,13 +22,12 @@ from autostack.pipe import (
 @click.command()
 def capture():
     '''
-    Capture all error messages outputed in the terminal for configured
-    languages.
+    Captures all output in the terminal, and pipes it to /tmp/monitorPipe.
     '''
 
     create_pipe(PIPE_PATH)
 
     if sys.platform.startswith('darwin'):  # Mac
-        subprocess.run(['script', '-q', '-F', '/tmp/monitorPipe'], check=True)
-    else:
-        subprocess.run(['script', '-q', '-f', '/tmp/monitorPipe'], check=True)
+        subprocess.run(['script', '-q', '-F', PIPE_PATH], check=True)
+    else:  # Linux
+        subprocess.run(['script', '-q', '-f', PIPE_PATH], check=True)
