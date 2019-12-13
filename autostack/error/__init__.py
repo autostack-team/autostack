@@ -2,30 +2,36 @@
 Authors: Elijah Sawyers, Benjamin Sanders
 Emails: elijahsawyers@gmail.com, ben.sanders97@gmail.com
 Date: 10/09/2019
-Overview: TODO: Write overview.
+Overview: Ability to handle exceptions.
 '''
 
-from __future__ import absolute_import, division, print_function
+from __future__ import (
+    absolute_import,
+    division,
+    print_function
+)
 
-from autostack import print_logo
+import importlib
+
+from autostack import (
+    print_logo
+)
+from autostack.config import (
+    get_config
+)
 from autostack.so_web_scraper import (
     accepted_posts,
     print_accepted_post
 )
 
-SYNTAX_ERRORS = [
-    'SyntaxError',
-    'IndentationError',
-    'TabError',
-]
 
-
-def listen_for_errors(pipe):
+def listen_for_errors(pipe, config):
     '''
     Reads output from a pipe until EOF, indicated by empty string. The
     output is parsed for errors.
 
-    Parameter {File}: the pipe to read output from.
+    Parameter {file} pipe: the pipe to read output from.
+    Parameter {dictionary} config: configuration object.
     '''
 
     print_logo()
@@ -37,65 +43,36 @@ def listen_for_errors(pipe):
         # Pipe closed.
         if output == '':
             break
+        
+        parse_output_for_error(pipe, output, config)
 
-        parse_output_for_error(output, pipe)
 
-
-def parse_output_for_error(output, pipe):
+def parse_output_for_error(pipe, output, config):
     '''
-    Parses a line of output, and determines whether or not it is
-    an error message. There are two types of errors, syntax errors
-    and runtime errors. Syntax errors do not have a traceback but
-    runtime errors do.
+    '''
 
-    e.g. without traceback:
-        IndentationError: unexpected indent
-    e.g. with traceback:
-        Traceback (most recent call last):
-            File "<stdin>", line 1, in <module>
-        NameError: name 'xyz' is not defined
+    for language in get_configured_languages(config):
+        error_lib = importlib.import_module('autostack.error.{}'.format(language.lower()))
+        error = error_lib.parse_output_for_error(output, pipe)
 
-    Parameter {str} output: line of output from a pipe.
-    Parameter {File} pipe: pipe to read output from, in case of traceback.
+        if error:
+            handle_exception(error)
+            print_listening_for_errors()
+
+
+def get_configured_languages(config):
+    '''
     '''
 
     try:
-        # Syntax errors - no traceback.
-        if output.split()[0][:-1] in SYNTAX_ERRORS:
-            error = output.split()[0][:-1]
-            handle_exception(error)
-            print_listening_for_errors()
-        # Runtime error - has traceback.
-        elif 'Traceback' in output.split():
-            error = get_error_from_traceback(pipe)
-            handle_exception(error)
-            print_listening_for_errors()
-    except IndexError:
-        pass
-
-
-def get_error_from_traceback(pipe):
-    '''
-    Gets the error description from a traceback.
-
-    e.g.:
-        Traceback (most recent call last):
-            File "<stdin>", line 1, in <module>
-        NameError: name 'xyz' is not defined
-    would return 'NameError'.
-
-    Parameter {File} pipe: the pipe to read the traceback from.
-    Returns {str}: the error description.
-    '''
-
-    output = pipe.readline()
-
-    while (
-            output.split()[0][-1] != ':'
-    ):
-        output = pipe.readline()
-
-    return output.split()[0][:-1]
+        return config.languages
+    except:
+        if get_config(False, 'languages'):
+            return get_config(False, 'languages')
+        elif get_config(True, 'languages'):
+            return get_config(True, 'languages')
+    
+    return []
 
 
 def handle_exception(query):
@@ -151,10 +128,10 @@ def handle_user_input():
 
 def print_listening_for_errors():
     '''
-    Prints "🥞 Listening for Python errors..."
+    Prints "🥞 Listening for errors..."
     '''
 
-    print(u'\U0001F95E Listening for Python errors...')
+    print(u'\U0001F95E Listening for errors...')
 
 
 def clear_terminal():

@@ -5,7 +5,11 @@ Date: 03/17/2019
 Overview: Used to scrape Stack Overflow for posts with a given query.
 '''
 
-from __future__ import absolute_import, division, print_function
+from __future__ import (
+    absolute_import,
+    division,
+    print_function
+)
 from bs4 import BeautifulSoup
 import pygments
 from pygments.lexers import PythonLexer  # pylint: disable=no-name-in-module

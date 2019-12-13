@@ -1,3 +1,4 @@
+# pylint: disable=bare-except
 '''
 Authors: Elijah Sawyers
 Emails: elijahsawyers@gmail.com
@@ -154,6 +155,29 @@ def print_config(global_=False):
             print('')
     except FileNotFoundError:
         print_file_not_found_error(path)
+
+
+def get_config(global_, key):
+    '''
+    Returns the value for a key in a configuration file.
+    Parameter {boolean} global_: whether to grab from the global configuration
+    file or the local configuration file in the current working directory.
+    Parameter {string} key: the key to get the value for.
+    Returns {any}: the value for the key.
+    '''
+
+    path = get_config_path(global_)
+
+    try:
+        with open(path, 'r') as config_file:
+            jsondata = json.loads(config_file.read())
+
+            try:
+                return jsondata[key]
+            except KeyError:
+                print_key_error(key)
+    except FileNotFoundError:
+        return None
 
 
 def set_config(global_, key, value):

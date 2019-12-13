@@ -31,7 +31,7 @@ def validate_language(ctx, param, value):
     Parameter {any} param: the value passed to the command's option.
     '''
 
-    if not value is None and not value in SUPPORTED_LANGUAGES:
+    if value is not None and value not in SUPPORTED_LANGUAGES:
         raise click.BadParameter(
             '{} is an invalid language. Use one of {}.'
             .format(value, SUPPORTED_LANGUAGES)
@@ -47,7 +47,7 @@ def validate_order_by(ctx, param, value):
     Parameter {any} param: the value passed to the command's option.
     '''
 
-    if not value is None and not value in SUPPORTED_ORDER_BY_FILTERS:
+    if value is not None and value not in SUPPORTED_ORDER_BY_FILTERS:
         raise click.BadParameter(
             '{} is an invalid order-by filter. Use one of {}.'
             .format(value, SUPPORTED_ORDER_BY_FILTERS)
@@ -63,7 +63,7 @@ def validate_display_comments(ctx, param, value):
     Parameter {any} param: the value passed to the command's option.
     '''
 
-    if not value is None and value <=0:
+    if value is not None and value <= 0:
         raise click.BadParameter(
             '{} is invalid. Enter a postitive integer.'
             .format(value)
@@ -88,7 +88,7 @@ def validate_display_comments(ctx, param, value):
 @click.option(
     '--verified-only/--unverified',
     '-v/-u',
-    default=True,
+    default=None,
     help='Whether or not to only display posts with verified answers.'
 )
 @click.option(
@@ -98,8 +98,7 @@ def validate_display_comments(ctx, param, value):
     callback=validate_display_comments,
     help='Whether or not to only display posts with verified answers.'
 )
-@click.pass_context
-def display(ctx, language, order_by, verified_only, display_comments):
+def display(language, order_by, verified_only, display_comments):
     '''
     Display posts for all error messages captured with the 'capture' command.
     '''
@@ -116,4 +115,4 @@ def display(ctx, language, order_by, verified_only, display_comments):
         return
 
     with open(PIPE_PATH) as pipe:
-        listen_for_errors(pipe)
+        listen_for_errors(pipe, config)
