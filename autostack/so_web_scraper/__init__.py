@@ -2,8 +2,7 @@
 Authors: Elijah Sawyers, Benjamin Sanders
 Emails: elijahsawyers@gmail.com, ben.sanders97@gmail.com
 Date: 03/17/2019
-Overview: Contains the StackOverflowScraper class which is used to
-scrape Stack Overflow for posts with accepted answers for a given query.
+Overview: Used to scrape Stack Overflow for posts with a given query.
 '''
 
 from __future__ import absolute_import, division, print_function
