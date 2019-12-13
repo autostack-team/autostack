@@ -6,15 +6,13 @@ Overview: the config package is used to interact with global and
 local (project-specific) configuration files for autostack.
 '''
 
+import ast
 import json
 import os
 
 DEFAULT_CONFIG = {
     'languages': [
         'Python'
-    ],
-    'communities': [
-        'Stack Overflow'
     ],
     'order_by': 'Relevance',
     'verified_only': True,
@@ -68,6 +66,29 @@ def get_config_path(global_):
     return os.path.join(os.getcwd(), CONFIG_FILE_NAME)
 
 
+def eval_string(string):
+    '''
+    Casts a string into native types: int, float, list, dict, etc.
+
+    Parameter {string} string: the string to evaluate.
+    Returns {any}: the evaluated value.
+    '''
+
+    try:
+        return json.loads(string)
+    except:
+        pass
+
+    try:
+        return ast.literal_eval(string)
+    except SyntaxError:
+        print('here')
+    except:
+        pass
+
+    return string
+
+
 def create_config(global_=False, jsondata=None):
     '''
     Creates a configuration file.
@@ -107,6 +128,7 @@ def reset_config(global_=False):
 
     try:
         with open(path, 'r+') as config_file:
+            config_file.truncate(0)
             json.dump(DEFAULT_CONFIG, config_file, indent=4)
     except FileNotFoundError:
         print_file_not_found_error(path)
@@ -124,36 +146,12 @@ def print_config(global_=False):
 
     try:
         with open(path, 'r') as config_file:
-            config = json.loads(config_file.read())
+            jsondata = json.loads(config_file.read())
 
             print('\nCONFIGURATIONS:')
-            for key, value in config.items():
+            for key, value in jsondata.items():
                 print('  {}: {}'.format(key, value))
             print('')
-    except FileNotFoundError:
-        print_file_not_found_error(path)
-
-
-def get_config(global_, key):
-    '''
-    Returns the value for a key in a configuration file.
-
-    Parameter {boolean} global_: whether to grab from the global configuration
-    file or the local configuration file in the current working directory.
-    Parameter {string} key: the key to get the value for.
-    Returns {any}: the value for the key.
-    '''
-
-    path = get_config_path(global_)
-
-    try:
-        with open(path, 'r') as config_file:
-            config = json.loads(config_file.read())
-
-            try:
-                return config[key]
-            except KeyError:
-                print_key_error(key, path)
     except FileNotFoundError:
         print_file_not_found_error(path)
 
@@ -169,16 +167,22 @@ def set_config(global_, key, value):
     '''
 
     path = get_config_path(global_)
+    jsondata = None
 
     try:
-        with open(path, 'r+') as config_file:
-            config = json.loads(config_file.read())
-
+        with open(path, 'r') as config_file:
             try:
-                config[key] = value
-                config_file.seek(0)
-                json.dump(config, config_file, indent=4)
-            except KeyError:
-                print_key_error(key, path)
+                jsondata = json.loads(config_file.read())
+            except:
+                print(
+                    'Failed to load the configuration file {}.'
+                    .format(path)
+                )
+                return
     except FileNotFoundError:
         print_file_not_found_error(path)
+        return
+
+    jsondata[key] = eval_string(value)
+    with open(path, 'w') as config_file:
+        json.dump(jsondata, config_file, indent=4)

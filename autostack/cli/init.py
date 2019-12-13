@@ -66,19 +66,6 @@ def init(default):
             ],
         },
         {
-            'type': 'checkbox',
-            'name': 'communities',
-            'message':
-                'Which Stack Exchange communities do you want to'
-                ' query?',
-            'choices': [
-                {
-                    'name': 'Stack Overflow',
-                    'checked': True,
-                },
-            ],
-        },
-        {
             'type': 'list',
             'name': 'order_by',
             'message': 'How do you want to order posts?',

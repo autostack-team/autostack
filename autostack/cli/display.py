@@ -12,7 +12,6 @@ import click
 
 from autostack.config.constants import (
     SUPPORTED_LANGUAGES,
-    SUPPORTED_COMMUNITIES,
     SUPPORTED_ORDER_BY_FILTERS
 )
 from autostack.cli.constants import (
@@ -36,22 +35,6 @@ def validate_language(ctx, param, value):
         raise click.BadParameter(
             '{} is an invalid language. Use one of {}.'
             .format(value, SUPPORTED_LANGUAGES)
-        )
-
-
-def validate_community(ctx, param, value):
-    '''
-    Validates the community option.
-
-    Parameter {click.core.Context} ctx: the command's context.
-    Parameter {click.core.Option} param: the command's option.
-    Parameter {any} param: the value passed to the command's option.
-    '''
-
-    if not value is None and not value in SUPPORTED_COMMUNITIES:
-        raise click.BadParameter(
-            '{} is an invalid community. Use one of {}.'
-            .format(value, SUPPORTED_COMMUNITIES)
         )
 
 
@@ -96,13 +79,6 @@ def validate_display_comments(ctx, param, value):
     help='The language to display posts for.'
 )
 @click.option(
-    '--community',
-    '-c',
-    is_flag=False,
-    callback=validate_community,
-    help='The community to display posts from.'
-)
-@click.option(
     '--order-by',
     '-o',
     is_flag=False,
@@ -123,16 +99,21 @@ def validate_display_comments(ctx, param, value):
     help='Whether or not to only display posts with verified answers.'
 )
 @click.pass_context
-def display(ctx, language, community, order_by, verified_only, display_comments):
+def display(ctx, language, order_by, verified_only, display_comments):
     '''
     Display posts for all error messages captured with the 'capture' command.
     '''
 
-    # if not os.path.exists(PIPE_PATH):
-    #     print('Execute "autostack capture" in another terminal window first.')
-    #     return
+    config = {
+        'language': language,
+        'order_by': order_by,
+        'verified_only': verified_only,
+        'display_comments': display_comments
+    }
 
-    # with open(PIPE_PATH) as pipe:
-    #     listen_for_errors(pipe)
+    if not os.path.exists(PIPE_PATH):
+        print('Execute "autostack capture" in another terminal window first.')
+        return
 
-    pass
+    with open(PIPE_PATH) as pipe:
+        listen_for_errors(pipe)

@@ -2,7 +2,7 @@
 Authors: Elijah Sawyers
 Emails: elijahsawyers@gmail.com
 Date: 12/05/2019
-Overview: Click command to query Stack Exchange with STRING, and dislay
+Overview: Click command to query Stack Overflow with STRING, and dislay
 posts for that query string.
 '''
 
@@ -17,7 +17,7 @@ from autostack.error import (
 @click.argument('string')
 def query(string):
     '''
-    Query Stack Exchange with STRING, and dislay posts for that query string.
+    Query Stack Overflow with STRING, and dislay posts for that query string.
     '''
 
     handle_exception(string)

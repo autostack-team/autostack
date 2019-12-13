@@ -6,5 +6,4 @@ Overview: Constants used by the config package.
 '''
 
 SUPPORTED_LANGUAGES = ['python']
-SUPPORTED_COMMUNITIES = ['Stack Overflow']
 SUPPORTED_ORDER_BY_FILTERS = ['Relevance', 'Newest', 'Active', 'Votes']
