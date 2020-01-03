@@ -66,11 +66,13 @@ What is the first thing you do when a confusing error message is displayed in yo
 **1. Clone the repo and use the install script.**
 
 Clone the repo.
+
 ```sh
 git clone https://github.com/autostack-team/autostack.git
 ```
 
 Navigate to the project directory, and run the install bash script.
+
 ```sh
 cd /path/to/project/
 chmod +x install.sh
@@ -85,17 +87,20 @@ pip3 install autostack
 
 ## Usage 
 
-In one terminal window, execute "autostack capture" which will capture all errors in the terminal.
+In one terminal window, execute "autostack capture" which will capture all errors in the terminal. You can run this command in as many terminal windows as you'd like.
+
 ```sh
 autostack capture
 ``` 
 
 In another terminal window, execute "autostack display" to display Stack Overflow posts for all captured errors.
+
 ```sh
 autostack display
 ```
 
 To stop running autostack, use the exit command in the terminals that executed "autostack capture". This automatically stops the terminal window displaying Stack Overflow posts for captured errors.
+
 ```sh
 exit
 ```
