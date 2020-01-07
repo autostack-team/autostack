@@ -9,3 +9,4 @@ venv/
 .coverage
 coverage.xml
 .DS_Store
+.autostack.json
