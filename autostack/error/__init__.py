@@ -164,11 +164,12 @@ def handle_user_input():
     '''
 
     user_input = input('Did this solve your error? (Y/n or custom query): ')
+    user_input = user_input.lower()
 
-    if user_input not in ('Y', 'n'):
+    if user_input not in ('y', 'n'):
         return user_input
 
-    if user_input == 'Y':
+    if user_input == 'y':
         return True
 
     return False

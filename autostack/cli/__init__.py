@@ -16,7 +16,10 @@ from autostack.cli.query import query
 
 @click.group()
 def cli():
-    # pylint: disable=missing-function-docstring
+    '''
+    A command-line debugging tool.
+    '''
+
     pass
 
 

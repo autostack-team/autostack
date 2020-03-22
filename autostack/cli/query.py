@@ -9,7 +9,7 @@ posts for that query string.
 import click
 
 from autostack.error import (
-    handle_exception
+    handle_error
 )
 
 
@@ -20,4 +20,4 @@ def query(string):
     Query Stack Overflow with STRING, and dislay posts for that query string.
     '''
 
-    handle_exception(string)
+    handle_error(string)
