@@ -3,13 +3,19 @@
 Authors: Elijah Sawyers
 Emails: elijahsawyers@gmail.com
 Date: 12/10/2019
-Overview: the config package is used to interact with global and
-local (project-specific) configuration files for autostack.
+Overview: Used to interact with global and local (project-specific) autostack
+configuration files.
 '''
 
 import ast
 import json
 import os
+
+from autostack.config.error_messages import (
+    print_file_not_found_error,
+    print_key_error,
+    print_file_load_error
+)
 
 DEFAULT_CONFIG = {
     'languages': [
@@ -26,30 +32,6 @@ GLOBAL_CONFIG_PATH = os.path.join(
     CONFIG_DIR_NAME,
     CONFIG_FILE_NAME
 )
-
-
-def print_file_not_found_error(path):
-    '''
-    Prints that the configuration file doesn't exist in the path.
-
-    Parameter {string} path: the path to the non-existant configuration file.
-    '''
-
-    print('No autostack configuration file found in {}!'.format(path))
-
-
-def print_key_error(key, path):
-    '''
-    Prints that the key doesn't exist in the configuration file.
-
-    Parameter {string} key: the key that doesn't exist.
-    Parameter {string} path: the path to the configuration file.
-    '''
-
-    print(
-        'The key {} doesn\'t exist in the configuration file {}.'
-        .format(key, path)
-    )
 
 
 def get_config_path(global_):
@@ -82,8 +64,6 @@ def eval_string(string):
 
     try:
         return ast.literal_eval(string)
-    except SyntaxError:
-        print('here')
     except:
         pass
 
@@ -119,7 +99,7 @@ def create_config(global_=False, jsondata=None):
 
 def reset_config(global_=False):
     '''
-    Resets a configuration file.
+    Resets a configuration file to the default configuration.
 
     Parameter {boolean} global_: whether to reset the global configuration file
     or the local configuration file in the current working directory.
@@ -127,32 +107,48 @@ def reset_config(global_=False):
 
     path = get_config_path(global_)
 
+    # Attempt to open the configuration file.
     try:
         with open(path, 'r+') as config_file:
             config_file.truncate(0)
             json.dump(DEFAULT_CONFIG, config_file, indent=4)
+    # The file doesn't exist.
     except FileNotFoundError:
         print_file_not_found_error(path)
 
 
-def print_config(global_=False):
+def print_config(global_=False, key=None):
     '''
-    Prints out a configuration file.
+    Prints out the configuration file, or a key-value pair in the
+    configuration file. If a key is passed in, only print that key-value
+    pair.
 
     Parameter {boolean} global_: whether to print the global configuration
     file or the location configuration file in the current working directory.
+    Parameter {string} key: the key of the key-value pair to print.
     '''
 
     path = get_config_path(global_)
+    jsondata = None
 
+    # Attempt to open the configuration file.
     try:
         with open(path, 'r') as config_file:
             jsondata = json.loads(config_file.read())
+
+            # Try to return the value from the specified key.
+            if key:
+                try:
+                    print('\n{}: {}\n'.format(key, jsondata[key]))
+                except KeyError:
+                    print_key_error(key, path)
+                return
 
             print('\nCONFIGURATIONS:')
             for key, value in jsondata.items():
                 print('  {}: {}'.format(key, value))
             print('')
+    # The file doesn't exist.
     except FileNotFoundError:
         print_file_not_found_error(path)
 
@@ -167,17 +163,27 @@ def get_config(global_, key):
     '''
 
     path = get_config_path(global_)
+    jsondata = None
 
+    # Attempt to open the configuration file.
     try:
         with open(path, 'r') as config_file:
-            jsondata = json.loads(config_file.read())
+            try:
+                jsondata = json.loads(config_file.read())
+            # The file could not be opened.
+            except:
+                print_file_load_error(path)
+                return
 
+            # Try to return the value from the specified key.
             try:
                 return jsondata[key]
             except KeyError:
-                print_key_error(key)
+                print_key_error(key, path)
+    # The file doesn't exist.
     except FileNotFoundError:
-        return None
+        print_file_not_found_error(path)
+        return
 
 
 def set_config(global_, key, value):
@@ -193,20 +199,21 @@ def set_config(global_, key, value):
     path = get_config_path(global_)
     jsondata = None
 
+    # Attempt to open the configuration file.
     try:
         with open(path, 'r') as config_file:
             try:
                 jsondata = json.loads(config_file.read())
+            # The file could not be opened.
             except:
-                print(
-                    'Failed to load the configuration file {}.'
-                    .format(path)
-                )
+                print_file_load_error(path)
                 return
+    # The file doesn't exist.
     except FileNotFoundError:
         print_file_not_found_error(path)
         return
 
+    # Write the key-value pair to the configuration file.
     jsondata[key] = eval_string(value)
     with open(path, 'w') as config_file:
         json.dump(jsondata, config_file, indent=4)

@@ -2,8 +2,7 @@
 Authors: Elijah Sawyers
 Emails: elijahsawyers@gmail.com
 Date: 12/05/2019
-Overview: Click commands tonteract with autostack configuration
-files.
+Overview: Commands to interact with autostack configuration files.
 '''
 
 import click
@@ -50,7 +49,7 @@ def reset(ctx):
 @click.pass_context
 def set_(ctx, key, value):
     '''
-    Sets a key to a value in the configuration file.
+    Sets a key's value in the configuration file.
 
     KEY in the configuration file to be assigned VALUE.
     '''
@@ -58,11 +57,24 @@ def set_(ctx, key, value):
     set_config(ctx.obj['GLOBAL'], key, value)
 
 
+@config.command('get')
+@click.argument('key')
+@click.pass_context
+def get_(ctx, key):
+    '''
+    Gets a key's value in the configuration file.
+
+    KEY in the configuration file to return the value for.
+    '''
+
+    print_config(ctx.obj['GLOBAL'], key)
+
+
 @config.command('list')
 @click.pass_context
 def list_(ctx):
     '''
-    List all configurations.
+    Lists all key-value pairs in the configuration file.
     '''
 
     print_config(ctx.obj['GLOBAL'])

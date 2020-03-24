@@ -2,7 +2,7 @@
 Authors: Elijah Sawyers
 Emails: elijahsawyers@gmail.com
 Date: 12/05/2019
-Overview: Click group and commands setup.
+Overview: Click Group and Command setup.
 '''
 
 import click

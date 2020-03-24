@@ -2,8 +2,8 @@
 Authors: Elijah Sawyers
 Emails: elijahsawyers@gmail.com
 Date: 12/05/2019
-Overview: Click command to capture all error messages outputed in the terminal
-for configured languages.
+Overview: Command to captures all output in the terminal, which is to be
+used with the 'display' command in another terminal.
 '''
 
 import subprocess
@@ -22,11 +22,13 @@ from autostack.pipe import (
 @click.command()
 def capture():
     '''
-    Captures all output in the terminal, and pipes it to /tmp/monitorPipe.
+    Captures all output in the terminal, which is to be used with the
+    'display' command in another terminal.
     '''
 
     create_pipe(PIPE_PATH)
 
+    # Depending on the platform (Mac or Linux), the -f, or -F, flag changes.
     try:
         if sys.platform.startswith('darwin'):  # Mac
             subprocess.run(['script', '-q', '-F', PIPE_PATH], check=True)

@@ -2,8 +2,8 @@
 Authors: Elijah Sawyers
 Emails: elijahsawyers@gmail.com
 Date: 12/05/2019
-Overview: Display posts for all error messages captured with the 'capture'
-command.
+Overview: Command to display Stack Overflow posts for all error messages
+captured in terminals executing the 'capture' command.
 '''
 
 import os
@@ -96,11 +96,12 @@ def validate_display_comments(ctx, param, value):
     '-d',
     type=int,
     callback=validate_display_comments,
-    help='Whether or not to only display posts with verified answers.'
+    help='The max number of comments to display on each question and answer.'
 )
 def display(language, order_by, verified_only, display_comments):
     '''
-    Display posts for all error messages captured with the 'capture' command.
+    Display Stack Overflow posts for all error messages captured in terminals
+    executing the 'capture' command.
     '''
 
     config = {
