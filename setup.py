@@ -4,7 +4,7 @@ from os import path
 setuptools.setup(
     # General setup information.
     name='autostack',
-    version='1.2.0',
+    version='1.2.1',
     packages=setuptools.find_packages(exclude=['tests']),
     entry_points={
         'console_scripts': [
@@ -31,14 +31,13 @@ setuptools.setup(
             'pytest-pylint',
         ]
     },
-
     # Meta data.
     url='https://github.com/elijahsawyers/autostack',
     author='Elijah Sawyers, Benjamin Sanders, Caleb Werth',
     author_email='elijahsawyers@gmail.com, ben.sanders97@gmail.com, cwerth@crimson.ua.edu',
     description='Automatically detect python errors and search Stack Overflow.',
-    long_description=open('./README.md').read(),
     long_description_content_type='text/markdown',
+    long_description=open('./README.md').read(),
     classifiers=[
         'Development Status :: 5 - Production/Stable',
         'Intended Audience :: Developers',
