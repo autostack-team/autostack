@@ -10,7 +10,7 @@ import os
 
 def create_pipe(path):
     '''
-    TODO: Write docstring.
+    Given a file path, create a fifo pipe, and return it in read mode.
 
     Parameter {string}: the full path to the fifo.
     Returns: The pipe in read mode.

@@ -41,3 +41,19 @@ def print_file_load_error(path):
         'Failed to load the configuration file {}.'
         .format(path)
     )
+
+def print_invalid_key_value(key, value, path):
+    '''
+    Prints that the key's value is invalid in the configuration file with
+    the specified path.
+
+    Parameter {string} key: the key.
+    Parameter {any} key: the invalid value.
+    Parameter {string} path: the path to the configuration file with the
+    key-value pair.
+    '''
+
+    print(
+        '{}\'s value {} is not valid in the configuration file {}.'
+        .format(key, value, path)
+    )

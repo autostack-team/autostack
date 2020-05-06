@@ -11,26 +11,21 @@ import ast
 import json
 import os
 
+from autostack.config.constants import (
+    CONFIG_DIR_NAME,
+    CONFIG_FILE_NAME,
+    DEFAULT_CONFIG,
+    GLOBAL_CONFIG_PATH,
+    SUPPORTED_CONFIG_KEYS,
+    SUPPORTED_LANGUAGES,
+    SUPPORTED_ORDER_BY_FILTERS
+)
+
 from autostack.config.error_messages import (
     print_file_not_found_error,
     print_key_error,
-    print_file_load_error
-)
-
-DEFAULT_CONFIG = {
-    'languages': [
-        'Python'
-    ],
-    'order_by': 'Relevance',
-    'verified_only': True,
-    'display_comments': False,
-}
-CONFIG_DIR_NAME = '.autostack'
-CONFIG_FILE_NAME = '.autostack.json'
-GLOBAL_CONFIG_PATH = os.path.join(
-    os.getenv('HOME'),
-    CONFIG_DIR_NAME,
-    CONFIG_FILE_NAME
+    print_file_load_error,
+    print_invalid_key_value
 )
 
 
@@ -53,7 +48,7 @@ def eval_string(string):
     '''
     Casts a string into native types: int, float, list, dict, etc.
 
-    Parameter {string} string: the string to evaluate.
+    Parameter {string} string: the string to cast into its native type.
     Returns {any}: the evaluated value.
     '''
 
@@ -153,13 +148,16 @@ def print_config(global_=False, key=None):
         print_file_not_found_error(path)
 
 
-def get_config(global_, key):
+def get_config(global_, key, display_errors=True):
     '''
     Returns the value for a key in a configuration file.
+
     Parameter {boolean} global_: whether to grab from the global configuration
     file or the local configuration file in the current working directory.
     Parameter {string} key: the key to get the value for.
     Returns {any}: the value for the key.
+    Parameter {boolean} display_errors: whether or not to print out error such as
+    file not found, or if the file can't be opened. Defaults to True.
     '''
 
     path = get_config_path(global_)
@@ -172,21 +170,43 @@ def get_config(global_, key):
                 jsondata = json.loads(config_file.read())
             # The file could not be opened.
             except:
-                print_file_load_error(path)
+                if display_errors:
+                    print_file_load_error(path)
                 return
 
             # Try to return the value from the specified key.
             try:
                 return jsondata[key]
             except KeyError:
-                print_key_error(key, path)
+                if display_errors:
+                    print_key_error(key, path)
     # The file doesn't exist.
     except FileNotFoundError:
-        print_file_not_found_error(path)
+        if display_errors:
+            print_file_not_found_error(path)
         return
 
 
-def set_config(global_, key, value):
+def get_config_hierarchically(key):
+    '''
+    Returns the value for a key in a configuration file, hierarchically. If a
+    local configuration file exists, it's searched for there. If the key is not
+    there, it's searched for in the global configuration file. If not found,
+    None is returned.
+
+    Parameter {string} key: the key to get the value for.
+    Returns {tuple} the value for the key and whether or not it was global.
+    '''
+
+    if get_config(False, key, False) is not None:
+        return (get_config(False, key), False)
+    elif get_config(True, key, False) is not None:
+        return (get_config(True, key), True)
+    else:
+        return None
+
+
+def set_config(global_, key, value, display_errors=True):
     '''
     Sets the value for a key in a configuration file.
 
@@ -194,6 +214,8 @@ def set_config(global_, key, value):
     file or the local configuration file in the current working directory.
     Parameter {string} key: the key to set a value for.
     Parameter {any} value: the value to assign to the key.
+    Parameter {boolean} display_errors: whether or not to print out error such as
+    file not found, or if the file can't be opened. Defaults to True.
     '''
 
     path = get_config_path(global_)
@@ -206,14 +228,119 @@ def set_config(global_, key, value):
                 jsondata = json.loads(config_file.read())
             # The file could not be opened.
             except:
-                print_file_load_error(path)
+                if display_errors:
+                    print_file_load_error(path)
                 return
     # The file doesn't exist.
     except FileNotFoundError:
-        print_file_not_found_error(path)
+        if display_errors:
+            print_file_not_found_error(path)
         return
 
     # Write the key-value pair to the configuration file.
     jsondata[key] = eval_string(value)
     with open(path, 'w') as config_file:
         json.dump(jsondata, config_file, indent=4)
+
+
+def create_config_object(language, order_by, verified_only, display_comments):
+    '''
+    Creates a configuration object of the form:
+
+    {
+        'language': ...,
+        'order_by': ...,
+        'verified_only': ...,
+        'diplay_comments': ...
+    }
+
+    If a valid configuration value cannot be found for a key in a local or the global
+    configuration files, None is returned. Otherwise, the config object is returned.
+
+    This function is intended to be used only with the click commands that take
+    in configuration objects.
+
+    Parameter {string|None} language: the config language.
+    Parameter {string|None} order_by: the config order_by.
+    Parameter {boolean|None} verified_only: the config verified_only.
+    Parameter {int|None} display_comments: the config display_comments.
+    Returns {dictionary|None} the configuration object, or None.
+    '''
+
+    config = {
+        'language': language,
+        'order_by': order_by,
+        'verified_only': verified_only,
+        'diplay_comments': False
+    }
+    if display_comments is not None:
+        config['display_comments'] = True
+        config['max_comments'] = display_comments
+
+    config = populate_config_object(config)
+
+    return config
+
+
+def populate_config_object(config):
+    '''
+    Given a configuration object, try to populate a key's value from a
+    local or the global configuration file, if its value is None.
+
+    If any of the key's cannot be assigned a valid value, None
+    is returned.
+
+    Parameter {dictionary} config: the configuration object to populate.
+    Returns {dictionary|None} the populated configuration object, or None.
+    '''
+
+    valid = False
+
+    for key, value in config.items():
+        if value is None:
+            new_value, global_ = get_config_hierarchically(key)
+            config[key] = new_value
+            valid = validate_config_key_value(key, new_value, global_)
+
+    if valid:
+        return config
+    else:
+        return None
+
+
+def validate_config_key_value(key, value, global_):
+    '''
+    Given a key-value pair, and whether it was in a local or the global
+    configuration file, determine if the value is valid.
+
+    Parameter {string} key: the key to validate its value.
+    Parameter {any} value: the value to verify.
+    Parameter {boolean} global_: whether or not the key-value pair was
+    grabbed from the global configuration file.
+    '''
+
+    valid = True
+    path = get_config_path(global_)
+
+    # Validate the value.
+    if value is None:
+        print('Cannot find a configuration value for the key {}.'.format(key))
+        valid = False
+    elif key == 'display_comments' and type(value) != bool:
+        print_invalid_key_value(key, value, path)
+        valid = False
+    elif key == 'language' and value not in SUPPORTED_LANGUAGES:
+        print_invalid_key_value(key, value, path)
+        valid = False
+    elif key == 'max_comments' and type(value) is not int and value < 1:
+        print_invalid_key_value(key, value, path)
+        valid = False
+    elif key == 'order_by' and value not in SUPPORTED_ORDER_BY_FILTERS:
+        print_invalid_key_value(key, value, path)
+        valid = False
+    elif key == 'verified_only' and type(value) != bool:
+        print(value)
+        print_invalid_key_value(key, value, path)
+        valid = False
+
+    return valid

@@ -5,12 +5,7 @@ Date: 12/13/2019
 Overview: Ability to parse output for python error messages.
 '''
 
-
-SYNTAX_ERRORS = [
-    'SyntaxError',
-    'IndentationError',
-    'TabError',
-]
+from autostack.error.python.constants import SYNTAX_ERRORS
 
 
 def parse_output_for_error(output, pipe):

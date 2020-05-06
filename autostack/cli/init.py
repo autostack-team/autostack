@@ -43,10 +43,10 @@ class MaxCommentsValidator(Validator):
 # Initialization prompts.
 prompts = [
     {
-        'type': 'checkbox',
-        'name': 'languages',
+        'type': 'list',
+        'name': 'language',
         'message':
-            'What languages do you want autostack'
+            'What language do you want autostack'
             ' to capture errors for?',
         'choices': [
             {
@@ -102,10 +102,17 @@ max_comments_prompts = [
     is_flag=True,
     help='Use default configuration values.'
 )
-def init(default):
+@click.option(
+    '--global',
+    '-g',
+    'global_',
+    is_flag=True,
+    help='Initialize the global configuration file.'
+)
+def init(default, global_):
     '''
-    Initialize the currect working directory with a .autostack.json
-    configuration file.
+    Initialize a .autostack.json configuration file in the current working
+    directory, or globally.
     '''
 
     if default:
@@ -121,6 +128,6 @@ def init(default):
                 max_comments_prompts
             )['max_comments']
 
-        create_config(False, answers)
+        create_config(global_, answers)
     except KeyError:
         pass
