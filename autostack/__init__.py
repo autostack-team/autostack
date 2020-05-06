@@ -7,7 +7,21 @@ Overview: The autostack package includes packages for a cli, error
 parsing, querying Stack Overflow, and more!
 '''
 
+from __future__ import (
+    absolute_import,
+    division,
+    print_function
+)
+
 name = 'autostack'
+
+
+def clear_terminal():
+    '''
+    Clears the terminal window.
+    '''
+
+    print(u'\033c')
 
 
 def print_logo():
@@ -27,3 +41,16 @@ def print_logo():
     print(u'  \u001b[38;5;94m/\u001b[38;5;224m/\u001b[38;5;94m                   \u001b[38;5;224m, \u001b[38;5;94m/   ')  # nopep8
     print(u'  \u001b[38;5;94m\\\u001b[38;5;224m\\\u001b[38;5;94m___________   \u001b[38;5;224m____  \u001b[38;5;94m/  ')  # nopep8
     print(u'               \u001b[38;5;94m\_______/\u001b[0m     \n')  # nopep8
+
+
+def print_welcome_message():
+    '''
+    Prints a welcome message after setup.
+    '''
+
+    clear_terminal()
+    print_logo()
+    print(
+        'Welcome to autostack! The command-line debugging tool that automatically displays Stack Overflow answers for thrown errors.'
+    )
+    print('Setup your global configuration file below...')

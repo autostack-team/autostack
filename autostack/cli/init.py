@@ -115,6 +115,9 @@ def init(default, global_):
     directory, or globally.
     '''
 
+    if not default:
+        print_logo()
+
     undecorated_init(default, global_)
 
 
@@ -133,7 +136,6 @@ def undecorated_init(default, global_):
         create_config(global_)
         return
 
-    print_logo()
     answers = prompt(prompts)
 
     try:

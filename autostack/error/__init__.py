@@ -13,9 +13,12 @@ from __future__ import (
 
 import importlib
 
+from autostack import clear_terminal
 from autostack.so_web_scraper import (
-    accepted_posts,
-    print_accepted_post
+    posts
+)
+from autostack.so_web_scraper.print import (
+    print_post
 )
 
 
@@ -25,8 +28,7 @@ def listen_for_errors(pipe, config):
     output is parsed for errors.
 
     Parameter {file} pipe: the pipe to read output from.
-    Parameter {dictionary} config: configuration object passed in from
-    the "display" cli command.
+    Parameter {dictionary} config: configuration object.
     '''
 
     error_library = None
@@ -53,11 +55,10 @@ def parse_output_for_error(pipe, output, error_library, config):
     Given a line of output read in from the pipe, determine if an error was
     outputted, and if so, display Stack Overflow posts for that error.
 
-    Parameter {file} pipe: the pipe to read output from, if needed.
+    Parameter {file} pipe: the pipe to read output from.
     Parameter {string} output: the current line of output read from the pipe.
     Parameter {library} error_library: the library to use for parsing for errors.
-    Parameter {dictionary} config: configuration object passed in from
-    the "display" cli command.
+    Parameter {dictionary} config: configuration object.
     '''
 
     error_handled = False
@@ -81,14 +82,13 @@ def handle_error(query, config):
     'Y'.
 
     Parameter {str} query: the query to display posts for.
-    Parameter {dictionary} config: configuration object passed in from
-    the "display" cli command.
+    Parameter {dictionary} config: configuration object.
     '''
 
-    for post in accepted_posts(query):
+    for post in posts(query, config):
         # Display Stack Overflow posts for the error.
         clear_terminal()
-        print_accepted_post(post)
+        print_post(post, config)
 
         user_input = handle_user_input()
 
@@ -134,11 +134,3 @@ def print_listening_for_errors():
     '''
 
     print(u'\U0001F95E Listening for errors...')
-
-
-def clear_terminal():
-    '''
-    Clears the terminal window.
-    '''
-
-    print(u'\033c')

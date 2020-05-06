@@ -1,6 +1,7 @@
 import setuptools
 from os import path
 
+from autostack import print_welcome_message
 from autostack.cli.init import undecorated_init
 
 # Setup autostack.
@@ -56,4 +57,5 @@ try:
 
 # After setup, initialize the global configuration file.
 finally:
+    print_welcome_message()
     undecorated_init(False, True)
