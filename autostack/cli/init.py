@@ -115,8 +115,22 @@ def init(default, global_):
     directory, or globally.
     '''
 
+    undecorated_init(default, global_)
+
+
+def undecorated_init(default, global_):
+    '''
+    Initialize a .autostack.json configuration file in the current working
+    directory, or globally.
+
+    Parameter {boolean} default: whether or not to use the default configuration
+    key-value pairs.
+    Parameter {boolean} global_: whether or not to init the global configuration. If
+    False, a local configuration will be initialized.
+    '''
+
     if default:
-        create_config(False)
+        create_config(global_)
         return
 
     print_logo()
