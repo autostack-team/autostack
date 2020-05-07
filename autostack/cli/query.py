@@ -49,13 +49,19 @@ from autostack.error import (
     callback=validate_display_comments,
     help='The max number of comments to display on each question and answer.'
 )
+@click.option(
+    '--no-comments',
+    '-n',
+    is_flag=True,
+    help='Don\'t display comments on each question and answer (overrides --display-comments option).'
+)
 @click.argument('string')
-def query(string, language, order_by, verified_only, display_comments):
+def query(string, language, order_by, verified_only, display_comments, no_comments):
     '''
     Query Stack Overflow, and dislay posts for the given query string.
     '''
 
-    config = create_config_object(language, order_by, verified_only, display_comments)
+    config = create_config_object(language, order_by, verified_only, display_comments, no_comments)
 
     if not config:
         return

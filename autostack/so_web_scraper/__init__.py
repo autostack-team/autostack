@@ -13,16 +13,16 @@ from autostack.so_web_scraper.scrape import (
 
 def posts(query, config):
     '''
-    A generator that queries Stack Overflow and yields posts, with consideration
-    to the configuration object.
+    A generator that queries Stack Overflow and yields posts for the query,
+    with consideration to the configuration object.
 
     Parameter {string} query: the string to query Stack Overflow with.
     Parameter {dictionary} config: configuration object.
-    Yields {bs4.BeautifulSoup}: a post html document (i.e. soup).
+    Yields {bs4.BeautifulSoup}: a post html document (i.e. bs4 soup).
     '''
 
-    for result_set in get_post_summaries(query, config):
-        for post_summary in result_set:
+    for post_summaries in get_post_summaries(query, config):
+        for post_summary in post_summaries:
             post = post_soup(post_summary, config)
 
             if post:

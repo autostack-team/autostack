@@ -16,6 +16,7 @@ from pygments.lexers import PythonLexer  # pylint: disable=no-name-in-module
 from termcolor import colored
 
 from autostack.so_web_scraper.scrape import (
+    get_post_comments,
     get_post_text,
     get_src_code
 )
@@ -23,17 +24,29 @@ from autostack.so_web_scraper.scrape import (
 
 def print_post(post, config):
     '''
-    Prints a Stack Overflow post with an accepted answer.
+    Prints a Stack Overflow post with an answer.
 
     Parameter {bs4.BeautifulSoup} post: The 'soup' of the post
     to print.
     Parameter {dictionary} config: configuration object.
     '''
 
-    question = get_post_text(post, 'question')
-    accepted_answer = get_post_text(post, 'accepted-answer')
+    question = None
+    question_comments = None
+    answer = None
+    answer_comments = None
 
-    if question is None or accepted_answer is None:
+    # Grab the question and answer.
+    question = get_post_text(post, 'question')
+    answer = get_post_text(post, 'answer')
+
+    # Grab the comments, if applicable.
+    if config['display_comments']:
+        question_comments = get_post_comments(post, 'question', config['max_comments'])
+        answer_comments = get_post_comments(post, 'answer', config['max_comments'])
+
+    # If the question or answer could not be grabbed, return.
+    if question is None or answer is None:
         return
 
     print(colored('~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~', 'red'))
@@ -42,11 +55,21 @@ def print_post(post, config):
     # Print the question.
     print_post_text(question)
 
+    # Print the question comments, if applicable.
+    if question_comments:
+        print(colored('\nComments:', 'red'))
+        print_post_comments(question_comments)
+
     print(colored('~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~', 'red'))
     print(colored('Answer:', 'red'))
 
     # Print the answer.
-    print_post_text(accepted_answer)
+    print_post_text(answer)
+
+    # Print the answer comments, if applicable.
+    if answer_comments:
+        print(colored('\nComments:', 'red'))
+        print_post_comments(answer_comments)
 
     print(colored('~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~', 'red'))
 
@@ -88,6 +111,17 @@ def print_post_text(post_text):
             print_ul(element)
         elif element.name == 'pre':  # Code.
             print_code_block(element.find('code'))
+
+    
+def print_post_comments(comments):
+    '''
+    TODO
+    '''
+
+    pass
+
+    # for comment in comments:
+    #     text = comment.find(attrs={'class': 'comment-copy'}, text=True)
 
 
 def print_ul(ul_element):

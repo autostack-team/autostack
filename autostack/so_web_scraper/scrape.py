@@ -57,9 +57,11 @@ def build_query_url(query, page, config):
     Returns {string} the query URL.
     '''
 
-    query_url = '{}/search?page={}&tab=Relevance&q=%5Bpython%5D'.format(
+    query_url = '{}/search?page={}&tab={}&q=%5B{}%5D'.format(
         BASE_URL,
-        page
+        page,
+        config['order_by'],
+        config['language']
     )
 
     for query_string in query.split(' '):
@@ -88,16 +90,15 @@ def query_stack_overflow(url):
 
 def post_soup(post_summary, config):
     '''
-    Given a post summary, query Stack Overflow, and return the
-    BeautifulSoup of the post, if it has an accepted answer.
+    Given a post summary, query Stack Overflow, and return the BeautifulSoup
+    of the post, if it has an answer (or accepted answer).
 
     Parameter {bs4.Tag} post_summary: the bs4.Tag post summary.
     Parameter {dictionary} config: configuration object.
-    Returns {bs4.BeautifulSoup} the BeautifulSoup of the post,
-    if it has an accepted answer; otherwise, None.
+    Returns {bs4.BeautifulSoup} the BeautifulSoup of the post.
     '''
 
-    if has_accepted_answer(post_summary):
+    if has_answer(post_summary, config['verified_only']):
         post_url = get_post_url(post_summary)
 
         try:
@@ -111,23 +112,29 @@ def post_soup(post_summary, config):
     return None
 
 
-def has_accepted_answer(post_summary):
+def has_answer(post_summary, accepted):
     '''
-    Given a post summary, this function determines whether or not
-    the post has an accepted answer.
+    Given a post summary, this function determines whether or not the
+    post has an answer (or accepted answer).
 
     Parameter {bs4.Tag} post_summary: the post summary.
-    Returns {boolean} True if the post has an accepted answer;
-    otherwise, False.
+    Returns {boolean} True if the post has an answer; otherwise, False.
     '''
 
-    accepted_answer = post_summary.find(
+    answer = post_summary.find(
         attrs={
             'class': 'answered-accepted'
         }
     )
 
-    if not accepted_answer:
+    if not answer and not accepted:
+        answer = post_summary.find(
+            attrs={
+                'class': 'answered'
+            }
+        )
+
+    if not answer:
         return False
 
     return True
@@ -153,15 +160,16 @@ def get_post_url(post_summary):
         return None
 
 
-def get_post_text(post, html_class):
+def get_post_text(post, class_):
     '''
     Given a post, and a html class, this function returns a
-    bs4.Tag with the post-text.
-    Typically, you'd only pass 'question' or 'accepted-answer' as
-    the html class.
+    bs4.Tag with the post-text, question or answer.
+
+    You'd only want to pass 'question', 'answer', or 'accepted-answer'
+    as the class.
 
     Parameter {bs4.BeautifulSoup} post: the post to get post-text from.
-    Parameter {str} html_class: the html class of the elementto get
+    Parameter {str} class_: the html class of the element to get
     post-text from.
     Returns {bs4.Tag} the post-text.
     '''
@@ -170,7 +178,7 @@ def get_post_text(post, html_class):
         return post.find(
             attrs={
                 'class',
-                html_class
+                class_
             }
         ).find(
             attrs={
@@ -182,13 +190,45 @@ def get_post_text(post, html_class):
         return None
 
 
+def get_post_comments(post, class_, limit):
+    '''
+    Given a post, and a html class, this function returns a list of
+    bs4.Tag objects with the question or answer's comments.
+
+    You'd only want to pass 'question', 'answer', or 'accepted-answer'
+    as the class.
+
+    Parameter {bs4.BeautifulSoup} post: the post to get comments from.
+    Parameter {str} class_: the html class of the element to get
+    comments from.
+    Parameter {int} limit: max comments to get.
+    Returns {list<bs4.Tag>} the comments.
+    '''
+
+    try:
+        return post.find(
+            attrs={
+                'class',
+                class_
+            }
+        ).find_all(
+            attrs={
+                'class',
+                'comment-body'
+            },
+            limit=limit
+        )
+    except AttributeError:
+        return None
+
+
 def get_src_code(code_block):
     '''
     Loops over a code block and grabs the 'source code'
     (i.e. text).
 
     Parameter {bs4.Tag} code_block: the source code (or text).
-    Returns {str}: the source code (or text).
+    Returns {string}: the source code (or text).
     '''
 
     code = ''

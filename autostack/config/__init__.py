@@ -243,7 +243,7 @@ def set_config(global_, key, value, display_errors=True):
         json.dump(jsondata, config_file, indent=4)
 
 
-def create_config_object(language, order_by, verified_only, display_comments):
+def create_config_object(language, order_by, verified_only, display_comments, no_comments):
     '''
     Creates a configuration object of the form:
 
@@ -263,7 +263,8 @@ def create_config_object(language, order_by, verified_only, display_comments):
     Parameter {string|None} language: the config language.
     Parameter {string|None} order_by: the config order_by.
     Parameter {boolean|None} verified_only: the config verified_only.
-    Parameter {int|None} display_comments: the config display_comments.
+    Parameter {int|None} display_comments: the max comments to display.
+    Parameter {boolean|None} no_comments: don't display comments.
     Returns {dictionary|None} the configuration object, or None.
     '''
 
@@ -271,9 +272,14 @@ def create_config_object(language, order_by, verified_only, display_comments):
         'language': language,
         'order_by': order_by,
         'verified_only': verified_only,
-        'diplay_comments': False
+        'display_comments': None,
+        'max_comments': None
     }
-    if display_comments is not None:
+
+    if no_comments:
+        config['display_comments'] = False
+        del config['max_comments']
+    elif display_comments is not None:
         config['display_comments'] = True
         config['max_comments'] = display_comments
 

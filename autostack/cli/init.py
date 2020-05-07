@@ -140,9 +140,11 @@ def undecorated_init(default, global_):
 
     try:
         if answers['display_comments']:
-            answers['max_comments'] = prompt(
-                max_comments_prompts
-            )['max_comments']
+            answers['max_comments'] = int(
+                prompt(
+                    max_comments_prompts
+                )['max_comments']
+            )
 
         create_config(global_, answers)
     except KeyError:

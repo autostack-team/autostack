@@ -57,7 +57,13 @@ from autostack.error import (
     callback=validate_display_comments,
     help='The max number of comments to display on each question and answer.'
 )
-def display(language, order_by, verified_only, display_comments):
+@click.option(
+    '--no-comments',
+    '-n',
+    is_flag=True,
+    help='Don\'t display comments on each question and answer (overrides --display-comments option).'
+)
+def display(language, order_by, verified_only, display_comments, no_comments):
     '''
     Display Stack Overflow posts for all error messages captured in terminals
     executing the 'capture' command.
@@ -65,7 +71,7 @@ def display(language, order_by, verified_only, display_comments):
 
     print_logo()
     
-    config = create_config_object(language, order_by, verified_only, display_comments)
+    config = create_config_object(language, order_by, verified_only, display_comments, no_comments)
 
     if not config:
         return
