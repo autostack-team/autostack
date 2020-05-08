@@ -118,10 +118,16 @@ def print_post_comments(comments):
     TODO
     '''
 
-    pass
-
-    # for comment in comments:
-    #     text = comment.find(attrs={'class': 'comment-copy'}, text=True)
+    for comment in comments:
+        try:
+            text = comment.find(
+                attrs={
+                    'class': 'comment-copy'
+                }
+            ).get_text()
+            print(text)
+        except AttributeError:
+            pass
 
 
 def print_ul(ul_element):
