@@ -17,9 +17,9 @@ def validate_language(ctx, param, value):
     '''
     Validates the language option.
 
-    Parameter {click.core.Context} ctx: the command's context.
-    Parameter {click.core.Option} param: the command's option.
-    Parameter {any} param: the value passed to the command's option.
+    Parameter {click.core.Context} ctx: the Click command's context.
+    Parameter {click.core.Option} param: the Click command's option.
+    Parameter {any} param: the value passed to the Click command's option.
     '''
 
     if value is not None and value not in SUPPORTED_LANGUAGES:
@@ -33,9 +33,9 @@ def validate_order_by(ctx, param, value):
     '''
     Validates the order_by option.
 
-    Parameter {click.core.Context} ctx: the command's context.
-    Parameter {click.core.Option} param: the command's option.
-    Parameter {any} param: the value passed to the command's option.
+    Parameter {click.core.Context} ctx: the Click command's context.
+    Parameter {click.core.Option} param: the Click command's option.
+    Parameter {any} param: the value passed to the Click command's option.
     '''
 
     if value is not None and value not in SUPPORTED_ORDER_BY_FILTERS:
@@ -49,9 +49,9 @@ def validate_display_comments(ctx, param, value):
     '''
     Validates the display_comments option.
 
-    Parameter {click.core.Context} ctx: the command's context.
-    Parameter {click.core.Option} param: the command's option.
-    Parameter {any} param: the value passed to the command's option.
+    Parameter {click.core.Context} ctx: the Click command's context.
+    Parameter {click.core.Option} param: the Click command's option.
+    Parameter {any} param: the value passed to the Click command's option.
     '''
 
     if value is not None and value <= 0:

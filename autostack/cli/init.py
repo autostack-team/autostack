@@ -2,8 +2,8 @@
 Authors: Elijah Sawyers
 Emails: elijahsawyers@gmail.com
 Date: 12/05/2019
-Overview: Command to initialize the currect working directory with a
-.autostack.json configuration file.
+Overview: Command to initialize a .autostack.json configuration file,
+locally or globally.
 '''
 
 import click
@@ -127,25 +127,26 @@ def undecorated_init(default, global_):
     directory, or globally.
 
     Parameter {boolean} default: whether or not to use the default configuration
-    key-value pairs.
-    Parameter {boolean} global_: whether or not to init the global configuration. If
-    False, a local configuration will be initialized.
+    key-value pairs, which can be found in autostack.config.constants.
+    Parameter {boolean} global_: If True, initialize the global configuration.
+    If False, a local configuration will be initialized in the current working
+    directory.
     '''
 
     if default:
         create_config(global_)
         return
 
-    answers = prompt(prompts)
+    config_options = prompt(prompts)
 
     try:
-        if answers['display_comments']:
-            answers['max_comments'] = int(
+        if config_options['display_comments']:
+            config_options['max_comments'] = int(
                 prompt(
                     max_comments_prompts
                 )['max_comments']
             )
 
-        create_config(global_, answers)
+        create_config(global_, config_options)
     except KeyError:
         pass
