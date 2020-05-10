@@ -2,7 +2,7 @@
 Authors: Elijah Sawyers, Benjamin Sanders
 Emails: elijahsawyers@gmail.com, ben.sanders97@gmail.com
 Date: 10/09/2019
-Overview: Ability to handle errors.
+Overview: Contains all methods to detect and handle errors.
 '''
 
 from __future__ import (
@@ -31,8 +31,6 @@ def listen_for_errors(pipe, config):
     Parameter {dictionary} config: configuration object.
     '''
 
-    error_library = None
-
     # Import the appropriate error detection library.
     error_library = importlib.import_module(
         'autostack.error.{}'.format(config['language'].lower())
@@ -40,13 +38,14 @@ def listen_for_errors(pipe, config):
 
     print_listening_for_errors()
 
+    # Parse each line of output from the pipe for errors.
     while True:
         output = pipe.readline()
 
         # Pipe closed.
         if output == '':
             break
-        
+
         parse_output_for_error(pipe, output, error_library, config)
 
 
@@ -61,18 +60,11 @@ def parse_output_for_error(pipe, output, error_library, config):
     Parameter {dictionary} config: configuration object.
     '''
 
-    error_handled = False
-    error = None
-
-    # Parse the current line of output from the pipe for an error.
     error = error_library.parse_output_for_error(output, pipe)
 
     if error:
         handle_error(error, config)
-        error_handled = True
-
-    if error_handled:
-        print_listening_for_errors()
+        print_listening_for_errors()    
 
 
 def handle_error(query, config):
@@ -81,12 +73,11 @@ def handle_error(query, config):
     Stack Overflow post, and displays them, until the user inputs
     'Y'.
 
-    Parameter {str} query: the query to display posts for.
+    Parameter {string} query: the query to display posts for.
     Parameter {dictionary} config: configuration object.
     '''
 
     for post in posts(query, config):
-        # Display Stack Overflow posts for the error.
         clear_terminal()
         print_post(post, config)
 
@@ -97,12 +88,12 @@ def handle_error(query, config):
             handle_error(user_input, config)
             return
 
-        # Error solved, break out of the loop.
+        # T - Error solved, break out of the loop.
         if user_input is True:
             clear_terminal()
             return
 
-        # Otherwise, the question wasn't answered, keep looping.
+        # f - The question wasn't answered, keep looping.
 
 
 def handle_user_input():

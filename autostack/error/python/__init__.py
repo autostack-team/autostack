@@ -2,7 +2,8 @@
 Authors: Elijah Sawyers
 Emails: elijahsawyers@gmail.com
 Date: 12/13/2019
-Overview: Ability to parse output for python error messages.
+Overview: This package contains an error parser for the Python programming
+language.
 '''
 
 from autostack.error.python.constants import SYNTAX_ERRORS
@@ -22,8 +23,8 @@ def parse_output_for_error(output, pipe):
             File "<stdin>", line 1, in <module>
         NameError: name 'xyz' is not defined
 
-    Parameter {str} output: line of output from a pipe.
-    Parameter {File} pipe: pipe to read output from, in case of traceback.
+    Parameter {string} output: line of output from a pipe.
+    Parameter {file} pipe: pipe to read output from, in case of traceback.
     Returns {string|None}: the error, or None, if it's not an error.
     '''
 
@@ -53,7 +54,7 @@ def get_error_from_traceback(pipe):
     would return 'NameError'.
 
     Parameter {File} pipe: the pipe to read the traceback from.
-    Returns {str}: the error description.
+    Returns {string}: the error description.
     '''
 
     output = pipe.readline()
