@@ -103,7 +103,7 @@ def handle_user_input():
     'f' meaning it wasn't solved. Otherwise, whatever the user entered
     is used for a custom query.
 
-    Returns: True if 'Y' or False if 'f' was inputed; otherwise, returns
+    Returns {boolean} True if 'Y' or False if 'f' was inputed; otherwise, returns
     the raw user input (custom query).
     '''
 

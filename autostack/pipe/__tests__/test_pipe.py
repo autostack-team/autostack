@@ -1,6 +1,6 @@
 '''
-Authors: Elijah Sawyers, Benjamin Sanders
-Emails: elijahsawyers@gmail.com, ben.sanders97@gmail.com
+Authors: Elijah Sawyers
+Emails: elijahsawyers@gmail.com
 Date: 10/22/2019
 Overview: Tests for the pipe package.
 '''

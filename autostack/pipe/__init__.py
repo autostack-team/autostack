@@ -2,7 +2,8 @@
 Authors: Elijah Sawyers, Benjamin Sanders
 Emails: elijahsawyers@gmail.com, ben.sanders97@gmail.com
 Date: 10/09/2019
-Overview:
+Overview: Contains the methods necessary for creating a pipe (FIFO),
+which is used to capture all output in a terminal session.
 '''
 
 import os
@@ -10,10 +11,10 @@ import os
 
 def create_pipe(path):
     '''
-    Given a file path, create a fifo pipe, and return it in read mode.
+    Given a file path, create a FIFO pipe, and return it in read mode.
 
-    Parameter {string}: the full path to the fifo.
-    Returns: The pipe in read mode.
+    Parameter {string} path: the full path to the FIFO.
+    Returns {file} The pipe in read mode.
     '''
 
     leaf_dir_path = '/'.join(path.split('/')[:-1])
