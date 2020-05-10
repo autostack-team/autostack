@@ -3,8 +3,8 @@
 Authors: Elijah Sawyers
 Emails: elijahsawyers@gmail.com
 Date: 12/10/2019
-Overview: Used to interact with global and local (project-specific) autostack
-configuration files.
+Overview: Contains methods to interact with .autostack.json configuration
+files.
 '''
 
 import ast
@@ -31,7 +31,10 @@ from autostack.config.error_messages import (
 
 def get_config_path(global_):
     '''
-    Returns a configuration file path.
+    Returns a configuration file path. If global_ is True, the path to the
+    global configuration file is returned. Otherwise, the path to the local
+    .autostack.json configuration file is returned, which is the current
+    working directory path + .autostack.json.
 
     Parameter {boolean} global_: whether to grab the local or global
     configuration file path.
@@ -67,12 +70,12 @@ def eval_string(string):
 
 def create_config(global_=False, jsondata=None):
     '''
-    Creates a configuration file.
+    Creates a configuration file in the current working directory, or globally.
 
     Parameter {boolean} global_: whether to create a global configuration file
     or a local configuration file in the current working directory.
     Parameter {dictionary} jsondata: the JSON data to write to the
-    configuration file; otherwise, the default configuration is written.
+    configuration file; if None, the default configuration is written.
     '''
 
     if (
@@ -114,11 +117,10 @@ def reset_config(global_=False):
 
 def print_config(global_=False, key=None):
     '''
-    Prints out the configuration file, or a key-value pair in the
-    configuration file. If a key is passed in, only print that key-value
-    pair.
+    Prints out the configuration file, or a key-value pair in the configuration
+    file. If a key is passed in, only that key-value pair is printed.
 
-    Parameter {boolean} global_: whether to print the global configuration
+    Parameter {boolean} global_: whether to print from the global configuration
     file or the location configuration file in the current working directory.
     Parameter {string} key: the key of the key-value pair to print.
     '''
@@ -137,7 +139,8 @@ def print_config(global_=False, key=None):
                     print('\n{}: {}\n'.format(key, jsondata[key]))
                 except KeyError:
                     print_key_error(key, path)
-                return
+                finally:
+                    return
 
             print('\nCONFIGURATIONS:')
             for key, value in jsondata.items():
@@ -155,9 +158,9 @@ def get_config(global_, key, display_errors=True):
     Parameter {boolean} global_: whether to grab from the global configuration
     file or the local configuration file in the current working directory.
     Parameter {string} key: the key to get the value for.
+    Parameter {boolean} display_errors: whether or not to print out errors such as
+    file not found, or if the file can't be opened.
     Returns {any}: the value for the key.
-    Parameter {boolean} display_errors: whether or not to print out error such as
-    file not found, or if the file can't be opened. Defaults to True.
     '''
 
     path = get_config_path(global_)
@@ -198,12 +201,14 @@ def get_config_hierarchically(key):
     Returns {tuple} the value for the key and whether or not it was global.
     '''
 
+    # Search locally.
     if get_config(False, key, False) is not None:
         return (get_config(False, key), False)
+    # Search globally.
     elif get_config(True, key, False) is not None:
         return (get_config(True, key), True)
-    else:
-        return None
+
+    return None
 
 
 def set_config(global_, key, value, display_errors=True):
@@ -214,8 +219,8 @@ def set_config(global_, key, value, display_errors=True):
     file or the local configuration file in the current working directory.
     Parameter {string} key: the key to set a value for.
     Parameter {any} value: the value to assign to the key.
-    Parameter {boolean} display_errors: whether or not to print out error such as
-    file not found, or if the file can't be opened. Defaults to True.
+    Parameter {boolean} display_errors: whether or not to print out errors
+    such as file not found, or if the file can't be opened.
     '''
 
     path = get_config_path(global_)
@@ -251,21 +256,24 @@ def create_config_object(language, order_by, verified_only, display_comments, no
         'language': ...,
         'order_by': ...,
         'verified_only': ...,
-        'diplay_comments': ...
+        'diplay_comments': ...,
+        'max_comments': ...
     }
 
     If a valid configuration value cannot be found for a key in a local or the global
     configuration files, None is returned. Otherwise, the config object is returned.
+    All values must be populated except for max_comments if display_comments is False.
 
-    This function is intended to be used only with the click commands that take
-    in configuration objects.
+    This function is intended to be used only with the Click commands that take
+    in configuration options such as display and query.
 
-    Parameter {string|None} language: the config language.
-    Parameter {string|None} order_by: the config order_by.
-    Parameter {boolean|None} verified_only: the config verified_only.
-    Parameter {int|None} display_comments: the max comments to display.
-    Parameter {boolean|None} no_comments: don't display comments.
-    Returns {dictionary|None} the configuration object, or None.
+    Parameter {string|None} language: the Click command language option.
+    Parameter {string|None} order_by: the Click command order_by option.
+    Parameter {boolean|None} verified_only: the Click command verified_only option.
+    Parameter {int|None} display_comments: the Click command display_comments option.
+    Parameter {boolean|None} no_comments: the Click command no_comments option.
+    Returns {dictionary|None} the configuration object, or None, if a valid configuration
+    object could not be populated from the configuration files and Click command options.
     '''
 
     config = {
@@ -276,6 +284,7 @@ def create_config_object(language, order_by, verified_only, display_comments, no
         'max_comments': None
     }
 
+    # No comments overrides display_comments Click command option.
     if no_comments:
         config['display_comments'] = False
         del config['max_comments']
@@ -290,14 +299,14 @@ def create_config_object(language, order_by, verified_only, display_comments, no
 
 def populate_config_object(config):
     '''
-    Given a configuration object, try to populate a key's value from a
+    Given a configuration object, try to populate each key's value from the
     local or the global configuration file, if its value is None.
 
-    If any of the key's cannot be assigned a valid value, None
-    is returned.
+    If any key cannot be assigned a valid value, None is returned.
 
     Parameter {dictionary} config: the configuration object to populate.
-    Returns {dictionary|None} the populated configuration object, or None.
+    Returns {dictionary|None} the populated configuration object, or None, if
+    a each key in the configuration object could not be populated with a value.
     '''
 
     valid = False
@@ -316,13 +325,16 @@ def populate_config_object(config):
 
 def validate_config_key_value(key, value, global_):
     '''
-    Given a key-value pair, and whether it was in a local or the global
-    configuration file, determine if the value is valid.
+    Given a configuration object's key-value pair, and whether it was in a local
+    or the global configuration file, determine if the value is valid.
+
+    If it's an invalid key-value pair, print out the mistake.
 
     Parameter {string} key: the key to validate its value.
     Parameter {any} value: the value to verify.
     Parameter {boolean} global_: whether or not the key-value pair was
     grabbed from the global configuration file.
+    Returns {boolean} whether or not the configuration key-value is valid.
     '''
 
     valid = True
@@ -345,7 +357,6 @@ def validate_config_key_value(key, value, global_):
         print_invalid_key_value(key, value, path)
         valid = False
     elif key == 'verified_only' and type(value) != bool:
-        print(value)
         print_invalid_key_value(key, value, path)
         valid = False
 

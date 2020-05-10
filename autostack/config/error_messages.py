@@ -32,7 +32,7 @@ def print_key_error(key, path):
 
 def print_file_load_error(path):
     '''
-    Prints that the file at the specified path failed to load.
+    Prints that the configuration file at the specified path failed to load.
 
     Parameter {string} path: the path to the configuration file.
     '''
@@ -44,8 +44,8 @@ def print_file_load_error(path):
 
 def print_invalid_key_value(key, value, path):
     '''
-    Prints that the key's value is invalid in the configuration file with
-    the specified path.
+    Prints that the key-value pair in the configuration file at the specified path
+    is invalid.
 
     Parameter {string} key: the key.
     Parameter {any} key: the invalid value.
