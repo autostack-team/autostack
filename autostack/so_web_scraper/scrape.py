@@ -18,7 +18,7 @@ def get_post_summaries(query, config):
 
     Parameter {string} query: the string to query Stack Overflow with.
     Parameter {dictionary} config: configuration object.
-    Yields {bs4.element.ResultSet}: ResultSet of post summaries.
+    Yields {bs4.element.ResultSet} ResultSet of post summaries.
     '''
 
     page = 1
@@ -48,7 +48,8 @@ def build_query_url(query, page, config):
     '''
     Builds a URL to query Stack Overflow with.
 
-    e.g. query == 'Test Query' and page == 1 then the url will be:
+    Given the configuration object orders by relevance and has python as the language,
+    and query == 'Test Query' and page == 1 then the url will be:
     https://stackoverflow.com/search?page=1&tab=Relevance&q=%5Bpython%5D+Test+Query
 
     Parameter {string} query: the string to query Stack Overflow with.
@@ -118,7 +119,10 @@ def has_answer(post_summary, accepted):
     post has an answer (or accepted answer).
 
     Parameter {bs4.Tag} post_summary: the post summary.
-    Returns {boolean} True if the post has an answer; otherwise, False.
+    Parameter {boolean} accepted: whether or not the post should check for
+    an accepted answer.
+    Returns {boolean} True if the post has an answer, or accepted answer;
+    otherwise, False.
     '''
 
     answer = post_summary.find(
@@ -145,7 +149,7 @@ def get_post_url(post_summary):
     Given a post summary, this function returns the post's url.
 
     Parameter {bs4.Tag} post_summary: the post summary.
-    Returns {str:None} post url, or None, if the post url couldn't
+    Returns {str|None} post url, or None, if the post url couldn't
     be found.
     '''
 
@@ -166,7 +170,7 @@ def get_post_text(post, class_):
     bs4.Tag with the post-text, question or answer.
 
     You'd only want to pass 'question', 'answer', or 'accepted-answer'
-    as the class.
+    as the class_.
 
     Parameter {bs4.BeautifulSoup} post: the post to get post-text from.
     Parameter {str} class_: the html class of the element to get
@@ -192,17 +196,17 @@ def get_post_text(post, class_):
 
 def get_post_comments(post, class_, limit):
     '''
-    Given a post, and a html class, this function returns a list of
-    bs4.Tag objects with the question or answer's comments.
+    Given a post, and a html class, this function returns a bs4.element.ResultSet
+    with bs4.Tag objects with the question or answer's comments.
 
     You'd only want to pass 'question', 'answer', or 'accepted-answer'
-    as the class.
+    as the class_.
 
     Parameter {bs4.BeautifulSoup} post: the post to get comments from.
     Parameter {str} class_: the html class of the element to get
     comments from.
     Parameter {int} limit: max comments to get.
-    Returns {list<bs4.Tag>} the comments.
+    Returns {bs4.element.ResultSet} a ResultSet of comments.
     '''
 
     try:
@@ -227,8 +231,8 @@ def get_src_code(code_block):
     Loops over a code block and grabs the 'source code'
     (i.e. text).
 
-    Parameter {bs4.Tag} code_block: the source code (or text).
-    Returns {string}: the source code (or text).
+    Parameter {bs4.Tag} code_block: the source code.
+    Returns {string}: the source code.
     '''
 
     code = ''

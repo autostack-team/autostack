@@ -2,7 +2,7 @@
 Authors: Elijah Sawyers
 Emails: elijahsawyers@gmail.com
 Date: 05/06/2020
-Overview: Used to print Stack Overflow posts.
+Overview: Contains methods to print Stack Overflow posts.
 '''
 
 from __future__ import (
@@ -24,7 +24,8 @@ from autostack.so_web_scraper.scrape import (
 
 def print_post(post, config):
     '''
-    Prints a Stack Overflow post with an answer.
+    Prints a Stack Overflow post's question and answer, and potentially, its
+    comments - if specified in the configuration.
 
     Parameter {bs4.BeautifulSoup} post: The 'soup' of the post
     to print.
@@ -115,7 +116,11 @@ def print_post_text(post_text):
     
 def print_post_comments(comments):
     '''
-    TODO
+    Given a post's question or answer comment body, print out each individual
+    comment.
+
+    Parameter {bs4.element.ResultSet} comments: a list of post comments 'soup',
+    for a question or answer.
     '''
 
     for comment in comments:
@@ -152,8 +157,8 @@ def print_code_block(code_block):
     to grab each of the 'code' element's 'span' elements' values to get
     the actual code.
 
-    Parameter {bs4.Tag} code_block: 'soup' of a HTML
-    'code' element from a Stack Overflow post.
+    Parameter {bs4.Tag} code_block: 'soup' of a HTML 'code' element from
+    a Stack Overflow post.
     '''
 
     token_colors = {
@@ -170,10 +175,8 @@ def print_code_block(code_block):
 
     print('')
 
-    # Store the code's text.
     code = get_src_code(code_block)
 
-    # Loop over code, and highlight.
     for token, content in pygments.lex(code, PythonLexer()):
         try:
             print(

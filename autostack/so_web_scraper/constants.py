@@ -5,4 +5,5 @@ Date: 05/06/2020
 Overview: Constants used in web scraping.
 '''
 
+# The base url to be built upon and used in queries.
 BASE_URL = 'https://stackoverflow.com'
