@@ -34,12 +34,12 @@ def parse_output_for_error(output, pipe):
             error = output.split()[0][:-1]
             return error
         # Runtime error - has traceback.
-        elif 'Traceback' in output.split():
+        if 'Traceback' in output.split():
             error = get_error_from_traceback(pipe)
             return error
     except IndexError:
         pass
-    
+
     return None
 
 

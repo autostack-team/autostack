@@ -8,12 +8,6 @@ parsing, querying Stack Overflow, and more! These packages contain
 all of the functionality needed to drive autostack.
 '''
 
-from __future__ import (
-    absolute_import,
-    division,
-    print_function
-)
-
 name = 'autostack'
 
 
@@ -52,6 +46,9 @@ def print_welcome_message():
     clear_terminal()
     print_logo()
     print(
-        'Welcome to autostack! The command-line debugging tool that automatically displays Stack Overflow answers for thrown errors.'
+        (
+            'Welcome to autostack! The command-line debugging tool that '
+            'automatically displays Stack Overflow answers for thrown errors.'
+            '\nSetup your global configuration file below...'
+        )
     )
-    print('Setup your global configuration file below...')

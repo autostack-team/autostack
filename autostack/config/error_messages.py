@@ -2,7 +2,7 @@
 Authors: Elijah Sawyers
 Emails: elijahsawyers@gmail.com
 Date: 03/23/2020
-Overview: Contains 
+Overview: Contains methods to print out common configuration errors.
 '''
 
 
@@ -42,10 +42,11 @@ def print_file_load_error(path):
         .format(path)
     )
 
+
 def print_invalid_key_value(key, value, path):
     '''
-    Prints that the key-value pair in the configuration file at the specified path
-    is invalid.
+    Prints that the key-value pair in the configuration file at the specified
+    path is invalid.
 
     Parameter {string} key: the key.
     Parameter {any} key: the invalid value.

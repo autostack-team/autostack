@@ -48,8 +48,8 @@ def build_query_url(query, page, config):
     '''
     Builds a URL to query Stack Overflow with.
 
-    Given the configuration object orders by relevance and has python as the language,
-    and query == 'Test Query' and page == 1 then the url will be:
+    Given the configuration object orders by relevance and has python as the
+    language, and query == 'Test Query' and page == 1 then the url will be:
     https://stackoverflow.com/search?page=1&tab=Relevance&q=%5Bpython%5D+Test+Query
 
     Parameter {string} query: the string to query Stack Overflow with.
@@ -196,8 +196,9 @@ def get_post_text(post, class_):
 
 def get_post_comments(post, class_, limit):
     '''
-    Given a post, and a html class, this function returns a bs4.element.ResultSet
-    with bs4.Tag objects with the question or answer's comments.
+    Given a post, and a html class, this function returns a
+    bs4.element.ResultSet with bs4.Tag objects with the question
+    or answer's comments.
 
     You'd only want to pass 'question', 'answer', or 'accepted-answer'
     as the class_.

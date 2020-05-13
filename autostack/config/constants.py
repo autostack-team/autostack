@@ -19,6 +19,7 @@ DEFAULT_CONFIG = {
     'order_by': 'Relevance',
     'verified_only': True,
     'display_comments': False,
+    'max_comments': 0
 }
 
 # The default global configuration file path.

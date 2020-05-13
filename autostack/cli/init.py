@@ -41,7 +41,7 @@ class MaxCommentsValidator(Validator):
 
 
 # Initialization prompts.
-prompts = [
+PROMPTS = [
     {
         'type': 'list',
         'name': 'language',
@@ -83,7 +83,7 @@ prompts = [
 ]
 
 # Max commments prompts.
-max_comments_prompts = [
+MAX_COMMENTS_PROMPTS = [
     {
         'type': 'input',
         'name': 'max_comments',
@@ -126,8 +126,9 @@ def undecorated_init(default, global_):
     Initialize a .autostack.json configuration file in the current working
     directory, or globally.
 
-    Parameter {boolean} default: whether or not to use the default configuration
-    key-value pairs, which can be found in autostack.config.constants.
+    Parameter {boolean} default: whether or not to use the default
+    configuration key-value pairs, which can be found in
+    autostack.config.constants.
     Parameter {boolean} global_: If True, initialize the global configuration.
     If False, a local configuration will be initialized in the current working
     directory.
@@ -137,15 +138,17 @@ def undecorated_init(default, global_):
         create_config(global_)
         return
 
-    config_options = prompt(prompts)
+    config_options = prompt(PROMPTS)
 
     try:
         if config_options['display_comments']:
             config_options['max_comments'] = int(
                 prompt(
-                    max_comments_prompts
+                    MAX_COMMENTS_PROMPTS
                 )['max_comments']
             )
+        else:
+            config_options['max_comments'] = 0
 
         create_config(global_, config_options)
     except KeyError:

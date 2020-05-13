@@ -5,12 +5,6 @@ Date: 05/06/2020
 Overview: Contains methods to print Stack Overflow posts.
 '''
 
-from __future__ import (
-    absolute_import,
-    division,
-    print_function
-)
-
 import pygments
 from pygments.lexers import PythonLexer  # pylint: disable=no-name-in-module
 from termcolor import colored
@@ -43,8 +37,16 @@ def print_post(post, config):
 
     # Grab the comments, if applicable.
     if config['display_comments']:
-        question_comments = get_post_comments(post, 'question', config['max_comments'])
-        answer_comments = get_post_comments(post, 'answer', config['max_comments'])
+        question_comments = get_post_comments(
+            post,
+            'question',
+            config['max_comments']
+        )
+        answer_comments = get_post_comments(
+            post,
+            'answer',
+            config['max_comments']
+        )
 
     # If the question or answer could not be grabbed, return.
     if question is None or answer is None:
@@ -113,7 +115,7 @@ def print_post_text(post_text):
         elif element.name == 'pre':  # Code.
             print_code_block(element.find('code'))
 
-    
+
 def print_post_comments(comments):
     '''
     Given a post's question or answer comment body, print out each individual

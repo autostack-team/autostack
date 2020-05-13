@@ -45,17 +45,17 @@ def validate_order_by(ctx, param, value):
         )
 
 
-def validate_display_comments(ctx, param, value):
+def validate_max_comments(ctx, param, value):
     '''
-    Validates the display_comments option.
+    Validates the max_comments option.
 
     Parameter {click.core.Context} ctx: the Click command's context.
     Parameter {click.core.Option} param: the Click command's option.
     Parameter {any} param: the value passed to the Click command's option.
     '''
 
-    if value is not None and value <= 0:
+    if value is not None and value < -1:
         raise click.BadParameter(
-            '{} is invalid. Enter a postitive integer.'
+            '{} is invalid. Enter an integer greater-than-or-equal-to zero.'
             .format(value)
         )

@@ -139,12 +139,11 @@ def print_config(global_=False, key=None):
                     print('\n{}: {}\n'.format(key, jsondata[key]))
                 except KeyError:
                     print_key_error(key, path)
-                finally:
-                    return
+                return
 
             print('\nCONFIGURATIONS:')
-            for key, value in jsondata.items():
-                print('  {}: {}'.format(key, value))
+            for config_key, config_value in jsondata.items():
+                print('  {}: {}'.format(config_key, config_value))
             print('')
     # The file doesn't exist.
     except FileNotFoundError:
@@ -158,9 +157,9 @@ def get_config(global_, key, display_errors=True):
     Parameter {boolean} global_: whether to grab from the global configuration
     file or the local configuration file in the current working directory.
     Parameter {string} key: the key to get the value for.
-    Parameter {boolean} display_errors: whether or not to print out errors such as
-    file not found, or if the file can't be opened.
-    Returns {any}: the value for the key.
+    Parameter {boolean} display_errors: whether or not to print out errors such
+    as file not found, or if the file can't be opened.
+    Returns {any}: the value for the key, or None, if it couldn't be found.
     '''
 
     path = get_config_path(global_)
@@ -175,7 +174,7 @@ def get_config(global_, key, display_errors=True):
             except:
                 if display_errors:
                     print_file_load_error(path)
-                return
+                return None
 
             # Try to return the value from the specified key.
             try:
@@ -187,7 +186,7 @@ def get_config(global_, key, display_errors=True):
     except FileNotFoundError:
         if display_errors:
             print_file_not_found_error(path)
-        return
+        return None
 
 
 def get_config_hierarchically(key):
@@ -205,7 +204,7 @@ def get_config_hierarchically(key):
     if get_config(False, key, False) is not None:
         return (get_config(False, key), False)
     # Search globally.
-    elif get_config(True, key, False) is not None:
+    if get_config(True, key, False) is not None:
         return (get_config(True, key), True)
 
     return None
@@ -248,7 +247,7 @@ def set_config(global_, key, value, display_errors=True):
         json.dump(jsondata, config_file, indent=4)
 
 
-def create_config_object(language, order_by, verified_only, display_comments, no_comments):
+def create_config_object(language, order_by, verified_only, max_comments):
     '''
     Creates a configuration object of the form:
 
@@ -260,20 +259,22 @@ def create_config_object(language, order_by, verified_only, display_comments, no
         'max_comments': ...
     }
 
-    If a valid configuration value cannot be found for a key in a local or the global
-    configuration files, None is returned. Otherwise, the config object is returned.
-    All values must be populated except for max_comments if display_comments is False.
+    If a valid configuration value cannot be found for a key in a local or the
+    global configuration files, None is returned. Otherwise, the config object
+    is returned. All values must be populated except for max_comments, if
+    display_comments is False.
 
     This function is intended to be used only with the Click commands that take
     in configuration options such as display and query.
 
     Parameter {string|None} language: the Click command language option.
     Parameter {string|None} order_by: the Click command order_by option.
-    Parameter {boolean|None} verified_only: the Click command verified_only option.
-    Parameter {int|None} display_comments: the Click command display_comments option.
-    Parameter {boolean|None} no_comments: the Click command no_comments option.
-    Returns {dictionary|None} the configuration object, or None, if a valid configuration
-    object could not be populated from the configuration files and Click command options.
+    Parameter {boolean|None} verified_only: the Click command verified_only
+    option.
+    Parameter {int|None} max_comments: the Click command max_comments option.
+    Returns {dictionary|None} the configuration object, or None, if a valid
+    configuration object could not be populated from the configuration files
+    and Click command options.
     '''
 
     config = {
@@ -284,13 +285,9 @@ def create_config_object(language, order_by, verified_only, display_comments, no
         'max_comments': None
     }
 
-    # No comments overrides display_comments Click command option.
-    if no_comments:
-        config['display_comments'] = False
-        del config['max_comments']
-    elif display_comments is not None:
+    if max_comments != -1:
         config['display_comments'] = True
-        config['max_comments'] = display_comments
+        config['max_comments'] = max_comments
 
     config = populate_config_object(config)
 
@@ -313,20 +310,23 @@ def populate_config_object(config):
 
     for key, value in config.items():
         if value is None:
-            new_value, global_ = get_config_hierarchically(key)
-            config[key] = new_value
-            valid = validate_config_key_value(key, new_value, global_)
+            if get_config_hierarchically(key):
+                new_value, global_ = get_config_hierarchically(key)
+                config[key] = new_value
+                valid = validate_config_key_value(key, new_value, global_)
+            else:
+                valid = validate_config_key_value(key, value, global_)
 
     if valid:
         return config
-    else:
-        return None
+
+    return None
 
 
 def validate_config_key_value(key, value, global_):
     '''
-    Given a configuration object's key-value pair, and whether it was in a local
-    or the global configuration file, determine if the value is valid.
+    Given a configuration object's key-value pair, and whether it was in a
+    local or the global configuration file, determine if the value is valid.
 
     If it's an invalid key-value pair, print out the mistake.
 
@@ -344,19 +344,19 @@ def validate_config_key_value(key, value, global_):
     if value is None:
         print('Cannot find a configuration value for the key {}.'.format(key))
         valid = False
-    elif key == 'display_comments' and type(value) != bool:
+    elif key == 'display_comments' and not isinstance(value, bool):
         print_invalid_key_value(key, value, path)
         valid = False
     elif key == 'language' and value not in SUPPORTED_LANGUAGES:
         print_invalid_key_value(key, value, path)
         valid = False
-    elif key == 'max_comments' and type(value) is not int and value < 1:
+    elif key == 'max_comments' and not isinstance(value, int) and value < 1:
         print_invalid_key_value(key, value, path)
         valid = False
     elif key == 'order_by' and value not in SUPPORTED_ORDER_BY_FILTERS:
         print_invalid_key_value(key, value, path)
         valid = False
-    elif key == 'verified_only' and type(value) != bool:
+    elif key == 'verified_only' and not isinstance(value, bool):
         print_invalid_key_value(key, value, path)
         valid = False
 

@@ -5,12 +5,6 @@ Date: 10/09/2019
 Overview: Contains all methods to detect and handle errors.
 '''
 
-from __future__ import (
-    absolute_import,
-    division,
-    print_function
-)
-
 import importlib
 
 from autostack import clear_terminal
@@ -56,7 +50,8 @@ def parse_output_for_error(pipe, output, error_library, config):
 
     Parameter {file} pipe: the pipe to read output from.
     Parameter {string} output: the current line of output read from the pipe.
-    Parameter {library} error_library: the library to use for parsing for errors.
+    Parameter {library} error_library: the library to use for parsing for
+    errors.
     Parameter {dictionary} config: configuration object.
     '''
 
@@ -64,7 +59,7 @@ def parse_output_for_error(pipe, output, error_library, config):
 
     if error:
         handle_error(error, config)
-        print_listening_for_errors()    
+        print_listening_for_errors()
 
 
 def handle_error(query, config):
@@ -103,8 +98,8 @@ def handle_user_input():
     'f' meaning it wasn't solved. Otherwise, whatever the user entered
     is used for a custom query.
 
-    Returns {boolean} True if 'Y' or False if 'f' was inputed; otherwise, returns
-    the raw user input (custom query).
+    Returns {boolean} True if 'Y' or False if 'f' was inputed; otherwise,
+    returns the raw user input (custom query).
     '''
 
     user_input = input('Did this solve your error? (Y/n or custom query): ')
