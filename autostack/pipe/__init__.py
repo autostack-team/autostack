@@ -11,10 +11,9 @@ import os
 
 def create_pipe(path):
     '''
-    Given a file path, create a FIFO pipe, and return it in read mode.
+    Given a file path, create a FIFO pipe.
 
     Parameter {string} path: the full path to the FIFO.
-    Returns {file} The pipe in read mode.
     '''
 
     leaf_dir_path = '/'.join(path.split('/')[:-1])
