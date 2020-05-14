@@ -2,3 +2,4 @@
 omit =
     *__tests__/*
     *main.py*
+    *constants.py*
