@@ -1,3 +1,4 @@
+# pylint: disable=line-too-long, anomalous-backslash-in-string
 '''
 Authors: Elijah Sawyers
 Emails: elijahsawyers@gmail.com
@@ -8,9 +9,9 @@ Overview: Tests for the autostack package.
 import re
 
 from autostack import (
-  clear_terminal,
-  print_logo,
-  print_welcome_message
+    clear_terminal,
+    print_logo,
+    print_welcome_message
 )
 from autostack.main import main
 
@@ -45,23 +46,24 @@ def test_print_logo(capsys):
     # 3. Then.
     captured = capsys.readouterr()
     assert ANSI_ESCAPE.sub('', captured.out) == (
-        '        _____________        \n'
-        '       /    ___      \       \n'
-        '      ||    \__\     ||                   _            _             _    \n'
-        '      ||      _      ||                  | |          | |           | |   \n'
-        '      |\     / \     /|        __ _ _   _| |_ ___  ___| |_ __ _  ___| | __\n'
-        '      \ \___/ ^ \___/ /       / _` | | | | __/ _ \/ __| __/ _` |/ __| |/ /\n'
-        '      \\\\____/_^_\____//_     | (_| | |_| | || (_) \__ \ || (_| | (__|   < \n'
-        '    __\\\\____/_^_\____// \     \__,_|\__,_|\__\___/|___/\__\__,_|\___|_|\_\\\n'
-        '   /   \____/_^_\____/ \ \     AUTOMATING THE INEVITABLE...\n'
-        '  //                   , /   \n'
-        '  \\\\___________   ____  /  \n'
-        '               \_______/     \n\n'
+        '        _____________        \n'  # nopep8
+        '       /    ___      \       \n'  # nopep8
+        '      ||    \__\     ||                   _            _             _    \n'  # nopep8
+        '      ||      _      ||                  | |          | |           | |   \n'  # nopep8
+        '      |\     / \     /|        __ _ _   _| |_ ___  ___| |_ __ _  ___| | __\n'  # nopep8
+        '      \ \___/ ^ \___/ /       / _` | | | | __/ _ \/ __| __/ _` |/ __| |/ /\n'  # nopep8
+        '      \\\\____/_^_\____//_     | (_| | |_| | || (_) \__ \ || (_| | (__|   < \n'  # nopep8
+        '    __\\\\____/_^_\____// \     \__,_|\__,_|\__\___/|___/\__\__,_|\___|_|\_\\\n'  # nopep8
+        '   /   \____/_^_\____/ \ \     AUTOMATING THE INEVITABLE...\n'  # nopep8
+        '  //                   , /   \n'  # nopep8
+        '  \\\\___________   ____  /  \n'  # nopep8
+        '               \_______/     \n\n'  # nopep8
     )
 
 
 def test_print_welcome_message(capsys, monkeypatch):
     '''
+    Ensures that the welcome message prints properly.
     '''
 
     # 1. Given.
@@ -99,6 +101,7 @@ def test_print_welcome_message(capsys, monkeypatch):
 
 def test_main(monkeypatch):
     '''
+    Ensures that main calls the cli() method.
     '''
 
     # 1. Given.
