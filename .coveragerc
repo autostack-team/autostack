@@ -2,3 +2,6 @@
 omit =
     *__tests__/*
     *constants.py*
+
+[report]
+show_missing = true

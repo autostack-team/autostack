@@ -23,7 +23,7 @@ from autostack.config import (
     help='Interact with the global configuration file.'
 )
 @click.pass_context
-def config(ctx, global_):
+def config_command(ctx, global_):
     '''
     Interact with autostack configuration files.
     '''
@@ -33,7 +33,7 @@ def config(ctx, global_):
     }
 
 
-@config.command()
+@config_command.command()
 @click.pass_context
 def reset(ctx):
     '''
@@ -43,7 +43,7 @@ def reset(ctx):
     reset_config(ctx.obj['GLOBAL'])
 
 
-@config.command('set')
+@config_command.command('set')
 @click.argument('key')
 @click.argument('value')
 @click.pass_context
@@ -57,7 +57,7 @@ def set_(ctx, key, value):
     set_config(ctx.obj['GLOBAL'], key, value)
 
 
-@config.command('get')
+@config_command.command('get')
 @click.argument('key')
 @click.pass_context
 def get_(ctx, key):
@@ -70,7 +70,7 @@ def get_(ctx, key):
     print_config(ctx.obj['GLOBAL'], key)
 
 
-@config.command('list')
+@config_command.command('list')
 @click.pass_context
 def list_(ctx):
     '''

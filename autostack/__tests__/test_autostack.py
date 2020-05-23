@@ -116,7 +116,7 @@ def test_main(monkeypatch):
         call_count += 1
 
     monkeypatch.setattr(
-        'autostack.main.cli',
+        'autostack.main.autostack',
         mock
     )
 

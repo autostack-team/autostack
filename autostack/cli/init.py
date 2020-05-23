@@ -109,7 +109,7 @@ MAX_COMMENTS_PROMPTS = [
     is_flag=True,
     help='Initialize the global configuration file.'
 )
-def init(default, global_):
+def init_command(default, global_):
     '''
     Initialize a .autostack.json configuration file in the current working
     directory, or globally.

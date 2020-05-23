@@ -5,7 +5,7 @@ Date: 03/17/2019
 Overview: Contains the entry point of autostack.
 '''
 
-from autostack.cli import cli
+from autostack.cli import autostack
 
 
 def main():
@@ -13,4 +13,4 @@ def main():
     Entry point of autostack.
     '''
 
-    cli()
+    autostack()

@@ -64,7 +64,7 @@ from autostack.error import (
     required=False,
     default=None
 )
-def display(string, language, order_by, verified_only, max_comments):
+def display_command(string, language, order_by, verified_only, max_comments):
     '''
     Display Stack Overflow posts for all error messages captured in terminals
     executing the 'capture' command, or display Stack Overflow posts for a

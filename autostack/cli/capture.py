@@ -20,7 +20,7 @@ from autostack.pipe import (
 
 
 @click.command()
-def capture():
+def capture_command():
     '''
     Captures all output in the terminal, which is to be used with the
     'display' command in another terminal.

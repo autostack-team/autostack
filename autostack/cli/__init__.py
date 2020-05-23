@@ -7,14 +7,14 @@ Overview: Click Group and Command setup.
 
 import click
 
-from autostack.cli.capture import capture
-from autostack.cli.config import config
-from autostack.cli.display import display
-from autostack.cli.init import init
+from autostack.cli.capture import capture_command
+from autostack.cli.config import config_command
+from autostack.cli.display import display_command
+from autostack.cli.init import init_command
 
 
 @click.group()
-def cli():
+def autostack():  # pragma: no cover
     '''
     A command-line debugging tool.
     '''
@@ -22,7 +22,7 @@ def cli():
     return
 
 
-cli.add_command(capture)
-cli.add_command(config)
-cli.add_command(display)
-cli.add_command(init)
+autostack.add_command(capture_command, name='capture')
+autostack.add_command(config_command, name='config')
+autostack.add_command(display_command, name='display')
+autostack.add_command(init_command, name='init')
