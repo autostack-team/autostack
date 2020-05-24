@@ -67,3 +67,6 @@ def test_create_pipe_file_already_exists():
 
     # 3. Then.
     assert os.path.getmtime(path) == modified_time
+
+    # After.
+    os.remove(path)
