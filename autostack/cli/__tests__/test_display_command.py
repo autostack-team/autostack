@@ -223,6 +223,7 @@ def test_display_command_custom_query(monkeypatch):
 #
 # ======================================================================
 
+
 def test_display_command_invalid_language():
     '''
     Ensure that the display command only accepts supported

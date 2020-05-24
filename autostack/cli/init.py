@@ -37,7 +37,8 @@ class MaxCommentsValidator(Validator):
         if not valid:
             raise ValidationError(
                 message='Please enter a valid integer',
-                cursor_position=len(document.text))
+                cursor_position=len(document.text)
+            )
 
 
 # Initialization prompts.
@@ -140,16 +141,13 @@ def undecorated_init(default, global_):
 
     config_options = prompt(PROMPTS)
 
-    try:
-        if config_options['display_comments']:
-            config_options['max_comments'] = int(
-                prompt(
-                    MAX_COMMENTS_PROMPTS
-                )['max_comments']
-            )
-        else:
-            config_options['max_comments'] = 0
+    if config_options['display_comments']:
+        config_options['max_comments'] = int(
+            prompt(
+                MAX_COMMENTS_PROMPTS
+            )['max_comments']
+        )
+    else:
+        config_options['max_comments'] = 0
 
-        create_config(global_, config_options)
-    except KeyError:
-        pass
+    create_config(global_, config_options)
