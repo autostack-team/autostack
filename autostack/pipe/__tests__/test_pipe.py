@@ -69,4 +69,4 @@ def test_create_pipe_file_already_exists():
     assert os.path.getmtime(path) == modified_time
 
     # After.
-    os.remove(path)
+    shutil.rmtree('/tmp/test_autostack/', ignore_errors=True)

@@ -20,7 +20,6 @@ from autostack.config.constants import (
     SUPPORTED_LANGUAGES,
     SUPPORTED_ORDER_BY_FILTERS
 )
-
 from autostack.config.error_messages import (
     print_file_not_found_error,
     print_key_error,
@@ -131,7 +130,12 @@ def print_config(global_=False, key=None):
     # Attempt to open the configuration file.
     try:
         with open(path, 'r') as config_file:
-            jsondata = json.loads(config_file.read())
+            try:
+                jsondata = json.loads(config_file.read())
+            # The file could not be opened.
+            except:
+                print_file_load_error(path)
+                return
 
             # Try to return the value from the specified key.
             if key:
