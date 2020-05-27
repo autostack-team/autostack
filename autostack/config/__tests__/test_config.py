@@ -1,3 +1,4 @@
+# pylint: disable=duplicate-code,too-many-lines
 '''
 Authors: Elijah Sawyers
 Emails: elijahsawyers@gmail.com
@@ -19,8 +20,8 @@ from autostack.config import (
     get_config_hierarchically,
     set_config,
     create_config_object,
-    # populate_config_object,
-    # validate_config_key_value
+    populate_config_object,
+    validate_config_key_value
 )
 from autostack.config.constants import (
     CONFIG_DIR_NAME,
@@ -745,3 +746,290 @@ def test_create_config_object_max_comments(monkeypatch):
         'display_comments': True,
         'max_comments': 3
     }
+
+
+def test_populate_config_object_value_not_found(monkeypatch):
+    '''
+    Ensures that populate_config_object returns None if
+    a valid value couldn't be found for each key.
+    '''
+
+    # 1. Given.
+    config_object = {
+        'language': 'python',
+        'order_by': 'Relevance',
+        'verified_only': True,
+        'display_comments': None,
+        'max_comments': None
+    }
+
+    def mock_get_config_hierarchically(*args):
+        # pylint: disable=unused-argument
+        '''
+        Mocks the get_config_hierarchically method.
+        '''
+
+        return None
+
+    def mock_validate_config_key_value(*args):
+        # pylint: disable=unused-argument
+        '''
+        Mocks the validate_config_key_value method.
+        '''
+
+        return True
+
+    monkeypatch.setattr(
+        'autostack.config.get_config_hierarchically',
+        mock_get_config_hierarchically
+    )
+
+    monkeypatch.setattr(
+        'autostack.config.validate_config_key_value',
+        mock_validate_config_key_value
+    )
+
+    # 2. When.
+    result = populate_config_object(config_object)
+
+    # 3. Then.
+    assert result is None
+
+
+def test_populate_config_object_invalid_value(monkeypatch):
+    '''
+    Ensures that populate_config_object returns None if
+    a valid value couldn't be found for each key.
+    '''
+
+    # 1. Given.
+    config_object = {
+        'language': 'python',
+        'order_by': 'Relevance',
+        'verified_only': True,
+        'display_comments': None,
+        'max_comments': 3
+    }
+
+    def mock_get_config_hierarchically(*args):
+        # pylint: disable=unused-argument
+        '''
+        Mocks the get_config_hierarchically method.
+        '''
+
+        return ('invalid', True)
+
+    def mock_validate_config_key_value(*args):
+        # pylint: disable=unused-argument
+        '''
+        Mocks the validate_config_key_value method.
+        '''
+
+        return False
+
+    monkeypatch.setattr(
+        'autostack.config.get_config_hierarchically',
+        mock_get_config_hierarchically
+    )
+
+    monkeypatch.setattr(
+        'autostack.config.validate_config_key_value',
+        mock_validate_config_key_value
+    )
+
+    # 2. When.
+    result = populate_config_object(config_object)
+
+    # 3. Then.
+    assert result is None
+
+
+def test_populate_config_object_valid(monkeypatch):
+    '''
+    Ensures that populate_config_object returns None if
+    a valid value couldn't be found for each key.
+    '''
+
+    # 1. Given.
+    config_object = {
+        'language': 'python',
+        'order_by': None,
+        'verified_only': True,
+        'display_comments': True,
+        'max_comments': 3
+    }
+
+    def mock_get_config_hierarchically(*args):
+        # pylint: disable=unused-argument
+        '''
+        Mocks the get_config_hierarchically method.
+        '''
+
+        return ('Relevance', True)
+
+    def mock_validate_config_key_value(*args):
+        # pylint: disable=unused-argument
+        '''
+        Mocks the validate_config_key_value method.
+        '''
+
+        return True
+
+    monkeypatch.setattr(
+        'autostack.config.get_config_hierarchically',
+        mock_get_config_hierarchically
+    )
+
+    monkeypatch.setattr(
+        'autostack.config.validate_config_key_value',
+        mock_validate_config_key_value
+    )
+
+    # 2. When.
+    result = populate_config_object(config_object)
+
+    # 3. Then.
+    assert result is not None
+
+
+def test_validate_config_key_value_none(capsys):
+    '''
+    Ensures that validate_config_key_value handles None
+    value.
+    '''
+
+    # 1. Given.
+    key = 'language'
+    value = None
+    global_ = True
+
+    # 2. When.
+    result = validate_config_key_value(key, value, global_)
+
+    # 3. Then.
+    captured = capsys.readouterr()
+    assert 'Cannot find a configuration value for the key' in captured.out
+    assert not result
+
+
+def test_validate_config_key_value_display_comments(capsys):
+    '''
+    Ensures that validate_config_key_value handles invalid
+    display_comments.
+    '''
+
+    # 1. Given.
+    key = 'display_comments'
+    value = 'invalid'
+    global_ = True
+
+    # 2. When.
+    result = validate_config_key_value(key, value, global_)
+
+    # 3. Then.
+    captured = capsys.readouterr()
+    assert 'is not valid in the configuration file' in captured.out
+    assert not result
+
+
+def test_validate_config_key_value_language(capsys):
+    '''
+    Ensures that validate_config_key_value handles invalid
+    language.
+    '''
+
+    # 1. Given.
+    key = 'language'
+    value = 'GoLang'
+    global_ = True
+
+    # 2. When.
+    result = validate_config_key_value(key, value, global_)
+
+    # 3. Then.
+    captured = capsys.readouterr()
+    assert 'is not valid in the configuration file' in captured.out
+    assert not result
+
+
+def test_validate_config_key_max_comments(capsys):
+    '''
+    Ensures that validate_config_key_value handles invalid
+    max_comments.
+    '''
+
+    # 1. Given.
+    key = 'max_comments'
+    value = 'invalid'
+    value2 = -2
+    global_ = True
+
+    # 2. When.
+    result = validate_config_key_value(key, value, global_)
+    result2 = validate_config_key_value(key, value2, global_)
+
+    # 3. Then.
+    captured = capsys.readouterr()
+    assert 'is not valid in the configuration file' in captured.out
+    assert not result
+    assert not result2
+
+
+def test_validate_config_key_order_by(capsys):
+    '''
+    Ensures that validate_config_key_value handles invalid
+    order_by.
+    '''
+
+    # 1. Given.
+    key = 'order_by'
+    value = 'invalid'
+    global_ = True
+
+    # 2. When.
+    result = validate_config_key_value(key, value, global_)
+
+    # 3. Then.
+    captured = capsys.readouterr()
+    assert 'is not valid in the configuration file' in captured.out
+    assert not result
+
+
+def test_validate_config_key_verified_only(capsys):
+    '''
+    Ensures that validate_config_key_value handles invalid
+    verified_only.
+    '''
+
+    # 1. Given.
+    key = 'verified_only'
+    value = 'invalid'
+    global_ = True
+
+    # 2. When.
+    result = validate_config_key_value(key, value, global_)
+
+    # 3. Then.
+    captured = capsys.readouterr()
+    assert 'is not valid in the configuration file' in captured.out
+    assert not result
+
+
+def test_validate_config_key_invalid_key(capsys):
+    '''
+    Ensures that validate_config_key_value handles invalid
+    keys.
+    '''
+
+    # 1. Given.
+    key = 'invalid_key'
+    value = 'invalid'
+    global_ = True
+
+    # 2. When.
+    result = validate_config_key_value(key, value, global_)
+
+    # 3. Then.
+    captured = capsys.readouterr()
+    assert 'is not valid.' in captured.out
+    assert not result

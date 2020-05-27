@@ -310,21 +310,18 @@ def populate_config_object(config):
     a each key in the configuration object could not be populated with a value.
     '''
 
-    valid = False
-
     for key, value in config.items():
         if value is None:
             if get_config_hierarchically(key):
                 new_value, global_ = get_config_hierarchically(key)
                 config[key] = new_value
-                valid = validate_config_key_value(key, new_value, global_)
+
+                if not validate_config_key_value(key, new_value, global_):
+                    return None
             else:
-                valid = validate_config_key_value(key, value, global_)
+                return None
 
-    if valid:
-        return config
-
-    return None
+    return config
 
 
 def validate_config_key_value(key, value, global_):
@@ -354,7 +351,7 @@ def validate_config_key_value(key, value, global_):
     elif key == 'language' and value not in SUPPORTED_LANGUAGES:
         print_invalid_key_value(key, value, path)
         valid = False
-    elif key == 'max_comments' and not isinstance(value, int) and value < 1:
+    elif key == 'max_comments' and (not isinstance(value, int) or value < 1):
         print_invalid_key_value(key, value, path)
         valid = False
     elif key == 'order_by' and value not in SUPPORTED_ORDER_BY_FILTERS:
@@ -362,6 +359,9 @@ def validate_config_key_value(key, value, global_):
         valid = False
     elif key == 'verified_only' and not isinstance(value, bool):
         print_invalid_key_value(key, value, path)
+        valid = False
+    else:
+        print('The key {} is not valid.'.format(key))
         valid = False
 
     return valid
