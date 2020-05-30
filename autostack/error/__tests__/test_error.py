@@ -5,457 +5,469 @@ Date: 10/22/2019
 Overview: Tests for the error package.
 '''
 
+from autostack.error import (
+    listen_for_errors,
+    parse_output_for_error,
+    handle_error,
+    handle_user_input,
+    print_listening_for_errors
+)
 
-def test_placeholder():
+
+class MockPipe:
     '''
-    Placeholder test.
+    Mocks a pipe.
     '''
 
-    assert True
-
-# from autostack.error import (
-#     listen_for_errors,
-#     parse_output_for_error,
-#     get_error_from_traceback,
-#     handle_exception,
-#     handle_user_input,
-#     print_listening_for_errors,
-#     clear_terminal,
-# )
-# from autostack.error.__tests__.mock_pipe import MockPipe
-# from autostack.error.__tests__.mock_handle_exception import (
-#     MockHandleException
-# )
-
-
-# def test_listen_for_errors(monkeypatch):
-#     '''
-#     Ensures that listen_for_errors reads output from a pipe until
-#     empty string is returned. In this case, that'd be 3 calls.
-#     '''
-
-#     # 1. Given.
-#     def mock_print():
-#         '''
-#         Mocks the print_logo and print_listening_for_errors function.
-#         '''
-
-#         return
-
-#     def mock_parse_output_for_error(output, pipe):
-#         # pylint: disable=unused-argument
-#         '''
-#         Mocks the parse_output_for_error function.
-#         '''
+    def __init__(self, readline_returns=''):
+        '''
+        Initializes a mock pipe with readline return values and
+        the number of readline calls set to 0.
+        '''
 
-#         return
+        self.readline_returns = readline_returns
+        self.readline_call_count = 0
 
-#     monkeypatch.setattr(
-#         'autostack.error.print_logo',
-#         mock_print
-#     )
+    def readline(self):
+        '''
+        Returns a value for readline, based on the current call
+        count value.
+        '''
 
-#     monkeypatch.setattr(
-#         'autostack.error.print_listening_for_errors',
-#         mock_print
-#     )
-
-#     monkeypatch.setattr(
-#         'autostack.error.parse_output_for_error',
-#         mock_parse_output_for_error
-#     )
-
-#     mockpipe = MockPipe(['output', 'output', ''])
-
-#     # 2. When.
-#     listen_for_errors(mockpipe)
-
-#     # 3. Then.
-#     assert mockpipe.get_readline_call_count() == 3
-
-
-# def test_parse_output_for_error_non_error(monkeypatch):
-#     '''
-#     Ensures that handle_exception is never called when a non-error
-#     is passed into parse_output_for_error.
-#     '''
-
-#     # 1. Given.
-#     mock_handle_exception = MockHandleException()
-
-#     def mock_print_accepted_post(*args):
-#         # pylint: disable=unused-argument
-#         '''
-#         Mocks the print_accepted_post function.
-#         '''
-
-#         return
-
-#     monkeypatch.setattr(
-#         'autostack.error.print_accepted_post',
-#         mock_print_accepted_post
-#     )
-
-#     monkeypatch.setattr(
-#         'autostack.error.handle_exception',
-#         mock_handle_exception.handle_exception
-#     )
-
-#     output = 'Not an error.'
-
-#     # 2. When.
-#     parse_output_for_error(output, None)
-
-#     # 3. Then.
-#     assert not mock_handle_exception.parameter
-#     assert not mock_handle_exception.was_called
-
-
-# def test_parse_output_for_error_with_error(monkeypatch):
-#     '''
-#     Ensures that handle_exception is called when an error
-#     is passed into parse_output_for_error.
-#     '''
-
-#     # 1. Given.
-#     mock_handle_exception = MockHandleException()
-
-#     def mock_print_accepted_post(*args):
-#         # pylint: disable=unused-argument
-#         '''
-#         Mocks the print_accepted_post function.
-#         '''
-
-#         return
-
-#     monkeypatch.setattr(
-#         'autostack.error.print_accepted_post',
-#         mock_print_accepted_post
-#     )
-
-#     monkeypatch.setattr(
-#         'autostack.error.handle_exception',
-#         mock_handle_exception.handle_exception
-#     )
+        readline_val = self.readline_returns[self.readline_call_count]
+        self.readline_call_count += 1
+        return readline_val
 
-#     output = 'IndentationError: unexpected indent'
+    def get_readline_call_count(self):
+        '''
+        Returns the readline method call count.
+        '''
 
-#     # 2. When.
-#     parse_output_for_error(output, None)
-
-#     # 3. Then.
-#     assert mock_handle_exception.parameter == 'IndentationError'
-#     assert mock_handle_exception.was_called
-
-
-# def test_parse_output_for_error_traceback(monkeypatch):
-#     '''
-#     Ensures that handle_exception is called when a traceback
-#     is passed into parse_output_for_error.
-#     '''
-
-#     # 1. Given.
-#     mock_pipe = MockPipe([
-#         '    File "<stdin>", line 1, in <module>',
-#         'NameError: name \'xyz\' is not defined'
-#     ])
-#     mock_handle_exception = MockHandleException()
-#     output = 'Traceback (most recent call last):'
-
-#     def mock_get_error_from_traceback(pipe):
-#         # pylint: disable=unused-argument
-#         '''
-#         Mocks the get_error_from_traceback function.
-#         '''
-
-#         return 'NameError'
-
-#     def mock_print_accepted_post(*args):
-#         # pylint: disable=unused-argument
-#         '''
-#         Mocks the print_accepted_post function.
-#         '''
-
-#         return
-
-#     monkeypatch.setattr(
-#         'autostack.error.print_accepted_post',
-#         mock_print_accepted_post
-#     )
-
-#     monkeypatch.setattr(
-#         'autostack.error.handle_exception',
-#         mock_handle_exception.handle_exception
-#     )
+        return self.readline_call_count
 
-#     monkeypatch.setattr(
-#         'autostack.error.get_error_from_traceback',
-#         mock_get_error_from_traceback
-#     )
-
-#     # 2. When.
-#     parse_output_for_error(output, mock_pipe)
 
-#     # 3. Then.
-#     assert mock_handle_exception.parameter == 'NameError'
-#     assert mock_handle_exception.was_called
-
-
-# def test_parse_output_for_error_index_error(monkeypatch):
-#     '''
-#     Ensures that parse_output_for_error catches index errors.
-#     '''
-
-#     # 1. Given.
-#     mock_handle_exception = MockHandleException()
-
-#     def mock_print_accepted_post(*args):
-#         # pylint: disable=unused-argument
-#         '''
-#         Mocks the print_accepted_post function.
-#         '''
+class MockErrorLibrary():
+    # pylint: disable=too-few-public-methods
+    '''
+    Mocks an error_library object.
+    '''
 
-#         return
+    def __init__(self, return_error):
+        '''
+        Init a error_library object.
+        '''
 
-#     monkeypatch.setattr(
-#         'autostack.error.print_accepted_post',
-#         mock_print_accepted_post
-#     )
+        self.return_error = return_error
 
-#     monkeypatch.setattr(
-#         'autostack.error.handle_exception',
-#         mock_handle_exception.handle_exception
-#     )
+    def parse_output_for_error(self, *args):
+        # pylint: disable=unused-argument
+        '''
+        Mocks parse_output_for_error method.
+        '''
 
-#     output = ''
+        if self.return_error:
+            return 'Error'
 
-#     # 2. When.
-#     parse_output_for_error(output, None)
+        return None
 
-#     # 3. Then.
-#     assert not mock_handle_exception.parameter
-#     assert not mock_handle_exception.was_called
 
+def mock_do_nothing(*args):
+    # pylint: disable=unused-argument
+    '''
+    Mocks method that does nothing.
+    '''
 
-# def test_get_error_from_traceback():
-#     '''
-#     Ensures that the error description is returned from a
-#     traceback.
-#     '''
+    return
 
-#     # 1. Given.
-#     mock_pipe = MockPipe([
-#         '    File "<stdin>", line 1, in <module>',
-#         'NameError: name \'xyz\' is not defined'
-#     ])
 
-#     # 2. When.
-#     error = get_error_from_traceback(mock_pipe)
+def mock_posts(*args):
+    # pylint: disable=unused-argument
+    '''
+    Mocks the posts generator.
+    '''
 
-#     # 3. Then.
-#     assert error == 'NameError'
-#     assert mock_pipe.get_readline_call_count() == 2
+    count = 1
 
+    while True:
+        yield count
+        count += 1
 
-# def test_handle_exception(monkeypatch):
-#     '''
-#     Ensures that posts are printed until the user inputs 'Y'
-#     to stop.
-#     '''
 
-#     # 1. Given.
-#     def mock_accepted_posts(*args):
-#         # pylint: disable=unused-argument
-#         '''
-#         Mocks the accepted_posts function which yields
-#         strings instead of actual post bs4 soup.
-#         '''
+def test_listen_for_errors(monkeypatch):
+    '''
+    Ensures that listen_for_errors reads output from a pipe until
+    empty string is returned. In this case, that'd be 3 calls.
+    '''
 
-#         i = 0
+    # 1. Given.
+    config = {
+        'language': 'language'
+    }
 
-#         while True:
-#             yield str(i)
-#             i += 1
+    monkeypatch.setattr(
+        'autostack.error.importlib.import_module',
+        mock_do_nothing
+    )
 
-#     def mock_print_accepted_post(*args):
-#         # pylint: disable=unused-argument
-#         '''
-#         Mocks the print_accepted_post function.
-#         '''
+    monkeypatch.setattr(
+        'autostack.print_logo',
+        mock_do_nothing
+    )
 
-#         return
+    monkeypatch.setattr(
+        'autostack.error.print_listening_for_errors',
+        mock_do_nothing
+    )
 
-#     call_count = 0
+    monkeypatch.setattr(
+        'autostack.error.parse_output_for_error',
+        mock_do_nothing
+    )
 
-#     def make_mock_handle_user_input():
-#         '''
-#         Creates the mock function to mock handle_user_input, and the
-#         input is different based on the call count.
-#         '''
+    mockpipe = MockPipe(['output', 'output', ''])
 
-#         nonlocal call_count
+    # 2. When.
+    listen_for_errors(mockpipe, config)
 
-#         def mock_handle_user_input():
-#             '''
-#             Mocks the handle_user_input function.
-#             '''
+    # 3. Then.
+    assert mockpipe.get_readline_call_count() == 3
 
-#             nonlocal call_count
-#             call_count += 1
 
-#             if call_count == 1:
-#                 return False
+def test_parse_output_for_error_non_error(monkeypatch):
+    '''
+    Ensures that handle_error is never called when a non-error
+    is passed into parse_output_for_error.
+    '''
 
-#             if call_count == 2:
-#                 return 'Custom query'
+    # 1. Given.
+    call_count = 0
 
-#             return True
+    def mock_handle_error(*args):
+        # pylint: disable=unused-argument
+        '''
+        Mocks the handle_error method.
+        '''
 
-#         return mock_handle_user_input
+        nonlocal call_count
+        call_count += 1
 
-#     def mock_clear_terminal():
-#         '''
-#         Mocks the clear_terminal function.
-#         '''
+    monkeypatch.setattr(
+        'autostack.error.print_listening_for_errors',
+        mock_do_nothing
+    )
 
-#         return
+    monkeypatch.setattr(
+        'autostack.error.handle_error',
+        mock_handle_error
+    )
 
-#     monkeypatch.setattr(
-#         'autostack.error.accepted_posts',
-#         mock_accepted_posts
-#     )
+    # 2. When.
+    parse_output_for_error('Not an error.', None, MockErrorLibrary(False), {})
 
-#     monkeypatch.setattr(
-#         'autostack.error.print_accepted_post',
-#         mock_print_accepted_post
-#     )
+    # 3. Then.
+    assert not call_count
 
-#     monkeypatch.setattr(
-#         'autostack.error.handle_user_input',
-#         make_mock_handle_user_input()
-#     )
 
-#     monkeypatch.setattr(
-#         'autostack.error.clear_terminal',
-#         mock_clear_terminal
-#     )
+def test_parse_output_for_error_with_error(monkeypatch):
+    '''
+    Ensures that handle_exception is called when an error
+    is passed into parse_output_for_error.
+    '''
 
-#     # 2. When.
-#     handle_exception('Error')
+    # 1. Given.
+    call_count = 0
 
-#     # 3. Then.
-#     assert call_count == 3
+    def mock_handle_error(*args):
+        # pylint: disable=unused-argument
+        '''
+        Mocks the handle_error method.
+        '''
 
+        nonlocal call_count
+        call_count += 1
 
-# def test_handle_user_input_y(monkeypatch):
-#     '''
-#     Ensures that when 'Y' is inputted, handle_user_input returns True.
-#     '''
+    monkeypatch.setattr(
+        'autostack.error.print_listening_for_errors',
+        mock_do_nothing
+    )
 
-#     # 1. Given.
-#     def mock_input(*args):
-#         # pylint: disable=unused-argument
-#         '''
-#         Mocks user input to be 'Y'.
-#         '''
+    monkeypatch.setattr(
+        'autostack.error.handle_error',
+        mock_handle_error
+    )
 
-#         return 'Y'
+    # 2. When.
+    parse_output_for_error('Not an error.', None, MockErrorLibrary(True), {})
 
-#     monkeypatch.setattr('builtins.input', mock_input)
+    # 3. Then.
+    assert call_count
 
-#     # 2. When.
-#     user_input = handle_user_input()
 
-#     # 3. Then.
-#     assert user_input is True
+def test_handle_error_first_answer_solved(monkeypatch):
+    '''
+    Ensures that only one post is printed.
+    '''
 
+    # 1. Given.
+    call_count = 0
 
-# def test_handle_user_input_n(monkeypatch):
-#     '''
-#     Ensures that when 'n' is inputted, handle_user_input returns False.
-#     '''
+    def mock_print_post(*args):
+        # pylint: disable=unused-argument
+        '''
+        Mocks print_post method.
+        '''
 
-#     # 1. Given.
-#     def mock_input(*args):
-#         # pylint: disable=unused-argument
-#         '''
-#         Mocks user input to be 'n'.
-#         '''
+        nonlocal call_count
+        call_count += 1
 
-#         return 'n'
+    def mock_handle_user_input():
+        '''
+        Mocks handle_user_input method.
+        '''
 
-#     monkeypatch.setattr('builtins.input', mock_input)
+        return True
 
-#     # 2. When.
-#     user_input = handle_user_input()
+    monkeypatch.setattr(
+        'autostack.error.posts',
+        mock_posts
+    )
 
-#     # 3. Then.
-#     assert not user_input
+    monkeypatch.setattr(
+        'autostack.error.print_post',
+        mock_print_post
+    )
 
+    monkeypatch.setattr(
+        'autostack.error.handle_user_input',
+        mock_handle_user_input
+    )
 
-# def test_handle_user_input_custom_query(monkeypatch):
-#     '''
-#     Ensures that when input isn't Y/n, handle_user_input returns the input.
-#     '''
+    # 2. When.
+    handle_error('', {})
 
-#     # 1. Given.
-#     def make_mock_input():
-#         '''
-#         Creates the mock function to mock user input, and the
-#         input is different based on the call count.
-#         '''
+    # 3. Then.
+    assert call_count == 1
 
-#         call_count = 0
 
-#         def mock_input(*args):
-#             # pylint: disable=unused-argument
-#             '''
-#             Mocks user input to be 'a' then 'Y'.
-#             '''
+def test_handle_error_first_multiple_posts(monkeypatch):
+    '''
+    Ensures that multiple posts are printed, until True
+    is returned for user input.
+    '''
 
-#             nonlocal call_count
-#             if call_count == 0:
-#                 call_count += 1
-#                 return 'Custom query'
-#             return 'Y'
-#         return mock_input
+    # 1. Given.
+    call_count = 0
 
-#     monkeypatch.setattr('builtins.input', make_mock_input())
+    def mock_print_post(*args):
+        # pylint: disable=unused-argument
+        '''
+        Mocks print_post method.
+        '''
 
-#     # 2. When.
-#     user_input = handle_user_input()
+        nonlocal call_count
+        call_count += 1
 
-#     # 3. Then.
-#     assert user_input == 'Custom query'
+    def mock_handle_user_input_wrapper():
+        '''
+        Mock handle_user_input wrapper for input count
+        tracking.
+        '''
 
+        input_count = 0
 
-# def test_print_listening_for_errors(capsys):
-#     '''
-#     Ensures that print_listening_for_errors prints the proper output.
+        def mock_handle_user_input():
+            '''
+            Mocks handle_user_input method.
+            '''
 
-#     "🥞 Listening for Python errors..."
-#     '''
+            nonlocal input_count
+            input_count += 1
 
-#     # 1. Given.
+            if input_count == 3:
+                return True
 
-#     # 2. When.
-#     print_listening_for_errors()
+            return False
 
-#     # 3. Then.
-#     captured = capsys.readouterr()
-#     assert captured.out == u'\U0001F95E Listening for Python errors...\n'
+        return mock_handle_user_input
 
+    monkeypatch.setattr(
+        'autostack.error.posts',
+        mock_posts
+    )
 
-# def test_clear_terminal(capsys):
-#     '''
-#     Ensures that clear_terminal clears the terminal.
-#     '''
+    monkeypatch.setattr(
+        'autostack.error.print_post',
+        mock_print_post
+    )
 
-#     # 1. Given.
+    monkeypatch.setattr(
+        'autostack.error.handle_user_input',
+        mock_handle_user_input_wrapper()
+    )
 
-#     # 2. When.
-#     clear_terminal()
+    # 2. When.
+    handle_error('', {})
 
-#     # 3. Then.
-#     captured = capsys.readouterr()
-#     assert captured.out == '\x1bc\n'  # Same as u'\033c'
+    # 3. Then.
+    assert call_count == 3
+
+
+def test_handle_error_first_custom_query(monkeypatch):
+    '''
+    Ensures that handle_error handles custom queries.
+    '''
+
+    # 1. Given.
+    call_count = 0
+
+    def mock_print_post(*args):
+        # pylint: disable=unused-argument
+        '''
+        Mocks print_post method.
+        '''
+
+        nonlocal call_count
+        call_count += 1
+
+    def mock_handle_user_input_wrapper():
+        '''
+        Mock handle_user_input wrapper for input count
+        tracking.
+        '''
+
+        input_count = 0
+
+        def mock_handle_user_input():
+            '''
+            Mocks handle_user_input method.
+            '''
+
+            nonlocal input_count
+            input_count += 1
+
+            if input_count == 2:
+                return True
+
+            return 'Custom query.'
+
+        return mock_handle_user_input
+
+    monkeypatch.setattr(
+        'autostack.error.posts',
+        mock_posts
+    )
+
+    monkeypatch.setattr(
+        'autostack.error.print_post',
+        mock_print_post
+    )
+
+    monkeypatch.setattr(
+        'autostack.error.handle_user_input',
+        mock_handle_user_input_wrapper()
+    )
+
+    # 2. When.
+    handle_error('', {})
+
+    # 3. Then.
+    assert call_count == 2
+
+
+def test_handle_user_input_y(monkeypatch):
+    '''
+    Ensures that when 'Y' is inputted, handle_user_input returns True.
+    '''
+
+    # 1. Given.
+    def mock_input(*args):
+        # pylint: disable=unused-argument
+        '''
+        Mocks user input to be 'Y'.
+        '''
+
+        return 'Y'
+
+    monkeypatch.setattr('builtins.input', mock_input)
+
+    # 2. When.
+    user_input = handle_user_input()
+
+    # 3. Then.
+    assert user_input is True
+
+
+def test_handle_user_input_n(monkeypatch):
+    '''
+    Ensures that when 'n' is inputted, handle_user_input returns False.
+    '''
+
+    # 1. Given.
+    def mock_input(*args):
+        # pylint: disable=unused-argument
+        '''
+        Mocks user input to be 'n'.
+        '''
+
+        return 'n'
+
+    monkeypatch.setattr('builtins.input', mock_input)
+
+    # 2. When.
+    user_input = handle_user_input()
+
+    # 3. Then.
+    assert not user_input
+
+
+def test_handle_user_input_custom_query(monkeypatch):
+    '''
+    Ensures that when input isn't Y/n, handle_user_input returns the input.
+    '''
+
+    # 1. Given.
+    def make_mock_input():
+        '''
+        Creates the mock function to mock user input, and the
+        input is different based on the call count.
+        '''
+
+        call_count = 0
+
+        def mock_input(*args):
+            # pylint: disable=unused-argument
+            '''
+            Mocks user input to be 'a' then 'Y'.
+            '''
+
+            nonlocal call_count
+            if call_count == 0:
+                call_count += 1
+                return 'custom query'
+            return 'Y'
+        return mock_input
+
+    monkeypatch.setattr('builtins.input', make_mock_input())
+
+    # 2. When.
+    user_input = handle_user_input()
+
+    # 3. Then.
+    assert user_input == 'custom query'
+
+
+def test_print_listening_for_errors(capsys):
+    '''
+    Ensures that print_listening_for_errors prints the proper output.
+
+    "🥞 Listening for Python errors..."
+    '''
+
+    # 1. Given.
+
+    # 2. When.
+    print_listening_for_errors()
+
+    # 3. Then.
+    captured = capsys.readouterr()
+    assert captured.out == u'\U0001F95E Listening for errors...\n'
