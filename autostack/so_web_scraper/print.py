@@ -132,7 +132,7 @@ def print_post_comments(comments):
                     'class': 'comment-copy'
                 }
             ).get_text()
-            print(text)
+            print(colored(text, 'white'))
         except AttributeError:
             pass
 
