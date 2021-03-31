@@ -1,7 +1,7 @@
 Pygments==2.3.1
 requests==2.21.0
 termcolor==1.1.0
-lxml==4.3.2
+lxml==4.6.3
 beautifulsoup4==4.7.1
 future==0.17.1
 pytest==5.0.1
